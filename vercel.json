@@ -1,0 +1,38 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": null,
+  "installCommand": "",
+  "buildCommand": "echo 'Prebuilt static site: public/ is generated locally by build.py and committed'",
+  "outputDirectory": "public",
+  "trailingSlash": false,
+  "headers": [
+    {
+      "source": "/feed.xml",
+      "headers": [
+        {"key": "Content-Type", "value": "application/rss+xml; charset=utf-8"},
+        {"key": "Cache-Control", "value": "public, max-age=0, s-maxage=300, must-revalidate"},
+        {"key": "Access-Control-Allow-Origin", "value": "*"}
+      ]
+    },
+    {
+      "source": "/(.*)\\.mp3",
+      "headers": [
+        {"key": "Content-Type", "value": "audio/mpeg"},
+        {"key": "Accept-Ranges", "value": "bytes"},
+        {"key": "Cache-Control", "value": "public, max-age=86400"},
+        {"key": "Access-Control-Allow-Origin", "value": "*"}
+      ]
+    },
+    {
+      "source": "/assets/(.*)",
+      "headers": [{"key": "Cache-Control", "value": "public, max-age=3600"}]
+    },
+    {
+      "source": "/(.*)",
+      "headers": [
+        {"key": "X-Content-Type-Options", "value": "nosniff"},
+        {"key": "Referrer-Policy", "value": "strict-origin-when-cross-origin"}
+      ]
+    }
+  ]
+}

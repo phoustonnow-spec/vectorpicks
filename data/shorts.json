@@ -1,0 +1,13 @@
+{
+  "_comment": "Add YouTube Shorts as {\"title\", \"date\", \"week\", \"youtube_url\", \"thumbnail\"}. youtube_url may be a youtube.com/shorts/ID or watch?v=ID link. Empty list = placeholder slots are shown.",
+  "placeholder_slots": 3,
+  "shorts": [],
+  "latest_local": {
+    "title": "Week 3 2026: 3 Best Bets + ATL +5.5 cashed",
+    "week": 3,
+    "season": 2026,
+    "thumbnail": "assets/shorts/wk3-2026-thumbnail.png",
+    "video": "assets/shorts/wk3-2026-short.mp4",
+    "youtube_url": ""
+  }
+}

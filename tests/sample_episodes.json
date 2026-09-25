@@ -1,0 +1,7 @@
+{
+  "_comment": "TEST FIXTURE ONLY - used by build.py --validate to exercise <item> generation. Not published.",
+  "episodes": [
+    {"title": "TEST Episode", "date": "2026-09-29", "show_type": "Tuesday Rankings", "mp3": "episodes/test.mp3",
+     "duration": "00:10:00", "bytes": 1000, "description": "Test fixture, not a real episode.", "week": 4, "season": 2026}
+  ]
+}

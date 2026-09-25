@@ -1,0 +1,96 @@
+
+<p class="lead">VectorPicks is a numbers-first NFL opinion project. Vector, our AI analyst, builds its own point spreads for every game, compares them with the contest market, and only puts a tier on a pick when several independent signals agree. This page explains exactly how, in plain English, including the parts we skip and the things we refuse to do.</p>
+
+<nav class="toc" aria-label="On this page">
+<a href="#power">1. Power ratings</a><a href="#units">2. Unit ratings</a><a href="#injuries">3. Injury layer</a><a href="#spread">4. Our Spread</a><a href="#tiers">5. Gap &amp; tiers</a><a href="#market">6. Market inputs</a><a href="#contest">7. Contest overlay</a><a href="#trends">8. Trends</a><a href="#integrity">9. Integrity rules</a>
+</nav>
+
+<section id="power">
+<h2>1. Team power ratings</h2>
+<p>Every team gets a <strong>power rating measured in points versus a league-average team</strong> on a neutral field. A rating of <b>+4.0</b> means we think that team is four points better than average; <b>&minus;3.0</b> means three points worse. Because the unit is points, two ratings can be subtracted to get a point spread directly.</p>
+<p>The framework is in the style popularized by handicapper Dr. Bob (points-versus-average ratings built from play-by-play efficiency, adjusted for opponents). <strong>We maintain our own numbers.</strong> We never republish, copy, or guess at Dr. Bob&rsquo;s figures, and nothing on this site should be read as his ratings.</p>
+<p>We sometimes show a <b>1&ndash;32 rank</b> for readability. That ordinal is display only. The math always uses the point rating, because the gap between #3 and #4 can be 0.1 points or 2 points.</p>
+</section>
+
+<section id="units">
+<h2>2. Offense and defense unit ratings</h2>
+<p>Each team&rsquo;s power is built from an <strong>offense rating</strong> and a <strong>defense rating</strong>, also in points versus average. That lets us look at <em>how</em> a game is likely to be played, not just who is better overall.</p>
+<ul>
+<li><b>Good offense vs good defense:</b> when a strong unit meets a strong unit, we don&rsquo;t simply add the numbers. We weight the matchup toward the side that is more stable week to week (typically the offense, especially the passing offense), and we trim confidence in the result.</li>
+<li><b>Mismatch exceptions:</b> a specific edge can matter more than the totals. The classic case is a strong <b>pass rush against a weak or injured offensive line</b>, or an elite <b>coverage unit against a thin receiver room</b>. When we see one, we flag it as a unit-matchup note. It can count as one checklist hit (see section 5); it does not rewrite the rating by itself.</li>
+</ul>
+</section>
+
+<section id="injuries">
+<h2>3. The player-value injury layer</h2>
+<p>Healthy team ratings are set early in the week. Injuries are then applied as a separate, visible layer so you can see exactly what moved.</p>
+<ul>
+<li><b>Every key player has a points value</b>, our own opinion of how much worse the team is without him versus his replacement. Quarterbacks carry by far the largest values (a franchise QB can be worth several points). After that, roughly: left tackle and offensive line, top wide receivers, edge rushers, cornerbacks, then everyone else.</li>
+<li><b>Out or Doubtful</b> = the full value comes off the team rating. <b>Questionable</b> or midweek &ldquo;did not practice&rdquo; = a partial value (typically about half), labeled as contingent.</li>
+<li><b>Clusters</b> (for example two offensive linemen or three defensive backs out together) are called out, because the drop-off compounds.</li>
+<li>We publish <b>before and after power</b> for every team each week (see the <a href="card.html#powers">weekly card</a>), so every adjustment is auditable.</li>
+</ul>
+<p class="callout"><b>No residue chasing.</b> If the market has already moved by the full value of an injury (say the line jumped four points when a starting QB was ruled out), the edge is gone. Even if our adjusted number still disagrees with the market, that game is a <b>Pass</b>. We don&rsquo;t try to squeeze profit out of news everyone already has.</p>
+</section>
+
+<section id="spread">
+<h2>4. Our Spread</h2>
+<div class="formula">Our Spread = away power &minus; home power &minus; home-field &plusmn; rest/travel</div>
+<ul>
+<li><b>Home-field</b> is <b>2.5 points</b> by default and <b>0</b> at a neutral site (for example international games).</li>
+<li><b>Rest and travel</b> (short weeks, byes, long trips) are applied inside Our Spread only when we can verify them. If we haven&rsquo;t sourced them, we say so and apply nothing.</li>
+<li>The result is expressed as the home team&rsquo;s line: negative means the home team is favored. We then relabel it the normal way (e.g. <b>DET &minus;2.9</b>).</li>
+<li><b>Our Spread is built independently of Vegas.</b> We do not start from the market line and nudge it. That independence is the whole point: it&rsquo;s the only way a disagreement means anything.</li>
+</ul>
+</section>
+
+<section id="tiers">
+<h2>5. Gap, the checklist, and tiers</h2>
+<div class="formula">Gap = Market line &minus; Our Spread (in points, toward the side we prefer)</div>
+<p>A large gap is necessary but not sufficient. To earn a tier, a pick also has to pass a five-item checklist:</p>
+<ol class="checklist">
+<li><b>Market move</b> &ndash; the line has moved (open to current) toward our side, or at least not away from it.</li>
+<li><b>Our number</b> &ndash; the gap is still there at the line we&rsquo;d actually be graded at.</li>
+<li><b>Contest-leader consensus</b> &ndash; the top Westgate SuperContest / Gold entrants are on the same side (when those tallies are published).</li>
+<li><b>Card shape</b> &ndash; the pick fits a contrarian shape, e.g. an underdog the public is fading in favor of chalk.</li>
+<li><b>Unit matchup</b> &ndash; a specific offense/defense edge supports the side (section 2).</li>
+</ol>
+<table class="rules">
+<thead><tr><th>Tier</th><th>Rule</th></tr></thead>
+<tbody>
+<tr><td><span class="tier tier-bestbet">Best Bet</span></td><td>Gap still present at the posted line <b>and</b> at least <b>3 of 5</b> checklist hits. Underdogs playing on a short week are capped at Lean.</td></tr>
+<tr><td><span class="tier tier-lean">Lean</span></td><td>A real gap in our favor but fewer checklist hits, a soft gap (under about 2 points), or a speculative number we want to track honestly.</td></tr>
+<tr><td><span class="tier tier-card">Card</span></td><td>Part of the full 16-game card (contest format) but no tier. If Our Spread exactly equals the line, there is no side and it&rsquo;s not graded.</td></tr>
+<tr><td><span class="tier tier-pass">Pass</span></td><td>No usable edge, or the market already moved the full value of the news (injury residue). A Pass can still carry a card side in contest play; it is graded on the full card but never counts as a Best Bet or Lean.</td></tr>
+</tbody></table>
+</section>
+
+<section id="market">
+<h2>6. Market inputs</h2>
+<ul>
+<li><b>Lines:</b> the official <b>Westgate SuperContest</b> weekly card is our line of record. Every pick is graded at that number. We may also show a consensus sportsbook line for context.</li>
+<li><b>Movement:</b> open-to-current line movement is one checklist item.</li>
+<li><b>Ticket vs handle</b> (share of bets vs share of money): used only when a source actually publishes it. If it isn&rsquo;t published, the cell is <b>blank</b>. We never estimate or invent splits.</li>
+</ul>
+</section>
+
+<section id="contest">
+<h2>7. Westgate SuperContest overlay</h2>
+<p>Westgate publishes the picks of SuperContest and SuperContest Gold entrants. We use <b>only the official Westgate PDFs</b> to see which sides the current contest leaders are on. That is one checklist signal, never a pick by itself. If the PDFs are not posted yet, the overlay is shown as missing.</p>
+</section>
+
+<section id="trends">
+<h2>8. Trends</h2>
+<p>Historical trends (&ldquo;team X is 9&ndash;2 against the spread after a bye&rdquo;) are mostly noise. We may mention one in a footnote for color, but <b>trends never count toward a pick</b>. Real situational effects like rest and travel already live inside Our Spread.</p>
+</section>
+
+<section id="integrity">
+<h2>9. Integrity rules</h2>
+<ul class="integrity">
+<li><b>No invented numbers.</b> No made-up lines, betting splits, injury statuses, or scores. Missing data is shown as missing.</li>
+<li><b>Graded at the posted line.</b> Every pick is graded at the Westgate card number we published, not a better number found later.</li>
+<li><b>Losses shown.</b> Every graded pick stays on the <a href="record.html">Record</a> page, wins and losses alike.</li>
+<li><b>Flat 1 unit per pick.</b> No &ldquo;5-star&rdquo; units, no retroactive sizing. Contest-style grading: win +1, loss &minus;1, push 0.</li>
+<li><b>Entertainment and opinion only.</b> Nothing here is betting advice. 21+.</li>
+</ul>
+</section>
