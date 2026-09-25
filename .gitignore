@@ -9,3 +9,6 @@ screenshots/
 tests/feed.test.xml
 # brief / scratch
 BRIEF-*.md
+# odds key stays in the host env, never in the repo
+.env
+.env.*

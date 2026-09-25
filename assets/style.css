@@ -112,3 +112,19 @@ td.rank{color:var(--grey)}
  .card-table td.note-cell{max-width:320px;color:var(--grey);font-size:.8rem}
 }
 @media (min-width:1100px){.home-grid{grid-template-columns:1.2fr 1fr 1fr}.home-grid .week-card{grid-row:span 2}}
+.btn-row{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center;margin-top:.4rem}
+.btn-row .btn{margin-top:0}
+.book-lines{display:block;font-size:.72rem;color:var(--grey);font-weight:600;margin-top:.15rem;line-height:1.35}
+#live-board{overflow-x:auto}
+.live-table td.gap{font-family:Anton,Impact,sans-serif;font-size:1.15rem;color:var(--green)}
+.panel .rg{margin-top:.8rem}
+@media (max-width:759px){
+ .live-table thead{display:none}
+ .live-table,.live-table tbody{display:block}
+ .live-table tr{display:grid;grid-template-columns:1fr 1fr;gap:.35rem .6rem;padding:.75rem .15rem;border-bottom:1px solid var(--line)}
+ .live-table td{border:0;padding:0}
+ .live-table td[data-l]::before{content:attr(data-l);display:block;font-size:.62rem;font-weight:800;text-transform:uppercase;color:var(--dim);letter-spacing:.05em;font-family:Montserrat,sans-serif}
+ .live-table td.game{grid-column:1/-1;font-size:1.05rem}
+ .live-table td.game::before{display:none!important}
+ .live-table td.market-cell,.live-table td.total-cell{grid-column:1/-1}
+}

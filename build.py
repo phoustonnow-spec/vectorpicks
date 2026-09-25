@@ -13,6 +13,8 @@ Inputs (data/):
   shorts.json        YouTube Shorts list (+ local latest Short)
   methodology.html   methodology body
 Static files in assets/ are copied to public/assets/.
+The Live Board (live.html) reads /api/odds in the browser and joins it to
+public/live-spreads.json, written here from the latest week's card.
 """
 import csv, glob, html, json, os, re, shutil, sys
 from datetime import datetime, date
@@ -84,8 +86,9 @@ def tracker_index(rows):
     return {(r["Season"], int(r["Week"]), r["Game"]): r for r in rows}
 
 # ---------------------------------------------------------------- layout
-NAV = [("index.html", "Home"), ("card.html", "Weekly Card"), ("record.html", "Record"),
-       ("methodology.html", "Methodology"), ("episodes.html", "Podcast"), ("shorts.html", "Shorts")]
+NAV = [("index.html", "Home"), ("card.html", "Weekly Card"), ("live.html", "Live Board"),
+       ("record.html", "Record"), ("methodology.html", "Methodology"),
+       ("episodes.html", "Podcast"), ("shorts.html", "Shorts")]
 
 def page(fname, title, body, desc=None, active=None):
     active = active or fname
@@ -296,13 +299,139 @@ def build_home(weeks, rows, tidx, eps, sh):
 <section class="panel week-card"><div class="wc-head"><h2>Week {w['week']} &middot; {w['season']}</h2><div class="wk-rec"><small>WEEK {w['week']} RECORD</small><b>{wt['rec'][:-2] if wt['P']==0 else wt['rec']}</b></div></div>
 <p class="kicker">{len(s['best_bets'])} Best Bets</p><ul class="picks big">{bb}</ul>{cash_html}
 <p class="note">Leans: {e(minus(', '.join(s['leans'])))}.</p>
-<a class="btn" href="card.html">Full card &rarr;</a></section>
+<div class="btn-row"><a class="btn" href="card.html">Full card &rarr;</a><a class="btn ghost" href="live.html">Live Board &rarr;</a></div></section>
 {record_box(rows)}
 <section class="panel"><h2>Latest episode</h2>{ep}</section>
 <section class="panel"><h2>Latest Short</h2><a href="shorts.html" class="thumb-link"><img src="{e(lt.get('thumbnail',''))}" alt="{e(lt.get('title',''))}" loading="lazy" width="576" height="1024"></a><p class="muted">{e(lt.get('title',''))}</p></section>
 <section class="panel how"><h2>How it works</h2><ol><li><b>Power ratings</b> in points vs average.</li><li><b>Injury layer</b> with a points value per player.</li><li><b>Our Spread</b>, built independent of Vegas.</li><li><b>Gap + checklist</b> decides Best Bet, Lean or Pass.</li></ol><a class="btn ghost" href="methodology.html">Methodology &rarr;</a></section>
 </div>"""
     page("index.html", None, body)
+
+# NFL abbreviations used on the card -> Odds API full names. Display only;
+# a game with no parseable Our Spread is omitted so the page shows a dash.
+ABBR = {
+    "ARI": "Arizona Cardinals", "ATL": "Atlanta Falcons", "BAL": "Baltimore Ravens",
+    "BUF": "Buffalo Bills", "CAR": "Carolina Panthers", "CHI": "Chicago Bears",
+    "CIN": "Cincinnati Bengals", "CLE": "Cleveland Browns", "DAL": "Dallas Cowboys",
+    "DEN": "Denver Broncos", "DET": "Detroit Lions", "GB": "Green Bay Packers",
+    "HOU": "Houston Texans", "IND": "Indianapolis Colts", "JAX": "Jacksonville Jaguars",
+    "KC": "Kansas City Chiefs", "LV": "Las Vegas Raiders", "LAC": "Los Angeles Chargers",
+    "LAR": "Los Angeles Rams", "MIA": "Miami Dolphins", "MIN": "Minnesota Vikings",
+    "NE": "New England Patriots", "NO": "New Orleans Saints", "NYG": "New York Giants",
+    "NYJ": "New York Jets", "PHI": "Philadelphia Eagles", "PIT": "Pittsburgh Steelers",
+    "SF": "San Francisco 49ers", "SEA": "Seattle Seahawks", "TB": "Tampa Bay Buccaneers",
+    "TEN": "Tennessee Titans", "WAS": "Washington Commanders",
+}
+
+def split_matchup(label):
+    base = re.sub(r"\s*\([^)]*\)\s*$", "", label or "").strip()
+    parts = re.split(r"\s*@\s*", base)
+    if len(parts) != 2 or not parts[0] or not parts[1]:
+        return None
+    return parts[0].strip(), parts[1].strip()
+
+def parse_our(text):
+    m = re.match(r"^([A-Z]{2,3})\s+([+-]?\d+(?:\.\d+)?)$", (text or "").strip())
+    if not m:
+        return None
+    return m.group(1), round(float(m.group(2)), 2)
+
+def live_spreads_payload(week):
+    """Current-week card numbers for the Live Board, matched by full team name.
+
+    our_point is the card quote from our_team's side (negative = that team favored),
+    the same sign the weekly card prints. The page restates it from the home side
+    before Gap = Market − Our Spread.
+    """
+    games = []
+    for g in week.get("games") or []:
+        mu = split_matchup(g.get("label") or "")
+        parsed = parse_our(g.get("our") or "")
+        if not mu or not parsed:
+            continue
+        away_abbr, home_abbr = mu
+        our_abbr, our_point = parsed
+        if away_abbr not in ABBR or home_abbr not in ABBR or our_abbr not in ABBR:
+            continue
+        if our_abbr not in (away_abbr, home_abbr):
+            continue
+        games.append({
+            "away_team": ABBR[away_abbr],
+            "home_team": ABBR[home_abbr],
+            "away_abbr": away_abbr,
+            "home_abbr": home_abbr,
+            "our_team": ABBR[our_abbr],
+            "our_point": our_point,
+            "our_label": g["our"].strip(),
+        })
+    return {
+        "season": week["season"],
+        "week": week["week"],
+        "as_of": week.get("as_of"),
+        "teams": {name: abbr for abbr, name in sorted(ABBR.items(), key=lambda kv: kv[1])},
+        "games": games,
+    }
+
+def write_live_spreads(week):
+    path = os.path.join(OUT, "live-spreads.json")
+    with open(path, "w") as f:
+        json.dump(live_spreads_payload(week), f, indent=2)
+        f.write("\n")
+
+def build_live(week):
+    body = f"""
+<section class="hero hero-sm"><p class="kicker">Market vs Our Spread</p><h1>Live <span class="g">Board</span></h1>
+<p class="muted">Upcoming NFL games. The market spread is the median of DraftKings, FanDuel, BetMGM and Caesars, from the home team's side. Negative means the home team is favored.</p></section>
+<section class="panel">
+<p id="live-updated" class="note" hidden></p>
+<div id="live-board" class="table-wrap" aria-live="polite"><p class="muted">Loading lines…</p></div>
+<p class="note">Our Spread is the Week {int(week['week'])} {int(week['season'])} card, restated on the same home-team side as the market number. <b>Gap</b> = Market &minus; Our Spread. A dash means that game has no Our Spread on the card.</p>
+<div class="rg"><span class="age">21+</span> <span>Entertainment and opinion only. Not betting advice. Gambling problem? Call <a href="tel:18004262537"><b>1-800-GAMBLER</b></a>.</span></div>
+</section>
+<script src="assets/live.js" defer></script>
+"""
+    page("live.html", "Live Board", body,
+         desc="Live NFL spreads from DraftKings, FanDuel, BetMGM and Caesars, next to this week's Our Spread. Entertainment and opinion only. Not betting advice. 21+.")
+
+def validate_live(week):
+    path = os.path.join(OUT, "live-spreads.json")
+    data = json.load(open(path))
+    expect = live_spreads_payload(week)
+    if data != expect:
+        raise SystemExit("live-spreads.json does not match the current weekly card")
+    if len(data["games"]) != len(week.get("games") or []):
+        raise SystemExit(f"live-spreads.json has {len(data['games'])} games; card has {len(week.get('games') or [])}")
+    for g in data["games"]:
+        parsed = parse_our(g["our_label"])
+        if not parsed or ABBR[parsed[0]] != g["our_team"] or parsed[1] != g["our_point"]:
+            raise SystemExit(f"live-spreads.json quote mismatch: {g}")
+        if g["our_team"] not in (g["home_team"], g["away_team"]):
+            raise SystemExit(f"Our Spread team is not in the matchup: {g}")
+    # Independent spot check while this file is still the Week 3 2026 card.
+    if week["season"] == 2026 and int(week["week"]) == 3:
+        want = {
+            ("Atlanta Falcons", "Green Bay Packers"): ("Green Bay Packers", -2.4),
+            ("Las Vegas Raiders", "New Orleans Saints"): ("Las Vegas Raiders", -0.8),
+            ("Houston Texans", "Indianapolis Colts"): ("Indianapolis Colts", -4.2),
+            ("Minnesota Vikings", "Tampa Bay Buccaneers"): ("Minnesota Vikings", -5.4),
+            ("Baltimore Ravens", "Dallas Cowboys"): ("Baltimore Ravens", -3.5),
+        }
+        for (away, home), (our_team, our_point) in want.items():
+            g = next(x for x in data["games"] if x["away_team"] == away and x["home_team"] == home)
+            if g["our_team"] != our_team or g["our_point"] != our_point:
+                raise SystemExit(f"Our Spread mismatch for {away} @ {home}: {g['our_team']} {g['our_point']}")
+    live_html = open(os.path.join(OUT, "live.html")).read()
+    for needle in ("Live Board", "assets/live.js", "1-800-GAMBLER", "Entertainment and opinion only",
+                   'href="live.html" aria-current="page"'):
+        if needle not in live_html:
+            raise SystemExit(f"live.html missing {needle}")
+    for fname in ("index.html", "card.html", "record.html"):
+        doc = open(os.path.join(OUT, fname)).read()
+        if 'href="live.html"' not in doc:
+            raise SystemExit(f"{fname} missing Live Board link")
+    if "live-spreads.json" not in os.listdir(OUT):
+        raise SystemExit("live-spreads.json was not written")
+    print(f"OK live board: Week {data['week']} {data['season']}, {len(data['games'])} Our Spreads, nav + home link")
 
 def build_methodology():
     body = f'<section class="hero hero-sm"><p class="kicker">How Vector picks</p><h1><span class="g">Methodology</span></h1></section><article class="panel prose">{open(os.path.join(DATA,"methodology.html")).read()}</article>'
@@ -383,7 +512,7 @@ def validate_feed(path, expect_items=None):
 
 # ---------------------------------------------------------------- misc
 def build_misc():
-    pages = ["", "card.html", "record.html", "methodology.html", "episodes.html", "shorts.html"] + \
+    pages = ["", "card.html", "live.html", "record.html", "methodology.html", "episodes.html", "shorts.html"] + \
             [f"{w['slug']}.html" for w in WEEKS]
     urls = "".join(f"<url><loc>{BASE}/{p}</loc></url>" for p in pages)
     open(os.path.join(OUT, "sitemap.xml"), "w").write(f'<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">{urls}</urlset>\n')
@@ -418,6 +547,8 @@ def main():
     build_episodes(eps)
     build_shorts(sh)
     build_home(WEEKS, rows, tidx, eps, sh)
+    write_live_spreads(WEEKS[-1])
+    build_live(WEEKS[-1])
     build_methodology()
     build_feed(eps, os.path.join(OUT, "feed.xml"))
     build_misc()
@@ -425,6 +556,7 @@ def main():
           f"{len(rows)} tracker rows; {len(eps)} episodes)")
     if "--validate" in sys.argv:
         validate_feed(os.path.join(OUT, "feed.xml"), expect_items=len(eps))
+        validate_live(WEEKS[-1])
         test_out = os.path.join(ROOT, "tests", "feed.test.xml")
         build_feed(load_episodes(os.path.join(ROOT, "tests", "sample_episodes.json")), test_out)
         validate_feed(test_out, expect_items=1)
