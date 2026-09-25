@@ -44,5 +44,5 @@ If `/workspace/shorts/ats-tracker.csv` exists (box workflow), the build copies i
 
 - Import the GitHub repo in Vercel. `vercel.json` sets framework "Other", no install, output directory `public`. No build runs on Vercel; the committed `public/` is served.
 - Add the custom domain in Vercel (Project > Settings > Domains) and point DNS as Vercel instructs.
-- `base_url` in `data/site_config.json` is `https://vectorpicks.com`. Change it there if the domain differs, rebuild, commit.
-- Before submitting `https://vectorpicks.com/feed.xml` to Apple Podcasts / Spotify: set a real `email`, publish at least one episode.
+- `base_url` in `data/site_config.json` is `https://www.vectorpicks.com`. Change it there if the domain differs, rebuild, commit. Canonical tags, Open Graph URLs, `sitemap.xml`, `robots.txt`, and `feed.xml` all use that value.
+- Before submitting `https://www.vectorpicks.com/feed.xml` to Apple Podcasts / Spotify: set a real `email`, publish at least one episode.

@@ -269,7 +269,7 @@
         "</tr>";
     }
     return '<table class="live-table"><thead><tr>' +
-      "<th>Matchup</th><th>Market spread</th><th>Total</th><th>Our Spread</th><th>Gap</th>" +
+      '<th scope="col">Matchup</th><th scope="col">Market spread</th><th scope="col">Total</th><th scope="col">Our Spread</th><th scope="col">Gap</th>' +
       "</tr></thead><tbody>" + rows + "</tbody></table>";
   }
 
