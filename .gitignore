@@ -8,4 +8,4 @@ __pycache__/
 screenshots/
 tests/feed.test.xml
 # brief / scratch
-BRIEF-site.md
+BRIEF-*.md
