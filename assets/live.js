@@ -205,8 +205,8 @@
 
   function updatedLine(odds) {
     var when = fmtPt(newestStamp(odds));
-    if (!when) return "Refreshes about every 2 hours";
-    return "Lines updated " + when + " PT \u00b7 refreshes about every 2 hours";
+    if (!when) return "Refreshes about every 4 hours";
+    return "Lines updated " + when + " PT \u00b7 refreshes about every 4 hours";
   }
 
   function cell(label, cls, inner) {

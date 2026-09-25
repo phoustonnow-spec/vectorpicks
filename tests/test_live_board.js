@@ -155,7 +155,8 @@ function testRender() {
 
   const line = live.updatedLine(odds);
   assert.ok(line.startsWith("Lines updated "), line);
-  assert.ok(line.includes(" PT \u00b7 refreshes about every 2 hours"), line);
+  assert.ok(line.includes(" PT \u00b7 refreshes about every 4 hours"), line);
+  assert.ok(!line.includes("2 hours"), line);
   // Newest book last_update is 18:10Z, which is 11:10 AM Pacific on Sep 25, 2026.
   assert.ok(line.includes("11:10"), line);
 }

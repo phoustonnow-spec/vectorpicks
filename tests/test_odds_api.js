@@ -11,7 +11,7 @@ const handler = require("../api/odds.js");
 const SECRET = "super-secret-odds-key";
 const REQUIRED_PREFIX =
   "https://api.the-odds-api.com/v4/sports/americanfootball_nfl/odds" +
-  "?regions=us&markets=spreads,totals,h2h&oddsFormat=american" +
+  "?regions=us&markets=spreads,totals&oddsFormat=american" +
   "&bookmakers=draftkings,fanduel,betmgm,caesars&apiKey=";
 
 function mockRes() {
@@ -112,7 +112,8 @@ async function testSuccess() {
   assert.strictEqual(called, 1);
   assert.strictEqual(seenUrl, REQUIRED_PREFIX + SECRET);
   assert.strictEqual(res.statusCode, 200);
-  assert.strictEqual(res.headers["Cache-Control"], "public, s-maxage=7200, stale-while-revalidate=86400");
+  assert.strictEqual(res.headers["Cache-Control"], "public, s-maxage=14400, stale-while-revalidate=86400");
+  assert.ok(!seenUrl.includes("h2h"), seenUrl);
   assert.strictEqual(res.headers["x-requests-remaining"], "432");
   assert.ok(String(res.headers["Content-Type"]).includes("application/json"));
   const body = res.json();
@@ -129,14 +130,16 @@ async function testSuccess() {
   assert.strictEqual(game.books.draftkings.total.point, 44.5);
   assert.strictEqual(game.books.draftkings.total.over_price, -105);
   assert.strictEqual(game.books.draftkings.total.under_price, -115);
-  assert.deepStrictEqual(game.books.draftkings.moneylines, { home: -240, away: 200 });
+  assert.strictEqual(game.books.draftkings.moneylines, undefined);
+  assert.ok(!Object.prototype.hasOwnProperty.call(game.books.draftkings, "moneylines"));
   assert.strictEqual(game.books.draftkings.last_update, "2026-09-25T18:00:00Z");
   assert.strictEqual(game.books.fanduel.spread.point, -4.5);
   assert.strictEqual(game.books.fanduel.total, null);
-  assert.strictEqual(game.books.fanduel.moneylines, null);
+  assert.strictEqual(game.books.fanduel.moneylines, undefined);
   const raw = res.body;
   assert.ok(!raw.includes(SECRET), "response leaked the API key");
   assert.ok(!raw.includes("sport_key"), "response was not trimmed");
+  assert.ok(!raw.includes("moneylines") && !raw.includes("-240"), "h2h moneylines were not dropped");
   assert.ok(!raw.includes("Atlanta Falcons\", \"price\": -110, \"point\": 5.5") && game.books.draftkings.spread.point < 0);
 }
 
@@ -151,7 +154,7 @@ async function testMissingKey() {
   assert.strictEqual(called, 0);
   assert.strictEqual(res.statusCode, 500);
   assert.strictEqual(res.headers["Cache-Control"], "public, max-age=0, s-maxage=60");
-  assert.ok(!res.headers["Cache-Control"].includes("7200"));
+  assert.ok(!res.headers["Cache-Control"].includes("14400"));
   assert.deepStrictEqual(res.json(), { error: "Live odds unavailable right now" });
   assert.ok(!res.body.includes("ODDS_API_KEY"));
 }
