@@ -19,5 +19,7 @@
   "responsible_gaming": "21+ only. Entertainment and opinion only, not betting advice. If you or someone you know has a gambling problem, call 1-800-GAMBLER.",
   "site_name": "VectorPicks.com",
   "tracker_sync_from": "/workspace/shorts/ats-tracker.csv",
-  "_tracker_note": "build.py copies tracker_sync_from into data/ if that file exists (box workflow); otherwise it uses the committed data/ats-tracker.csv."
+  "_tracker_note": "build.py copies tracker_sync_from into data/ if that file exists (box workflow); otherwise it uses the committed data/ats-tracker.csv.",
+  "youtube_url": "https://www.youtube.com/@VectorPicks",
+  "youtube_handle": "@VectorPicks"
 }

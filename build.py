@@ -127,7 +127,7 @@ def page(fname, title, body, desc=None, active=None):
 <footer class="site-footer">
   <div class="rg"><span class="age">21+</span> <span>Entertainment and opinion only. Not betting advice. Gambling problem? Call <a href="tel:18004262537"><b>1-800-GAMBLER</b></a>.</span></div>
   <p>Lines of record: official Westgate SuperContest weekly card. Every pick graded at the posted line, flat 1 unit, losses included. <a href="methodology.html#integrity">Integrity rules</a>.</p>
-  <p class="small">&copy; {date.today().year} {e(CFG['site_name'])} &middot; {e(CFG['title'])} &middot; <a href="feed.xml">Podcast RSS</a></p>
+  <p class="small">&copy; {date.today().year} {e(CFG['site_name'])} &middot; {e(CFG['title'])} &middot; <a href="{e(CFG.get('youtube_url',''))}" rel="noopener">YouTube {e(CFG.get('youtube_handle',''))}</a> &middot; <a href="mailto:{e(CFG['email'])}">{e(CFG['email'])}</a> &middot; <a href="feed.xml">Podcast RSS</a></p>
 </footer>
 <script src="assets/site.js" defer></script>
 </body>
@@ -273,7 +273,7 @@ def build_shorts(sh):
     if lt:
         latest = f"""<section class="panel latest-short"><h2>Latest Short &middot; Week {lt['week']} {lt['season']}</h2>
 <div class="short-feature"><video controls preload="none" poster="{e(lt['thumbnail'])}" src="{e(lt['video'])}" playsinline></video>
-<div><h3>{e(lt['title'])}</h3><p class="muted">Vertical 9:16 recap. {'<a href="'+e(lt['youtube_url'])+'">Watch on YouTube</a>' if lt.get('youtube_url') else 'YouTube link will be added when posted.'}</p></div></div></section>"""
+<div><h3>{e(lt['title'])}</h3><p class="muted">Vertical 9:16 recap. {'<a href="'+e(lt['youtube_url'])+'">Watch on YouTube</a>' if lt.get('youtube_url') else 'Follow <a href="'+e(CFG.get('youtube_url',''))+'">'+e(CFG.get('youtube_handle',''))+'</a> on YouTube for every Short.'}</p></div></div></section>"""
     body = f"""<section class="hero hero-sm"><p class="kicker">60 seconds, every week</p><h1><span class="g">Shorts</span></h1></section>
 {latest}<section class="panel"><h2>On YouTube</h2><div class="shorts-grid">{cards}</div></section>"""
     page("shorts.html", "Shorts", body, desc="VectorPicks weekly NFL Shorts.")
