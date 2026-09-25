@@ -21,5 +21,6 @@
   "tracker_sync_from": "/workspace/shorts/ats-tracker.csv",
   "_tracker_note": "build.py copies tracker_sync_from into data/ if that file exists (box workflow); otherwise it uses the committed data/ats-tracker.csv.",
   "youtube_url": "https://www.youtube.com/@VectorPicks",
-  "youtube_handle": "@VectorPicks"
+  "youtube_handle": "@VectorPicks",
+  "ga_measurement_id": ""
 }

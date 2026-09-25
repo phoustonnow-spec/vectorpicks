@@ -6,7 +6,7 @@ Usage:
   python3 build.py --validate   # build, then validate feed.xml (+ a test feed with a sample episode)
 
 Inputs (data/):
-  site_config.json   base_url, titles, podcast metadata (one place to change the domain)
+  site_config.json   base_url, titles, podcast metadata, ga_measurement_id (one place to change the domain)
   weeks/*.json       one file per week (e.g. 2026-w04.json); newest = "latest card"
   ats-tracker.csv    graded picks (synced from tracker_sync_from if that path exists)
   episodes.json      podcast episodes -> episodes.html + feed.xml
@@ -90,6 +90,24 @@ NAV = [("index.html", "Home"), ("card.html", "Weekly Card"), ("live.html", "Live
        ("record.html", "Record"), ("methodology.html", "Methodology"),
        ("episodes.html", "Podcast"), ("shorts.html", "Shorts")]
 
+def gtag_snippet():
+    """Standard GA4 gtag snippet, or "" when ga_measurement_id is empty."""
+    gid = str(CFG.get("ga_measurement_id") or "").strip()
+    if not gid:
+        return ""
+    if not re.fullmatch(r"G-[A-Z0-9]+", gid):
+        raise SystemExit("ga_measurement_id must be a GA4 id like G-XXXXXXXX, or empty")
+    return (
+        "<!-- Google tag (gtag.js) -->\n"
+        f'<script async src="https://www.googletagmanager.com/gtag/js?id={gid}"></script>\n'
+        "<script>\n"
+        "  window.dataLayer = window.dataLayer || [];\n"
+        "  function gtag(){dataLayer.push(arguments);}\n"
+        "  gtag('js', new Date());\n"
+        f"  gtag('config', '{gid}');\n"
+        "</script>\n"
+    )
+
 def page(fname, title, body, desc=None, active=None):
     active = active or fname
     nav = "".join(f'<a href="{h}"{" aria-current=\"page\"" if h == active else ""}>{t}</a>' for h, t in NAV)
@@ -99,7 +117,7 @@ def page(fname, title, body, desc=None, active=None):
     doc = f"""<!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
+{gtag_snippet()}<meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{e(full_title)}</title>
 <meta name="description" content="{e(desc)}">
@@ -433,6 +451,47 @@ def validate_live(week):
         raise SystemExit("live-spreads.json was not written")
     print(f"OK live board: Week {data['week']} {data['season']}, {len(data['games'])} Our Spreads, nav + home link")
 
+def validate_analytics():
+    gid = str(CFG.get("ga_measurement_id") or "").strip()
+    pages = []
+    for dirpath, _, names in os.walk(OUT):
+        for name in names:
+            if name.endswith(".html"):
+                pages.append(os.path.join(dirpath, name))
+    basenames = {os.path.basename(p) for p in pages}
+    for name in ("index.html", "live.html", "404.html"):
+        if name not in basenames:
+            raise SystemExit(f"analytics check missing {name}")
+    for path in pages:
+        text = open(path).read()
+        has_tag = "googletagmanager.com/gtag/js" in text or "gtag('config'" in text
+        if gid and not has_tag:
+            raise SystemExit(f"{os.path.basename(path)} is missing the gtag snippet")
+        if not gid and has_tag:
+            raise SystemExit(f"{os.path.basename(path)} includes gtag but ga_measurement_id is empty")
+    saved = CFG.get("ga_measurement_id", "")
+    try:
+        CFG["ga_measurement_id"] = "G-TEST1234"
+        snippet = gtag_snippet()
+        if "https://www.googletagmanager.com/gtag/js?id=G-TEST1234" not in snippet:
+            raise SystemExit("gtag snippet missing async script")
+        if "gtag('config', 'G-TEST1234')" not in snippet:
+            raise SystemExit("gtag snippet missing gtag('config')")
+        CFG["ga_measurement_id"] = "   "
+        if gtag_snippet() != "":
+            raise SystemExit("blank ga_measurement_id should inject nothing")
+        CFG["ga_measurement_id"] = "<script>"
+        try:
+            gtag_snippet()
+        except SystemExit as err:
+            if "GA4" not in str(err):
+                raise
+        else:
+            raise SystemExit("invalid ga_measurement_id should fail the build")
+    finally:
+        CFG["ga_measurement_id"] = saved
+    print(f"OK analytics: ga_measurement_id {gid or 'empty'}, {len(pages)} pages, snippet injects only when set")
+
 def build_methodology():
     body = f'<section class="hero hero-sm"><p class="kicker">How Vector picks</p><h1><span class="g">Methodology</span></h1></section><article class="panel prose">{open(os.path.join(DATA,"methodology.html")).read()}</article>'
     page("methodology.html", "Methodology", body, desc="How VectorPicks builds power ratings, injury adjustments, Our Spread, and Best Bet / Lean / Pass tiers.")
@@ -557,6 +616,7 @@ def main():
     if "--validate" in sys.argv:
         validate_feed(os.path.join(OUT, "feed.xml"), expect_items=len(eps))
         validate_live(WEEKS[-1])
+        validate_analytics()
         test_out = os.path.join(ROOT, "tests", "feed.test.xml")
         build_feed(load_episodes(os.path.join(ROOT, "tests", "sample_episodes.json")), test_out)
         validate_feed(test_out, expect_items=1)
