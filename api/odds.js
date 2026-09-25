@@ -17,13 +17,15 @@
  *         <book key>: {
  *           last_update,
  *           spread: { point, price } | null,          // home team
- *           total: { point, over_price, under_price } | null,
- *           moneylines: { home, away } | null
+ *           total: { point, over_price, under_price } | null
  *         }
  *       }
  *     }]
  *   }
- *   Cache-Control: public, s-maxage=7200, stale-while-revalidate=86400
+ *   Cache-Control: public, s-maxage=14400, stale-while-revalidate=86400
+ *
+ * markets is spreads,totals only. h2h (moneylines) is one extra credit per
+ * refresh and is not shown on the Live Board.
  *
  * Missing key (500) or upstream failure (502):
  *   { error: "Live odds unavailable right now" }
@@ -32,10 +34,10 @@
 
 const ODDS_URL =
   "https://api.the-odds-api.com/v4/sports/americanfootball_nfl/odds" +
-  "?regions=us&markets=spreads,totals,h2h&oddsFormat=american" +
+  "?regions=us&markets=spreads,totals&oddsFormat=american" +
   "&bookmakers=draftkings,fanduel,betmgm,caesars";
 
-const CACHE_OK = "public, s-maxage=7200, stale-while-revalidate=86400";
+const CACHE_OK = "public, s-maxage=14400, stale-while-revalidate=86400";
 const CACHE_ERR = "public, max-age=0, s-maxage=60";
 const ERROR_BODY = { error: "Live odds unavailable right now" };
 
@@ -72,13 +74,11 @@ function marketByKey(markets) {
   return out;
 }
 
-function trimBook(book, home, away) {
+function trimBook(book, home) {
   const markets = marketByKey(book && book.markets);
   const spread = findOutcome(markets.spreads && markets.spreads.outcomes, home);
   const over = findOutcome(markets.totals && markets.totals.outcomes, "Over");
   const under = findOutcome(markets.totals && markets.totals.outcomes, "Under");
-  const homeMl = findOutcome(markets.h2h && markets.h2h.outcomes, home);
-  const awayMl = findOutcome(markets.h2h && markets.h2h.outcomes, away);
   const spreadPoint = spread ? numOrNull(spread.point) : null;
   const totalPoint = (over && numOrNull(over.point) != null)
     ? numOrNull(over.point)
@@ -91,10 +91,6 @@ function trimBook(book, home, away) {
       over_price: over ? numOrNull(over.price) : null,
       under_price: under ? numOrNull(under.price) : null,
     },
-    moneylines: (!homeMl && !awayMl) ? null : {
-      home: homeMl ? numOrNull(homeMl.price) : null,
-      away: awayMl ? numOrNull(awayMl.price) : null,
-    },
   };
 }
 
@@ -105,7 +101,7 @@ function trimGame(game) {
   const list = game && Array.isArray(game.bookmakers) ? game.bookmakers : [];
   for (const book of list) {
     if (!book || typeof book.key !== "string" || !book.key) continue;
-    books[book.key] = trimBook(book, home, away);
+    books[book.key] = trimBook(book, home);
   }
   return {
     id: game && game.id,
