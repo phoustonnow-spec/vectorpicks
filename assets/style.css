@@ -135,5 +135,16 @@ td.rank{color:var(--grey)}
  .live-table td[data-l]::before{content:attr(data-l);display:block;font-size:.62rem;font-weight:800;text-transform:uppercase;color:var(--dim);letter-spacing:.05em;font-family:Montserrat,sans-serif}
  .live-table td.game{grid-column:1/-1;font-size:1.05rem}
  .live-table td.game::before{display:none!important}
- .live-table td.market-cell,.live-table td.total-cell{grid-column:1/-1}
+ .live-table td.market-cell,.live-table td.total-cell,.live-table td.score-cell{grid-column:1/-1}
 }
+.pick-badge{display:block;margin-top:.2rem;font-size:.78rem;font-weight:800;color:var(--gold)}
+.ats{display:block;margin-top:.15rem;font-size:.78rem;font-weight:800}
+.ats-good{color:var(--green)}
+.ats-bad{color:#fecaca}
+.ats-push{color:var(--gold)}
+#live-strip:empty{display:none}
+.live-strip{margin-top:1rem}
+.score-row{display:flex;flex-wrap:wrap;gap:.5rem}
+.score-chip{display:block;background:var(--navy2);color:var(--white);text-decoration:none;border-radius:10px;padding:.5rem .7rem;min-width:9.5rem}
+.score-chip:hover{color:var(--green)}
+.score-chip .sub,.score-chip .pick-badge,.score-chip .ats{display:block}

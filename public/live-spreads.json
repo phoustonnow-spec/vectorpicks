@@ -44,7 +44,12 @@
       "home_abbr": "GB",
       "our_team": "Green Bay Packers",
       "our_point": -2.4,
-      "our_label": "GB -2.4"
+      "our_label": "GB -2.4",
+      "pick_team": "Atlanta Falcons",
+      "pick_abbr": "ATL",
+      "pick_line": 5.5,
+      "pick_label": "ATL +5.5",
+      "tier": "Lean"
     },
     {
       "away_team": "Seattle Seahawks",
@@ -53,7 +58,12 @@
       "home_abbr": "WAS",
       "our_team": "Seattle Seahawks",
       "our_point": -10.8,
-      "our_label": "SEA -10.8"
+      "our_label": "SEA -10.8",
+      "pick_team": null,
+      "pick_abbr": null,
+      "pick_line": null,
+      "pick_label": null,
+      "tier": "Pass"
     },
     {
       "away_team": "Cincinnati Bengals",
@@ -62,7 +72,12 @@
       "home_abbr": "PIT",
       "our_team": "Cincinnati Bengals",
       "our_point": -1.0,
-      "our_label": "CIN -1.0"
+      "our_label": "CIN -1.0",
+      "pick_team": "Pittsburgh Steelers",
+      "pick_abbr": "PIT",
+      "pick_line": 3.5,
+      "pick_label": "PIT +3.5",
+      "tier": "Card"
     },
     {
       "away_team": "New York Jets",
@@ -71,7 +86,12 @@
       "home_abbr": "DET",
       "our_team": "Detroit Lions",
       "our_point": -2.9,
-      "our_label": "DET -2.9"
+      "our_label": "DET -2.9",
+      "pick_team": "New York Jets",
+      "pick_abbr": "NYJ",
+      "pick_line": 6.5,
+      "pick_label": "NYJ +6.5",
+      "tier": "Best Bet"
     },
     {
       "away_team": "Tennessee Titans",
@@ -80,7 +100,12 @@
       "home_abbr": "NYG",
       "our_team": "New York Giants",
       "our_point": -1.1,
-      "our_label": "NYG -1.1"
+      "our_label": "NYG -1.1",
+      "pick_team": "Tennessee Titans",
+      "pick_abbr": "TEN",
+      "pick_line": 2.5,
+      "pick_label": "TEN +2.5",
+      "tier": "Card"
     },
     {
       "away_team": "New England Patriots",
@@ -89,7 +114,12 @@
       "home_abbr": "JAX",
       "our_team": "Jacksonville Jaguars",
       "our_point": -0.9,
-      "our_label": "JAX -0.9"
+      "our_label": "JAX -0.9",
+      "pick_team": "New England Patriots",
+      "pick_abbr": "NE",
+      "pick_line": 3.0,
+      "pick_label": "NE +3",
+      "tier": "Lean"
     },
     {
       "away_team": "Kansas City Chiefs",
@@ -98,7 +128,12 @@
       "home_abbr": "MIA",
       "our_team": "Kansas City Chiefs",
       "our_point": -4.1,
-      "our_label": "KC -4.1"
+      "our_label": "KC -4.1",
+      "pick_team": "Miami Dolphins",
+      "pick_abbr": "MIA",
+      "pick_line": 11.5,
+      "pick_label": "MIA +11.5",
+      "tier": "Lean"
     },
     {
       "away_team": "Houston Texans",
@@ -107,7 +142,12 @@
       "home_abbr": "IND",
       "our_team": "Indianapolis Colts",
       "our_point": -4.2,
-      "our_label": "IND -4.2"
+      "our_label": "IND -4.2",
+      "pick_team": "Indianapolis Colts",
+      "pick_abbr": "IND",
+      "pick_line": 2.5,
+      "pick_label": "IND +2.5",
+      "tier": "Best Bet"
     },
     {
       "away_team": "Carolina Panthers",
@@ -116,7 +156,12 @@
       "home_abbr": "CLE",
       "our_team": "Carolina Panthers",
       "our_point": -2.5,
-      "our_label": "CAR -2.5"
+      "our_label": "CAR -2.5",
+      "pick_team": null,
+      "pick_abbr": null,
+      "pick_line": null,
+      "pick_label": null,
+      "tier": "Card"
     },
     {
       "away_team": "Los Angeles Chargers",
@@ -125,7 +170,12 @@
       "home_abbr": "BUF",
       "our_team": "Buffalo Bills",
       "our_point": -8.9,
-      "our_label": "BUF -8.9"
+      "our_label": "BUF -8.9",
+      "pick_team": "Buffalo Bills",
+      "pick_abbr": "BUF",
+      "pick_line": -7.5,
+      "pick_label": "BUF -7.5",
+      "tier": "Lean"
     },
     {
       "away_team": "Minnesota Vikings",
@@ -134,7 +184,12 @@
       "home_abbr": "TB",
       "our_team": "Minnesota Vikings",
       "our_point": -5.4,
-      "our_label": "MIN -5.4"
+      "our_label": "MIN -5.4",
+      "pick_team": "Minnesota Vikings",
+      "pick_abbr": "MIN",
+      "pick_line": -1.5,
+      "pick_label": "MIN -1.5",
+      "tier": "Best Bet"
     },
     {
       "away_team": "Arizona Cardinals",
@@ -143,7 +198,12 @@
       "home_abbr": "SF",
       "our_team": "San Francisco 49ers",
       "our_point": -8.4,
-      "our_label": "SF -8.4"
+      "our_label": "SF -8.4",
+      "pick_team": "Arizona Cardinals",
+      "pick_abbr": "ARI",
+      "pick_line": 8.5,
+      "pick_label": "ARI +8.5",
+      "tier": "Card"
     },
     {
       "away_team": "Las Vegas Raiders",
@@ -152,7 +212,12 @@
       "home_abbr": "NO",
       "our_team": "Las Vegas Raiders",
       "our_point": -0.8,
-      "our_label": "LV -0.8"
+      "our_label": "LV -0.8",
+      "pick_team": "Las Vegas Raiders",
+      "pick_abbr": "LV",
+      "pick_line": 3.0,
+      "pick_label": "LV +3",
+      "tier": "Lean"
     },
     {
       "away_team": "Baltimore Ravens",
@@ -161,7 +226,12 @@
       "home_abbr": "DAL",
       "our_team": "Baltimore Ravens",
       "our_point": -3.5,
-      "our_label": "BAL -3.5"
+      "our_label": "BAL -3.5",
+      "pick_team": null,
+      "pick_abbr": null,
+      "pick_line": null,
+      "pick_label": null,
+      "tier": "Card"
     },
     {
       "away_team": "Los Angeles Rams",
@@ -170,7 +240,12 @@
       "home_abbr": "DEN",
       "our_team": "Denver Broncos",
       "our_point": -0.4,
-      "our_label": "DEN -0.4"
+      "our_label": "DEN -0.4",
+      "pick_team": "Denver Broncos",
+      "pick_abbr": "DEN",
+      "pick_line": 2.5,
+      "pick_label": "DEN +2.5",
+      "tier": "Lean"
     },
     {
       "away_team": "Philadelphia Eagles",
@@ -179,7 +254,12 @@
       "home_abbr": "CHI",
       "our_team": "Chicago Bears",
       "our_point": -6.1,
-      "our_label": "CHI -6.1"
+      "our_label": "CHI -6.1",
+      "pick_team": null,
+      "pick_abbr": null,
+      "pick_line": null,
+      "pick_label": null,
+      "tier": "Pass"
     }
   ]
 }
