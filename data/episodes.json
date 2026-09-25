@@ -1,0 +1,4 @@
+{
+  "_comment": "Add one object per episode, newest anywhere (build sorts by date). show_type must be one of: Tuesday Rankings, Thursday Picks, Sunday Update, Sunday Recap. mp3 is relative to base_url (put the file in public/episodes/). duration is HH:MM:SS. bytes = file size (build fills it in automatically if the mp3 exists in public/).",
+  "episodes": []
+}

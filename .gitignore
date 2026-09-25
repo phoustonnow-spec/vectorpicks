@@ -1,0 +1,11 @@
+# local tooling
+.venv/
+__pycache__/
+*.pyc
+.DS_Store
+.vercel/
+# local-only verification output
+screenshots/
+tests/feed.test.xml
+# brief / scratch
+BRIEF-*.md

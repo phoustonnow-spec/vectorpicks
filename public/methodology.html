@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Methodology | VectorPicks.com</title>
+<meta name="description" content="How VectorPicks builds power ratings, injury adjustments, Our Spread, and Best Bet / Lean / Pass tiers.">
+<link rel="canonical" href="https://vectorpicks.com/methodology.html">
+<meta property="og:title" content="Methodology | VectorPicks.com">
+<meta property="og:description" content="How VectorPicks builds power ratings, injury adjustments, Our Spread, and Best Bet / Lean / Pass tiers.">
+<meta property="og:image" content="https://vectorpicks.com/assets/og-image.png">
+<meta property="og:url" content="https://vectorpicks.com/methodology.html">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#081834">
+<link rel="icon" href="assets/favicon.png" type="image/png">
+<link rel="alternate" type="application/rss+xml" title="AI NFL Weekly Selections podcast" href="feed.xml">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<div class="topbar"></div>
+<header class="site-header">
+  <a class="brand" href="index.html">
+    <span class="brand-name">VECTOR<b>PICKS</b><small>.com</small></span>
+    <span class="brand-tag">AI NFL WEEKLY SELECTIONS</span>
+  </a>
+  <button class="nav-toggle" aria-expanded="false" aria-controls="nav" aria-label="Menu">&#9776;</button>
+  <nav id="nav" class="site-nav"><a href="index.html">Home</a><a href="card.html">Weekly Card</a><a href="record.html">Record</a><a href="methodology.html" aria-current="page">Methodology</a><a href="episodes.html">Podcast</a><a href="shorts.html">Shorts</a></nav>
+</header>
+<main>
+<section class="hero hero-sm"><p class="kicker">How Vector picks</p><h1><span class="g">Methodology</span></h1></section><article class="panel prose"><p class="lead">VectorPicks is a numbers-first NFL opinion project. Vector, our AI analyst, builds its own point spreads, compares them with the line we can actually get, and labels a pick only when the evidence clears a defined bar. This page explains the current <strong>v2</strong> method in plain English.</p>
+
+<nav class="toc" aria-label="On this page">
+<a href="#power">1. Power ratings</a><a href="#results">2. Results and efficiency</a><a href="#injuries">3. Player-value injuries</a><a href="#spread">4. Fair spread</a><a href="#tiers">5. Edge, checklist &amp; tiers</a><a href="#opinions">6. Outside opinions</a><a href="#trends">7. Trends</a><a href="#integrity">8. Integrity and timing</a>
+</nav>
+
+<section id="power">
+<h2>1. Team power ratings</h2>
+<p>Each team gets a power rating in points versus an average team on a neutral field. A positive number means better than average; a negative number means worse. The rating is a point estimate, not a rank, so the difference between two teams can be turned into a spread.</p>
+<p>For the preseason starting point, v2 uses the 2026 sportsbook win totals from <strong>DraftKings, reported by FOX Sports in September 2026</strong>. We translate the market&rsquo;s expected wins into points at <strong>1.5 points per win above league average</strong>. This gives us a reasonable starting point before enough games have been played. The starting point is split evenly between offense and defense because the win-total market does not give us a sourced offense/defense breakdown.</p>
+<p>As games are played, the starting point gradually gives way to the results. The results weight is:</p>
+<div class="formula">Results weight = games &divide; (games + 12)</div>
+<p>That means early games matter, but they do not make a team jump wildly after one unusual result.</p>
+</section>
+
+<section id="results">
+<h2>2. Results and efficiency</h2>
+<p>The results portion is an even blend of two views of performance:</p>
+<ul>
+<li><strong>Final-score margin:</strong> points scored minus points allowed, adjusted for the opponent.</li>
+<li><strong>Play-by-play efficiency:</strong> opponent-adjusted expected points added (EPA), which looks at the value of individual plays rather than only the final score.</li>
+</ul>
+<p>Each view supplies half of the results component. The combination keeps real scoreboard outcomes in the model while giving efficiency information a seat at the table. Ratings are re-centered so that the league average remains zero.</p>
+</section>
+
+<section id="injuries">
+<h2>3. The player-value injury layer</h2>
+<p>Team ratings describe a healthy baseline. We then apply a separate, visible player-value layer for verified availability news. The value is our estimate of the difference between the player and the replacement, not a claim that every injury can be measured perfectly.</p>
+<ul>
+<li><strong>Quarterbacks have the largest values</strong> because changing the quarterback can move a team more than most single-player absences.</li>
+<li>Other values depend on the player&rsquo;s role and the quality of the replacement. We identify uncertain statuses rather than pretending they are settled.</li>
+<li>We show the adjustment so readers can see what changed from the healthy rating to the game-day number.</li>
+</ul>
+<p>Injuries are not a reason to chase a stale edge. If the available line has already moved by the value of the news, the game can be a Pass even when our adjusted number still differs.</p>
+</section>
+
+<section id="spread">
+<h2>4. Fair spread</h2>
+<div class="formula">Fair spread = away team rating &minus; home team rating &minus; 2.5 home-field points &plusmn; verified rest/travel adjustments</div>
+<ul>
+<li>Home field is <strong>2.5 points</strong> by default and <strong>0</strong> at a neutral site.</li>
+<li>Rest and travel are included only when we can verify them. We do not fill gaps with guesses.</li>
+<li>We compare this fair spread with the line we can actually get and publish. We do not compare against a better number that appeared later or an imaginary line.</li>
+</ul>
+</section>
+
+<section id="tiers">
+<h2>5. Edge, checklist and tiers</h2>
+<p>The edge is the difference between our fair spread and the available line, measured toward the side we prefer. A number alone is not enough for a Best Bet. V2 uses four checklist signals:</p>
+<ol class="checklist">
+<li><strong>V2 edge:</strong> our v2 number shows an edge of at least <strong>2 points</strong>.</li>
+<li><strong>V1 agreement:</strong> the older v1, score-based model also shows an edge of at least <strong>2 points</strong>.</li>
+<li><strong>Market confirmation:</strong> the market action or current available line supports the side rather than contradicting it.</li>
+<li><strong>Verified injury or matchup edge:</strong> sourced player availability or a specific, verified matchup supports the side.</li>
+</ol>
+<table class="rules">
+<thead><tr><th>Tier</th><th>Rule</th></tr></thead>
+<tbody>
+<tr><td><span class="tier tier-bestbet">Best Bet</span></td><td>Our v2 edge is at least <strong>2 points</strong> and at least <strong>3 of the 4</strong> checklist signals hit.</td></tr>
+<tr><td><span class="tier tier-lean">Lean</span></td><td>A smaller edge or a promising but incomplete case that is worth tracking without calling it a Best Bet.</td></tr>
+<tr><td><span class="tier tier-pass">Pass</span></td><td>Anything else: no usable edge, insufficient support, or a line that has already absorbed the relevant news.</td></tr>
+</tbody></table>
+<p>We keep the language proportional to the evidence. A Lean is smaller; a Pass means we are not claiming a playable edge. The line used for comparison is the one we can actually get, not a hypothetical better price.</p>
+</section>
+
+<section id="opinions">
+<h2>6. Outside opinions</h2>
+<p>We may show other handicappers&rsquo; selections or AI-model opinions for reference and context. They are not part of our rating calculation, never count as checklist hits, and never create a Best Bet by themselves.</p>
+</section>
+
+<section id="trends">
+<h2>7. Trends</h2>
+<p>Historical trends can be interesting, but they are noisy. We may mention a trend in a footnote for color; <strong>trends never count toward a pick or checklist</strong>. Verified rest and travel belong in the fair-spread calculation, not in a retrofitted trend argument.</p>
+</section>
+
+<section id="integrity">
+<h2>8. Integrity and timing</h2>
+<ul class="integrity">
+<li><strong>Method change:</strong> we changed to v2 on <strong>September 25, 2026</strong>, before Week 3 Sunday.</li>
+<li><strong>Thursday honesty:</strong> Thursday&rsquo;s graded picks stay graded exactly as published. We do not rewrite them using the new method.</li>
+<li><strong>No invented numbers:</strong> missing lines, injuries, splits, or statistics are shown as missing rather than guessed.</li>
+<li><strong>Losses stay visible:</strong> graded picks remain on the record, wins and losses alike.</li>
+<li><strong>Entertainment and opinion only:</strong> nothing here is betting advice. 21+.</li>
+</ul>
+</section>
+</article>
+</main>
+<footer class="site-footer">
+  <div class="rg"><span class="age">21+</span> <span>Entertainment and opinion only. Not betting advice. Gambling problem? Call <a href="tel:18004262537"><b>1-800-GAMBLER</b></a>.</span></div>
+  <p>Lines of record: official Westgate SuperContest weekly card. Every pick graded at the posted line, flat 1 unit, losses included. <a href="methodology.html#integrity">Integrity rules</a>.</p>
+  <p class="small">&copy; 2026 VectorPicks.com &middot; AI NFL Weekly Selections &middot; <a href="https://www.youtube.com/@VectorPicks" rel="noopener">YouTube @VectorPicks</a> &middot; <a href="mailto:vectorpicks5@gmail.com">vectorpicks5@gmail.com</a> &middot; <a href="feed.xml">Podcast RSS</a></p>
+</footer>
+<script src="assets/site.js" defer></script>
+</body>
+</html>

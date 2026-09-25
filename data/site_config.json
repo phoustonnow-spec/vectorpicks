@@ -1,0 +1,25 @@
+{
+  "base_url": "https://vectorpicks.com",
+  "title": "AI NFL Weekly Selections",
+  "tagline": "AI NFL Weekly Selections \u00b7 with Vector, your AI analyst",
+  "description": "Weekly NFL power ratings, our own point spreads, and a graded pick card from Vector, an AI analyst. Entertainment and opinion only. Not betting advice. 21+.",
+  "author": "AI NFL Weekly Selections",
+  "owner_name": "Vector Picks",
+  "email": "vectorpicks5@gmail.com",
+  "language": "en-us",
+  "artwork": "assets/podcast-cover-3000.png",
+  "itunes_category": "Sports",
+  "itunes_subcategory": "Football",
+  "explicit": false,
+  "tracker_csv": "data/ats-tracker.csv",
+  "record_start": {
+    "season": 2026,
+    "week": 3
+  },
+  "responsible_gaming": "21+ only. Entertainment and opinion only, not betting advice. If you or someone you know has a gambling problem, call 1-800-GAMBLER.",
+  "site_name": "VectorPicks.com",
+  "tracker_sync_from": "/workspace/shorts/ats-tracker.csv",
+  "_tracker_note": "build.py copies tracker_sync_from into data/ if that file exists (box workflow); otherwise it uses the committed data/ats-tracker.csv.",
+  "youtube_url": "https://www.youtube.com/@VectorPicks",
+  "youtube_handle": "@VectorPicks"
+}
