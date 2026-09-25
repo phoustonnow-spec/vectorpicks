@@ -1,0 +1,185 @@
+{
+  "season": 2026,
+  "week": 3,
+  "as_of": "Westgate compare Thu Sep 24, 2026 ~7:53 AM PT; injury board Wed Sep 23, 2026 PT",
+  "teams": {
+    "Arizona Cardinals": "ARI",
+    "Atlanta Falcons": "ATL",
+    "Baltimore Ravens": "BAL",
+    "Buffalo Bills": "BUF",
+    "Carolina Panthers": "CAR",
+    "Chicago Bears": "CHI",
+    "Cincinnati Bengals": "CIN",
+    "Cleveland Browns": "CLE",
+    "Dallas Cowboys": "DAL",
+    "Denver Broncos": "DEN",
+    "Detroit Lions": "DET",
+    "Green Bay Packers": "GB",
+    "Houston Texans": "HOU",
+    "Indianapolis Colts": "IND",
+    "Jacksonville Jaguars": "JAX",
+    "Kansas City Chiefs": "KC",
+    "Las Vegas Raiders": "LV",
+    "Los Angeles Chargers": "LAC",
+    "Los Angeles Rams": "LAR",
+    "Miami Dolphins": "MIA",
+    "Minnesota Vikings": "MIN",
+    "New England Patriots": "NE",
+    "New Orleans Saints": "NO",
+    "New York Giants": "NYG",
+    "New York Jets": "NYJ",
+    "Philadelphia Eagles": "PHI",
+    "Pittsburgh Steelers": "PIT",
+    "San Francisco 49ers": "SF",
+    "Seattle Seahawks": "SEA",
+    "Tampa Bay Buccaneers": "TB",
+    "Tennessee Titans": "TEN",
+    "Washington Commanders": "WAS"
+  },
+  "games": [
+    {
+      "away_team": "Atlanta Falcons",
+      "home_team": "Green Bay Packers",
+      "away_abbr": "ATL",
+      "home_abbr": "GB",
+      "our_team": "Green Bay Packers",
+      "our_point": -2.4,
+      "our_label": "GB -2.4"
+    },
+    {
+      "away_team": "Seattle Seahawks",
+      "home_team": "Washington Commanders",
+      "away_abbr": "SEA",
+      "home_abbr": "WAS",
+      "our_team": "Seattle Seahawks",
+      "our_point": -10.8,
+      "our_label": "SEA -10.8"
+    },
+    {
+      "away_team": "Cincinnati Bengals",
+      "home_team": "Pittsburgh Steelers",
+      "away_abbr": "CIN",
+      "home_abbr": "PIT",
+      "our_team": "Cincinnati Bengals",
+      "our_point": -1.0,
+      "our_label": "CIN -1.0"
+    },
+    {
+      "away_team": "New York Jets",
+      "home_team": "Detroit Lions",
+      "away_abbr": "NYJ",
+      "home_abbr": "DET",
+      "our_team": "Detroit Lions",
+      "our_point": -2.9,
+      "our_label": "DET -2.9"
+    },
+    {
+      "away_team": "Tennessee Titans",
+      "home_team": "New York Giants",
+      "away_abbr": "TEN",
+      "home_abbr": "NYG",
+      "our_team": "New York Giants",
+      "our_point": -1.1,
+      "our_label": "NYG -1.1"
+    },
+    {
+      "away_team": "New England Patriots",
+      "home_team": "Jacksonville Jaguars",
+      "away_abbr": "NE",
+      "home_abbr": "JAX",
+      "our_team": "Jacksonville Jaguars",
+      "our_point": -0.9,
+      "our_label": "JAX -0.9"
+    },
+    {
+      "away_team": "Kansas City Chiefs",
+      "home_team": "Miami Dolphins",
+      "away_abbr": "KC",
+      "home_abbr": "MIA",
+      "our_team": "Kansas City Chiefs",
+      "our_point": -4.1,
+      "our_label": "KC -4.1"
+    },
+    {
+      "away_team": "Houston Texans",
+      "home_team": "Indianapolis Colts",
+      "away_abbr": "HOU",
+      "home_abbr": "IND",
+      "our_team": "Indianapolis Colts",
+      "our_point": -4.2,
+      "our_label": "IND -4.2"
+    },
+    {
+      "away_team": "Carolina Panthers",
+      "home_team": "Cleveland Browns",
+      "away_abbr": "CAR",
+      "home_abbr": "CLE",
+      "our_team": "Carolina Panthers",
+      "our_point": -2.5,
+      "our_label": "CAR -2.5"
+    },
+    {
+      "away_team": "Los Angeles Chargers",
+      "home_team": "Buffalo Bills",
+      "away_abbr": "LAC",
+      "home_abbr": "BUF",
+      "our_team": "Buffalo Bills",
+      "our_point": -8.9,
+      "our_label": "BUF -8.9"
+    },
+    {
+      "away_team": "Minnesota Vikings",
+      "home_team": "Tampa Bay Buccaneers",
+      "away_abbr": "MIN",
+      "home_abbr": "TB",
+      "our_team": "Minnesota Vikings",
+      "our_point": -5.4,
+      "our_label": "MIN -5.4"
+    },
+    {
+      "away_team": "Arizona Cardinals",
+      "home_team": "San Francisco 49ers",
+      "away_abbr": "ARI",
+      "home_abbr": "SF",
+      "our_team": "San Francisco 49ers",
+      "our_point": -8.4,
+      "our_label": "SF -8.4"
+    },
+    {
+      "away_team": "Las Vegas Raiders",
+      "home_team": "New Orleans Saints",
+      "away_abbr": "LV",
+      "home_abbr": "NO",
+      "our_team": "Las Vegas Raiders",
+      "our_point": -0.8,
+      "our_label": "LV -0.8"
+    },
+    {
+      "away_team": "Baltimore Ravens",
+      "home_team": "Dallas Cowboys",
+      "away_abbr": "BAL",
+      "home_abbr": "DAL",
+      "our_team": "Baltimore Ravens",
+      "our_point": -3.5,
+      "our_label": "BAL -3.5"
+    },
+    {
+      "away_team": "Los Angeles Rams",
+      "home_team": "Denver Broncos",
+      "away_abbr": "LAR",
+      "home_abbr": "DEN",
+      "our_team": "Denver Broncos",
+      "our_point": -0.4,
+      "our_label": "DEN -0.4"
+    },
+    {
+      "away_team": "Philadelphia Eagles",
+      "home_team": "Chicago Bears",
+      "away_abbr": "PHI",
+      "home_abbr": "CHI",
+      "our_team": "Chicago Bears",
+      "our_point": -6.1,
+      "our_label": "CHI -6.1"
+    }
+  ]
+}

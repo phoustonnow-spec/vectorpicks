@@ -4,7 +4,7 @@ from playwright.sync_api import sync_playwright
 BASE = sys.argv[1] if len(sys.argv) > 1 else "http://localhost:8765"
 OUT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "screenshots")
 os.makedirs(OUT, exist_ok=True)
-PAGES = ["index", "methodology", "record", "card", "episodes", "shorts"]
+PAGES = ["index", "methodology", "record", "card", "live", "episodes", "shorts"]
 with sync_playwright() as p:
     b = p.chromium.launch(executable_path="/usr/bin/google-chrome", args=["--no-sandbox"])
     for label, vp in (("mobile", {"width": 390, "height": 844}), ("desktop", {"width": 1366, "height": 900})):

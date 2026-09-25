@@ -1,0 +1,24 @@
+{
+  "name": "Vector Picks",
+  "short_name": "Vector Picks",
+  "description": "Weekly NFL power ratings, our own point spreads, and a graded pick card from Vector, an AI analyst. Entertainment and opinion only. Not betting advice. 21+.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#081834",
+  "theme_color": "#081834",
+  "icons": [
+    {
+      "src": "/assets/icon-192.png?v=fee91d80f8",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/assets/icon-512.png?v=7e470393a8",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}
