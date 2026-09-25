@@ -138,9 +138,10 @@ function testRender() {
 
   const mystery = row(html, "Mystery Club @ Some Other Team");
   const cells = mystery.split("</td>");
-  // Our Spread and Gap are the last two cells and must be a dash, not a made-up number.
-  assert.ok(cells[3].includes("\u2014"), cells[3]);
+  // Score, Our Spread, and Gap stay a dash. No invented pick or line.
+  assert.ok(cells[1].includes("\u2014"), cells[1]);
   assert.ok(cells[4].includes("\u2014"), cells[4]);
+  assert.ok(cells[5].includes("\u2014"), cells[5]);
   assert.ok(!mystery.includes("+0.8") && !mystery.includes("\u22122.4"));
   assert.ok(mystery.includes("Some Other Team \u22121.0"));
 
@@ -149,9 +150,9 @@ function testRender() {
   // No market number, so Gap stays blank even though Our Spread exists.
   assert.ok(!blank.includes("IND \u22124.2") || blank.includes("\u2014"));
   const blankCells = blank.split("</td>");
-  assert.ok(blankCells[1].includes("\u2014"), "missing books must not invent a market");
-  assert.ok(blankCells[3].includes("IND \u22124.2"), blankCells[3]);
-  assert.ok(blankCells[4].includes("\u2014"), "gap without a market is a dash");
+  assert.ok(blankCells[2].includes("\u2014"), "missing books must not invent a market");
+  assert.ok(blankCells[4].includes("IND \u22124.2"), blankCells[4]);
+  assert.ok(blankCells[5].includes("\u2014"), "gap without a market is a dash");
 
   const line = live.updatedLine(odds);
   assert.ok(line.startsWith("Lines updated "), line);
@@ -161,9 +162,131 @@ function testRender() {
   assert.ok(line.includes("11:10"), line);
 }
 
+function testAts() {
+  // Favorite: MIN -1.5. 24-21 covers by 1.5; 21-20 does not; 24-22.5 is not an NFL score.
+  assert.strictEqual(live.atsStatus(-1.5, 24, 21, "in"), "Covering");
+  assert.strictEqual(live.atsStatus(-1.5, 24, 21, "post"), "Won");
+  assert.strictEqual(live.atsStatus(-1.5, 21, 20, "in"), "Not covering");
+  assert.strictEqual(live.atsStatus(-1.5, 21, 20, "post"), "Lost");
+  // Dog: ATL +5.5. 17-20 covers; 14-20 does not.
+  assert.strictEqual(live.atsStatus(5.5, 17, 20, "in"), "Covering");
+  assert.strictEqual(live.atsStatus(5.5, 17, 20, "post"), "Won");
+  assert.strictEqual(live.atsStatus(5.5, 14, 20, "in"), "Not covering");
+  assert.strictEqual(live.atsStatus(5.5, 14, 20, "post"), "Lost");
+  // Push, either side, live or final. Pre-game never gets a status.
+  assert.strictEqual(live.atsStatus(-3, 24, 21, "in"), "Push");
+  assert.strictEqual(live.atsStatus(-3, 24, 21, "post"), "Push");
+  assert.strictEqual(live.atsStatus(3, 17, 20, "post"), "Push");
+  assert.strictEqual(live.atsStatus(3, 17, 20, "pre"), null);
+  assert.strictEqual(live.atsStatus(5.5, null, 20, "in"), null);
+  assert.strictEqual(live.coverMargin(5.5, 14, 20), -0.5);
+  assert.strictEqual(live.coverMargin(-7.5, 31, 24), -0.5);
+
+  const picked = {
+    games: [
+      {
+        away_team: "Atlanta Falcons",
+        home_team: "Green Bay Packers",
+        our_team: "Green Bay Packers",
+        our_point: -2.4,
+        our_label: "GB -2.4",
+        pick_team: "Atlanta Falcons",
+        pick_abbr: "ATL",
+        pick_line: 5.5,
+        pick_label: "ATL +5.5",
+        tier: "Lean",
+      },
+      {
+        away_team: "Seattle Seahawks",
+        home_team: "Washington Commanders",
+        our_team: "Seattle Seahawks",
+        our_point: -10.8,
+        our_label: "SEA -10.8",
+        pick_team: null,
+        pick_abbr: null,
+        pick_line: null,
+        pick_label: null,
+        tier: "Pass",
+      },
+    ],
+    teams: card.teams,
+  };
+  const scores = {
+    games: [
+      {
+        status: "post",
+        detail: "Final",
+        kickoff: "2026-09-28T00:20:00Z",
+        home: { name: "Green Bay Packers", abbr: "GB", score: 14 },
+        away: { name: "Atlanta Falcons", abbr: "ATL", score: 17 },
+      },
+      {
+        status: "in",
+        detail: "Q3 4:12",
+        kickoff: "2026-09-27T17:00:00Z",
+        possession: "NE",
+        red_zone: true,
+        home: { name: "Jacksonville Jaguars", abbr: "JAX", score: 10 },
+        away: { name: "New England Patriots", abbr: "NE", score: 14 },
+      },
+      {
+        status: "pre",
+        detail: "Sun 1:00 PM",
+        kickoff: "2026-09-27T20:25:00Z",
+        home: { name: "Washington Commanders", abbr: "WAS", score: 0 },
+        away: { name: "Seattle Seahawks", abbr: "SEA", score: 0 },
+      },
+    ],
+  };
+  const odds = {
+    games: [
+      {
+        commence_time: "2026-09-27T20:25:00Z",
+        home_team: "Washington Commanders",
+        away_team: "Seattle Seahawks",
+        books: { draftkings: { spread: { point: -7, price: -110 }, total: { point: 43 } } },
+      },
+    ],
+  };
+  const merged = live.mergeBoard(odds, picked, scores);
+  assert.strictEqual(merged.length, 3);
+  assert.strictEqual(merged[0].away_team, "New England Patriots");
+  assert.strictEqual(merged[1].away_team, "Seattle Seahawks");
+  assert.strictEqual(merged[2].away_team, "Atlanta Falcons");
+  const html = live.renderTable(odds, picked, scores);
+  assert.ok(html.includes("Our pick: ATL +5.5"), html);
+  assert.ok(html.includes("Won"), html);
+  assert.ok(html.includes("ATL 17"), html);
+  assert.ok(!html.includes("Our pick: SEA"), html);
+  assert.ok(html.indexOf("NE 14") < html.indexOf("Seattle Seahawks @ Washington Commanders"), "live games sort before upcoming");
+  assert.ok(html.indexOf("Seattle Seahawks @ Washington Commanders") < html.indexOf("ATL @ GB"), "finals sort after upcoming");
+  const strip = live.renderStrip(scores, {
+    games: picked.games.concat([{
+      away_team: "New England Patriots",
+      home_team: "Jacksonville Jaguars",
+      pick_team: "New England Patriots",
+      pick_abbr: "NE",
+      pick_line: 3,
+      pick_label: "NE +3",
+      tier: "Lean",
+    }]),
+    teams: {},
+  });
+  assert.ok(strip.includes("Live now"), strip);
+  assert.ok(strip.includes("Our pick: NE +3"), strip);
+  assert.ok(strip.includes("Covering"), strip);
+  assert.ok(strip.includes("Our pick: ATL +5.5"), strip);
+  assert.ok(!strip.includes("SEA"), strip);
+  assert.ok(strip.includes("Scores via ESPN; unofficial, may lag."), strip);
+  assert.strictEqual(live.nextScoresDelay(scores.games), 60000);
+  assert.strictEqual(live.nextScoresDelay([{ status: "post" }, { status: "pre" }]), 600000);
+  assert.strictEqual(live.renderStrip({ games: [scores.games[2]] }, picked), "");
+}
+
 function main() {
   testMath();
   testRender();
+  testAts();
   console.log("OK live board: median, home-perspective gap, empty Our Spread");
 }
 

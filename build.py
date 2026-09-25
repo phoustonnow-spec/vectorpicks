@@ -450,7 +450,9 @@ def build_home(weeks, rows, tidx, eps, sh):
 <section class="panel"><h2>Latest episode</h2>{ep}</section>
 {short_block}
 <section class="panel how"><h2>How it works</h2><ol><li><b>Power ratings</b> in points vs average.</li><li><b>Injury layer</b> with a points value per player.</li><li><b>Our Spread</b>, built independent of Vegas.</li><li><b>Gap + checklist</b> decides Best Bet, Lean or Pass.</li></ol><a class="btn ghost" href="methodology.html">Methodology &rarr;</a></section>
-</div>"""
+</div>
+<div id="live-strip"></div>
+<script src="{e(asset('assets/live.js'))}" defer></script>"""
     page("index.html", None, body,
          desc=f"Week {w['week']} {w['season']} AI NFL picks from Vector: power ratings, our own spreads, and a graded record. Watch on YouTube. Entertainment only. 21+.",
          extra_head=home_json_ld())
@@ -484,6 +486,25 @@ def parse_our(text):
         return None
     return m.group(1), round(float(m.group(2)), 2)
 
+PUBLISHED_TIERS = {"Best Bet", "Lean", "Card"}
+
+def published_pick(game, away_abbr, home_abbr):
+    """Westgate side we actually publish. Pass and 'No side' stay blank."""
+    tier = (game.get("tier") or "").strip()
+    empty = {"pick_team": None, "pick_abbr": None, "pick_line": None, "pick_label": None, "tier": tier or None}
+    if tier not in PUBLISHED_TIERS:
+        return empty
+    parsed = parse_our(game.get("pick") or "")
+    if not parsed or parsed[0] not in (away_abbr, home_abbr) or parsed[0] not in ABBR:
+        return empty
+    return {
+        "pick_team": ABBR[parsed[0]],
+        "pick_abbr": parsed[0],
+        "pick_line": parsed[1],
+        "pick_label": game["pick"].strip(),
+        "tier": tier,
+    }
+
 def live_spreads_payload(week):
     """Current-week card numbers for the Live Board, matched by full team name.
 
@@ -511,6 +532,7 @@ def live_spreads_payload(week):
             "our_team": ABBR[our_abbr],
             "our_point": our_point,
             "our_label": g["our"].strip(),
+            **published_pick(g, away_abbr, home_abbr),
         })
     return {
         "season": week["season"],
@@ -529,17 +551,18 @@ def write_live_spreads(week):
 def build_live(week):
     body = f"""
 <section class="hero hero-sm"><p class="kicker">Market vs Our Spread</p><h1>Live <span class="g">Board</span></h1>
-<p class="muted">Upcoming NFL games. The market spread is the median of DraftKings, FanDuel, BetMGM and Caesars, from the home team's side. Negative means the home team is favored.</p></section>
+<p class="muted">NFL games with the market spread next to Our Spread, and the score when ESPN has one. The market spread is the median of DraftKings, FanDuel, BetMGM and Caesars, from the home team's side. Negative means the home team is favored.</p></section>
 <section class="panel">
 <p id="live-updated" class="note" hidden></p>
 <div id="live-board" class="table-wrap" aria-live="polite"><p class="muted">Loading lines…</p></div>
-<p class="note">Our Spread is the Week {int(week['week'])} {int(week['season'])} card, restated on the same home-team side as the market number. <b>Gap</b> = Market &minus; Our Spread. A dash means that game has no Our Spread on the card.</p>
+<p class="note">Our Spread is the Week {int(week['week'])} {int(week['season'])} card, restated on the same home-team side as the market number. <b>Gap</b> = Market &minus; Our Spread. A dash means that game has no Our Spread on the card. A pick badge is the published Best Bet, Lean, or Card side at the Westgate line.</p>
+<p class="note">Scores via ESPN; unofficial, may lag.</p>
 <div class="rg"><span class="age">21+</span> <span>Entertainment and opinion only. Not betting advice. Gambling problem? Call <a href="tel:18004262537"><b>1-800-GAMBLER</b></a>.</span></div>
 </section>
 <script src="{e(asset('assets/live.js'))}" defer></script>
 """
     page("live.html", "Live Board", body,
-         desc="Live NFL spreads from DraftKings, FanDuel, BetMGM and Caesars, next to this week's Our Spread. Entertainment and opinion only. Not betting advice. 21+.")
+         desc="Live NFL scores and spreads next to this week's Our Spread, with covering status for published picks. Entertainment and opinion only. Not betting advice. 21+.")
 
 def validate_live(week):
     path = os.path.join(OUT, "live-spreads.json")
@@ -570,9 +593,26 @@ def validate_live(week):
                 raise SystemExit(f"Our Spread mismatch for {away} @ {home}: {g['our_team']} {g['our_point']}")
     live_html = open(os.path.join(OUT, "live.html")).read()
     for needle in ("Live Board", "assets/live.js", "1-800-GAMBLER", "Entertainment and opinion only",
-                   'href="live.html" aria-current="page"'):
+                   'href="live.html" aria-current="page"', "Scores via ESPN; unofficial, may lag."):
         if needle not in live_html:
             raise SystemExit(f"live.html missing {needle}")
+    if week["season"] == 2026 and int(week["week"]) == 3:
+        by_matchup = {(g["away_abbr"], g["home_abbr"]): g for g in data["games"]}
+        ne = by_matchup[("NE", "JAX")]
+        if ne["pick_label"] != "NE +3" or ne["pick_line"] != 3 or ne["tier"] != "Lean":
+            raise SystemExit(f"published pick mismatch for NE@JAX: {ne}")
+        nyj = by_matchup[("NYJ", "DET")]
+        if nyj["pick_label"] != "NYJ +6.5" or nyj["tier"] != "Best Bet":
+            raise SystemExit(f"published pick mismatch for NYJ@DET: {nyj}")
+        sea = by_matchup[("SEA", "WAS")]
+        if sea["pick_label"] is not None or sea["tier"] != "Pass":
+            raise SystemExit(f"Pass should not publish a pick: {sea}")
+        car = by_matchup[("CAR", "CLE")]
+        if car["pick_label"] is not None or car["tier"] != "Card":
+            raise SystemExit(f"No-side card should not publish a pick: {car}")
+    home = open(os.path.join(OUT, "index.html")).read()
+    if 'id="live-strip"' not in home or "assets/live.js" not in home:
+        raise SystemExit("home page is missing the live scores strip")
     for fname in ("index.html", "card.html", "record.html"):
         doc = open(os.path.join(OUT, fname)).read()
         if 'href="live.html"' not in doc:
