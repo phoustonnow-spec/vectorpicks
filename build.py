@@ -603,15 +603,14 @@ def validate_live(week):
         expect_pub = {
             ("PHI", "CHI"): ("CHI +4.5", "Best Bet"), ("CIN", "PIT"): ("PIT +3.5", "Best Bet"),
             ("LAR", "DEN"): ("DEN +2.5", "Best Bet"), ("KC", "MIA"): ("MIA +11.5", "Lean"),
-            ("ARI", "SF"): ("SF -8.5", "Lean"), ("NYJ", "DET"): ("DET -6.5", "Lean"),
-            ("MIN", "TB"): ("TB +1.5", "Lean"), ("ATL", "GB"): ("ATL +5.5", "Lean"),
+            ("ARI", "SF"): ("SF -8.5", "Lean"), ("ATL", "GB"): ("ATL +5.5", "Lean"),
         }
         for mu, (label, tier) in expect_pub.items():
             g = by_matchup[mu]
             if g["pick_label"] != label or g["tier"] != tier:
                 raise SystemExit(f"published pick mismatch for {mu}: {g}")
         for mu in (("HOU", "IND"), ("NE", "JAX"), ("LV", "NO"), ("TEN", "NYG"), ("SEA", "WAS"),
-                   ("CAR", "CLE"), ("LAC", "BUF"), ("BAL", "DAL")):
+                   ("CAR", "CLE"), ("LAC", "BUF"), ("BAL", "DAL"), ("NYJ", "DET"), ("MIN", "TB")):
             g = by_matchup[mu]
             if g["pick_label"] is not None:
                 raise SystemExit(f"removed game should not publish a pick: {g}")
@@ -622,6 +621,9 @@ def validate_live(week):
     card_html = open(os.path.join(OUT, "card.html")).read()
     if note not in card_html.replace("&#x27;", "'") or note not in home.replace("&#x27;", "'"):
         raise SystemExit("Sat 9/26 v3 model note missing from the card or home page")
+    for gone in ("DET -6.5 vs NYJ", "TB +1.5 vs MIN", "DET \u22126.5 vs NYJ"):
+        if gone in home or gone in card_html:
+            raise SystemExit(f"removed Lean still listed on the card/home page: {gone}")
     if "IND +2.5 vs HOU" in home or "IND +2.5 vs HOU" in card_html:
         raise SystemExit("IND +2.5 still listed on the card/home page")
     for fname in ("index.html", "card.html", "record.html"):

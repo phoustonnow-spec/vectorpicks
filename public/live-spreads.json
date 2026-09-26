@@ -87,11 +87,11 @@
       "our_team": "Detroit Lions",
       "our_point": -7.8,
       "our_label": "DET -7.8",
-      "pick_team": "Detroit Lions",
-      "pick_abbr": "DET",
-      "pick_line": -6.5,
-      "pick_label": "DET -6.5",
-      "tier": "Lean"
+      "pick_team": null,
+      "pick_abbr": null,
+      "pick_line": null,
+      "pick_label": null,
+      "tier": "Pass"
     },
     {
       "away_team": "Tennessee Titans",
@@ -185,11 +185,11 @@
       "our_team": "Minnesota Vikings",
       "our_point": -0.4,
       "our_label": "MIN -0.4",
-      "pick_team": "Tampa Bay Buccaneers",
-      "pick_abbr": "TB",
-      "pick_line": 1.5,
-      "pick_label": "TB +1.5",
-      "tier": "Lean"
+      "pick_team": null,
+      "pick_abbr": null,
+      "pick_line": null,
+      "pick_label": null,
+      "tier": "Pass"
     },
     {
       "away_team": "Arizona Cardinals",
