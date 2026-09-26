@@ -1,7 +1,8 @@
 {
  "season": 2026,
  "week": 3,
- "as_of": "Westgate compare Thu Sep 24, 2026 ~7:53 AM PT; injury board Wed Sep 23, 2026 PT",
+ "as_of": "Fri Sep 25, 2026 PT",
+ "update_note": "Updated Fri 9/25: tiers finalized after injury news; Kyler Murray starts for MIN",
  "sources": [
   "/workspace/week3-2026-our-spread-vs-westgate.md",
   "/workspace/week3-2026-injury-adjusted-board.md",
@@ -12,21 +13,19 @@
  "hfa_note": "HFA 2.5 default; BAL @ DAL (Brazil) neutral site, HFA 0. Rest adjustments not applied this week (no verified rest deltas sourced).",
  "summary": {
   "best_bets": [
-   "NYJ +6.5 @ DET",
-   "MIN -1.5 @ TB",
+   "NE +3 @ JAX",
+   "DEN +2.5 vs LAR",
    "IND +2.5 vs HOU"
   ],
   "leans": [
    "ATL +5.5 @ GB",
+   "NYJ +6.5 @ DET",
+   "CHI +4.5 vs PHI",
    "LV +3 @ NO",
-   "NE +3 @ JAX",
-   "DEN +2.5 vs LAR",
-   "BUF -7.5 vs LAC (soft)",
    "MIA +11.5 vs KC (spec)"
   ],
   "passes": [
-   "SEA -7 @ WAS (injury priced)",
-   "PHI @ CHI (injury priced)"
+   "SEA -7 @ WAS (injury priced)"
   ]
  },
  "games": [
@@ -78,9 +77,9 @@
    "market": "DET -6.5",
    "our": "DET -2.9",
    "gap": 3.6,
-   "tier": "Best Bet",
+   "tier": "Lean",
    "pick": "NYJ +6.5",
-   "note": "Tuesday Best Bet intact. Market still prices the Lions big; our adjusted DET only -2.9."
+   "note": "Demoted from Best Bet to Lean Fri 9/25. Market still prices the Lions big; our adjusted DET only -2.9."
   },
   {
    "game": "TEN@NYG",
@@ -104,9 +103,9 @@
    "market": "JAX -3",
    "our": "JAX -0.9",
    "gap": 2.1,
-   "tier": "Lean",
+   "tier": "Best Bet",
    "pick": "NE +3",
-   "note": "Powers still like the Pats; JAX -3 overstates the home edge."
+   "note": "Upgraded from Lean to Best Bet Fri 9/25. Powers still like the Pats; JAX -3 overstates the home edge."
   },
   {
    "game": "KC@MIA",
@@ -156,9 +155,9 @@
    "market": "BUF -7",
    "our": "BUF -8.9",
    "gap": 1.4,
-   "tier": "Lean",
+   "tier": "Card",
    "pick": "BUF -7.5",
-   "note": "LAC TE unit gutted (Njoku IR, Kolar out). Soft Lean: gap under 2."
+   "note": "Demoted from Lean to Card Fri 9/25. LAC TE unit gutted (Njoku IR, Kolar out); gap stays under 2."
   },
   {
    "game": "MIN@TB",
@@ -169,9 +168,9 @@
    "market": "MIN -1.5",
    "our": "MIN -5.4",
    "gap": 3.9,
-   "tier": "Best Bet",
+   "tier": "Card",
    "pick": "MIN -1.5",
-   "note": "Tuesday Best Bet intact. Vikings power still well clear after a soft Jones haircut."
+   "note": "Demoted from Best Bet to Card Fri 9/25. Kyler Murray starts after clearing concussion protocol; our rating was built on Wentz starts."
   },
   {
    "game": "ARI@SF",
@@ -221,9 +220,9 @@
    "market": "LAR -2.5",
    "our": "DEN -0.4",
    "gap": 2.9,
-   "tier": "Lean",
+   "tier": "Best Bet",
    "pick": "DEN +2.5",
-   "note": "Nacua questionable + home field flips a thin LAR road edge."
+   "note": "Upgraded from Lean to Best Bet Fri 9/25. Nacua questionable + home field flips a thin LAR road edge."
   },
   {
    "game": "PHI@CHI",
@@ -234,9 +233,9 @@
    "market": "PHI -4.5",
    "our": "CHI -6.1",
    "gap": 10.6,
-   "tier": "Pass",
+   "tier": "Lean",
    "pick": "CHI +4.5",
-   "note": "Caleb Williams likely out, already priced into the market. Pass: injury residue, no chase."
+   "note": "Upgraded from Pass to Lean Fri 9/25. Side stays CHI +4.5."
   }
  ],
  "powers": [

@@ -285,9 +285,10 @@ def build_card(w, tidx, fname):
         pw += f'<tr><td class="rank">{i}</td><td><b>{e(team)}</b></td><td>{minus(f"{h:+.1f}")}</td><td class="{dcls}">{minus(f"{d:+.1f}") if d else "0"}</td><td><b>{minus(f"{a:+.1f}")}</b></td><td class="muted">{e(minus(why))}</td></tr>'
     s = w["summary"]
     li = lambda xs: "".join(f"<li>{e(minus(x))}</li>" for x in xs)
+    update = f'<p class="note">{e(w["update_note"])}</p>' if w.get("update_note") else ""
     body = f"""
 <section class="hero hero-sm"><p class="kicker">Week {w['week']} &middot; {w['season']}</p><h1>Weekly <span class="g">Card</span></h1>
-<p class="muted">As of {e(w['as_of'])}.</p></section>
+<p class="muted">As of {e(w['as_of'])}.</p>{update}</section>
 <section class="summary-grid">
 <div class="panel"><h2>{tier_badge('Best Bet')} Best Bets</h2><ul class="picks big">{li(s['best_bets'])}</ul></div>
 <div class="panel"><h2>{tier_badge('Lean')} Leans</h2><ul class="picks">{li(s['leans'])}</ul></div>
@@ -445,6 +446,7 @@ def build_home(weeks, rows, tidx, eps, sh):
 <section class="panel week-card"><div class="wc-head"><h2>Week {w['week']} &middot; {w['season']}</h2><div class="wk-rec"><small>WEEK {w['week']} RECORD</small><b>{wt['rec'][:-2] if wt['P']==0 else wt['rec']}</b></div></div>
 <p class="kicker">{len(s['best_bets'])} Best Bets</p><ul class="picks big">{bb}</ul>{cash_html}
 <p class="note">Leans: {e(minus(', '.join(s['leans'])))}.</p>
+{f'<p class="note">{e(w["update_note"])}</p>' if w.get("update_note") else ""}
 <div class="btn-row"><a class="btn" href="card.html">Full card &rarr;</a><a class="btn ghost" href="live.html">Live Board &rarr;</a></div></section>
 {record_box(rows)}
 <section class="panel"><h2>Latest episode</h2>{ep}</section>
@@ -599,11 +601,29 @@ def validate_live(week):
     if week["season"] == 2026 and int(week["week"]) == 3:
         by_matchup = {(g["away_abbr"], g["home_abbr"]): g for g in data["games"]}
         ne = by_matchup[("NE", "JAX")]
-        if ne["pick_label"] != "NE +3" or ne["pick_line"] != 3 or ne["tier"] != "Lean":
+        if ne["pick_label"] != "NE +3" or ne["pick_line"] != 3 or ne["tier"] != "Best Bet":
             raise SystemExit(f"published pick mismatch for NE@JAX: {ne}")
+        den = by_matchup[("LAR", "DEN")]
+        if den["pick_label"] != "DEN +2.5" or den["tier"] != "Best Bet":
+            raise SystemExit(f"published pick mismatch for LAR@DEN: {den}")
+        ind = by_matchup[("HOU", "IND")]
+        if ind["pick_label"] != "IND +2.5" or ind["tier"] != "Best Bet":
+            raise SystemExit(f"published pick mismatch for HOU@IND: {ind}")
         nyj = by_matchup[("NYJ", "DET")]
-        if nyj["pick_label"] != "NYJ +6.5" or nyj["tier"] != "Best Bet":
+        if nyj["pick_label"] != "NYJ +6.5" or nyj["tier"] != "Lean":
             raise SystemExit(f"published pick mismatch for NYJ@DET: {nyj}")
+        chi = by_matchup[("PHI", "CHI")]
+        if chi["pick_label"] != "CHI +4.5" or chi["tier"] != "Lean":
+            raise SystemExit(f"published pick mismatch for PHI@CHI: {chi}")
+        minn = by_matchup[("MIN", "TB")]
+        if minn["pick_label"] != "MIN -1.5" or minn["tier"] != "Card":
+            raise SystemExit(f"published pick mismatch for MIN@TB: {minn}")
+        buf = by_matchup[("LAC", "BUF")]
+        if buf["pick_label"] != "BUF -7.5" or buf["tier"] != "Card":
+            raise SystemExit(f"published pick mismatch for LAC@BUF: {buf}")
+        atl = by_matchup[("ATL", "GB")]
+        if atl["pick_label"] != "ATL +5.5" or atl["tier"] != "Lean":
+            raise SystemExit(f"published pick mismatch for ATL@GB: {atl}")
         sea = by_matchup[("SEA", "WAS")]
         if sea["pick_label"] is not None or sea["tier"] != "Pass":
             raise SystemExit(f"Pass should not publish a pick: {sea}")
@@ -613,6 +633,12 @@ def validate_live(week):
     home = open(os.path.join(OUT, "index.html")).read()
     if 'id="live-strip"' not in home or "assets/live.js" not in home:
         raise SystemExit("home page is missing the live scores strip")
+    note = "Updated Fri 9/25: tiers finalized after injury news; Kyler Murray starts for MIN"
+    card_html = open(os.path.join(OUT, "card.html")).read()
+    if note not in card_html or note not in home:
+        raise SystemExit("Fri 9/25 tier note missing from the card or home page")
+    if "MIN \u22121.5" in home or "NYJ +6.5 @ DET</li><li>MIN" in home:
+        raise SystemExit("home still lists the old Best Bets")
     for fname in ("index.html", "card.html", "record.html"):
         doc = open(os.path.join(OUT, fname)).read()
         if 'href="live.html"' not in doc:
