@@ -601,7 +601,7 @@ def validate_live(week):
     if week["season"] == 2026 and int(week["week"]) == 3:
         by_matchup = {(g["away_abbr"], g["home_abbr"]): g for g in data["games"]}
         ne = by_matchup[("NE", "JAX")]
-        if ne["pick_label"] != "NE +3" or ne["pick_line"] != 3 or ne["tier"] != "Best Bet":
+        if ne["pick_label"] != "NE +3" or ne["pick_line"] != 3 or ne["tier"] != "Lean" or ne["our_point"] != -1.7:
             raise SystemExit(f"published pick mismatch for NE@JAX: {ne}")
         den = by_matchup[("LAR", "DEN")]
         if den["pick_label"] != "DEN +2.5" or den["tier"] != "Best Bet":
@@ -610,10 +610,10 @@ def validate_live(week):
         if ind["pick_label"] != "IND +2.5" or ind["tier"] != "Best Bet":
             raise SystemExit(f"published pick mismatch for HOU@IND: {ind}")
         nyj = by_matchup[("NYJ", "DET")]
-        if nyj["pick_label"] != "NYJ +6.5" or nyj["tier"] != "Lean":
+        if nyj["pick_label"] != "DET -6.5" or nyj["pick_line"] != -6.5 or nyj["tier"] != "Card" or nyj["our_point"] != -8.1:
             raise SystemExit(f"published pick mismatch for NYJ@DET: {nyj}")
         chi = by_matchup[("PHI", "CHI")]
-        if chi["pick_label"] != "CHI +4.5" or chi["tier"] != "Lean":
+        if chi["pick_label"] != "CHI +4.5" or chi["tier"] != "Lean" or chi["our_point"] != 1.1:
             raise SystemExit(f"published pick mismatch for PHI@CHI: {chi}")
         minn = by_matchup[("MIN", "TB")]
         if minn["pick_label"] != "MIN -1.5" or minn["tier"] != "Card":
@@ -625,7 +625,7 @@ def validate_live(week):
         if atl["pick_label"] != "ATL +5.5" or atl["tier"] != "Lean":
             raise SystemExit(f"published pick mismatch for ATL@GB: {atl}")
         sea = by_matchup[("SEA", "WAS")]
-        if sea["pick_label"] is not None or sea["tier"] != "Pass":
+        if sea["pick_label"] is not None or sea["tier"] != "Pass" or sea["our_label"] != "WAS +7.5" or sea["our_point"] != 7.5:
             raise SystemExit(f"Pass should not publish a pick: {sea}")
         car = by_matchup[("CAR", "CLE")]
         if car["pick_label"] is not None or car["tier"] != "Card":
@@ -633,7 +633,7 @@ def validate_live(week):
     home = open(os.path.join(OUT, "index.html")).read()
     if 'id="live-strip"' not in home or "assets/live.js" not in home:
         raise SystemExit("home page is missing the live scores strip")
-    note = "Updated Fri 9/25: tiers finalized after injury news; Kyler Murray starts for MIN"
+    note = "Updated Fri 9/25 injury recheck: NE +3 downgraded to Lean (edge 1.3, under the 2-point Best Bet floor). NYJ +6.5 dropped; card side is DET -6.5 (our number DET -8.1). Caleb Williams missed practice; Case Keenum expected to start Monday night; final statuses Saturday."
     card_html = open(os.path.join(OUT, "card.html")).read()
     if note not in card_html or note not in home:
         raise SystemExit("Fri 9/25 tier note missing from the card or home page")
