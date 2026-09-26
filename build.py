@@ -298,9 +298,9 @@ def build_card(w, tidx, fname):
 <p class="note"><b>Westgate</b> = contest line of record (graded here). <b>Market</b> = {e(w['market_source'])}. <b>Gap</b> = points between the Westgate line and Our Spread, toward the card side. {e(w['hfa_note'])}</p>
 <div class="table-wrap"><table class="card-table"><thead><tr><th scope="col">Game</th><th scope="col">Westgate</th><th scope="col">Market</th><th scope="col">Our Spread</th><th scope="col">Gap</th><th scope="col">Tier</th><th scope="col">Card side</th><th scope="col">Result</th><th scope="col">Why</th></tr></thead><tbody>{rows}</tbody></table></div>
 </section>
-<section class="panel" id="powers"><h2>Power ratings: healthy &rarr; injury-adjusted</h2>
-<p class="note">Points vs a league-average team. Injury &Delta; = our player-value layer (Out/Doubtful full value, Questionable/DNP ~half). Rank is display only.</p>
-<div class="table-wrap"><table class="power-table"><thead><tr><th scope="col">#</th><th scope="col">Team</th><th scope="col">Healthy</th><th scope="col">Injury &Delta;</th><th scope="col">Adjusted</th><th scope="col">Drivers</th></tr></thead><tbody>{pw}</tbody></table></div></section>
+<section class="panel" id="powers"><h2>{e(w.get("powers_title", "Power ratings: healthy &rarr; injury-adjusted"))}</h2>
+<p class="note">{e(w.get("powers_note", "Points vs a league-average team. Injury Δ = our player-value layer (Out/Doubtful full value, Questionable/DNP ~half). Rank is display only."))}</p>
+<div class="table-wrap"><table class="power-table"><thead><tr><th scope="col">#</th><th scope="col">Team</th><th scope="col">{e(w.get("powers_healthy_label", "Healthy"))}</th><th scope="col">Injury &Delta;</th><th scope="col">Adjusted</th><th scope="col">Drivers</th></tr></thead><tbody>{pw}</tbody></table></div></section>
 <section class="panel"><h2>Missing / not used this week</h2><ul class="missing">{li(w.get('missing', []))}</ul>
 <p class="note">Lines: {e(w['line_source'])}</p></section>
 """
