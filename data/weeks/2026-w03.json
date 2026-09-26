@@ -13,10 +13,10 @@
  "hfa_note": "HFA 2.5 default; BAL @ DAL (Brazil) neutral site, HFA 0. Rest adjustments not applied this week (no verified rest deltas sourced).",
  "summary": {
   "best_bets": [
-   "DEN +2.5 vs LAR",
-   "IND +2.5 vs HOU"
+   "DEN +2.5 vs LAR"
   ],
   "leans": [
+   "IND +2.5 vs HOU",
    "ATL +5.5 @ GB",
    "NE +3 @ JAX",
    "CHI +4.5 vs PHI",
@@ -128,9 +128,9 @@
    "market": "HOU -2.5",
    "our": "IND -4.2",
    "gap": 6.7,
-   "tier": "Best Bet",
+   "tier": "Lean",
    "pick": "IND +2.5",
-   "note": "Nico Collins likely out flips the HOU pass offense; Pierce (IND) also out but IND still preferred. Upgraded from Tuesday Lean."
+   "note": "Downgraded Sat 9/26: market-anchored model edge 1.6 and scheme matchups favor HOU."
   },
   {
    "game": "CAR@CLE",
