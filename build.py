@@ -580,14 +580,14 @@ def validate_live(week):
             raise SystemExit(f"live-spreads.json quote mismatch: {g}")
         if g["our_team"] not in (g["home_team"], g["away_team"]):
             raise SystemExit(f"Our Spread team is not in the matchup: {g}")
-    # Independent spot check while this file is still the Week 3 2026 card.
+    # Independent spot check while this file is still the Week 3 2026 card (Sat 9/26 v3 update).
     if week["season"] == 2026 and int(week["week"]) == 3:
         want = {
             ("Atlanta Falcons", "Green Bay Packers"): ("Green Bay Packers", -2.4),
-            ("Las Vegas Raiders", "New Orleans Saints"): ("Las Vegas Raiders", -0.8),
-            ("Houston Texans", "Indianapolis Colts"): ("Indianapolis Colts", -4.2),
-            ("Minnesota Vikings", "Tampa Bay Buccaneers"): ("Minnesota Vikings", -5.4),
-            ("Baltimore Ravens", "Dallas Cowboys"): ("Baltimore Ravens", -3.5),
+            ("Philadelphia Eagles", "Chicago Bears"): ("Philadelphia Eagles", -2.0),
+            ("Cincinnati Bengals", "Pittsburgh Steelers"): ("Cincinnati Bengals", -1.0),
+            ("Los Angeles Rams", "Denver Broncos"): ("Los Angeles Rams", -0.7),
+            ("Arizona Cardinals", "San Francisco 49ers"): ("San Francisco 49ers", -9.9),
         }
         for (away, home), (our_team, our_point) in want.items():
             g = next(x for x in data["games"] if x["away_team"] == away and x["home_team"] == home)
@@ -600,45 +600,30 @@ def validate_live(week):
             raise SystemExit(f"live.html missing {needle}")
     if week["season"] == 2026 and int(week["week"]) == 3:
         by_matchup = {(g["away_abbr"], g["home_abbr"]): g for g in data["games"]}
-        ne = by_matchup[("NE", "JAX")]
-        if ne["pick_label"] != "NE +3" or ne["pick_line"] != 3 or ne["tier"] != "Lean" or ne["our_point"] != -1.7:
-            raise SystemExit(f"published pick mismatch for NE@JAX: {ne}")
-        den = by_matchup[("LAR", "DEN")]
-        if den["pick_label"] != "DEN +2.5" or den["tier"] != "Best Bet":
-            raise SystemExit(f"published pick mismatch for LAR@DEN: {den}")
-        ind = by_matchup[("HOU", "IND")]
-        if ind["pick_label"] != "IND +2.5" or ind["tier"] != "Lean":
-            raise SystemExit(f"published pick mismatch for HOU@IND: {ind}")
-        nyj = by_matchup[("NYJ", "DET")]
-        if nyj["pick_label"] != "DET -6.5" or nyj["pick_line"] != -6.5 or nyj["tier"] != "Card" or nyj["our_point"] != -8.1:
-            raise SystemExit(f"published pick mismatch for NYJ@DET: {nyj}")
-        chi = by_matchup[("PHI", "CHI")]
-        if chi["pick_label"] != "CHI +4.5" or chi["tier"] != "Lean" or chi["our_point"] != 1.1:
-            raise SystemExit(f"published pick mismatch for PHI@CHI: {chi}")
-        minn = by_matchup[("MIN", "TB")]
-        if minn["pick_label"] != "MIN -1.5" or minn["tier"] != "Card":
-            raise SystemExit(f"published pick mismatch for MIN@TB: {minn}")
-        buf = by_matchup[("LAC", "BUF")]
-        if buf["pick_label"] != "BUF -7.5" or buf["tier"] != "Card":
-            raise SystemExit(f"published pick mismatch for LAC@BUF: {buf}")
-        atl = by_matchup[("ATL", "GB")]
-        if atl["pick_label"] != "ATL +5.5" or atl["tier"] != "Lean":
-            raise SystemExit(f"published pick mismatch for ATL@GB: {atl}")
-        sea = by_matchup[("SEA", "WAS")]
-        if sea["pick_label"] is not None or sea["tier"] != "Pass" or sea["our_label"] != "WAS +7.5" or sea["our_point"] != 7.5:
-            raise SystemExit(f"Pass should not publish a pick: {sea}")
-        car = by_matchup[("CAR", "CLE")]
-        if car["pick_label"] is not None or car["tier"] != "Card":
-            raise SystemExit(f"No-side card should not publish a pick: {car}")
+        expect_pub = {
+            ("PHI", "CHI"): ("CHI +4.5", "Best Bet"), ("CIN", "PIT"): ("PIT +3.5", "Best Bet"),
+            ("LAR", "DEN"): ("DEN +2.5", "Best Bet"), ("KC", "MIA"): ("MIA +11.5", "Lean"),
+            ("ARI", "SF"): ("SF -8.5", "Lean"), ("NYJ", "DET"): ("DET -6.5", "Lean"),
+            ("MIN", "TB"): ("TB +1.5", "Lean"), ("ATL", "GB"): ("ATL +5.5", "Lean"),
+        }
+        for mu, (label, tier) in expect_pub.items():
+            g = by_matchup[mu]
+            if g["pick_label"] != label or g["tier"] != tier:
+                raise SystemExit(f"published pick mismatch for {mu}: {g}")
+        for mu in (("HOU", "IND"), ("NE", "JAX"), ("LV", "NO"), ("TEN", "NYG"), ("SEA", "WAS"),
+                   ("CAR", "CLE"), ("LAC", "BUF"), ("BAL", "DAL")):
+            g = by_matchup[mu]
+            if g["pick_label"] is not None:
+                raise SystemExit(f"removed game should not publish a pick: {g}")
     home = open(os.path.join(OUT, "index.html")).read()
     if 'id="live-strip"' not in home or "assets/live.js" not in home:
         raise SystemExit("home page is missing the live scores strip")
-    note = "Updated Fri 9/25 injury recheck: NE +3 downgraded to Lean (edge 1.3, under the 2-point Best Bet floor). NYJ +6.5 dropped; card side is DET -6.5 (our number DET -8.1). Caleb Williams missed practice; Case Keenum expected to start Monday night; final statuses Saturday."
+    note = "Updated model (v3): starts from the betting market"
     card_html = open(os.path.join(OUT, "card.html")).read()
-    if note not in card_html or note not in home:
-        raise SystemExit("Fri 9/25 tier note missing from the card or home page")
-    if "MIN \u22121.5" in home or "NYJ +6.5 @ DET</li><li>MIN" in home:
-        raise SystemExit("home still lists the old Best Bets")
+    if note not in card_html.replace("&#x27;", "'") or note not in home.replace("&#x27;", "'"):
+        raise SystemExit("Sat 9/26 v3 model note missing from the card or home page")
+    if "IND +2.5 vs HOU" in home or "IND +2.5 vs HOU" in card_html:
+        raise SystemExit("IND +2.5 still listed on the card/home page")
     for fname in ("index.html", "card.html", "record.html"):
         doc = open(os.path.join(OUT, fname)).read()
         if 'href="live.html"' not in doc:
