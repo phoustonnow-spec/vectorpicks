@@ -444,7 +444,7 @@ def build_home(weeks, rows, tidx, eps, sh):
 <p class="btn-row"><a class="btn" href="{e(youtube_subscribe())}" target="_blank" rel="noopener">Watch &amp; Subscribe on YouTube</a></p></section>
 <div class="home-grid">
 <section class="panel week-card"><div class="wc-head"><h2>Week {w['week']} &middot; {w['season']}</h2><div class="wk-rec"><small>WEEK {w['week']} RECORD</small><b>{wt['rec'][:-2] if wt['P']==0 else wt['rec']}</b></div></div>
-<p class="kicker">{len(s['best_bets'])} Best Bets</p><ul class="picks big">{bb}</ul>{cash_html}
+<p class="kicker">{len(s['best_bets'])} Best Bet{'' if len(s['best_bets']) == 1 else 's'}</p><ul class="picks big">{bb}</ul>{cash_html}
 <p class="note">Leans: {e(minus(', '.join(s['leans'])))}.</p>
 {f'<p class="note">{e(w["update_note"])}</p>' if w.get("update_note") else ""}
 <div class="btn-row"><a class="btn" href="card.html">Full card &rarr;</a><a class="btn ghost" href="live.html">Live Board &rarr;</a></div></section>
@@ -607,7 +607,7 @@ def validate_live(week):
         if den["pick_label"] != "DEN +2.5" or den["tier"] != "Best Bet":
             raise SystemExit(f"published pick mismatch for LAR@DEN: {den}")
         ind = by_matchup[("HOU", "IND")]
-        if ind["pick_label"] != "IND +2.5" or ind["tier"] != "Best Bet":
+        if ind["pick_label"] != "IND +2.5" or ind["tier"] != "Lean":
             raise SystemExit(f"published pick mismatch for HOU@IND: {ind}")
         nyj = by_matchup[("NYJ", "DET")]
         if nyj["pick_label"] != "DET -6.5" or nyj["pick_line"] != -6.5 or nyj["tier"] != "Card" or nyj["our_point"] != -8.1:
