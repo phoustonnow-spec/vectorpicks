@@ -1,8 +1,8 @@
 {
  "season": 2026,
  "week": 3,
- "as_of": "Fri Sep 25, 2026 PT",
- "update_note": "Updated Fri 9/25: tiers finalized after injury news; Kyler Murray starts for MIN",
+ "as_of": "Fri Sep 25, 2026 PT, injury recheck",
+ "update_note": "Updated Fri 9/25 injury recheck: NE +3 downgraded to Lean (edge 1.3, under the 2-point Best Bet floor). NYJ +6.5 dropped; card side is DET -6.5 (our number DET -8.1). Caleb Williams missed practice; Case Keenum expected to start Monday night; final statuses Saturday.",
  "sources": [
   "/workspace/week3-2026-our-spread-vs-westgate.md",
   "/workspace/week3-2026-injury-adjusted-board.md",
@@ -13,13 +13,12 @@
  "hfa_note": "HFA 2.5 default; BAL @ DAL (Brazil) neutral site, HFA 0. Rest adjustments not applied this week (no verified rest deltas sourced).",
  "summary": {
   "best_bets": [
-   "NE +3 @ JAX",
    "DEN +2.5 vs LAR",
    "IND +2.5 vs HOU"
   ],
   "leans": [
    "ATL +5.5 @ GB",
-   "NYJ +6.5 @ DET",
+   "NE +3 @ JAX",
    "CHI +4.5 vs PHI",
    "LV +3 @ NO",
    "MIA +11.5 vs KC (spec)"
@@ -49,11 +48,11 @@
    "date": "2026-09-27",
    "westgate": "SEA -7",
    "market": "SEA -7",
-   "our": "SEA -10.8",
-   "gap": 3.8,
+   "our": "WAS +7.5",
+   "gap": 0.5,
    "tier": "Pass",
    "pick": "SEA -7",
-   "note": "Daniels OUT and the market already moved on it. Pass: injury residue, no chase."
+   "note": "Daniels OUT and the market already moved on it. Pass: injury residue, no chase. Our Spread is now WAS +7.5."
   },
   {
    "game": "CIN@PIT",
@@ -75,11 +74,11 @@
    "date": "2026-09-27",
    "westgate": "DET -6.5",
    "market": "DET -6.5",
-   "our": "DET -2.9",
-   "gap": 3.6,
-   "tier": "Lean",
-   "pick": "NYJ +6.5",
-   "note": "Demoted from Best Bet to Lean Fri 9/25. Market still prices the Lions big; our adjusted DET only -2.9."
+   "our": "DET -8.1",
+   "gap": 1.6,
+   "tier": "Card",
+   "pick": "DET -6.5",
+   "note": "Dropped as a Lean: our number (DET -8.1) no longer supports NYJ +6.5."
   },
   {
    "game": "TEN@NYG",
@@ -101,11 +100,11 @@
    "date": "2026-09-27",
    "westgate": "JAX -3",
    "market": "JAX -3",
-   "our": "JAX -0.9",
-   "gap": 2.1,
-   "tier": "Best Bet",
+   "our": "JAX -1.7",
+   "gap": 1.3,
+   "tier": "Lean",
    "pick": "NE +3",
-   "note": "Upgraded from Lean to Best Bet Fri 9/25. Powers still like the Pats; JAX -3 overstates the home edge."
+   "note": "Downgraded Fri 9/25: NE edge rushers Dre'Mont Jones and Quintayvious Hutchins ruled out; edge now under our 2-point Best Bet floor."
   },
   {
    "game": "KC@MIA",
@@ -231,11 +230,11 @@
    "date": "2026-09-28",
    "westgate": "PHI -4.5",
    "market": "PHI -4.5",
-   "our": "CHI -6.1",
-   "gap": 10.6,
+   "our": "CHI +1.1",
+   "gap": 3.4,
    "tier": "Lean",
    "pick": "CHI +4.5",
-   "note": "Upgraded from Pass to Lean Fri 9/25. Side stays CHI +4.5."
+   "note": "Upgraded from Pass to Lean Fri 9/25. Side stays CHI +4.5. Our Spread is now CHI +1.1."
   }
  ],
  "powers": [
