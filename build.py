@@ -7,6 +7,7 @@ Usage:
 
 Inputs (data/):
   site_config.json   base_url, titles, podcast metadata, ga_measurement_id (one place to change the domain)
+  ai-picks/*.json    AI chatbot picks per week -> ai-picks.html (+ archive per week)
   weeks/*.json       one file per week (e.g. 2026-w04.json); newest = "latest card"
   ats-tracker.csv    graded picks (synced from tracker_sync_from if that path exists)
   episodes.json      podcast episodes -> episodes.html + feed.xml
@@ -107,7 +108,7 @@ def tracker_index(rows):
     return {(r["Season"], int(r["Week"]), r["Game"]): r for r in rows}
 
 # ---------------------------------------------------------------- layout
-NAV = [("index.html", "Home"), ("card.html", "Weekly Card"), ("live.html", "Live Board"),
+NAV = [("index.html", "Home"), ("card.html", "Weekly Card"), ("ai-picks.html", "AI Picks"), ("live.html", "Live Board"),
        ("record.html", "Record"), ("methodology.html", "Methodology"),
        ("episodes.html", "Podcast"), ("shorts.html", "Shorts")]
 
@@ -937,10 +938,133 @@ def write_manifest():
         json.dump(manifest, f, indent=2)
         f.write("\n")
 
+# ---------------------------------------------------------------- AI picks
+def load_ai_weeks():
+    """data/ai-picks/YYYY-wNN.json, one file per week (same shape as 2026-w03.json)."""
+    weeks = []
+    for p in sorted(glob.glob(os.path.join(DATA, "ai-picks", "*.json"))):
+        w = json.load(open(p))
+        w["slug"] = f"ai-picks-{w['season']}-w{int(w['week']):02d}"
+        weeks.append(w)
+    weeks.sort(key=lambda w: (w["season"], w["week"]))
+    return weeks
+
+def fmt_units(u):
+    return (f"{u:g}U")
+
+def ai_cell(pick, units=None, tag=None, res=None):
+    if not pick:
+        return '<span class="muted">&mdash;</span>'
+    extra = ""
+    if units is not None:
+        extra += f' <span class="ai-u">{e(fmt_units(units))}</span>'
+    if tag:
+        extra += f' <span class="sub">{e(tag)}</span>'
+    if res:
+        cls = {"W": "win", "L": "loss", "P": "push"}.get(res, "pend")
+        extra += f' <span class="res res-{cls}">{e({"W": "WIN", "L": "LOSS", "P": "PUSH"}.get(res, res))}</span>'
+    return f"<b>{e(minus(pick))}</b>{extra}"
+
+def ai_scoreboard(ai_weeks):
+    """Season totals per entrant from graded weeks; ungraded weeks listed as pending."""
+    last = ai_weeks[-1]
+    entrants = [(a["id"], a["name"]) for a in last["ais"]]
+    vec = last.get("vector")
+    tot = {}
+    for w in ai_weeks:
+        if not w.get("graded"):
+            continue
+        for eid, g in (w.get("grades") or {}).items():
+            t = tot.setdefault(eid, {"s": [0, 0, 0], "u": 0.0, "p5": [0, 0, 0], "has_p5": False})
+            for i, n in enumerate(g.get("sides") or [0, 0, 0]):
+                t["s"][i] += n
+            t["u"] += g.get("best_bet_units") or 0
+            if g.get("pick5") is not None:
+                t["has_p5"] = True
+                for i, n in enumerate(g["pick5"]):
+                    t["p5"][i] += n
+    pending = [w for w in ai_weeks if not w.get("graded")]
+    pend_txt = "Grades after Monday night"
+    def row(eid, name, has_p5=True, cls=""):
+        t = tot.get(eid)
+        if not t:
+            cells = f'<td data-l="Sides W-L-P" class="muted">{pend_txt}</td><td data-l="Best-bet units" class="muted">{pend_txt}</td><td data-l="Pick 5" class="muted">{pend_txt if has_p5 else "n/a"}</td>'
+        else:
+            cells = (f'<td data-l="Sides W-L-P"><b>{"-".join(map(str, t["s"]))}</b></td>'
+                     f'<td data-l="Best-bet units"><b>{minus(f"{t["u"]:+g}U")}</b></td>'
+                     f'<td data-l="Pick 5">{"-".join(map(str, t["p5"])) if (has_p5 and t["has_p5"]) else "n/a"}</td>')
+        return f'<tr class="{cls}"><td class="game" data-l="Entrant"><b>{e(name)}</b></td>{cells}</tr>'
+    head = '<thead><tr><th scope="col">Entrant</th><th scope="col">Sides W-L-P</th><th scope="col">Best-bet units</th><th scope="col">Pick 5</th></tr></thead>'
+    ai_rows = "".join(row(i, n) for i, n in entrants)
+    ai_tbl = f'<h3>The AIs</h3><div class="table-wrap"><table class="rec-table ai-score">{head}<tbody>{ai_rows}</tbody></table></div>'
+    ref_rows = ""
+    if vec:
+        ref_rows += row("vector", vec["name"] + " (us)", has_p5=False, cls="vec-row")
+    ref_tbl = f'<h3>Super Agent Vector (our model, not an AI chatbot entry)</h3><div class="table-wrap"><table class="rec-table ai-score">{head}<tbody>{ref_rows}</tbody></table></div>' if ref_rows else ""
+    pend_note = ""
+    if pending:
+        pend_note = '<p class="note">' + " ".join(f"Week {w['week']} {w['season']}: <b>{pend_txt}</b> (pending)." for w in pending) + "</p>"
+    return ai_tbl + ref_tbl + pend_note
+
+def build_ai_picks(w, ai_weeks, fname):
+    ais = w["ais"]
+    vec = w.get("vector") or {}
+    res = w.get("results") or {}
+    rows = ""
+    for g in w["games"]:
+        gid = g["game"]
+        r = res.get(gid, {})
+        final = f'<span class="sub">Final: {e(g["final"])}</span>' if g.get("final") else ""
+        cells = ""
+        for a in ais:
+            pk = a["sides"].get(gid)
+            cells += f'<td data-l="{e(a["name"])}">{ai_cell(pk, res=r.get(pk))}</td>'
+        rows += f'<tr><td class="game"><b>{e(g["label"])}</b><span class="sub">{e(g["day"])} {e(g["date"][5:].replace("-", "/"))}</span>{final}</td><td data-l="Westgate" class="muted">{e(minus(g["westgate"]))}</td>{cells}</tr>'
+    head = '<th scope="col">Game</th><th scope="col">Westgate</th>' + "".join(f'<th scope="col">{e(a["name"])}</th>' for a in ais)
+    cards = ""
+    for a in ais:
+        bb = "".join(f"<li>{e(minus(b['pick']))} <span class=\"ai-u\">{e(fmt_units(b['units']))}</span></li>" for b in a["best_bets"])
+        p5 = "".join(f"<li>{e(minus(p))}</li>" for p in a["pick5"])
+        cards += f'<div class="panel"><h2>{e(a["name"])}</h2><p class="sub">Received {e(a.get("received", ""))}</p><h3>Best bets</h3><ul class="picks big">{bb}</ul><h3>Pick 5</h3><ol class="picks">{p5}</ol><p class="note">Tiebreaker: {e(a.get("tiebreaker", ""))}</p></div>'
+    cons = "".join(f"<li>{e(minus(c))}</li>" for c in w.get("consensus", []))
+    gmap = {g["game"]: g for g in w["games"]}
+    def vec_li(d, tier):
+        out = ""
+        for gid, pk in d.items():
+            rr = res.get(gid, {}).get(pk)
+            badge = f' <span class="res res-{ {"W": "win", "L": "loss", "P": "push"}[rr]}">{ {"W": "WIN", "L": "LOSS", "P": "PUSH"}[rr]}</span>' if rr in ("W", "L", "P") else ""
+            out += f'<li>{e(minus(pk))} <span class="sub">{e(gmap[gid]["label"]) if gid in gmap else e(gid)}</span>{badge}</li>'
+        return out
+    vec_html = ""
+    if vec:
+        vec_html = f"""<section class="panel vec-block" id="vector"><p class="kicker">Not an AI chatbot entry &middot; our own model</p><h2><span class="g">{e(vec['name'])}</span></h2>
+<p class="note">Vector's own Week {w['week']} card from our model, kept separate from the three chatbots. Full numbers on the <a href="card.html">Weekly Card</a>.</p>
+<div class="summary-grid vec-grid"><div><h3>{tier_badge('Best Bet')} Best Bets</h3><ul class="picks big">{vec_li(vec.get('best_bets', {}), 'Best Bet')}</ul></div>
+<div><h3>{tier_badge('Lean')} Leans</h3><ul class="picks">{vec_li(vec.get('leans', {}), 'Lean')}</ul></div></div></section>"""
+    body = f"""
+<section class="hero hero-sm"><p class="kicker">Week {w['week']} &middot; {w['season']} &middot; AI vs AI</p><h1>AI <span class="g">Picks</span></h1>
+<p class="muted">{e(w['intro'])}</p><p class="note">{e(w.get('prompt_note', ''))}</p></section>
+<section class="panel callout"><h2>Consensus</h2><ul class="picks">{cons}</ul></section>
+<section class="panel"><h2>Game by game: Claude vs Gemini vs Grok</h2>
+<p class="note">Each AI's side at the line it stated. Blank = no pick.</p>
+<div class="table-wrap"><table class="rec-table ai-grid"><thead><tr>{head}</tr></thead><tbody>{rows}</tbody></table></div>
+<p class="note">Lines: {e(w['line_source'])}</p></section>
+<section class="summary-grid">{cards}</section>
+{vec_html}
+<section class="panel" id="scoreboard"><h2>Season <span class="g">Scoreboard</span></h2>{ai_scoreboard([x for x in ai_weeks if (x['season'], x['week']) <= (w['season'], w['week'])])}
+<p class="note">Entertainment and opinion only. Nothing here is betting advice.</p></section>
+"""
+    archived = fname != "ai-picks.html"
+    title = f"AI Picks Week {w['week']} {w['season']}" + (" archive" if archived else "")
+    desc = (f"{'Archived ' if archived else ''}Week {w['week']} {w['season']} NFL picks against the spread from Claude, Gemini and Grok, "
+            f"side by side, plus Super Agent Vector's own card. Entertainment only.")
+    page(fname, title, body, desc=desc, active="ai-picks.html")
+
 # ---------------------------------------------------------------- misc
 def build_misc():
     pages = ["", "card.html", "live.html", "record.html", "methodology.html", "episodes.html", "shorts.html"] + \
-            [f"{w['slug']}.html" for w in WEEKS]
+            [f"{w['slug']}.html" for w in WEEKS] + \
+            (["ai-picks.html"] + [f"{w['slug']}.html" for w in AI_WEEKS] if AI_WEEKS else [])
     urls = "".join(f"<url><loc>{BASE}/{p}</loc></url>" for p in pages)
     open(os.path.join(OUT, "sitemap.xml"), "w").write(f'<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">{urls}</urlset>\n')
     open(os.path.join(OUT, "robots.txt"), "w").write(f"User-agent: *\nAllow: /\nSitemap: {BASE}/sitemap.xml\n")
@@ -949,7 +1073,7 @@ def build_misc():
     write_manifest()
 
 def main():
-    global WEEKS
+    global WEEKS, AI_WEEKS
     subset_fonts()
     convert_webp()
     recompress_pngs()
@@ -981,6 +1105,11 @@ def main():
     doc = doc.replace("</main>", build_week_index(WEEKS) + "\n</main>")
     open(os.path.join(OUT, "card.html"), "w").write(doc)
     build_record(rows, tidx)
+    AI_WEEKS = load_ai_weeks()
+    for aw in AI_WEEKS:
+        build_ai_picks(aw, AI_WEEKS, aw["slug"] + ".html")
+    if AI_WEEKS:
+        build_ai_picks(AI_WEEKS[-1], AI_WEEKS, "ai-picks.html")
     build_episodes(eps)
     build_shorts(sh)
     build_home(WEEKS, rows, tidx, eps, sh)
