@@ -148,3 +148,10 @@ td.rank{color:var(--grey)}
 .score-chip{display:block;background:var(--navy2);color:var(--white);text-decoration:none;border-radius:10px;padding:.5rem .7rem;min-width:9.5rem}
 .score-chip:hover{color:var(--green)}
 .score-chip .sub,.score-chip .pick-badge,.score-chip .ats{display:block}
+.ai-u{font-size:.72rem;font-weight:800;color:var(--gold)}
+.ai-grid td .sub{display:inline}
+.ai-grid td.game .sub{display:block}
+.vec-block{border:2px solid var(--green)}
+.vec-grid{margin-bottom:0}
+.ai-score tr.vec-row td{background:rgba(34,197,94,.08)}
+.vec-block ul.picks li .sub{display:inline;margin:0 .4rem}
