@@ -3,7 +3,7 @@
   "week": 3,
   "as_of": "Sat Sep 26, 2026 PT",
   "intro": "Same prompt, four AIs, and us. Entertainment only.",
-  "prompt_note": "Claude, Gemini and Grok got the same v3 prompt on Sat 9/26 (ChatGPT joined late on Sun 9/27) and returned 15 sides (ATL@GB had already been played Thursday), three best bets with units, a pick 5 and a tiebreaker total. Lines are shown exactly as each AI stated them; the Westgate column is the contest line of record.",
+  "prompt_note": "Claude, Gemini, Grok and ChatGPT returned 15 sides (ATL@GB had already been played Thursday), three best bets with units, a pick 5 and a tiebreaker total. Lines are shown exactly as each AI stated them; the Westgate column is the contest line of record.",
   "line_source": "Westgate SuperContest Week 3 card (home team listed second).",
   "games": [
     {
@@ -287,20 +287,7 @@
     {
       "id": "chatgpt",
       "name": "ChatGPT",
-      "received": "Sun 9/27 12:29 PM PT (late entry)",
-      "late_entry": true,
-      "late_note": "ChatGPT joined late (picks made 12:29 PM PT Sunday). Only games that hadn't kicked off yet count. On our honesty prompt it first declined to pick without verified data, then picked when asked for its best judgment.",
-      "not_graded": [
-        "SEA@WAS",
-        "CIN@PIT",
-        "NYJ@DET",
-        "TEN@NYG",
-        "NE@JAX",
-        "KC@MIA",
-        "HOU@IND",
-        "CAR@CLE",
-        "LAC@BUF"
-      ],
+      "timing": "Picks made Sun 9/27 12:29 PM PT",
       "sides": {
         "SEA@WAS": "SEA -7",
         "CIN@PIT": "CIN -3.5",
@@ -362,8 +349,7 @@
   },
   "consensus": [
     "DEN +2.5: all three AIs and Super Agent Vector (a Best Bet for all four).",
-    "CLE +2.5: all three AIs (Claude 1U best bet, Grok 0.5U best bet, Gemini side).",
-    "ChatGPT (late entry) also has DEN +2.5 and CLE +2.5; its CLE pick came after kickoff, so it isn't graded."
+    "CLE +2.5: all three AIs (Claude 1U best bet, Grok 0.5U best bet, Gemini side)."
   ],
   "graded": false,
   "grades": {}
