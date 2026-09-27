@@ -1019,13 +1019,14 @@ def build_ai_picks(w, ai_weeks, fname):
         for a in ais:
             pk = a["sides"].get(gid)
             cells += f'<td data-l="{e(a["name"])}">{ai_cell(pk, res=r.get(pk))}</td>'
-        rows += f'<tr><td class="game"><b>{e(g["label"])}</b><span class="sub">{e(g["day"])} {e(g["date"][5:].replace("-", "/"))}</span>{final}</td><td data-l="Westgate" class="muted">{e(minus(g["westgate"]))}</td>{cells}</tr>'
+        rows += f'<tr><td class="game"><b>{e(g["label"])}</b><span class="sub">{e(g["day"])} {e(g["date"][5:].replace("-", "/"))}{(" &middot; " + e(g["kickoff_pt"])) if g.get("kickoff_pt") else ""}</span>{final}</td><td data-l="Westgate" class="muted">{e(minus(g["westgate"]))}</td>{cells}</tr>'
     head = '<th scope="col">Game</th><th scope="col">Westgate</th>' + "".join(f'<th scope="col">{e(a["name"])}</th>' for a in ais)
     cards = ""
     for a in ais:
         bb = "".join(f"<li>{e(minus(b['pick']))} <span class=\"ai-u\">{e(fmt_units(b['units']))}</span></li>" for b in a["best_bets"])
         p5 = "".join(f"<li>{e(minus(p))}</li>" for p in a["pick5"])
-        cards += f'<div class="panel"><h2>{e(a["name"])}</h2><p class="sub">Received {e(a.get("received", ""))}</p><h3>Best bets</h3><ul class="picks big">{bb}</ul><h3>Pick 5</h3><ol class="picks">{p5}</ol><p class="note">Tiebreaker: {e(a.get("tiebreaker", ""))}</p></div>'
+        stamp = e(a["timing"]) if a.get("timing") else f'Received {e(a.get("received", ""))}'
+        cards += f'<div class="panel"><h2>{e(a["name"])}</h2><p class="sub">{stamp}</p><h3>Best bets</h3><ul class="picks big">{bb}</ul><h3>Pick 5</h3><ol class="picks">{p5}</ol><p class="note">Tiebreaker: {e(a.get("tiebreaker", ""))}</p></div>'
     cons = "".join(f"<li>{e(minus(c))}</li>" for c in w.get("consensus", []))
     gmap = {g["game"]: g for g in w["games"]}
     def vec_li(d, tier):
@@ -1035,17 +1036,18 @@ def build_ai_picks(w, ai_weeks, fname):
             badge = f' <span class="res res-{ {"W": "win", "L": "loss", "P": "push"}[rr]}">{ {"W": "WIN", "L": "LOSS", "P": "PUSH"}[rr]}</span>' if rr in ("W", "L", "P") else ""
             out += f'<li>{e(minus(pk))} <span class="sub">{e(gmap[gid]["label"]) if gid in gmap else e(gid)}</span>{badge}</li>'
         return out
+    n_ais = {3: "three", 4: "four", 5: "five"}.get(len(ais), str(len(ais)))
     vec_html = ""
     if vec:
         vec_html = f"""<section class="panel vec-block" id="vector"><p class="kicker">Not an AI chatbot entry &middot; our own model</p><h2><span class="g">{e(vec['name'])}</span></h2>
-<p class="note">Vector's own Week {w['week']} card from our model, kept separate from the three chatbots. Full numbers on the <a href="card.html">Weekly Card</a>.</p>
+<p class="note">Vector's own Week {w['week']} card from our model, kept separate from the {n_ais} chatbots. Full numbers on the <a href="card.html">Weekly Card</a>.</p>
 <div class="summary-grid vec-grid"><div><h3>{tier_badge('Best Bet')} Best Bets</h3><ul class="picks big">{vec_li(vec.get('best_bets', {}), 'Best Bet')}</ul></div>
 <div><h3>{tier_badge('Lean')} Leans</h3><ul class="picks">{vec_li(vec.get('leans', {}), 'Lean')}</ul></div></div></section>"""
     body = f"""
 <section class="hero hero-sm"><p class="kicker">Week {w['week']} &middot; {w['season']} &middot; AI vs AI</p><h1>AI <span class="g">Picks</span></h1>
 <p class="muted">{e(w['intro'])}</p><p class="note">{e(w.get('prompt_note', ''))}</p></section>
 <section class="panel callout"><h2>Consensus</h2><ul class="picks">{cons}</ul></section>
-<section class="panel"><h2>Game by game: Claude vs Gemini vs Grok</h2>
+<section class="panel"><h2>Game by game: {" vs ".join(e(a["name"]) for a in ais)}</h2>
 <p class="note">Each AI's side at the line it stated. Blank = no pick.</p>
 <div class="table-wrap"><table class="rec-table ai-grid"><thead><tr>{head}</tr></thead><tbody>{rows}</tbody></table></div>
 <p class="note">Lines: {e(w['line_source'])}</p></section>
@@ -1056,7 +1058,7 @@ def build_ai_picks(w, ai_weeks, fname):
 """
     archived = fname != "ai-picks.html"
     title = f"AI Picks Week {w['week']} {w['season']}" + (" archive" if archived else "")
-    desc = (f"{'Archived ' if archived else ''}Week {w['week']} {w['season']} NFL picks against the spread from Claude, Gemini and Grok, "
+    desc = (f"{'Archived ' if archived else ''}Week {w['week']} {w['season']} NFL picks against the spread from {", ".join(a["name"] for a in ais[:-1])} and {ais[-1]["name"]}, "
             f"side by side, plus Super Agent Vector's own card. Entertainment only.")
     page(fname, title, body, desc=desc, active="ai-picks.html")
 
