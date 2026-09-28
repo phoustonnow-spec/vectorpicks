@@ -158,16 +158,15 @@ td.rank{color:var(--grey)}
 .vec-card{border:2px solid var(--green)}
 .ai-grid th .sub{display:block;font-size:.62rem;letter-spacing:.04em;text-transform:uppercase}
 .ai-cards li .sub{display:inline;margin:0 .35rem}
-/* Covered sides only. Pushes and losses stay on the page background. */
+/* Covered sides: yellow pick text only. No background box. Pushes and losses stay white. */
 .ai-grid td.covered,
 .ai-cards li.covered,
-.vec-block li.covered{background:#ffe94d;color:#081834}
+.vec-block li.covered{background:none}
 .ai-grid td.covered b,
-.ai-cards li.covered .ai-u,
-.vec-block li.covered .ai-u,
-.ai-cards li.covered .sub,
-.vec-block li.covered .sub{color:#081834}
-.ai-grid td.covered[data-l]::before{color:#081834}
 .ai-cards li.covered,
-.vec-block li.covered{border-radius:8px;padding:.15rem .45rem}
-ul.picks.big li.covered{padding:.1rem .45rem}
+.vec-block li.covered,
+ul.picks.big li.covered{color:#ffd84d;font-weight:800}
+.ai-cards li.covered .ai-u,
+.vec-block li.covered .ai-u{color:var(--gold);font-weight:800}
+.ai-cards li.covered .sub,
+.vec-block li.covered .sub{color:var(--grey);font-weight:600}
