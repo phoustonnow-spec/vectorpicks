@@ -5,6 +5,7 @@
   "intro": "Same prompt, four AIs, and us. Entertainment only.",
   "prompt_note": "Claude, Gemini, Grok and ChatGPT returned 15 sides (ATL@GB had already been played Thursday), three best bets with units, a pick 5 and a tiebreaker total. Lines are shown exactly as each AI stated them; the Westgate column is the contest line of record.",
   "line_source": "Westgate SuperContest Week 3 card (home team listed second).",
+  "score_source": "ESPN NFL scoreboard (https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard). Only games with status final are stored. dates=20260924 (ATL@GB), dates=20260927 (Sunday slate; LAR@DEN was in progress and is not stored), dates=20260928 (PHI@CHI had not started).",
   "games": [
     {
       "game": "ATL@GB",
@@ -13,7 +14,12 @@
       "date": "2026-09-24",
       "westgate": "GB -5.5",
       "final": "ATL 35, GB 14",
-      "kickoff_pt": "5:15 PM PT"
+      "kickoff_pt": "5:15 PM PT",
+      "score": {
+        "away": 35,
+        "home": 14,
+        "status": "final"
+      }
     },
     {
       "game": "SEA@WAS",
@@ -21,8 +27,13 @@
       "day": "Sun",
       "date": "2026-09-27",
       "westgate": "SEA -7",
-      "final": null,
-      "kickoff_pt": "10:00 AM PT"
+      "final": "SEA 31, WAS 33",
+      "kickoff_pt": "10:00 AM PT",
+      "score": {
+        "away": 31,
+        "home": 33,
+        "status": "final"
+      }
     },
     {
       "game": "CIN@PIT",
@@ -30,8 +41,13 @@
       "day": "Sun",
       "date": "2026-09-27",
       "westgate": "CIN -3.5",
-      "final": null,
-      "kickoff_pt": "10:00 AM PT"
+      "final": "CIN 27, PIT 30",
+      "kickoff_pt": "10:00 AM PT",
+      "score": {
+        "away": 27,
+        "home": 30,
+        "status": "final"
+      }
     },
     {
       "game": "NYJ@DET",
@@ -39,8 +55,13 @@
       "day": "Sun",
       "date": "2026-09-27",
       "westgate": "DET -6.5",
-      "final": null,
-      "kickoff_pt": "10:00 AM PT"
+      "final": "NYJ 24, DET 31",
+      "kickoff_pt": "10:00 AM PT",
+      "score": {
+        "away": 24,
+        "home": 31,
+        "status": "final"
+      }
     },
     {
       "game": "TEN@NYG",
@@ -48,8 +69,13 @@
       "day": "Sun",
       "date": "2026-09-27",
       "westgate": "NYG -2.5",
-      "final": null,
-      "kickoff_pt": "10:00 AM PT"
+      "final": "TEN 7, NYG 12",
+      "kickoff_pt": "10:00 AM PT",
+      "score": {
+        "away": 7,
+        "home": 12,
+        "status": "final"
+      }
     },
     {
       "game": "NE@JAX",
@@ -57,8 +83,13 @@
       "day": "Sun",
       "date": "2026-09-27",
       "westgate": "JAX -3",
-      "final": null,
-      "kickoff_pt": "10:00 AM PT"
+      "final": "NE 6, JAX 35",
+      "kickoff_pt": "10:00 AM PT",
+      "score": {
+        "away": 6,
+        "home": 35,
+        "status": "final"
+      }
     },
     {
       "game": "KC@MIA",
@@ -66,8 +97,13 @@
       "day": "Sun",
       "date": "2026-09-27",
       "westgate": "KC -11.5",
-      "final": null,
-      "kickoff_pt": "10:00 AM PT"
+      "final": "KC 24, MIA 10",
+      "kickoff_pt": "10:00 AM PT",
+      "score": {
+        "away": 24,
+        "home": 10,
+        "status": "final"
+      }
     },
     {
       "game": "HOU@IND",
@@ -75,8 +111,13 @@
       "day": "Sun",
       "date": "2026-09-27",
       "westgate": "HOU -2.5",
-      "final": null,
-      "kickoff_pt": "10:00 AM PT"
+      "final": "HOU 17, IND 19",
+      "kickoff_pt": "10:00 AM PT",
+      "score": {
+        "away": 17,
+        "home": 19,
+        "status": "final"
+      }
     },
     {
       "game": "CAR@CLE",
@@ -84,8 +125,13 @@
       "day": "Sun",
       "date": "2026-09-27",
       "westgate": "CAR -2.5",
-      "final": null,
-      "kickoff_pt": "10:00 AM PT"
+      "final": "CAR 18, CLE 21",
+      "kickoff_pt": "10:00 AM PT",
+      "score": {
+        "away": 18,
+        "home": 21,
+        "status": "final"
+      }
     },
     {
       "game": "LAC@BUF",
@@ -93,8 +139,13 @@
       "day": "Sun",
       "date": "2026-09-27",
       "westgate": "BUF -7.5",
-      "final": null,
-      "kickoff_pt": "10:00 AM PT"
+      "final": "LAC 16, BUF 24",
+      "kickoff_pt": "10:00 AM PT",
+      "score": {
+        "away": 16,
+        "home": 24,
+        "status": "final"
+      }
     },
     {
       "game": "MIN@TB",
@@ -102,8 +153,13 @@
       "day": "Sun",
       "date": "2026-09-27",
       "westgate": "MIN -1.5",
-      "final": null,
-      "kickoff_pt": "1:05 PM PT"
+      "final": "MIN 23, TB 16",
+      "kickoff_pt": "1:05 PM PT",
+      "score": {
+        "away": 23,
+        "home": 16,
+        "status": "final"
+      }
     },
     {
       "game": "ARI@SF",
@@ -111,8 +167,13 @@
       "day": "Sun",
       "date": "2026-09-27",
       "westgate": "SF -8.5",
-      "final": null,
-      "kickoff_pt": "1:05 PM PT"
+      "final": "ARI 30, SF 36",
+      "kickoff_pt": "1:05 PM PT",
+      "score": {
+        "away": 30,
+        "home": 36,
+        "status": "final"
+      }
     },
     {
       "game": "LV@NO",
@@ -120,8 +181,13 @@
       "day": "Sun",
       "date": "2026-09-27",
       "westgate": "NO -3",
-      "final": null,
-      "kickoff_pt": "1:25 PM PT"
+      "final": "LV 35, NO 27",
+      "kickoff_pt": "1:25 PM PT",
+      "score": {
+        "away": 35,
+        "home": 27,
+        "status": "final"
+      }
     },
     {
       "game": "BAL@DAL",
@@ -129,8 +195,13 @@
       "day": "Sun",
       "date": "2026-09-27",
       "westgate": "BAL -3.5",
-      "final": null,
-      "kickoff_pt": "1:25 PM PT"
+      "final": "BAL 34, DAL 31",
+      "kickoff_pt": "1:25 PM PT",
+      "score": {
+        "away": 34,
+        "home": 31,
+        "status": "final"
+      }
     },
     {
       "game": "LAR@DEN",
@@ -345,6 +416,59 @@
   "results": {
     "ATL@GB": {
       "ATL +5.5": "W"
+    },
+    "SEA@WAS": {
+      "SEA -7": "L",
+      "SEA -7.5": "L",
+      "WAS +7.5": "W"
+    },
+    "CIN@PIT": {
+      "CIN -3.5": "L",
+      "PIT +3.5": "W"
+    },
+    "NYJ@DET": {
+      "DET -6.5": "W",
+      "NYJ +6.5": "L"
+    },
+    "TEN@NYG": {
+      "NYG -2.5": "W",
+      "TEN +2.5": "L"
+    },
+    "NE@JAX": {
+      "JAX -3": "W",
+      "NE +2.5": "L"
+    },
+    "KC@MIA": {
+      "KC -10.5": "W",
+      "MIA +10.5": "L",
+      "MIA +11.5": "L"
+    },
+    "HOU@IND": {
+      "HOU -2.5": "L",
+      "IND +1.5": "W"
+    },
+    "CAR@CLE": {
+      "CLE +2.5": "W"
+    },
+    "LAC@BUF": {
+      "BUF -7.5": "W",
+      "LAC +7.5": "L"
+    },
+    "MIN@TB": {
+      "MIN -1.5": "W",
+      "TB +1.5": "L"
+    },
+    "ARI@SF": {
+      "ARI +8.5": "W",
+      "SF -8.5": "L"
+    },
+    "LV@NO": {
+      "LV +3": "W",
+      "LV +3.5": "W"
+    },
+    "BAL@DAL": {
+      "BAL -3.5": "L",
+      "DAL +3.5": "W"
     }
   },
   "consensus": [
@@ -352,5 +476,85 @@
     "CLE +2.5: all three AIs (Claude 1U best bet, Grok 0.5U best bet, Gemini side)."
   ],
   "graded": false,
-  "grades": {}
+  "grades": {
+    "claude": {
+      "sides": [
+        8,
+        5,
+        0
+      ],
+      "sides_pending": 2,
+      "best_bet_units": 1.5,
+      "best_bets_pending": 1,
+      "pick5": [
+        4,
+        0,
+        0
+      ],
+      "pick5_pending": 1
+    },
+    "gemini": {
+      "sides": [
+        6,
+        7,
+        0
+      ],
+      "sides_pending": 2,
+      "best_bet_units": -0.5,
+      "best_bets_pending": 1,
+      "pick5": [
+        3,
+        1,
+        0
+      ],
+      "pick5_pending": 1
+    },
+    "grok": {
+      "sides": [
+        7,
+        6,
+        0
+      ],
+      "sides_pending": 2,
+      "best_bet_units": -0.5,
+      "best_bets_pending": 1,
+      "pick5": [
+        3,
+        1,
+        0
+      ],
+      "pick5_pending": 1
+    },
+    "chatgpt": {
+      "sides": [
+        5,
+        8,
+        0
+      ],
+      "sides_pending": 2,
+      "best_bet_units": -4.5,
+      "best_bets_pending": 0,
+      "pick5": [
+        0,
+        4,
+        0
+      ],
+      "pick5_pending": 1
+    },
+    "vector": {
+      "sides": [
+        2,
+        2,
+        0
+      ],
+      "sides_pending": 2,
+      "best_bet_units": 1,
+      "best_bets_pending": 2,
+      "pick5": null
+    }
+  },
+  "ungraded_games": [
+    "LAR@DEN",
+    "PHI@CHI"
+  ]
 }
