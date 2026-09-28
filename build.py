@@ -944,13 +944,237 @@ def load_ai_weeks():
     weeks = []
     for p in sorted(glob.glob(os.path.join(DATA, "ai-picks", "*.json"))):
         w = json.load(open(p))
+        w["_path"] = p
         w["slug"] = f"ai-picks-{w['season']}-w{int(w['week']):02d}"
+        regrade_ai_week(w)
         weeks.append(w)
     weeks.sort(key=lambda w: (w["season"], w["week"]))
     return weeks
 
 def fmt_units(u):
     return (f"{u:g}U")
+
+PICK_RE = re.compile(r"^([A-Z]{2,3})\s+([+-])(\d+(?:\.\d+)?)$")
+FINAL_RE = re.compile(r"^([A-Z]{2,3})\s+(\d+),\s*([A-Z]{2,3})\s+(\d+)$")
+ATS_BADGE = {"W": ("win", "WIN"), "L": ("loss", "LOSS"), "P": ("push", "PUSH")}
+
+def parse_ats_pick(pick):
+    """Team and the points added to that team's score. None when it is not a side."""
+    if not isinstance(pick, str):
+        return None
+    m = PICK_RE.match(pick.strip())
+    if not m:
+        return None
+    points = float(m.group(3))
+    return m.group(1), (points if m.group(2) == "+" else -points)
+
+def final_score(g):
+    """(away, home) only when the game is final. In-progress scores are ignored."""
+    sc = g.get("score")
+    if isinstance(sc, dict):
+        if sc.get("status") != "final":
+            return None
+        try:
+            return int(sc["away"]), int(sc["home"])
+        except (KeyError, TypeError, ValueError):
+            return None
+    final = g.get("final")
+    if not isinstance(final, str):
+        return None
+    m = FINAL_RE.match(final.strip())
+    if not m:
+        return None
+    away, home = g["game"].split("@")
+    if m.group(1) != away or m.group(3) != home:
+        return None
+    return int(m.group(2)), int(m.group(4))
+
+def grade_ats(pick, g):
+    """W/L/P at the listed line, or None when the game is not final."""
+    parsed = parse_ats_pick(pick)
+    scored = final_score(g)
+    if not parsed or not scored:
+        return None
+    team, spread = parsed
+    away, home = g["game"].split("@")
+    away_s, home_s = scored
+    if team == away:
+        margin = away_s + spread - home_s
+    elif team == home:
+        margin = home_s + spread - away_s
+    else:
+        raise SystemExit(f"{g['game']}: pick {pick!r} is not one of the two teams")
+    if margin > 0:
+        return "W"
+    if margin < 0:
+        return "L"
+    return "P"
+
+def json_num(n):
+    n = float(n)
+    return int(n) if n == int(n) else n
+
+def tally_marks(marks):
+    w = l = p = pending = 0
+    for mark in marks:
+        if mark == "W":
+            w += 1
+        elif mark == "L":
+            l += 1
+        elif mark == "P":
+            p += 1
+        else:
+            pending += 1
+    return [w, l, p], pending
+
+def vector_published(vec, games):
+    """Best bets and leans. A full `sides` map replaces that when every game is listed."""
+    if not vec:
+        return {}, {}, {}
+    game_ids = [g["game"] for g in games]
+    known = set(game_ids)
+    def as_pick(value):
+        if isinstance(value, str):
+            return value.strip()
+        if isinstance(value, dict):
+            return str(value.get("pick") or "").strip()
+        return ""
+    def keep(gid, pick):
+        return gid in known and bool(pick)
+    best, leans = {}, {}
+    for gid, value in (vec.get("best_bets") or {}).items():
+        pick = as_pick(value)
+        if keep(gid, pick):
+            best[gid] = pick
+    for gid, value in (vec.get("leans") or {}).items():
+        pick = as_pick(value)
+        if keep(gid, pick):
+            leans[gid] = pick
+    sides = vec.get("sides")
+    if isinstance(sides, dict) and all(gid in sides for gid in game_ids):
+        # Full card on file: grid uses it, including an explicit blank for a pass.
+        full = {}
+        for gid in game_ids:
+            pick = as_pick(sides.get(gid))
+            if parse_ats_pick(pick):
+                full[gid] = pick
+        return best, leans, full
+    shown = dict(best)
+    shown.update(leans)
+    return best, leans, shown
+
+def regrade_ai_week(w):
+    """Grade every listed side from stored final scores and write the results back.
+
+    Updating a game's score and rebuilding recomputes highlights and the scoreboard.
+    Games without status "final" stay ungraded.
+    """
+    games = {g["game"]: g for g in w["games"]}
+    for g in w["games"]:
+        scored = final_score(g)
+        if not scored:
+            continue
+        away, home = g["game"].split("@")
+        g["final"] = f"{away} {scored[0]}, {home} {scored[1]}"
+    best, leans, shown = vector_published(w.get("vector") or {}, w["games"])
+    picks = {}
+    def add(gid, pick):
+        if gid in games and isinstance(pick, str) and pick.strip():
+            picks.setdefault(gid, set()).add(pick.strip())
+    for a in w.get("ais") or []:
+        for gid, pick in (a.get("sides") or {}).items():
+            add(gid, pick)
+        for b in a.get("best_bets") or []:
+            add(next((gid for gid, pk in (a.get("sides") or {}).items() if pk == b.get("pick")), None), b.get("pick"))
+        for pick in a.get("pick5") or []:
+            add(next((gid for gid, pk in (a.get("sides") or {}).items() if pk == pick), None), pick)
+    for gid, pick in {**best, **leans, **shown}.items():
+        add(gid, pick)
+    results = {}
+    for g in w["games"]:
+        gid = g["game"]
+        bucket = {}
+        for pick in sorted(picks.get(gid) or []):
+            mark = grade_ats(pick, g)
+            if mark:
+                bucket[pick] = mark
+        if bucket:
+            results[gid] = bucket
+    w["results"] = results
+    def mark_of(gid, pick):
+        return (results.get(gid) or {}).get(pick)
+    def side_gid(a, pick):
+        for gid, pk in (a.get("sides") or {}).items():
+            if pk == pick:
+                return gid
+        return None
+    grades = {}
+    for a in w.get("ais") or []:
+        side_marks = [mark_of(gid, pick) for gid, pick in (a.get("sides") or {}).items()]
+        sides, sides_pending = tally_marks(side_marks)
+        units = 0.0
+        bb_marks = []
+        for b in a.get("best_bets") or []:
+            mark = mark_of(side_gid(a, b.get("pick")), b.get("pick"))
+            bb_marks.append(mark)
+            if mark == "W":
+                units += float(b.get("units") or 0)
+            elif mark == "L":
+                units -= float(b.get("units") or 0)
+        _, bb_pending = tally_marks(bb_marks)
+        p5_marks = [mark_of(side_gid(a, pick), pick) for pick in (a.get("pick5") or [])]
+        pick5, pick5_pending = tally_marks(p5_marks)
+        grades[a["id"]] = {
+            "sides": sides,
+            "sides_pending": sides_pending,
+            "best_bet_units": json_num(units),
+            "best_bets_pending": bb_pending,
+            "pick5": pick5,
+            "pick5_pending": pick5_pending,
+        }
+    if w.get("vector"):
+        # Flat 1U, same rule as the weekly record. Leans count as sides, not best-bet units.
+        side_marks = [mark_of(gid, pick) for gid, pick in shown.items()]
+        sides, sides_pending = tally_marks(side_marks)
+        units = 0.0
+        bb_marks = []
+        for gid, pick in best.items():
+            mark = mark_of(gid, pick)
+            bb_marks.append(mark)
+            if mark == "W":
+                units += 1
+            elif mark == "L":
+                units -= 1
+        _, bb_pending = tally_marks(bb_marks)
+        grades["vector"] = {
+            "sides": sides,
+            "sides_pending": sides_pending,
+            "best_bet_units": json_num(units),
+            "best_bets_pending": bb_pending,
+            "pick5": None,
+        }
+    w["grades"] = grades
+    ungraded = [g["game"] for g in w["games"] if g["game"] in picks and not final_score(g)]
+    w["ungraded_games"] = ungraded
+    w["graded"] = not ungraded and bool(picks)
+    save_ai_week(w)
+
+def save_ai_week(w):
+    path = w.get("_path")
+    if not path:
+        return
+    data = {k: v for k, v in w.items() if k != "slug" and not str(k).startswith("_")}
+    text = json.dumps(data, indent=2, ensure_ascii=False) + "\n"
+    if os.path.exists(path) and open(path).read() == text:
+        return
+    with open(path, "w") as f:
+        f.write(text)
+
+def ats_badge(res):
+    if res not in ATS_BADGE:
+        return ""
+    cls, label = ATS_BADGE[res]
+    return f' <span class="res res-{cls}">{label}</span>'
 
 def ai_cell(pick, units=None, tag=None, res=None):
     if not pick:
@@ -960,98 +1184,140 @@ def ai_cell(pick, units=None, tag=None, res=None):
         extra += f' <span class="ai-u">{e(fmt_units(units))}</span>'
     if tag:
         extra += f' <span class="sub">{e(tag)}</span>'
-    if res:
-        cls = {"W": "win", "L": "loss", "P": "push"}.get(res, "pend")
-        extra += f' <span class="res res-{cls}">{e({"W": "WIN", "L": "LOSS", "P": "PUSH"}.get(res, res))}</span>'
+    extra += ats_badge(res)
     return f"<b>{e(minus(pick))}</b>{extra}"
 
+def pick_li(pick, res=None, units=None, sub=None):
+    cls = ' class="covered"' if res == "W" else ""
+    extra = ""
+    if units is not None:
+        extra += f' <span class="ai-u">{e(fmt_units(units))}</span>'
+    if sub:
+        extra += f' <span class="sub">{e(sub)}</span>'
+    extra += ats_badge(res)
+    return f"<li{cls}>{e(minus(pick))}{extra}</li>"
+
 def ai_scoreboard(ai_weeks):
-    """Season totals per entrant from graded weeks; ungraded weeks listed as pending."""
+    """Season totals from stored grades. Partial weeks still show the games that are final."""
     last = ai_weeks[-1]
     entrants = [(a["id"], a["name"]) for a in last["ais"]]
     vec = last.get("vector")
     tot = {}
     for w in ai_weeks:
-        if not w.get("graded"):
-            continue
         for eid, g in (w.get("grades") or {}).items():
-            t = tot.setdefault(eid, {"s": [0, 0, 0], "u": 0.0, "p5": [0, 0, 0], "has_p5": False})
+            t = tot.setdefault(eid, {"s": [0, 0, 0], "s_pend": 0, "u": 0.0, "u_pend": 0, "p5": [0, 0, 0], "p5_pend": 0, "has_p5": False})
             for i, n in enumerate(g.get("sides") or [0, 0, 0]):
                 t["s"][i] += n
+            t["s_pend"] += g.get("sides_pending") or 0
             t["u"] += g.get("best_bet_units") or 0
+            t["u_pend"] += g.get("best_bets_pending") or 0
             if g.get("pick5") is not None:
                 t["has_p5"] = True
                 for i, n in enumerate(g["pick5"]):
                     t["p5"][i] += n
-    pending = [w for w in ai_weeks if not w.get("graded")]
+                t["p5_pend"] += g.get("pick5_pending") or 0
     pend_txt = "Grades after Monday night"
+    def pend_sub(n):
+        return f'<span class="sub">{int(n)} not final</span>' if n else ""
     def row(eid, name, has_p5=True, cls=""):
         t = tot.get(eid)
         if not t:
             cells = f'<td data-l="Sides W-L-P" class="muted">{pend_txt}</td><td data-l="Best-bet units" class="muted">{pend_txt}</td><td data-l="Pick 5" class="muted">{pend_txt if has_p5 else "n/a"}</td>'
         else:
-            cells = (f'<td data-l="Sides W-L-P"><b>{"-".join(map(str, t["s"]))}</b></td>'
-                     f'<td data-l="Best-bet units"><b>{minus(f"{t["u"]:+g}U")}</b></td>'
-                     f'<td data-l="Pick 5">{"-".join(map(str, t["p5"])) if (has_p5 and t["has_p5"]) else "n/a"}</td>')
-        return f'<tr class="{cls}"><td class="game" data-l="Entrant"><b>{e(name)}</b></td>{cells}</tr>'
+            p5 = (f'<b>{"-".join(map(str, t["p5"]))}</b>{pend_sub(t["p5_pend"])}') if (has_p5 and t["has_p5"]) else "n/a"
+            cells = (f'<td data-l="Sides W-L-P"><b>{"-".join(map(str, t["s"]))}</b>{pend_sub(t["s_pend"])}</td>'
+                     f'<td data-l="Best-bet units"><b>{minus(f"{t["u"]:+g}U")}</b>{pend_sub(t["u_pend"])}</td>'
+                     f'<td data-l="Pick 5">{p5}</td>')
+        attr = f' class="{cls}"' if cls else ""
+        return f'<tr{attr}><td class="game" data-l="Entrant"><b>{e(name)}</b></td>{cells}</tr>'
     head = '<thead><tr><th scope="col">Entrant</th><th scope="col">Sides W-L-P</th><th scope="col">Best-bet units</th><th scope="col">Pick 5</th></tr></thead>'
     ai_rows = "".join(row(i, n) for i, n in entrants)
     ai_tbl = f'<h3>The AIs</h3><div class="table-wrap"><table class="rec-table ai-score">{head}<tbody>{ai_rows}</tbody></table></div>'
     ref_rows = ""
     if vec:
-        ref_rows += row("vector", vec["name"] + " (us)", has_p5=False, cls="vec-row")
-    ref_tbl = f'<h3>Super Agent Vector (our model, not an AI chatbot entry)</h3><div class="table-wrap"><table class="rec-table ai-score">{head}<tbody>{ref_rows}</tbody></table></div>' if ref_rows else ""
-    pend_note = ""
-    if pending:
-        pend_note = '<p class="note">' + " ".join(f"Week {w['week']} {w['season']}: <b>{pend_txt}</b> (pending)." for w in pending) + "</p>"
+        ref_rows += row("vector", vec["name"] + " (ours)", has_p5=False, cls="vec-row")
+    ref_tbl = f'<h3>Super Agent Vector (ours, not an AI chatbot entry)</h3><div class="table-wrap"><table class="rec-table ai-score">{head}<tbody>{ref_rows}</tbody></table></div>' if ref_rows else ""
+    if ref_tbl:
+        ref_tbl += '<p class="note">Vector sides are the published Best Bets and Leans. Best-bet units are flat 1U. Pick 5 does not apply.</p>'
+    notes = []
+    for w in ai_weeks:
+        if w.get("graded"):
+            continue
+        left = w.get("ungraded_games") or []
+        labels = []
+        by_id = {g["game"]: g.get("label") or g["game"] for g in w.get("games") or []}
+        for gid in left:
+            labels.append(by_id.get(gid, gid))
+        if w.get("grades") and labels:
+            notes.append(f"Week {w['week']} {w['season']}: {e(', '.join(labels))} not final, so those picks are left out of the records above.")
+        elif not w.get("grades"):
+            notes.append(f"Week {w['week']} {w['season']}: <b>{pend_txt}</b> (pending).")
+    pend_note = f'<p class="note">{" ".join(notes)}</p>' if notes else ""
     return ai_tbl + ref_tbl + pend_note
 
 def build_ai_picks(w, ai_weeks, fname):
     ais = w["ais"]
     vec = w.get("vector") or {}
     res = w.get("results") or {}
+    games = {g["game"]: g for g in w["games"]}
+    best, leans, shown = vector_published(vec, w["games"])
+    def cell(name, pick, gid, extra_cls=""):
+        mark = (res.get(gid) or {}).get(pick) if pick else None
+        cls = " ".join(x for x in (extra_cls, "covered" if mark == "W" else "") if x)
+        attr = f' class="{cls}"' if cls else ""
+        return f'<td data-l="{e(name)}"{attr}>{ai_cell(pick, res=mark)}</td>'
     rows = ""
     for g in w["games"]:
         gid = g["game"]
-        r = res.get(gid, {})
         final = f'<span class="sub">Final: {e(g["final"])}</span>' if g.get("final") else ""
-        cells = ""
-        for a in ais:
-            pk = a["sides"].get(gid)
-            cells += f'<td data-l="{e(a["name"])}">{ai_cell(pk, res=r.get(pk))}</td>'
+        cells = "".join(cell(a["name"], (a.get("sides") or {}).get(gid), gid) for a in ais)
+        if vec:
+            cells += cell("Vector", shown.get(gid), gid, "vec-col")
         rows += f'<tr><td class="game"><b>{e(g["label"])}</b><span class="sub">{e(g["day"])} {e(g["date"][5:].replace("-", "/"))}{(" &middot; " + e(g["kickoff_pt"])) if g.get("kickoff_pt") else ""}</span>{final}</td><td data-l="Westgate" class="muted">{e(minus(g["westgate"]))}</td>{cells}</tr>'
     head = '<th scope="col">Game</th><th scope="col">Westgate</th>' + "".join(f'<th scope="col">{e(a["name"])}</th>' for a in ais)
+    if vec:
+        head += '<th scope="col">Vector<span class="sub">ours</span></th>'
+    def side_gid(a, pick):
+        for gid, pk in (a.get("sides") or {}).items():
+            if pk == pick:
+                return gid
+        return None
     cards = ""
     for a in ais:
-        bb = "".join(f"<li>{e(minus(b['pick']))} <span class=\"ai-u\">{e(fmt_units(b['units']))}</span></li>" for b in a["best_bets"])
-        p5 = "".join(f"<li>{e(minus(p))}</li>" for p in a["pick5"])
+        bb = "".join(pick_li(b["pick"], res=(res.get(side_gid(a, b["pick"])) or {}).get(b["pick"]), units=b["units"]) for b in a["best_bets"])
+        p5 = "".join(pick_li(p, res=(res.get(side_gid(a, p)) or {}).get(p)) for p in a["pick5"])
         stamp = e(a["timing"]) if a.get("timing") else f'Received {e(a.get("received", ""))}'
         cards += f'<div class="panel"><h2>{e(a["name"])}</h2><p class="sub">{stamp}</p><h3>Best bets</h3><ul class="picks big">{bb}</ul><h3>Pick 5</h3><ol class="picks">{p5}</ol><p class="note">Tiebreaker: {e(a.get("tiebreaker", ""))}</p></div>'
+    if vec:
+        bb = "".join(pick_li(pk, res=(res.get(gid) or {}).get(pk), sub=(games.get(gid) or {}).get("label")) for gid, pk in best.items())
+        ln = "".join(pick_li(pk, res=(res.get(gid) or {}).get(pk), sub=(games.get(gid) or {}).get("label")) for gid, pk in leans.items())
+        cards += f'<div class="panel vec-card"><h2>Vector</h2><p class="sub">{e(vec.get("name") or "Super Agent Vector")} &middot; ours</p><h3>Best bets</h3><ul class="picks big">{bb}</ul><h3>Leans</h3><ul class="picks">{ln}</ul><p class="note">Our model, not a chatbot entry. No pick 5.</p></div>'
     cons = "".join(f"<li>{e(minus(c))}</li>" for c in w.get("consensus", []))
-    gmap = {g["game"]: g for g in w["games"]}
-    def vec_li(d, tier):
+    def vec_li(d):
         out = ""
         for gid, pk in d.items():
-            rr = res.get(gid, {}).get(pk)
-            badge = f' <span class="res res-{ {"W": "win", "L": "loss", "P": "push"}[rr]}">{ {"W": "WIN", "L": "LOSS", "P": "PUSH"}[rr]}</span>' if rr in ("W", "L", "P") else ""
-            out += f'<li>{e(minus(pk))} <span class="sub">{e(gmap[gid]["label"]) if gid in gmap else e(gid)}</span>{badge}</li>'
+            if gid not in games:
+                continue
+            mark = (res.get(gid) or {}).get(pk)
+            out += pick_li(pk, res=mark, sub=games[gid]["label"])
         return out
     n_ais = {3: "three", 4: "four", 5: "five"}.get(len(ais), str(len(ais)))
     vec_html = ""
     if vec:
-        vec_html = f"""<section class="panel vec-block" id="vector"><p class="kicker">Not an AI chatbot entry &middot; our own model</p><h2><span class="g">{e(vec['name'])}</span></h2>
+        vec_html = f"""<section class="panel vec-block" id="vector"><p class="kicker">Not an AI chatbot entry &middot; our own model</p><h2><span class="g">{e(vec.get('name') or 'Super Agent Vector')}</span></h2>
 <p class="note">Vector's own Week {w['week']} card from our model, kept separate from the {n_ais} chatbots. Full numbers on the <a href="card.html">Weekly Card</a>.</p>
-<div class="summary-grid vec-grid"><div><h3>{tier_badge('Best Bet')} Best Bets</h3><ul class="picks big">{vec_li(vec.get('best_bets', {}), 'Best Bet')}</ul></div>
-<div><h3>{tier_badge('Lean')} Leans</h3><ul class="picks">{vec_li(vec.get('leans', {}), 'Lean')}</ul></div></div></section>"""
+<div class="summary-grid vec-grid"><div><h3>{tier_badge('Best Bet')} Best Bets</h3><ul class="picks big">{vec_li(best)}</ul></div>
+<div><h3>{tier_badge('Lean')} Leans</h3><ul class="picks">{vec_li(leans)}</ul></div></div></section>"""
+    names = " vs ".join(e(a["name"]) for a in ais)
     body = f"""
 <section class="hero hero-sm"><p class="kicker">Week {w['week']} &middot; {w['season']} &middot; AI vs AI</p><h1>AI <span class="g">Picks</span></h1>
 <p class="muted">{e(w['intro'])}</p><p class="note">{e(w.get('prompt_note', ''))}</p></section>
 <section class="panel callout"><h2>Consensus</h2><ul class="picks">{cons}</ul></section>
-<section class="panel"><h2>Game by game: {" vs ".join(e(a["name"]) for a in ais)}</h2>
-<p class="note">Each AI's side at the line it stated. Blank = no pick.</p>
+<section class="panel"><h2>Game by game: {names}, plus Vector</h2>
+<p class="note">Each side is graded at the line that entrant listed. Vector is {e(vec.get('name') or 'Super Agent Vector')}, ours: Best Bets and Leans only, and a dash where we had no side. Yellow means the side covered. Pushes are not highlighted. Final scores are from ESPN, and games that are not final are not graded.</p>
 <div class="table-wrap"><table class="rec-table ai-grid"><thead><tr>{head}</tr></thead><tbody>{rows}</tbody></table></div>
 <p class="note">Lines: {e(w['line_source'])}</p></section>
-<section class="summary-grid">{cards}</section>
+<section class="summary-grid ai-cards">{cards}</section>
 {vec_html}
 <section class="panel" id="scoreboard"><h2>Season <span class="g">Scoreboard</span></h2>{ai_scoreboard([x for x in ai_weeks if (x['season'], x['week']) <= (w['season'], w['week'])])}
 <p class="note">Entertainment and opinion only. Nothing here is betting advice.</p></section>
