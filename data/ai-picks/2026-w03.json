@@ -5,7 +5,7 @@
   "intro": "Same prompt, four AIs, and us. Entertainment only.",
   "prompt_note": "Claude, Gemini, Grok and ChatGPT returned 15 sides (ATL@GB had already been played Thursday), three best bets with units, a pick 5 and a tiebreaker total. Lines are shown exactly as each AI stated them; the Westgate column is the contest line of record.",
   "line_source": "Westgate SuperContest Week 3 card (home team listed second).",
-  "score_source": "ESPN NFL scoreboard (https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard). Only games with status final are stored. dates=20260924 (ATL@GB), dates=20260927 (Sunday slate, including LAR@DEN final), dates=20260928 (PHI@CHI had not started).",
+  "score_source": "ESPN NFL scoreboard (https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard). Only games with status final are stored. dates=20260924 (ATL@GB), dates=20260927 (Sunday slate, including LAR@DEN final), dates=20260928 (PHI@CHI final).",
   "games": [
     {
       "game": "ATL@GB",
@@ -223,8 +223,13 @@
       "day": "Mon",
       "date": "2026-09-28",
       "westgate": "PHI -4.5",
-      "final": null,
-      "kickoff_pt": "5:15 PM PT"
+      "final": "PHI 7, CHI 27",
+      "kickoff_pt": "5:15 PM PT",
+      "score": {
+        "away": 7,
+        "home": 27,
+        "status": "final"
+      }
     }
   ],
   "ais": [
@@ -477,21 +482,25 @@
     },
     "LAR@DEN": {
       "DEN +2.5": "W"
+    },
+    "PHI@CHI": {
+      "CHI +4.5": "W",
+      "PHI -4.5": "L"
     }
   },
   "consensus": [
     "DEN +2.5: all three AIs and Super Agent Vector (a Best Bet for all four).",
     "CLE +2.5: all three AIs (Claude 1U best bet, Grok 0.5U best bet, Gemini side)."
   ],
-  "graded": false,
+  "graded": true,
   "grades": {
     "claude": {
       "sides": [
-        9,
+        10,
         5,
         0
       ],
-      "sides_pending": 1,
+      "sides_pending": 0,
       "best_bet_units": 2.5,
       "best_bets_pending": 0,
       "pick5": [
@@ -504,10 +513,10 @@
     "gemini": {
       "sides": [
         7,
-        7,
+        8,
         0
       ],
-      "sides_pending": 1,
+      "sides_pending": 0,
       "best_bet_units": 0.5,
       "best_bets_pending": 0,
       "pick5": [
@@ -520,10 +529,10 @@
     "grok": {
       "sides": [
         8,
-        6,
+        7,
         0
       ],
-      "sides_pending": 1,
+      "sides_pending": 0,
       "best_bet_units": 0.5,
       "best_bets_pending": 0,
       "pick5": [
@@ -536,32 +545,30 @@
     "chatgpt": {
       "sides": [
         6,
-        8,
+        9,
         0
       ],
-      "sides_pending": 1,
+      "sides_pending": 0,
       "best_bet_units": -4.5,
       "best_bets_pending": 0,
       "pick5": [
         0,
-        4,
+        5,
         0
       ],
-      "pick5_pending": 1
+      "pick5_pending": 0
     },
     "vector": {
       "sides": [
-        3,
+        4,
         2,
         0
       ],
-      "sides_pending": 1,
-      "best_bet_units": 2,
-      "best_bets_pending": 1,
+      "sides_pending": 0,
+      "best_bet_units": 3,
+      "best_bets_pending": 0,
       "pick5": null
     }
   },
-  "ungraded_games": [
-    "PHI@CHI"
-  ]
+  "ungraded_games": []
 }
