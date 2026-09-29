@@ -1,4 +1,13 @@
 {
   "_comment": "Add one object per episode, newest anywhere (build sorts by date). show_type must be one of: Tuesday Rankings, Thursday Picks, Sunday Update, Sunday Recap. mp3 is relative to base_url (put the file in public/episodes/). duration is HH:MM:SS. bytes = file size (build fills it in automatically if the mp3 exists in public/).",
-  "episodes": []
+  "episodes": [
+    {
+      "title": "Week 3 2026 Sunday Recap — Vector 3-0 Best Bets, Claude Leads the AIs",
+      "date": "2026-09-28",
+      "show_type": "Sunday Recap",
+      "mp3": "episodes/2026-w03-sunday-recap.mp3",
+      "duration": "00:02:44",
+      "description": "Catch-up Sunday Recap for the missed post-SNF slot: Vector Best Bets went 3-0 (+3U) on CHI +4.5, PIT +3.5, and DEN +2.5, with Monday night Chicago 27–Philadelphia 7 sealing the card. Claude led the AI panel (10-5 sides, +2.5U, pick-5 5-0); Gemini and Grok were near even; ChatGPT lagged. SuperContest after Week 3 is topped at 13.00 (13-2) by Hitman, Rigged, and Seans Dolphins. Graded board: https://www.vectorpicks.com/ai-picks.html. Entertainment only."
+    }
+  ]
 }
