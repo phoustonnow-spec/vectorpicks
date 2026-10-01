@@ -1,0 +1,475 @@
+{
+  "season": 2026,
+  "week": 4,
+  "as_of": "Wed Sep 30, 2026 ~10:05 PM PT",
+  "intro": "Same prompt, four AIs, and us. Entertainment only. Graded on Westgate SuperContest lines.",
+  "prompt_note": "Each AI got the same v3 Westgate Week 4 prompt Wed 9/30. Grok later revised after a QB/injury audit; Gemini posted the original chalk sheet. Lines are Westgate SuperContest Week 4.",
+  "line_source": "Westgate SuperContest Week 4 card",
+  "games": [
+    {
+      "game": "PIT@CLE",
+      "label": "PIT @ CLE",
+      "day": "Thu",
+      "date": "2026-10-01",
+      "westgate": "CLE +2.5",
+      "final": null
+    },
+    {
+      "game": "IND@WAS",
+      "label": "IND @ WAS (London, Tottenham — neutral)",
+      "day": "Sun",
+      "date": "2026-10-04",
+      "westgate": "WAS +3.5",
+      "final": null
+    },
+    {
+      "game": "NE@BUF",
+      "label": "NE @ BUF",
+      "day": "Sun",
+      "date": "2026-10-04",
+      "westgate": "BUF -6.5",
+      "final": null
+    },
+    {
+      "game": "NYJ@CHI",
+      "label": "NYJ @ CHI",
+      "day": "Sun",
+      "date": "2026-10-04",
+      "westgate": "CHI -3.5",
+      "final": null
+    },
+    {
+      "game": "ARI@NYG",
+      "label": "ARI @ NYG",
+      "day": "Sun",
+      "date": "2026-10-04",
+      "westgate": "NYG +1.5",
+      "final": null
+    },
+    {
+      "game": "DAL@HOU",
+      "label": "DAL @ HOU",
+      "day": "Sun",
+      "date": "2026-10-04",
+      "westgate": "HOU -2.5",
+      "final": null
+    },
+    {
+      "game": "JAX@CIN",
+      "label": "JAX @ CIN",
+      "day": "Sun",
+      "date": "2026-10-04",
+      "westgate": "CIN -2.5",
+      "final": null
+    },
+    {
+      "game": "GB@TB",
+      "label": "GB @ TB",
+      "day": "Sun",
+      "date": "2026-10-04",
+      "westgate": "TB +3.5",
+      "final": null
+    },
+    {
+      "game": "LAR@PHI",
+      "label": "LAR @ PHI",
+      "day": "Sun",
+      "date": "2026-10-04",
+      "westgate": "PHI +3",
+      "final": null
+    },
+    {
+      "game": "TEN@BAL",
+      "label": "TEN @ BAL",
+      "day": "Sun",
+      "date": "2026-10-04",
+      "westgate": "BAL -11.5",
+      "final": null
+    },
+    {
+      "game": "MIA@MIN",
+      "label": "MIA @ MIN",
+      "day": "Sun",
+      "date": "2026-10-04",
+      "westgate": "MIN -10.5",
+      "final": null
+    },
+    {
+      "game": "DEN@SF",
+      "label": "DEN @ SF",
+      "day": "Sun",
+      "date": "2026-10-04",
+      "westgate": "SF -2.5",
+      "final": null
+    },
+    {
+      "game": "KC@LV",
+      "label": "KC @ LV",
+      "day": "Sun",
+      "date": "2026-10-04",
+      "westgate": "LV +4.5",
+      "final": null
+    },
+    {
+      "game": "LAC@SEA",
+      "label": "LAC @ SEA",
+      "day": "Sun",
+      "date": "2026-10-04",
+      "westgate": "SEA -7.5",
+      "final": null
+    },
+    {
+      "game": "DET@CAR",
+      "label": "DET @ CAR",
+      "day": "Sun",
+      "date": "2026-10-04",
+      "westgate": "CAR +3.5",
+      "final": null
+    },
+    {
+      "game": "ATL@NO",
+      "label": "ATL @ NO",
+      "day": "Mon",
+      "date": "2026-10-05",
+      "westgate": "NO -2.5",
+      "final": null
+    }
+  ],
+  "ais": [
+    {
+      "id": "claude",
+      "name": "Claude",
+      "received": "Wed 9/30 ~10:03 PM PT",
+      "sides": {
+        "PIT@CLE": "PIT -2.5",
+        "IND@WAS": "IND -3.5",
+        "NE@BUF": "NE +6.5",
+        "NYJ@CHI": "CHI -3.5",
+        "ARI@NYG": "NYG +1.5",
+        "DAL@HOU": "DAL +2.5",
+        "JAX@CIN": "JAX +2.5",
+        "GB@TB": "GB -3.5",
+        "LAR@PHI": "LAR -3",
+        "TEN@BAL": "BAL -11.5",
+        "MIA@MIN": "MIN -10.5",
+        "DEN@SF": "SF -2.5",
+        "KC@LV": "KC -4.5",
+        "LAC@SEA": "SEA -7.5",
+        "DET@CAR": "CAR +3.5",
+        "ATL@NO": "NO -2.5"
+      },
+      "best_bets": [
+        {
+          "pick": "CHI -3.5",
+          "units": 1
+        },
+        {
+          "pick": "JAX +2.5",
+          "units": 1
+        },
+        {
+          "pick": "PIT -2.5",
+          "units": 0.5
+        }
+      ],
+      "pick5": [
+        "CHI -3.5",
+        "JAX +2.5",
+        "PIT -2.5",
+        "SF -2.5",
+        "MIN -10.5"
+      ],
+      "tiebreaker": "47"
+    },
+    {
+      "id": "gemini",
+      "name": "Gemini",
+      "received": "Wed 9/30 ~10:05 PM PT",
+      "sides": {
+        "PIT@CLE": "PIT -2.5",
+        "IND@WAS": "WAS +3.5",
+        "NE@BUF": "BUF -6.5",
+        "NYJ@CHI": "CHI -3.5",
+        "ARI@NYG": "ARI -1.5",
+        "DAL@HOU": "HOU -2.5",
+        "JAX@CIN": "CIN -2.5",
+        "GB@TB": "TB +3.5",
+        "LAR@PHI": "PHI +3",
+        "TEN@BAL": "BAL -11.5",
+        "MIA@MIN": "MIN -10.5",
+        "DEN@SF": "DEN +2.5",
+        "KC@LV": "KC -4.5",
+        "LAC@SEA": "LAC +7.5",
+        "DET@CAR": "DET -3.5",
+        "ATL@NO": "ATL +2.5"
+      },
+      "best_bets": [
+        {
+          "pick": "DET -3.5",
+          "units": 2.5
+        },
+        {
+          "pick": "BUF -6.5",
+          "units": 2.0
+        },
+        {
+          "pick": "KC -4.5",
+          "units": 1.5
+        }
+      ],
+      "pick5": [
+        "DET -3.5",
+        "BUF -6.5",
+        "KC -4.5",
+        "HOU -2.5",
+        "PHI +3"
+      ],
+      "tiebreaker": "46"
+    },
+    {
+      "id": "grok",
+      "name": "Grok",
+      "received": "Wed 9/30 ~9:58 PM PT (revised audit)",
+      "sides": {
+        "PIT@CLE": "PIT -2.5",
+        "IND@WAS": "WAS +3.5",
+        "NE@BUF": "BUF -6.5",
+        "NYJ@CHI": "CHI -3.5",
+        "ARI@NYG": "ARI -1.5",
+        "DAL@HOU": "HOU -2.5",
+        "JAX@CIN": "CIN -2.5",
+        "GB@TB": "GB -3.5",
+        "LAR@PHI": "PHI +3",
+        "TEN@BAL": "BAL -11.5",
+        "MIA@MIN": "MIN -10.5",
+        "DEN@SF": "DEN +2.5",
+        "KC@LV": "KC -4.5",
+        "LAC@SEA": "LAC +7.5",
+        "DET@CAR": "DET -3.5",
+        "ATL@NO": "ATL +2.5"
+      },
+      "best_bets": [
+        {
+          "pick": "BUF -6.5",
+          "units": 1
+        },
+        {
+          "pick": "PIT -2.5",
+          "units": 0.5
+        },
+        {
+          "pick": "DEN +2.5",
+          "units": 0.5
+        }
+      ],
+      "pick5": [
+        "BUF -6.5",
+        "PIT -2.5",
+        "DEN +2.5",
+        "PHI +3",
+        "MIN -10.5"
+      ],
+      "tiebreaker": "48",
+      "notes": "Revised after self-audit of QB/injury errors; TB +3.5 and KC best bets killed."
+    },
+    {
+      "id": "chatgpt",
+      "name": "ChatGPT",
+      "received": "Wed 9/30 ~10:00 PM PT",
+      "sides": {
+        "PIT@CLE": "CLE +2.5",
+        "IND@WAS": "WAS +3.5",
+        "NE@BUF": "NE +6.5",
+        "NYJ@CHI": "CHI -3.5",
+        "ARI@NYG": "ARI -1.5",
+        "DAL@HOU": "DAL +2.5",
+        "JAX@CIN": "JAX +2.5",
+        "GB@TB": "GB -3.5",
+        "LAR@PHI": "PHI +3",
+        "TEN@BAL": "TEN +11.5",
+        "MIA@MIN": "MIA +10.5",
+        "DEN@SF": "DEN +2.5",
+        "KC@LV": "LV +4.5",
+        "LAC@SEA": "SEA -7.5",
+        "DET@CAR": "CAR +3.5",
+        "ATL@NO": "NO -2.5"
+      },
+      "best_bets": [
+        {
+          "pick": "GB -3.5",
+          "units": 2.0
+        },
+        {
+          "pick": "TEN +11.5",
+          "units": 1.5
+        },
+        {
+          "pick": "NE +6.5",
+          "units": 1.25
+        }
+      ],
+      "pick5": [
+        "GB -3.5",
+        "TEN +11.5",
+        "NE +6.5",
+        "DAL +2.5",
+        "SEA -7.5"
+      ],
+      "tiebreaker": "45"
+    }
+  ],
+  "vector": {
+    "name": "Super Agent Vector",
+    "received": "Wed Sep 30, 2026 ~9:51 PM PT",
+    "sides": {
+      "PIT@CLE": "CLE +2.5",
+      "IND@WAS": "IND -3.5",
+      "NE@BUF": "NE +6.5",
+      "NYJ@CHI": "CHI -3.5",
+      "ARI@NYG": "NYG +1.5",
+      "DAL@HOU": "HOU -2.5",
+      "JAX@CIN": "JAX +2.5",
+      "GB@TB": "TB +3.5",
+      "LAR@PHI": "PHI +3",
+      "TEN@BAL": "TEN +11.5",
+      "MIA@MIN": "MIA +10.5",
+      "DEN@SF": "DEN +2.5",
+      "KC@LV": "KC -4.5",
+      "LAC@SEA": "LAC +7.5",
+      "DET@CAR": "CAR +3.5",
+      "ATL@NO": "NO -2.5"
+    },
+    "best_bets": [
+      {
+        "pick": "NYG +1.5",
+        "units": 1,
+        "game": "ARI@NYG",
+        "edge": 3.9
+      },
+      {
+        "pick": "PHI +3",
+        "units": 1,
+        "game": "LAR@PHI",
+        "edge": 3.4
+      },
+      {
+        "pick": "CAR +3.5",
+        "units": 0.5,
+        "game": "DET@CAR",
+        "edge": 2.4
+      }
+    ],
+    "pick5": [
+      "NYG +1.5",
+      "PHI +3",
+      "CAR +3.5",
+      "KC -4.5",
+      "TB +3.5"
+    ],
+    "tiebreaker": "45",
+    "leans": null
+  },
+  "results": {},
+  "consensus": [],
+  "graded": false,
+  "grades": {
+    "claude": {
+      "sides": [
+        0,
+        0,
+        0
+      ],
+      "sides_pending": 16,
+      "best_bet_units": 0,
+      "best_bets_pending": 3,
+      "pick5": [
+        0,
+        0,
+        0
+      ],
+      "pick5_pending": 5
+    },
+    "gemini": {
+      "sides": [
+        0,
+        0,
+        0
+      ],
+      "sides_pending": 16,
+      "best_bet_units": 0,
+      "best_bets_pending": 3,
+      "pick5": [
+        0,
+        0,
+        0
+      ],
+      "pick5_pending": 5
+    },
+    "grok": {
+      "sides": [
+        0,
+        0,
+        0
+      ],
+      "sides_pending": 16,
+      "best_bet_units": 0,
+      "best_bets_pending": 3,
+      "pick5": [
+        0,
+        0,
+        0
+      ],
+      "pick5_pending": 5
+    },
+    "chatgpt": {
+      "sides": [
+        0,
+        0,
+        0
+      ],
+      "sides_pending": 16,
+      "best_bet_units": 0,
+      "best_bets_pending": 3,
+      "pick5": [
+        0,
+        0,
+        0
+      ],
+      "pick5_pending": 5
+    },
+    "vector": {
+      "sides": [
+        0,
+        0,
+        0
+      ],
+      "sides_pending": 16,
+      "best_bet_units": 0,
+      "best_bets_pending": 3,
+      "pick5": [
+        0,
+        0,
+        0
+      ],
+      "pick5_pending": 5
+    }
+  },
+  "ungraded_games": [
+    "PIT@CLE",
+    "IND@WAS",
+    "NE@BUF",
+    "NYJ@CHI",
+    "ARI@NYG",
+    "DAL@HOU",
+    "JAX@CIN",
+    "GB@TB",
+    "LAR@PHI",
+    "TEN@BAL",
+    "MIA@MIN",
+    "DEN@SF",
+    "KC@LV",
+    "LAC@SEA",
+    "DET@CAR",
+    "ATL@NO"
+  ]
+}
