@@ -3,6 +3,13 @@
   "placeholder_slots": 3,
   "shorts": [
     {
+      "title": "Week 4 NFL AI Picks: Best Bets After 3-0 Week · NYG +1.5, PHI +3, CAR +3.5 #Shorts",
+      "date": "2026-10-01",
+      "week": 4,
+      "youtube_url": "https://youtube.com/shorts/sR2kezQwius",
+      "thumbnail": "assets/shorts/wk4-2026-thumbnail.webp"
+    },
+    {
       "title": "Week 3 NFL AI Picks: 3 Best Bets After ATL +5.5 Cashed 35-14",
       "date": "2026-09-25",
       "week": 3,
@@ -11,11 +18,11 @@
     }
   ],
   "latest_local": {
-    "title": "Week 3 2026: 3 Best Bets + ATL +5.5 cashed",
-    "week": 3,
+    "title": "Week 4 2026: Best Bets NYG +1.5, PHI +3, CAR +3.5",
+    "week": 4,
     "season": 2026,
-    "thumbnail": "assets/shorts/wk3-2026-thumbnail.webp",
-    "video": "assets/shorts/wk3-2026-short.mp4",
-    "youtube_url": "https://youtube.com/shorts/lF1RWrbgARw"
+    "thumbnail": "assets/shorts/wk4-2026-thumbnail.webp",
+    "video": "assets/shorts/wk4-2026-short.mp4",
+    "youtube_url": "https://youtube.com/shorts/sR2kezQwius"
   }
 }

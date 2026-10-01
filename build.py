@@ -411,9 +411,22 @@ def build_shorts(sh):
     latest = ""
     if lt:
         poster = asset(lt["thumbnail"]) if lt.get("thumbnail") else ""
-        video = asset(lt["video"]) if lt.get("video") else ""
+        video_rel = lt.get("video") or ""
+        video_file = os.path.join(ROOT, video_rel.lstrip("/")) if video_rel else ""
+        if video_file and os.path.isfile(video_file):
+            media = f'<video controls preload="none" poster="{e(poster)}" src="{e(asset(video_rel))}" playsinline width="576" height="1024"></video>'
+        else:
+            vid = yt_id(lt.get("youtube_url"))
+            title = lt.get("title") or "YouTube Short"
+            thumb = poster or (f"https://i.ytimg.com/vi/{vid}/hqdefault.jpg" if vid else "")
+            media = (
+                f'<button type="button" class="yt-facade" data-yt="{e(vid)}" data-title="{e(title)}" '
+                f'aria-label="Play {e(title)}">'
+                f'<img src="{e(thumb)}" alt="" width="1080" height="1920" loading="lazy" decoding="async">'
+                f'<span class="yt-play" aria-hidden="true"></span></button>'
+            ) if vid else ""
         latest = f"""<section class="panel latest-short"><h2>Latest Short &middot; Week {lt['week']} {lt['season']}</h2>
-<div class="short-feature"><video controls preload="none" poster="{e(poster)}" src="{e(video)}" playsinline width="576" height="1024"></video>
+<div class="short-feature">{media}
 <div><h3>{e(lt['title'])}</h3><p class="muted">Vertical 9:16 recap. {'<a href="'+e(lt['youtube_url'])+'" target="_blank" rel="noopener">Watch on YouTube</a>' if lt.get('youtube_url') else 'Follow <a href="'+e(CFG.get('youtube_url',''))+'" target="_blank" rel="noopener">'+e(CFG.get('youtube_handle',''))+'</a> on YouTube for every Short.'}</p></div></div></section>"""
     body = f"""<section class="hero hero-sm"><p class="kicker">60 seconds, every week</p><h1><span class="g">Shorts</span></h1></section>
 {latest}<section class="panel"><h2>On YouTube</h2><div class="shorts-grid">{cards}</div></section>"""
@@ -832,6 +845,7 @@ def convert_webp():
     jobs = [
         ("podcast-cover-600.png", "podcast-cover-600.webp"),
         ("shorts/wk3-2026-thumbnail.png", "shorts/wk3-2026-thumbnail.webp"),
+        ("shorts/wk4-2026-thumbnail.png", "shorts/wk4-2026-thumbnail.webp"),
     ]
     for src, dest in jobs:
         sp = os.path.join(ROOT, "assets", src)
