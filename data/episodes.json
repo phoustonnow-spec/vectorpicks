@@ -2,6 +2,14 @@
   "_comment": "Add one object per episode, newest anywhere (build sorts by date). show_type must be one of: Tuesday Rankings, Thursday Picks, Sunday Update, Sunday Recap. mp3 is relative to base_url (put the file in public/episodes/). duration is HH:MM:SS. bytes = file size (build fills it in automatically if the mp3 exists in public/).",
   "episodes": [
     {
+      "title": "Week 4 2026 Thursday Picks — NYG +1.5, PHI +3, CAR +3.5",
+      "date": "2026-10-02",
+      "show_type": "Thursday Picks",
+      "mp3": "episodes/2026-w04-thursday-picks.mp3",
+      "duration": "00:03:01",
+      "description": "Catch-up Thursday Picks for Week 4: how to listen on vectorpicks.com/Podcast + RSS; oddsmakers vs our fair spread; Vector Best Bets NYG +1.5 (1U), PHI +3 (1U), CAR +3.5 (0.5U). Pick 5: NYG +1.5, PHI +3, CAR +3.5, KC −4.5, TB +3.5. Board: https://www.vectorpicks.com/ai-picks.html. Entertainment only."
+    },
+    {
       "title": "Week 3 2026 Sunday Recap — Vector 3-0 Best Bets, Claude Leads the AIs",
       "date": "2026-09-28",
       "show_type": "Sunday Recap",

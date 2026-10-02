@@ -365,6 +365,7 @@ def build_episodes(eps):
     body = f"""
 <section class="hero hero-sm ep-hero"><img src="{e(asset('assets/podcast-cover-600.webp'))}" alt="{e(CFG['title'])} podcast cover" width="600" height="600" decoding="async">
 <div><p class="kicker">Podcast</p><h1>{e(CFG['title'])}</h1><p class="muted">Vector talks power ratings, our spreads and the weekly card. Four shows a week.</p>
+<p class="muted">Play every episode on this Podcast page, or subscribe with the RSS feed in Apple Podcasts, Spotify, or your app.</p>
 <p><a class="btn" href="feed.xml">RSS feed</a></p></div></section>
 <section class="panel"><h2>Shows</h2><ul class="shows">{shows}</ul></section>
 <section class="panel"><h2>Episodes</h2>{lst}</section>
