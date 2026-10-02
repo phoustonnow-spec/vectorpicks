@@ -5,6 +5,7 @@
   "intro": "Same prompt, four AIs, and us. Entertainment only. Graded on Westgate SuperContest lines.",
   "prompt_note": "Each AI got the same v3 Westgate Week 4 prompt Wed 9/30. Grok later revised after a QB/injury audit; Gemini posted the original chalk sheet. Lines are Westgate SuperContest Week 4.",
   "line_source": "Westgate SuperContest Week 4 card",
+  "score_source": "ESPN NFL scoreboard (https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard). Only games with status final are stored. dates=20261001 (PIT@CLE final).",
   "games": [
     {
       "game": "PIT@CLE",
@@ -12,7 +13,12 @@
       "day": "Thu",
       "date": "2026-10-01",
       "westgate": "CLE +2.5",
-      "final": null
+      "final": "PIT 24, CLE 27",
+      "score": {
+        "away": 24,
+        "home": 27,
+        "status": "final"
+      }
     },
     {
       "game": "IND@WAS",
@@ -369,33 +375,38 @@
     "tiebreaker": "45",
     "leans": null
   },
-  "results": {},
+  "results": {
+    "PIT@CLE": {
+      "CLE +2.5": "W",
+      "PIT -2.5": "L"
+    }
+  },
   "consensus": [],
   "graded": false,
   "grades": {
     "claude": {
       "sides": [
         0,
-        0,
+        1,
         0
       ],
-      "sides_pending": 16,
-      "best_bet_units": 0,
-      "best_bets_pending": 3,
+      "sides_pending": 15,
+      "best_bet_units": -0.5,
+      "best_bets_pending": 2,
       "pick5": [
         0,
-        0,
+        1,
         0
       ],
-      "pick5_pending": 5
+      "pick5_pending": 4
     },
     "gemini": {
       "sides": [
         0,
-        0,
+        1,
         0
       ],
-      "sides_pending": 16,
+      "sides_pending": 15,
       "best_bet_units": 0,
       "best_bets_pending": 3,
       "pick5": [
@@ -408,26 +419,26 @@
     "grok": {
       "sides": [
         0,
-        0,
+        1,
         0
       ],
-      "sides_pending": 16,
-      "best_bet_units": 0,
-      "best_bets_pending": 3,
+      "sides_pending": 15,
+      "best_bet_units": -0.5,
+      "best_bets_pending": 2,
       "pick5": [
         0,
-        0,
+        1,
         0
       ],
-      "pick5_pending": 5
+      "pick5_pending": 4
     },
     "chatgpt": {
       "sides": [
-        0,
+        1,
         0,
         0
       ],
-      "sides_pending": 16,
+      "sides_pending": 15,
       "best_bet_units": 0,
       "best_bets_pending": 3,
       "pick5": [
@@ -439,11 +450,11 @@
     },
     "vector": {
       "sides": [
-        0,
+        1,
         0,
         0
       ],
-      "sides_pending": 16,
+      "sides_pending": 15,
       "best_bet_units": 0,
       "best_bets_pending": 3,
       "pick5": [
@@ -455,7 +466,6 @@
     }
   },
   "ungraded_games": [
-    "PIT@CLE",
     "IND@WAS",
     "NE@BUF",
     "NYJ@CHI",
