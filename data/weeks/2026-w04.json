@@ -1,0 +1,248 @@
+{
+ "season": 2026,
+ "week": 4,
+ "as_of": "Wed Sep 30, 2026 ~10:05 PM PT",
+ "update_note": "Week 4 board, Wed 9/30. Best Bets: NYG +1.5 (1U), PHI +3 (1U), CAR +3.5 (0.5U). No leans. Lines are the Westgate SuperContest Week 4 card. Entertainment only.",
+ "sources": [
+  "data/ai-picks/2026-w04.json Vector best bets and Westgate lines",
+  "Westgate SuperContest Week 4 lines"
+ ],
+ "line_source": "Westgate SuperContest Week 4 card",
+ "market_source": "no separate market table this week (blank, not invented)",
+ "hfa_note": "Our Spread was not published with the Week 4 board, so that column is blank. Top Plays are listed in the Best Bets tier.",
+ "summary": {
+  "best_bets": [
+   "NYG +1.5 vs ARI",
+   "PHI +3 vs LAR",
+   "CAR +3.5 vs DET"
+  ],
+  "leans": [
+   "No leans this week"
+  ],
+  "passes": [
+   "No Best Bet or Lean on the other games"
+  ]
+ },
+ "pick5": [
+  "NYG +1.5",
+  "PHI +3",
+  "CAR +3.5",
+  "KC -4.5",
+  "TB +3.5"
+ ],
+ "tiebreaker": "45",
+ "games": [
+  {
+   "game": "PIT@CLE",
+   "label": "PIT @ CLE",
+   "day": "Thu",
+   "date": "2026-10-01",
+   "westgate": "CLE +2.5",
+   "market": "",
+   "our": "",
+   "gap": null,
+   "tier": "Pass",
+   "pick": "No side (no play)",
+   "note": "No Best Bet or Lean. Thursday final on the board: PIT 24, CLE 27."
+  },
+  {
+   "game": "IND@WAS",
+   "label": "IND @ WAS (London, Tottenham — neutral)",
+   "day": "Sun",
+   "date": "2026-10-04",
+   "westgate": "WAS +3.5",
+   "market": "",
+   "our": "",
+   "gap": null,
+   "tier": "Pass",
+   "pick": "No side (no play)",
+   "note": "No Best Bet or Lean on the Week 4 board."
+  },
+  {
+   "game": "NE@BUF",
+   "label": "NE @ BUF",
+   "day": "Sun",
+   "date": "2026-10-04",
+   "westgate": "BUF -6.5",
+   "market": "",
+   "our": "",
+   "gap": null,
+   "tier": "Pass",
+   "pick": "No side (no play)",
+   "note": "No Best Bet or Lean on the Week 4 board."
+  },
+  {
+   "game": "NYJ@CHI",
+   "label": "NYJ @ CHI",
+   "day": "Sun",
+   "date": "2026-10-04",
+   "westgate": "CHI -3.5",
+   "market": "",
+   "our": "",
+   "gap": null,
+   "tier": "Pass",
+   "pick": "No side (no play)",
+   "note": "No Best Bet or Lean on the Week 4 board."
+  },
+  {
+   "game": "ARI@NYG",
+   "label": "ARI @ NYG",
+   "day": "Sun",
+   "date": "2026-10-04",
+   "westgate": "NYG +1.5",
+   "market": "",
+   "our": "",
+   "gap": null,
+   "tier": "Best Bet",
+   "pick": "NYG +1.5",
+   "note": "Best Bet, 1U, on the Week 4 board. Westgate NYG +1.5. Published edge 3.9."
+  },
+  {
+   "game": "DAL@HOU",
+   "label": "DAL @ HOU",
+   "day": "Sun",
+   "date": "2026-10-04",
+   "westgate": "HOU -2.5",
+   "market": "",
+   "our": "",
+   "gap": null,
+   "tier": "Pass",
+   "pick": "No side (no play)",
+   "note": "No Best Bet or Lean on the Week 4 board."
+  },
+  {
+   "game": "JAX@CIN",
+   "label": "JAX @ CIN",
+   "day": "Sun",
+   "date": "2026-10-04",
+   "westgate": "CIN -2.5",
+   "market": "",
+   "our": "",
+   "gap": null,
+   "tier": "Pass",
+   "pick": "No side (no play)",
+   "note": "No Best Bet or Lean on the Week 4 board."
+  },
+  {
+   "game": "GB@TB",
+   "label": "GB @ TB",
+   "day": "Sun",
+   "date": "2026-10-04",
+   "westgate": "TB +3.5",
+   "market": "",
+   "our": "",
+   "gap": null,
+   "tier": "Pass",
+   "pick": "No side (no play)",
+   "note": "No Best Bet or Lean on the Week 4 board."
+  },
+  {
+   "game": "LAR@PHI",
+   "label": "LAR @ PHI",
+   "day": "Sun",
+   "date": "2026-10-04",
+   "westgate": "PHI +3",
+   "market": "",
+   "our": "",
+   "gap": null,
+   "tier": "Best Bet",
+   "pick": "PHI +3",
+   "note": "Best Bet, 1U, on the Week 4 board. Westgate PHI +3. Published edge 3.4."
+  },
+  {
+   "game": "TEN@BAL",
+   "label": "TEN @ BAL",
+   "day": "Sun",
+   "date": "2026-10-04",
+   "westgate": "BAL -11.5",
+   "market": "",
+   "our": "",
+   "gap": null,
+   "tier": "Pass",
+   "pick": "No side (no play)",
+   "note": "No Best Bet or Lean on the Week 4 board."
+  },
+  {
+   "game": "MIA@MIN",
+   "label": "MIA @ MIN",
+   "day": "Sun",
+   "date": "2026-10-04",
+   "westgate": "MIN -10.5",
+   "market": "",
+   "our": "",
+   "gap": null,
+   "tier": "Pass",
+   "pick": "No side (no play)",
+   "note": "No Best Bet or Lean on the Week 4 board."
+  },
+  {
+   "game": "DEN@SF",
+   "label": "DEN @ SF",
+   "day": "Sun",
+   "date": "2026-10-04",
+   "westgate": "SF -2.5",
+   "market": "",
+   "our": "",
+   "gap": null,
+   "tier": "Pass",
+   "pick": "No side (no play)",
+   "note": "No Best Bet or Lean on the Week 4 board."
+  },
+  {
+   "game": "KC@LV",
+   "label": "KC @ LV",
+   "day": "Sun",
+   "date": "2026-10-04",
+   "westgate": "LV +4.5",
+   "market": "",
+   "our": "",
+   "gap": null,
+   "tier": "Pass",
+   "pick": "No side (no play)",
+   "note": "No Best Bet or Lean on the Week 4 board."
+  },
+  {
+   "game": "LAC@SEA",
+   "label": "LAC @ SEA",
+   "day": "Sun",
+   "date": "2026-10-04",
+   "westgate": "SEA -7.5",
+   "market": "",
+   "our": "",
+   "gap": null,
+   "tier": "Pass",
+   "pick": "No side (no play)",
+   "note": "No Best Bet or Lean on the Week 4 board."
+  },
+  {
+   "game": "DET@CAR",
+   "label": "DET @ CAR",
+   "day": "Sun",
+   "date": "2026-10-04",
+   "westgate": "CAR +3.5",
+   "market": "",
+   "our": "",
+   "gap": null,
+   "tier": "Best Bet",
+   "pick": "CAR +3.5",
+   "note": "Best Bet, 0.5U, on the Week 4 board. Westgate CAR +3.5. Published edge 2.4."
+  },
+  {
+   "game": "ATL@NO",
+   "label": "ATL @ NO",
+   "day": "Mon",
+   "date": "2026-10-05",
+   "westgate": "NO -2.5",
+   "market": "",
+   "our": "",
+   "gap": null,
+   "tier": "Pass",
+   "pick": "No side (no play)",
+   "note": "No Best Bet or Lean on the Week 4 board."
+  }
+ ],
+ "missing": [
+  "Our Spread, market table, and power ratings were not on the Week 4 board, so they are blank here rather than filled in.",
+  "Ticket vs handle splits: not used this week (blank, not invented)."
+ ]
+}

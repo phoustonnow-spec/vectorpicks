@@ -248,6 +248,21 @@ def page(fname, title, body, desc=None, active=None, extra_head=""):
 def tier_badge(t):
     return f'<span class="tier tier-{TIER_CLASS.get(t, "card")}">{e(t)}</span>'
 
+def pick5_note(w):
+    """Pick 5 line when the week file publishes one. Empty for older cards."""
+    p5 = w.get("pick5") or []
+    if not p5:
+        return ""
+    tb = w.get("tiebreaker")
+    tb_bit = f" Tiebreaker {e(tb)}." if tb not in (None, "") else ""
+    return f'<p class="note">Pick 5: {e(minus(", ".join(str(x) for x in p5)))}.{tb_bit}</p>'
+
+def gap_text(g):
+    gap = g.get("gap")
+    if gap is None or gap == "":
+        return "\u2014"
+    return f"{float(gap):.1f}"
+
 def result_badge(r):
     res = (r or {}).get("_res", "")
     cls = {"W": "win", "L": "loss", "P": "push"}.get(res, "pend")
@@ -269,12 +284,14 @@ def build_card(w, tidx, fname):
     for g in w["games"]:
         tr = tidx.get((w["season"], w["week"], g["game"]))
         score = e(tr["Final Score"]) if tr and tr.get("Final Score") else ""
+        our = g.get("our") or ""
+        our_cell = f"<b>{e(minus(our))}</b>" if str(our).strip() else "\u2014"
         rows += f"""<tr class="t-{TIER_CLASS.get(g['tier'],'card')}">
 <td class="game"><b>{e(g['label'])}</b><span class="sub">{e(g['day'])} {e(g['date'][5:].replace('-','/'))}</span></td>
 <td data-l="Westgate">{e(minus(g['westgate']))}</td>
 <td data-l="Market" class="muted">{e(minus(g.get('market') or ''))}</td>
-<td data-l="Our Spread"><b>{e(minus(g['our']))}</b></td>
-<td data-l="Gap" class="gap">{g['gap']:.1f}</td>
+<td data-l="Our Spread">{our_cell}</td>
+<td data-l="Gap" class="gap">{gap_text(g)}</td>
 <td data-l="Tier">{tier_badge(g['tier'])}</td>
 <td data-l="Card side" class="pick">{e(minus(g['pick']))}</td>
 <td data-l="Result">{result_badge(tr)}{f'<span class="sub">{score}</span>' if score else ''}</td>
@@ -287,6 +304,15 @@ def build_card(w, tidx, fname):
     s = w["summary"]
     li = lambda xs: "".join(f"<li>{e(minus(x))}</li>" for x in xs)
     update = f'<p class="note">{e(w["update_note"])}</p>' if w.get("update_note") else ""
+    p5_html = pick5_note(w)
+    if p5_html:
+        p5_html += "\n"
+    powers_html = ""
+    if w.get("powers"):
+        powers_html = f"""<section class="panel" id="powers"><h2>{e(w.get("powers_title", "Power ratings: healthy &rarr; injury-adjusted"))}</h2>
+<p class="note">{e(w.get("powers_note", "Points vs a league-average team. Injury Δ = our player-value layer (Out/Doubtful full value, Questionable/DNP ~half). Rank is display only."))}</p>
+<div class="table-wrap"><table class="power-table"><thead><tr><th scope="col">#</th><th scope="col">Team</th><th scope="col">{e(w.get("powers_healthy_label", "Healthy"))}</th><th scope="col">Injury &Delta;</th><th scope="col">Adjusted</th><th scope="col">Drivers</th></tr></thead><tbody>{pw}</tbody></table></div></section>
+"""
     body = f"""
 <section class="hero hero-sm"><p class="kicker">Week {w['week']} &middot; {w['season']}</p><h1>Weekly <span class="g">Card</span></h1>
 <p class="muted">As of {e(w['as_of'])}.</p>{update}</section>
@@ -295,14 +321,11 @@ def build_card(w, tidx, fname):
 <div class="panel"><h2>{tier_badge('Lean')} Leans</h2><ul class="picks">{li(s['leans'])}</ul></div>
 <div class="panel"><h2>{tier_badge('Pass')} Passes</h2><ul class="picks">{li(s['passes'])}</ul></div>
 </section>
-<section class="panel"><h2>Full card: Market vs Our Spread</h2>
+{p5_html}<section class="panel"><h2>Full card: Market vs Our Spread</h2>
 <p class="note"><b>Westgate</b> = contest line of record (graded here). <b>Market</b> = {e(w['market_source'])}. <b>Gap</b> = points between the Westgate line and Our Spread, toward the card side. {e(w['hfa_note'])}</p>
 <div class="table-wrap"><table class="card-table"><thead><tr><th scope="col">Game</th><th scope="col">Westgate</th><th scope="col">Market</th><th scope="col">Our Spread</th><th scope="col">Gap</th><th scope="col">Tier</th><th scope="col">Card side</th><th scope="col">Result</th><th scope="col">Why</th></tr></thead><tbody>{rows}</tbody></table></div>
 </section>
-<section class="panel" id="powers"><h2>{e(w.get("powers_title", "Power ratings: healthy &rarr; injury-adjusted"))}</h2>
-<p class="note">{e(w.get("powers_note", "Points vs a league-average team. Injury Δ = our player-value layer (Out/Doubtful full value, Questionable/DNP ~half). Rank is display only."))}</p>
-<div class="table-wrap"><table class="power-table"><thead><tr><th scope="col">#</th><th scope="col">Team</th><th scope="col">{e(w.get("powers_healthy_label", "Healthy"))}</th><th scope="col">Injury &Delta;</th><th scope="col">Adjusted</th><th scope="col">Drivers</th></tr></thead><tbody>{pw}</tbody></table></div></section>
-<section class="panel"><h2>Missing / not used this week</h2><ul class="missing">{li(w.get('missing', []))}</ul>
+{powers_html}<section class="panel"><h2>Missing / not used this week</h2><ul class="missing">{li(w.get('missing', []))}</ul>
 <p class="note">Lines: {e(w['line_source'])}</p></section>
 """
     archived = fname != "card.html"
@@ -445,6 +468,9 @@ def build_home(weeks, rows, tidx, eps, sh):
     short = newest_short(sh)
     facade = yt_facade(short) if short else ""
     short_title = (short or {}).get("title") or "Latest Short"
+    p5_html = pick5_note(w)
+    if p5_html:
+        p5_html += "\n"
     short_block = (
         f'<section class="panel home-short"><h2>Latest Short</h2>{facade}'
         f'<p class="muted">{e(short_title)}</p>'
@@ -461,7 +487,7 @@ def build_home(weeks, rows, tidx, eps, sh):
 <section class="panel week-card"><div class="wc-head"><h2>Week {w['week']} &middot; {w['season']}</h2><div class="wk-rec"><small>WEEK {w['week']} RECORD</small><b>{wt['rec'][:-2] if wt['P']==0 else wt['rec']}</b></div></div>
 <p class="kicker">{len(s['best_bets'])} Best Bet{'' if len(s['best_bets']) == 1 else 's'}</p><ul class="picks big">{bb}</ul>{cash_html}
 <p class="note">Leans: {e(minus(', '.join(s['leans'])))}.</p>
-{f'<p class="note">{e(w["update_note"])}</p>' if w.get("update_note") else ""}
+{p5_html}{f'<p class="note">{e(w["update_note"])}</p>' if w.get("update_note") else ""}
 <div class="btn-row"><a class="btn" href="card.html">Full card &rarr;</a><a class="btn ghost" href="live.html">Live Board &rarr;</a></div></section>
 {record_box(rows)}
 <section class="panel"><h2>Latest episode</h2>{ep}</section>
@@ -532,23 +558,27 @@ def live_spreads_payload(week):
     games = []
     for g in week.get("games") or []:
         mu = split_matchup(g.get("label") or "")
-        parsed = parse_our(g.get("our") or "")
-        if not mu or not parsed:
+        if not mu:
             continue
         away_abbr, home_abbr = mu
-        our_abbr, our_point = parsed
-        if away_abbr not in ABBR or home_abbr not in ABBR or our_abbr not in ABBR:
+        if away_abbr not in ABBR or home_abbr not in ABBR:
             continue
-        if our_abbr not in (away_abbr, home_abbr):
-            continue
+        parsed = parse_our(g.get("our") or "")
+        our_team = our_point = our_label = None
+        if parsed:
+            our_abbr, our_point = parsed
+            if our_abbr not in ABBR or our_abbr not in (away_abbr, home_abbr):
+                continue
+            our_team = ABBR[our_abbr]
+            our_label = (g.get("our") or "").strip()
         games.append({
             "away_team": ABBR[away_abbr],
             "home_team": ABBR[home_abbr],
             "away_abbr": away_abbr,
             "home_abbr": home_abbr,
-            "our_team": ABBR[our_abbr],
+            "our_team": our_team,
             "our_point": our_point,
-            "our_label": g["our"].strip(),
+            "our_label": our_label,
             **published_pick(g, away_abbr, home_abbr),
         })
     return {
@@ -590,6 +620,10 @@ def validate_live(week):
     if len(data["games"]) != len(week.get("games") or []):
         raise SystemExit(f"live-spreads.json has {len(data['games'])} games; card has {len(week.get('games') or [])}")
     for g in data["games"]:
+        if not g.get("our_label"):
+            if g.get("our_team") is not None or g.get("our_point") is not None:
+                raise SystemExit(f"live-spreads.json quote mismatch: {g}")
+            continue
         parsed = parse_our(g["our_label"])
         if not parsed or ABBR[parsed[0]] != g["our_team"] or parsed[1] != g["our_point"]:
             raise SystemExit(f"live-spreads.json quote mismatch: {g}")
@@ -634,8 +668,40 @@ def validate_live(week):
         raise SystemExit("home page is missing the live scores strip")
     note = "Updated model (v3): starts from the betting market"
     card_html = open(os.path.join(OUT, "card.html")).read()
-    if note not in card_html.replace("&#x27;", "'") or note not in home.replace("&#x27;", "'"):
-        raise SystemExit("Sat 9/26 v3 model note missing from the card or home page")
+    archive_path = os.path.join(OUT, "card-2026-w03.html")
+    if os.path.exists(archive_path):
+        archive = open(archive_path).read().replace("&#x27;", "'")
+        if note not in archive:
+            raise SystemExit("Sat 9/26 v3 model note missing from the Week 3 archive card")
+    if week["season"] == 2026 and int(week["week"]) == 3:
+        if note not in card_html.replace("&#x27;", "'") or note not in home.replace("&#x27;", "'"):
+            raise SystemExit("Sat 9/26 v3 model note missing from the card or home page")
+    if week["season"] == 2026 and int(week["week"]) == 4:
+        by_matchup = {(g["away_abbr"], g["home_abbr"]): g for g in data["games"]}
+        expect_pub = {
+            ("ARI", "NYG"): "NYG +1.5",
+            ("LAR", "PHI"): "PHI +3",
+            ("DET", "CAR"): "CAR +3.5",
+        }
+        for mu, label in expect_pub.items():
+            g = by_matchup[mu]
+            if g["pick_label"] != label or g["tier"] != "Best Bet" or g.get("our_label"):
+                raise SystemExit(f"Week 4 Best Bet mismatch for {mu}: {g}")
+        for g in data["games"]:
+            if (g["away_abbr"], g["home_abbr"]) not in expect_pub and g["pick_label"] is not None:
+                raise SystemExit(f"Week 4 game should not publish an extra pick: {g}")
+        block_m = re.search(r'<section class="panel week-card">.*?</section>', home, re.S)
+        block = block_m.group(0) if block_m else ""
+        for needle in ("NYG +1.5", "PHI +3", "CAR +3.5", "Week 4"):
+            if needle not in block or needle not in card_html:
+                raise SystemExit(f"Week 4 Best Bet missing from home card or weekly card: {needle}")
+        for old in ("CHI +4.5 vs PHI", "PIT +3.5 vs CIN", "DEN +2.5 vs LAR"):
+            if old in block:
+                raise SystemExit(f"Week 3 Best Bet still on the home card: {old}")
+        if "Pick 5:" not in block or "TB +3.5" not in block or "Tiebreaker 45" not in block:
+            raise SystemExit("Week 4 Pick 5 missing from the home card")
+        if "Pick 5:" not in card_html or "TB +3.5" not in card_html or "Tiebreaker 45" not in card_html:
+            raise SystemExit("Week 4 Pick 5 missing from the weekly card")
     for gone in ("DET -6.5 vs NYJ", "TB +1.5 vs MIN", "DET \u22126.5 vs NYJ"):
         if gone in home or gone in card_html:
             raise SystemExit(f"removed Lean still listed on the card/home page: {gone}")
@@ -647,7 +713,8 @@ def validate_live(week):
             raise SystemExit(f"{fname} missing Live Board link")
     if "live-spreads.json" not in os.listdir(OUT):
         raise SystemExit("live-spreads.json was not written")
-    print(f"OK live board: Week {data['week']} {data['season']}, {len(data['games'])} Our Spreads, nav + home link")
+    n_our = sum(1 for g in data["games"] if g.get("our_label"))
+    print(f"OK live board: Week {data['week']} {data['season']}, {n_our} Our Spreads, {len(data['games'])} games, nav + home link")
 
 def validate_analytics():
     gid = str(CFG.get("ga_measurement_id") or "").strip()
