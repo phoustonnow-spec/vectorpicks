@@ -3,6 +3,13 @@
   "placeholder_slots": 3,
   "shorts": [
     {
+      "title": "Week 4 Saturday Update · CAR demoted · NYG + PHI Best Bets · Vector Picks",
+      "date": "2026-10-03",
+      "week": 4,
+      "youtube_url": "https://youtube.com/shorts/_QbUq9lv_g4",
+      "thumbnail": "assets/shorts/wk4-2026-sat-thumbnail.webp"
+    },
+    {
       "title": "Week 4 NFL AI Picks: Best Bets After 3-0 Week · NYG +1.5, PHI +3, CAR +3.5 #Shorts",
       "date": "2026-10-01",
       "week": 4,
@@ -18,11 +25,11 @@
     }
   ],
   "latest_local": {
-    "title": "Week 4 2026: Best Bets NYG +1.5, PHI +3, CAR +3.5",
+    "title": "Week 4 2026: Saturday Update · CAR demoted · NYG + PHI Best Bets",
     "week": 4,
     "season": 2026,
-    "thumbnail": "assets/shorts/wk4-2026-thumbnail.webp",
-    "video": "assets/shorts/wk4-2026-short.mp4",
-    "youtube_url": "https://youtube.com/shorts/sR2kezQwius"
+    "thumbnail": "assets/shorts/wk4-2026-sat-thumbnail.webp",
+    "video": "assets/shorts/wk4-2026-sat-short.mp4",
+    "youtube_url": "https://youtube.com/shorts/_QbUq9lv_g4"
   }
 }
