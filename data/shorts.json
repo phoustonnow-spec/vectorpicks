@@ -3,6 +3,13 @@
   "placeholder_slots": 3,
   "shorts": [
     {
+      "title": "Week 4 Westgate SuperContest Top 5 Leaders | 3 Entries at 13-2",
+      "date": "2026-10-04",
+      "week": 4,
+      "youtube_url": "https://youtube.com/shorts/_99qQd5Py98",
+      "thumbnail": "assets/shorts/wk4-2026-leaders-thumbnail.webp"
+    },
+    {
       "title": "Week 4 Saturday Update · CAR demoted · NYG + PHI Best Bets · Vector Picks",
       "date": "2026-10-03",
       "week": 4,
@@ -25,11 +32,11 @@
     }
   ],
   "latest_local": {
-    "title": "Week 4 2026: Saturday Update · CAR demoted · NYG + PHI Best Bets",
+    "title": "Week 4 2026: Westgate SuperContest Top 5 Leaders · 3 Entries at 13-2",
     "week": 4,
     "season": 2026,
-    "thumbnail": "assets/shorts/wk4-2026-sat-thumbnail.webp",
-    "video": "assets/shorts/wk4-2026-sat-short.mp4",
-    "youtube_url": "https://youtube.com/shorts/_QbUq9lv_g4"
+    "thumbnail": "assets/shorts/wk4-2026-leaders-thumbnail.webp",
+    "video": "assets/shorts/wk4-2026-leaders-short.mp4",
+    "youtube_url": "https://youtube.com/shorts/_99qQd5Py98"
   }
 }

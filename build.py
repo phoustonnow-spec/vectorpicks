@@ -915,6 +915,7 @@ def convert_webp():
         ("shorts/wk3-2026-thumbnail.png", "shorts/wk3-2026-thumbnail.webp"),
         ("shorts/wk4-2026-thumbnail.png", "shorts/wk4-2026-thumbnail.webp"),
         ("shorts/wk4-2026-sat-thumbnail.png", "shorts/wk4-2026-sat-thumbnail.webp"),
+        ("shorts/wk4-2026-leaders-thumbnail.png", "shorts/wk4-2026-leaders-thumbnail.webp"),
     ]
     for src, dest in jobs:
         sp = os.path.join(ROOT, "assets", src)
