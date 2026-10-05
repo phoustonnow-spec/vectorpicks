@@ -5,7 +5,7 @@
   "intro": "Same prompt, four AIs, and us. Entertainment only. Graded on Westgate SuperContest lines.",
   "prompt_note": "Each AI got the same v3 Westgate Week 4 prompt Wed 9/30. Grok later revised after a QB/injury audit; Gemini posted the original chalk sheet. Lines are Westgate SuperContest Week 4.",
   "line_source": "Westgate SuperContest Week 4 card",
-  "score_source": "ESPN NFL scoreboard (https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?week=4&seasontype=2&dates=2026). Only games with status final are stored. Snapshot Sunday Oct 4, 2026 ~1:35 PM PT: PIT@CLE, IND@WAS, NE@BUF, NYJ@CHI, ARI@NYG, DAL@HOU, JAX@CIN, GB@TB, LAR@PHI, TEN@BAL final. Snapshot Sunday Oct 4, 2026 ~4:59 PM PT: MIA@MIN, KC@LV, DEN@SF, LAC@SEA final. DET@CAR and ATL@NO not final, left blank.",
+  "score_source": "ESPN NFL scoreboard (https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?week=4&seasontype=2&dates=2026). Only games with status final are stored. Snapshot Sunday Oct 4, 2026 ~1:35 PM PT: PIT@CLE, IND@WAS, NE@BUF, NYJ@CHI, ARI@NYG, DAL@HOU, JAX@CIN, GB@TB, LAR@PHI, TEN@BAL final. Snapshot Sunday Oct 4, 2026 ~4:59 PM PT: MIA@MIN, KC@LV, DEN@SF, LAC@SEA final. Snapshot Sunday Oct 4, 2026 ~8:43 PM PT: DET@CAR final. ATL@NO not final, left blank.",
   "games": [
     {
       "game": "PIT@CLE",
@@ -195,7 +195,12 @@
       "day": "Sun",
       "date": "2026-10-04",
       "westgate": "CAR +3.5",
-      "final": null
+      "final": "DET 26, CAR 32",
+      "score": {
+        "away": 26,
+        "home": 32,
+        "status": "final"
+      }
     },
     {
       "game": "ATL@NO",
@@ -495,6 +500,10 @@
     "LAC@SEA": {
       "LAC +7.5": "W",
       "SEA -7.5": "L"
+    },
+    "DET@CAR": {
+      "CAR +3.5": "W",
+      "DET -3.5": "L"
     }
   },
   "consensus": [],
@@ -502,11 +511,11 @@
   "grades": {
     "claude": {
       "sides": [
-        8,
+        9,
         6,
         0
       ],
-      "sides_pending": 2,
+      "sides_pending": 1,
       "best_bet_units": 1.5,
       "best_bets_pending": 0,
       "pick5": [
@@ -519,26 +528,26 @@
     "gemini": {
       "sides": [
         3,
-        11,
+        12,
         0
       ],
-      "sides_pending": 2,
-      "best_bet_units": -3.5,
-      "best_bets_pending": 1,
+      "sides_pending": 1,
+      "best_bet_units": -6,
+      "best_bets_pending": 0,
       "pick5": [
         0,
-        4,
+        5,
         0
       ],
-      "pick5_pending": 1
+      "pick5_pending": 0
     },
     "grok": {
       "sides": [
         2,
-        12,
+        13,
         0
       ],
-      "sides_pending": 2,
+      "sides_pending": 1,
       "best_bet_units": -2,
       "best_bets_pending": 0,
       "pick5": [
@@ -550,11 +559,11 @@
     },
     "chatgpt": {
       "sides": [
-        8,
+        9,
         6,
         0
       ],
-      "sides_pending": 2,
+      "sides_pending": 1,
       "best_bet_units": 0.75,
       "best_bets_pending": 0,
       "pick5": [
@@ -566,23 +575,22 @@
     },
     "vector": {
       "sides": [
-        10,
+        11,
         4,
         0
       ],
-      "sides_pending": 2,
-      "best_bet_units": 0,
-      "best_bets_pending": 1,
+      "sides_pending": 1,
+      "best_bet_units": 0.5,
+      "best_bets_pending": 0,
       "pick5": [
-        2,
+        3,
         2,
         0
       ],
-      "pick5_pending": 1
+      "pick5_pending": 0
     }
   },
   "ungraded_games": [
-    "DET@CAR",
     "ATL@NO"
   ]
 }
