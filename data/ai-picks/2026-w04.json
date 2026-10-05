@@ -5,7 +5,7 @@
   "intro": "Same prompt, four AIs, and us. Entertainment only. Graded on Westgate SuperContest lines.",
   "prompt_note": "Each AI got the same v3 Westgate Week 4 prompt Wed 9/30. Grok later revised after a QB/injury audit; Gemini posted the original chalk sheet. Lines are Westgate SuperContest Week 4.",
   "line_source": "Westgate SuperContest Week 4 card",
-  "score_source": "ESPN NFL scoreboard (https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?week=4&seasontype=2&dates=2026). Only games with status final are stored. Snapshot Sunday Oct 4, 2026 ~1:35 PM PT: PIT@CLE, IND@WAS, NE@BUF, NYJ@CHI, ARI@NYG, DAL@HOU, JAX@CIN, GB@TB, LAR@PHI, TEN@BAL final. MIA@MIN, KC@LV, DEN@SF, LAC@SEA in progress and DET@CAR, ATL@NO scheduled left blank.",
+  "score_source": "ESPN NFL scoreboard (https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?week=4&seasontype=2&dates=2026). Only games with status final are stored. Snapshot Sunday Oct 4, 2026 ~1:35 PM PT: PIT@CLE, IND@WAS, NE@BUF, NYJ@CHI, ARI@NYG, DAL@HOU, JAX@CIN, GB@TB, LAR@PHI, TEN@BAL final. Snapshot Sunday Oct 4, 2026 ~4:59 PM PT: MIA@MIN, KC@LV, DEN@SF, LAC@SEA final. DET@CAR and ATL@NO not final, left blank.",
   "games": [
     {
       "game": "PIT@CLE",
@@ -143,7 +143,12 @@
       "day": "Sun",
       "date": "2026-10-04",
       "westgate": "MIN -10.5",
-      "final": null
+      "final": "MIA 10, MIN 15",
+      "score": {
+        "away": 10,
+        "home": 15,
+        "status": "final"
+      }
     },
     {
       "game": "DEN@SF",
@@ -151,7 +156,12 @@
       "day": "Sun",
       "date": "2026-10-04",
       "westgate": "SF -2.5",
-      "final": null
+      "final": "DEN 14, SF 24",
+      "score": {
+        "away": 14,
+        "home": 24,
+        "status": "final"
+      }
     },
     {
       "game": "KC@LV",
@@ -159,7 +169,12 @@
       "day": "Sun",
       "date": "2026-10-04",
       "westgate": "LV +4.5",
-      "final": null
+      "final": "KC 30, LV 27",
+      "score": {
+        "away": 30,
+        "home": 27,
+        "status": "final"
+      }
     },
     {
       "game": "LAC@SEA",
@@ -167,7 +182,12 @@
       "day": "Sun",
       "date": "2026-10-04",
       "westgate": "SEA -7.5",
-      "final": null
+      "final": "LAC 23, SEA 30",
+      "score": {
+        "away": 23,
+        "home": 30,
+        "status": "final"
+      }
     },
     {
       "game": "DET@CAR",
@@ -459,6 +479,22 @@
     "TEN@BAL": {
       "BAL -11.5": "L",
       "TEN +11.5": "W"
+    },
+    "MIA@MIN": {
+      "MIA +10.5": "W",
+      "MIN -10.5": "L"
+    },
+    "DEN@SF": {
+      "DEN +2.5": "L",
+      "SF -2.5": "W"
+    },
+    "KC@LV": {
+      "KC -4.5": "L",
+      "LV +4.5": "W"
+    },
+    "LAC@SEA": {
+      "LAC +7.5": "W",
+      "SEA -7.5": "L"
     }
   },
   "consensus": [],
@@ -466,90 +502,86 @@
   "grades": {
     "claude": {
       "sides": [
-        7,
-        3,
+        8,
+        6,
         0
       ],
-      "sides_pending": 6,
+      "sides_pending": 2,
       "best_bet_units": 1.5,
       "best_bets_pending": 0,
       "pick5": [
+        3,
         2,
-        1,
         0
       ],
-      "pick5_pending": 2
+      "pick5_pending": 0
     },
     "gemini": {
       "sides": [
-        2,
-        8,
-        0
-      ],
-      "sides_pending": 6,
-      "best_bet_units": -2,
-      "best_bets_pending": 2,
-      "pick5": [
-        0,
         3,
+        11,
         0
       ],
-      "pick5_pending": 2
-    },
-    "grok": {
-      "sides": [
-        1,
-        9,
-        0
-      ],
-      "sides_pending": 6,
-      "best_bet_units": -1.5,
+      "sides_pending": 2,
+      "best_bet_units": -3.5,
       "best_bets_pending": 1,
       "pick5": [
         0,
-        3,
-        0
-      ],
-      "pick5_pending": 2
-    },
-    "chatgpt": {
-      "sides": [
-        6,
         4,
-        0
-      ],
-      "sides_pending": 6,
-      "best_bet_units": 0.75,
-      "best_bets_pending": 0,
-      "pick5": [
-        3,
-        1,
         0
       ],
       "pick5_pending": 1
     },
-    "vector": {
+    "grok": {
+      "sides": [
+        2,
+        12,
+        0
+      ],
+      "sides_pending": 2,
+      "best_bet_units": -2,
+      "best_bets_pending": 0,
+      "pick5": [
+        0,
+        5,
+        0
+      ],
+      "pick5_pending": 0
+    },
+    "chatgpt": {
       "sides": [
         8,
+        6,
+        0
+      ],
+      "sides_pending": 2,
+      "best_bet_units": 0.75,
+      "best_bets_pending": 0,
+      "pick5": [
+        3,
         2,
         0
       ],
-      "sides_pending": 6,
+      "pick5_pending": 0
+    },
+    "vector": {
+      "sides": [
+        10,
+        4,
+        0
+      ],
+      "sides_pending": 2,
       "best_bet_units": 0,
       "best_bets_pending": 1,
       "pick5": [
         2,
-        1,
+        2,
         0
       ],
-      "pick5_pending": 2
+      "pick5_pending": 1
     }
   },
   "ungraded_games": [
-    "MIA@MIN",
-    "DEN@SF",
-    "KC@LV",
-    "LAC@SEA",
     "DET@CAR",
     "ATL@NO"
   ]
