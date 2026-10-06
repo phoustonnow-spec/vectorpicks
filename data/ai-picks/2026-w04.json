@@ -5,7 +5,7 @@
   "intro": "Same prompt, four AIs, and us. Entertainment only. Graded on Westgate SuperContest lines.",
   "prompt_note": "Each AI got the same v3 Westgate Week 4 prompt Wed 9/30. Grok later revised after a QB/injury audit; Gemini posted the original chalk sheet. Lines are Westgate SuperContest Week 4.",
   "line_source": "Westgate SuperContest Week 4 card",
-  "score_source": "ESPN NFL scoreboard (https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?week=4&seasontype=2&dates=2026). Only games with status final are stored. Snapshot Sunday Oct 4, 2026 ~1:35 PM PT: PIT@CLE, IND@WAS, NE@BUF, NYJ@CHI, ARI@NYG, DAL@HOU, JAX@CIN, GB@TB, LAR@PHI, TEN@BAL final. Snapshot Sunday Oct 4, 2026 ~4:59 PM PT: MIA@MIN, KC@LV, DEN@SF, LAC@SEA final. Snapshot Sunday Oct 4, 2026 ~8:43 PM PT: DET@CAR final. ATL@NO not final, left blank.",
+  "score_source": "ESPN NFL scoreboard (https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?week=4&seasontype=2&dates=2026). Only games with status final are stored. Snapshot Sunday Oct 4, 2026 ~1:35 PM PT: PIT@CLE, IND@WAS, NE@BUF, NYJ@CHI, ARI@NYG, DAL@HOU, JAX@CIN, GB@TB, LAR@PHI, TEN@BAL final. Snapshot Sunday Oct 4, 2026 ~4:59 PM PT: MIA@MIN, KC@LV, DEN@SF, LAC@SEA final. Snapshot Sunday Oct 4, 2026 ~8:43 PM PT: DET@CAR final. Snapshot Monday Oct 5, 2026 ~8:40 PM PT: ATL@NO final. Week 4 complete.",
   "games": [
     {
       "game": "PIT@CLE",
@@ -208,7 +208,12 @@
       "day": "Mon",
       "date": "2026-10-05",
       "westgate": "NO -2.5",
-      "final": null
+      "final": "ATL 45, NO 24",
+      "score": {
+        "away": 45,
+        "home": 24,
+        "status": "final"
+      }
     }
   ],
   "ais": [
@@ -504,18 +509,22 @@
     "DET@CAR": {
       "CAR +3.5": "W",
       "DET -3.5": "L"
+    },
+    "ATL@NO": {
+      "ATL +2.5": "W",
+      "NO -2.5": "L"
     }
   },
   "consensus": [],
-  "graded": false,
+  "graded": true,
   "grades": {
     "claude": {
       "sides": [
         9,
-        6,
+        7,
         0
       ],
-      "sides_pending": 1,
+      "sides_pending": 0,
       "best_bet_units": 1.5,
       "best_bets_pending": 0,
       "pick5": [
@@ -527,11 +536,11 @@
     },
     "gemini": {
       "sides": [
-        3,
+        4,
         12,
         0
       ],
-      "sides_pending": 1,
+      "sides_pending": 0,
       "best_bet_units": -6,
       "best_bets_pending": 0,
       "pick5": [
@@ -543,11 +552,11 @@
     },
     "grok": {
       "sides": [
-        2,
+        3,
         13,
         0
       ],
-      "sides_pending": 1,
+      "sides_pending": 0,
       "best_bet_units": -2,
       "best_bets_pending": 0,
       "pick5": [
@@ -560,10 +569,10 @@
     "chatgpt": {
       "sides": [
         9,
-        6,
+        7,
         0
       ],
-      "sides_pending": 1,
+      "sides_pending": 0,
       "best_bet_units": 0.75,
       "best_bets_pending": 0,
       "pick5": [
@@ -576,10 +585,10 @@
     "vector": {
       "sides": [
         11,
-        4,
+        5,
         0
       ],
-      "sides_pending": 1,
+      "sides_pending": 0,
       "best_bet_units": 0.5,
       "best_bets_pending": 0,
       "pick5": [
@@ -590,7 +599,5 @@
       "pick5_pending": 0
     }
   },
-  "ungraded_games": [
-    "ATL@NO"
-  ]
+  "ungraded_games": []
 }
