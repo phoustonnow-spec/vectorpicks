@@ -1719,6 +1719,41 @@ def validate_week5():
     for old in ("CHI \u22123", "DET \u22125.5", "CIN \u22127", "MIN \u22122.5", "IND +2.5", "PHI +7.5"):
         if old in ccard:
             raise SystemExit(f"ChatGPT card still has the old pick {old}")
+    grok_sides = {
+        "TB @ DAL": "TB +8.5",
+        "PHI @ JAX (London)": "JAX \u22127.5",
+        "CHI @ GB": "GB +3",
+        "HOU @ TEN": "HOU \u22127.5",
+        "CIN @ MIA": "CIN \u22127",
+        "LV @ NE": "NE \u22123.5",
+        "MIN @ NO": "MIN \u22122.5",
+        "CLE @ NYJ": "NYJ \u22122.5",
+        "IND @ PIT": "IND +2.5",
+        "NYG @ WAS": "WAS \u22123.5",
+        "DEN @ LAC": "LAC +3.5",
+        "DET @ ARI": "DET \u22125.5",
+        "SF @ SEA": "SF +3",
+        "BAL @ ATL": "ATL \u22123.5",
+        "BUF @ LAR": "LAR \u22123",
+    }
+    for label, side in grok_sides.items():
+        cell = entrant_side(label, "Grok")
+        if side not in cell:
+            raise SystemExit(f"Grok {label} should be {side}, got {cell}")
+    grok_tb = entrant_side("TB @ DAL", "Grok")
+    if "submitted after kickoff" not in grok_tb or "original pick stands" not in grok_tb or "DAL \u22128.5" in grok_tb:
+        raise SystemExit("Grok TB @ DAL must keep TB +8.5 and note that the DAL switch does not count")
+    grok = re.search(r'<div class="panel"><h2>Grok</h2>.*?</div>', ai, re.S)
+    if not grok:
+        raise SystemExit("Grok card missing")
+    gk = grok.group(0)
+    for needle in ("SF +3", "CIN \u22127", "HOU \u22127.5", "LAC +3.5", "GB +3", "TB +8.5", "LAR \u22123",
+                   "2.5U", "2U", "1.5U", "1U", "Tiebreaker: 47", "Grok revised Thu 10/8 7 PM PT"):
+        if needle not in gk:
+            raise SystemExit(f"Grok card missing {needle}")
+    for old in ("CLE +2.5", "MIN \u22122.5", "BUF +3", "3U", "Tiebreaker: 48"):
+        if old in gk:
+            raise SystemExit(f"Grok card still has the old pick {old}")
     if "51.5 (Over)" in ai:
         raise SystemExit("Gemini's old Monday-night total is still on the AI Picks page")
     gem = re.search(r'<div class="panel"><h2>Gemini</h2>.*?</div>', ai, re.S)

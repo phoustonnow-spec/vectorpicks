@@ -218,42 +218,47 @@
     {
       "id": "grok",
       "name": "Grok",
-      "received": "Thu Oct 8, 2026 ~6:33-6:38 PM PT",
+      "received": "Thu Oct 8, 2026 ~6:33-6:38 PM PT. Grok revised Thu 10/8 7 PM PT",
       "sides": {
         "TB@DAL": {
           "pick": "TB +8.5",
-          "after_kickoff": true
+          "after_kickoff": true,
+          "note": "Grok tried to switch to DAL after kickoff; original pick stands."
         },
         "PHI@JAX": "JAX -7.5",
         "CHI@GB": "GB +3",
-        "HOU@TEN": "TEN +7.5",
+        "HOU@TEN": "HOU -7.5",
         "CIN@MIA": "CIN -7",
-        "LV@NE": "LV +3.5",
+        "LV@NE": "NE -3.5",
         "MIN@NO": "MIN -2.5",
-        "CLE@NYJ": "CLE +2.5",
+        "CLE@NYJ": "NYJ -2.5",
         "IND@PIT": "IND +2.5",
         "NYG@WAS": "WAS -3.5",
-        "DEN@LAC": "DEN -3.5",
-        "DET@ARI": "ARI +5.5",
+        "DEN@LAC": "LAC +3.5",
+        "DET@ARI": "DET -5.5",
         "SF@SEA": "SF +3",
-        "BAL@ATL": "BAL +3.5",
-        "BUF@LAR": "BUF +3"
+        "BAL@ATL": "ATL -3.5",
+        "BUF@LAR": "LAR -3"
       },
       "best_bets": [
         {
-          "pick": "GB +3",
-          "units": 3
-        },
-        {
-          "pick": "CLE +2.5",
-          "units": 2
-        },
-        {
           "pick": "SF +3",
+          "units": 2.5
+        },
+        {
+          "pick": "CIN -7",
           "units": 2
         },
         {
-          "pick": "MIN -2.5",
+          "pick": "HOU -7.5",
+          "units": 2
+        },
+        {
+          "pick": "LAC +3.5",
+          "units": 1.5
+        },
+        {
+          "pick": "GB +3",
           "units": 1
         },
         {
@@ -262,13 +267,13 @@
         }
       ],
       "pick5": [
-        "GB +3",
-        "CLE +2.5",
         "SF +3",
-        "MIN -2.5",
-        "BUF +3"
+        "CIN -7",
+        "HOU -7.5",
+        "LAC +3.5",
+        "LAR -3"
       ],
-      "tiebreaker": "48"
+      "tiebreaker": "47"
     },
     {
       "id": "chatgpt",
@@ -420,7 +425,7 @@
       ],
       "sides_pending": 15,
       "best_bet_units": 0,
-      "best_bets_pending": 5,
+      "best_bets_pending": 6,
       "pick5": [
         0,
         0,
