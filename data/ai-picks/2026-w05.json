@@ -273,43 +273,47 @@
     {
       "id": "chatgpt",
       "name": "ChatGPT",
-      "received": "Thu Oct 8, 2026 ~6:33-6:38 PM PT",
+      "received": "Thu Oct 8, 2026 ~6:33-6:38 PM PT. ChatGPT revised Thu 10/8 7 PM PT",
       "sides": {
         "TB@DAL": {
           "pick": "TB +8.5",
           "after_kickoff": true
         },
         "PHI@JAX": "PHI +7.5",
-        "CHI@GB": "CHI -3",
+        "CHI@GB": "GB +3",
         "HOU@TEN": "HOU -7.5",
         "CIN@MIA": "CIN -7",
         "LV@NE": "NE -3.5",
-        "MIN@NO": "MIN -2.5",
+        "MIN@NO": "NO +2.5",
         "CLE@NYJ": "CLE +2.5",
         "IND@PIT": "IND +2.5",
-        "NYG@WAS": "NYG +3.5",
-        "DEN@LAC": "DEN -3.5",
-        "DET@ARI": "DET -5.5",
+        "NYG@WAS": "WAS -3.5",
+        "DEN@LAC": "LAC +3.5",
+        "DET@ARI": "ARI +5.5",
         "SF@SEA": "SF +3",
-        "BAL@ATL": "BAL +3.5",
-        "BUF@LAR": "BUF +3"
+        "BAL@ATL": "ATL -3.5",
+        "BUF@LAR": "LAR -3"
       },
       "best_bets": [
         {
-          "pick": "CIN -7",
+          "pick": "GB +3",
           "units": 2
         },
         {
-          "pick": "MIN -2.5",
+          "pick": "ATL -3.5",
+          "units": 1.5
+        },
+        {
+          "pick": "HOU -7.5",
           "units": 1.5
         }
       ],
       "pick5": [
-        "CIN -7",
-        "MIN -2.5",
-        "DET -5.5",
-        "IND +2.5",
-        "PHI +7.5"
+        "GB +3",
+        "ATL -3.5",
+        "HOU -7.5",
+        "LAC +3.5",
+        "LAR -3"
       ],
       "tiebreaker": "47"
     }
@@ -432,7 +436,7 @@
       ],
       "sides_pending": 15,
       "best_bet_units": 0,
-      "best_bets_pending": 2,
+      "best_bets_pending": 3,
       "pick5": [
         0,
         0,
