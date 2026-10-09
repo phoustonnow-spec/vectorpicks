@@ -2,7 +2,7 @@
   "season": 2026,
   "week": 5,
   "as_of": "Thu Oct 8, 2026, 7:31 AM PT",
-  "update_note": "Locked Thursday Oct 8, 2026, 7:31 AM PT, before Thursday Night Football kickoff. WAS, LAC, and BAL are Provisional, Conditional, and Hold, confirmed Friday/Saturday. TB @ DAL is in progress and left ungraded. KC and CAR are on bye. Lines are the Westgate SuperContest Week 5 card. Entertainment only.",
+  "update_note": "Locked Thursday Oct 8, 2026, 7:31 AM PT, before Thursday Night Football kickoff. Updated Fri 10/9: DEN @ LAC is DEN -3.5, a card side, not a Best Bet. Chargers ruled out LT Joe Alt, G Trevor Penning, G Kayode Awosika, S Derwin James, CB Donte Jackson, and WR Quentin Johnston. WAS and BAL are Provisional and Hold, confirmed Friday/Saturday. TB @ DAL is in progress and left ungraded. KC and CAR are on bye. Lines are the Westgate SuperContest Week 5 card. Entertainment only.",
   "sources": [
     "Vector Week 5 2026 public selections, locked Thu Oct 8, 2026, 7:31 AM PT",
     "Westgate SuperContest Week 5 card"
@@ -24,11 +24,10 @@
     ],
     "flags": [
       "WAS -3.5 — Provisional (QB status Fri)",
-      "LAC +3.5 — Conditional (LAC OL injuries)",
       "BAL +3.5 — Hold (Lamar status)"
     ],
     "passes": [
-      "Card sides, not Best Bets: TEN +7.5, CIN -7, NYJ -2.5, ARI +5.5, SF +3, BUF +3"
+      "Card sides, not Best Bets: TEN +7.5, CIN -7, NYJ -2.5, DEN -3.5, ARI +5.5, SF +3, BUF +3"
     ]
   },
   "games": [
@@ -170,10 +169,10 @@
       "westgate": "LAC +3.5",
       "market": "",
       "our": "LAC +1.0",
-      "gap": 2.5,
-      "tier": "Conditional",
-      "pick": "LAC +3.5",
-      "note": "Conditional (LAC OL injuries). Confirmed Friday/Saturday. Westgate LAC +3.5. Vector line LAC +1.0. Edge 2.5."
+      "gap": -2.5,
+      "tier": "Card",
+      "pick": "DEN -3.5",
+      "note": "Updated Fri 10/9. Card side, not a Best Bet. Chargers ruled out LT Joe Alt, G Trevor Penning, G Kayode Awosika, S Derwin James, CB Donte Jackson, and WR Quentin Johnston. Westgate LAC +3.5. Vector line LAC +1.0."
     },
     {
       "game": "DET@ARI",
