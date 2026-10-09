@@ -1489,6 +1489,8 @@ def build_ai_picks(w, ai_weeks, fname):
                 extra += ' <span class="needs-confirm">needs confirmation</span>'
             if isinstance(raw, dict) and raw.get("after_kickoff"):
                 extra += ' <span class="late-note">submitted after kickoff</span>'
+            if isinstance(raw, dict) and raw.get("note"):
+                extra += f' <span class="late-note">{e(raw["note"])}</span>'
             cells += f'<td data-l="{e(a["name"])}"{attr}>{ai_cell(side, res=mark)}{extra}</td>'
         if vec:
             pick = shown.get(gid)
@@ -1663,7 +1665,7 @@ def validate_week5():
             raise SystemExit(f"Week 5 weekly card missing {needle}")
     for needle in ("ai-picks-2026-w05.html", "ai-picks-2026-w04.html", "ai-picks-2026-w03.html",
                    "submitted after kickoff", "In progress, ungraded",
-                   "DAL \u22128.5", "51.5 (Over)", "WAS \u22123.5", "LAC +3.5", "BAL +3.5"):
+                   "DAL \u22128.5", "Under 47.5", "Gemini revised Thu 10/8 7 PM PT", "WAS \u22123.5", "LAC +3.5", "BAL +3.5"):
         if needle not in ai:
             raise SystemExit(f"Week 5 AI Picks page missing {needle}")
     if "needs confirmation" in ai or "CHI +3" in ai or "DET +5.5" in ai:
@@ -1685,6 +1687,39 @@ def validate_week5():
         raise SystemExit("ChatGPT CHI @ GB must be CHI -3 with no confirmation note")
     if not det or "DET \u22125.5" not in det.group(0) or "needs confirmation" in det.group(0):
         raise SystemExit("ChatGPT DET @ ARI must be DET -5.5 with no confirmation note")
+    if "51.5 (Over)" in ai:
+        raise SystemExit("Gemini's old Monday-night total is still on the AI Picks page")
+    gem = re.search(r'<div class="panel"><h2>Gemini</h2>.*?</div>', ai, re.S)
+    if not gem:
+        raise SystemExit("Gemini card missing")
+    gcard = gem.group(0)
+    for needle in ("SF +3", "NE \u22123.5", "HOU \u22127.5", "LAC +3.5", "JAX \u22127.5",
+                   "3U", "2.5U", "2U", "Under 47.5", "Gemini revised Thu 10/8 7 PM PT"):
+        if needle not in gcard:
+            raise SystemExit(f"Gemini card missing {needle}")
+    for old in ("DET \u22125.5", "CIN \u22127", "MIN \u22122.5", "51.5"):
+        if old in gcard:
+            raise SystemExit(f"Gemini card still has the old pick {old}")
+    def gemini_side(label):
+        row = re.search(rf'<tr><td class="game"><b>{re.escape(label)}</b>.*?</tr>', ai, re.S)
+        cell = re.search(r'<td data-l="Gemini">(.*?)</td>', row.group(0) if row else "", re.S)
+        return cell.group(1) if cell else ""
+    expect_sides = {
+        "TB @ DAL": "TB +8.5",
+        "PHI @ JAX (London)": "JAX \u22127.5",
+        "LV @ NE": "NE \u22123.5",
+        "CLE @ NYJ": "NYJ \u22122.5",
+        "NYG @ WAS": "WAS \u22123.5",
+        "BAL @ ATL": "ATL \u22123.5",
+        "BUF @ LAR": "LAR \u22123",
+    }
+    for label, side in expect_sides.items():
+        cell = gemini_side(label)
+        if side not in cell:
+            raise SystemExit(f"Gemini {label} should be {side}, got {cell}")
+    tb_cell = gemini_side("TB @ DAL")
+    if "original pick stands" not in tb_cell or "DAL \u22128.5" in tb_cell:
+        raise SystemExit("Gemini TB @ DAL must keep TB +8.5 and note that the DAL switch does not count")
     if "Week 4" not in archive_ai or "NYG +1.5" not in archive_ai:
         raise SystemExit("Week 4 AI Picks archive was overwritten")
     if "Week 4" not in archive_card or "NYG +1.5" not in archive_card:
