@@ -1668,8 +1668,8 @@ def validate_week5():
                    "DAL \u22128.5", "Under 47.5", "Gemini revised Thu 10/8 7 PM PT", "WAS \u22123.5", "LAC +3.5", "BAL +3.5"):
         if needle not in ai:
             raise SystemExit(f"Week 5 AI Picks page missing {needle}")
-    if "needs confirmation" in ai or "CHI +3" in ai or "DET +5.5" in ai:
-        raise SystemExit("ChatGPT's corrected CHI and DET sides should not still need confirmation")
+    if "needs confirmation" in ai or "CHI +3" in ai or "CHI \u22123" in ai or "DET +5.5" in ai:
+        raise SystemExit("ChatGPT's old CHI and DET sides should be gone")
     if ">pending<" in ai:
         raise SystemExit("Week 5 AI columns are still pending")
     if "are not in yet" in card:
@@ -1681,12 +1681,44 @@ def validate_week5():
         raise SystemExit("TB @ DAL should mark Gemini, ChatGPT, and Grok as submitted after kickoff")
     if "needs confirmation" in tb.group(0):
         raise SystemExit("TB @ DAL is not one of the lines that needs confirmation")
-    chi = re.search(r'<tr><td class="game"><b>CHI @ GB</b>.*?</tr>', ai, re.S)
-    det = re.search(r'<tr><td class="game"><b>DET @ ARI</b>.*?</tr>', ai, re.S)
-    if not chi or "CHI \u22123" not in chi.group(0) or "needs confirmation" in chi.group(0):
-        raise SystemExit("ChatGPT CHI @ GB must be CHI -3 with no confirmation note")
-    if not det or "DET \u22125.5" not in det.group(0) or "needs confirmation" in det.group(0):
-        raise SystemExit("ChatGPT DET @ ARI must be DET -5.5 with no confirmation note")
+    def entrant_side(label, name):
+        row = re.search(rf'<tr><td class="game"><b>{re.escape(label)}</b>.*?</tr>', ai, re.S)
+        cell = re.search(rf'<td data-l="{re.escape(name)}">(.*?)</td>', row.group(0) if row else "", re.S)
+        return cell.group(1) if cell else ""
+    chatgpt_sides = {
+        "TB @ DAL": "TB +8.5",
+        "PHI @ JAX (London)": "PHI +7.5",
+        "CHI @ GB": "GB +3",
+        "HOU @ TEN": "HOU \u22127.5",
+        "CIN @ MIA": "CIN \u22127",
+        "LV @ NE": "NE \u22123.5",
+        "MIN @ NO": "NO +2.5",
+        "CLE @ NYJ": "CLE +2.5",
+        "IND @ PIT": "IND +2.5",
+        "NYG @ WAS": "WAS \u22123.5",
+        "DEN @ LAC": "LAC +3.5",
+        "DET @ ARI": "ARI +5.5",
+        "SF @ SEA": "SF +3",
+        "BAL @ ATL": "ATL \u22123.5",
+        "BUF @ LAR": "LAR \u22123",
+    }
+    for label, side in chatgpt_sides.items():
+        cell = entrant_side(label, "ChatGPT")
+        if side not in cell:
+            raise SystemExit(f"ChatGPT {label} should be {side}, got {cell}")
+    if "submitted after kickoff" not in entrant_side("TB @ DAL", "ChatGPT"):
+        raise SystemExit("ChatGPT TB @ DAL should still say submitted after kickoff")
+    cgpt = re.search(r'<div class="panel"><h2>ChatGPT</h2>.*?</div>', ai, re.S)
+    if not cgpt:
+        raise SystemExit("ChatGPT card missing")
+    ccard = cgpt.group(0)
+    for needle in ("GB +3", "ATL \u22123.5", "HOU \u22127.5", "LAC +3.5", "LAR \u22123",
+                   "2U", "1.5U", "Tiebreaker: 47", "ChatGPT revised Thu 10/8 7 PM PT"):
+        if needle not in ccard:
+            raise SystemExit(f"ChatGPT card missing {needle}")
+    for old in ("CHI \u22123", "DET \u22125.5", "CIN \u22127", "MIN \u22122.5", "IND +2.5", "PHI +7.5"):
+        if old in ccard:
+            raise SystemExit(f"ChatGPT card still has the old pick {old}")
     if "51.5 (Over)" in ai:
         raise SystemExit("Gemini's old Monday-night total is still on the AI Picks page")
     gem = re.search(r'<div class="panel"><h2>Gemini</h2>.*?</div>', ai, re.S)
