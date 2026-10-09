@@ -185,11 +185,11 @@
       "our_team": "Los Angeles Chargers",
       "our_point": 1.0,
       "our_label": "LAC +1.0",
-      "pick_team": "Los Angeles Chargers",
-      "pick_abbr": "LAC",
-      "pick_line": 3.5,
-      "pick_label": "LAC +3.5",
-      "tier": "Conditional"
+      "pick_team": "Denver Broncos",
+      "pick_abbr": "DEN",
+      "pick_line": -3.5,
+      "pick_label": "DEN -3.5",
+      "tier": "Card"
     },
     {
       "away_team": "Detroit Lions",
