@@ -3,7 +3,7 @@
   "week": 5,
   "as_of": "Thu Oct 8, 2026, 7:31 AM PT",
   "intro": "Same prompt, four AIs, and us. Entertainment only. Graded on Westgate SuperContest lines.",
-  "prompt_note": "Received Thu Oct 8, 2026, ~6:33-6:38 PM PT. Locked Thursday Oct 8, 2026, 7:31 AM PT, before Thursday Night Football kickoff. Claude locked DAL -8.5 before kickoff. Gemini, ChatGPT, and Grok submitted TB @ DAL after kickoff. TB @ DAL is in progress and left ungraded. Updated Fri 10/9: DEN @ LAC is DEN -3.5, a card side, not a Best Bet. Chargers ruled out LT Joe Alt, G Trevor Penning, G Kayode Awosika, S Derwin James, CB Donte Jackson, and WR Quentin Johnston. WAS and BAL are Provisional and Hold, confirmed Friday/Saturday.",
+  "prompt_note": "Received Thu Oct 8, 2026, ~6:33-6:38 PM PT. Locked Thursday Oct 8, 2026, 7:31 AM PT, before Thursday Night Football kickoff. Claude locked DAL -8.5 before kickoff. Gemini, ChatGPT, and Grok submitted TB @ DAL after kickoff. TB @ DAL is in progress and left ungraded. Updated Fri 10/9: NE -3.5 stays the side and is a regular pick, not a Best Bet. Patriots ruled out CB Christian Gonzalez, CB Carlton Davis III, CB Karon Prunty, CB Channing Canada, and WR Mack Hollins. Updated Fri 10/9: Chargers' ruled-out players were mostly already priced in; LAC +3.5 restored as a regular pick. WAS and BAL are Provisional and Hold, confirmed Friday/Saturday.",
   "line_source": "Westgate SuperContest Week 5 card",
   "score_source": "No finals stored. TB @ DAL is in progress and left ungraded.",
   "games": [
@@ -332,14 +332,17 @@
       "CHI@GB": "GB +3",
       "HOU@TEN": "TEN +7.5",
       "CIN@MIA": "CIN -7",
-      "LV@NE": "NE -3.5",
+      "LV@NE": {
+        "pick": "NE -3.5",
+        "note": "Updated Fri 10/9"
+      },
       "MIN@NO": "NO +2.5",
       "CLE@NYJ": "NYJ -2.5",
       "IND@PIT": "IND +2.5",
       "NYG@WAS": "WAS -3.5",
       "DEN@LAC": {
-        "pick": "DEN -3.5",
-        "note": "Updated Fri 10/9"
+        "pick": "LAC +3.5",
+        "note": "Updated Fri 10/9: Chargers' ruled-out players were mostly already priced in; LAC +3.5 restored as a regular pick."
       },
       "DET@ARI": "ARI +5.5",
       "SF@SEA": "SF +3",
@@ -365,11 +368,6 @@
         "pick": "GB +3",
         "game": "CHI@GB",
         "edge": 6.3
-      },
-      {
-        "pick": "NE -3.5",
-        "game": "LV@NE",
-        "edge": 2.2
       },
       {
         "pick": "NO +2.5",
@@ -459,7 +457,7 @@
       ],
       "sides_pending": 15,
       "best_bet_units": 0,
-      "best_bets_pending": 6,
+      "best_bets_pending": 5,
       "pick5": null
     }
   },
