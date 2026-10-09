@@ -1653,25 +1653,29 @@ def validate_week5():
     block_m = re.search(r'<section class="panel week-card">.*?</section>', home, re.S)
     block = block_m.group(0) if block_m else ""
     for needle in ("Week 5", "TB +8.5", "PHI +7.5", "GB +3", "NO +2.5", "IND +2.5",
-                   "Provisional (QB status Fri)", "Hold (Lamar status)",
-                   "Confirmed Friday/Saturday.", "Updated Fri 10/9", "Joe Alt", "DEN -3.5"):
+                   "5 Best Bets", "Provisional (QB status Fri)", "Hold (Lamar status)",
+                   "Confirmed Friday/Saturday.", "Updated Fri 10/9", "Christian Gonzalez",
+                   "already priced in", "LAC +3.5 restored"):
         if needle not in block:
             raise SystemExit(f"Week 5 home card missing {needle}")
-    if "LAC +3.5" in block or "Conditional" in block:
-        raise SystemExit("Week 5 home card still has the LAC conditional pick")
-    if "NE \u22123.5" not in block:
-        raise SystemExit("Week 5 home card missing NE -3.5")
+    if "NE \u22123.5 vs LV" in block or "Conditional" in block or "DEN -2" in block or "Joe Alt" in block:
+        raise SystemExit("Week 5 home card still has the old NE best bet or DEN side")
     for old in ("NYG +1.5 vs ARI", "PHI +3 vs LAR", "CAR +3.5 vs DET"):
         if old in block:
             raise SystemExit(f"Week 4 Best Bet still on the home card: {old}")
     for needle in ("TB +8.5", "PHI +7.5", "DAL \u22126.4", "GB \u22123.3", "BAL \u22121.9",
                    "Provisional", "Hold", "tiebreaker", "Confirmed Friday/Saturday.",
-                   "Updated Fri 10/9", "Joe Alt", "DEN \u22123.5"):
+                   "Updated Fri 10/9", "Christian Gonzalez", "already priced in", "DEN \u22121.5"):
         if needle not in card:
             raise SystemExit(f"Week 5 weekly card missing {needle}")
+    if "Joe Alt" in card or "DEN -2" in card or "LAC +1.0" in card:
+        raise SystemExit("weekly card still has the withdrawn DEN line or inactive list")
     den_row = re.search(r'<tr class="t-card">\s*<td class="game"><b>DEN @ LAC</b>.*?</tr>', card, re.S)
-    if not den_row or "DEN \u22123.5" not in den_row.group(0) or "Conditional" in den_row.group(0) or "tier-bestbet" in den_row.group(0):
-        raise SystemExit("DEN @ LAC must be a card side on DEN -3.5")
+    if not den_row or "LAC +3.5" not in den_row.group(0) or "DEN \u22121.5" not in den_row.group(0) or "Conditional" in den_row.group(0) or "tier-bestbet" in den_row.group(0):
+        raise SystemExit("DEN @ LAC must be a regular LAC +3.5 with Vector line DEN -1.5")
+    ne_row = re.search(r'<tr class="t-card">\s*<td class="game"><b>LV @ NE</b>.*?</tr>', card, re.S)
+    if not ne_row or "NE \u22123.5" not in ne_row.group(0) or "tier-bestbet" in ne_row.group(0) or "Christian Gonzalez" not in ne_row.group(0):
+        raise SystemExit("NE -3.5 must stay the side and leave the Best Bet tier")
     if "Conditional (LAC OL injuries)" in card:
         raise SystemExit("weekly card still lists the LAC conditional flag")
     for needle in ("ai-picks-2026-w05.html", "ai-picks-2026-w04.html", "ai-picks-2026-w03.html",
@@ -1697,8 +1701,11 @@ def validate_week5():
         cell = re.search(rf'<td data-l="{re.escape(name)}"[^>]*>(.*?)</td>', row.group(0) if row else "", re.S)
         return cell.group(1) if cell else ""
     vec_den = entrant_side("DEN @ LAC", "Vector")
-    if "DEN \u22123.5" not in vec_den or "Updated Fri 10/9" not in vec_den or "LAC +3.5" in vec_den or "Conditional" in vec_den or "Best Bet" in vec_den:
-        raise SystemExit(f"Vector DEN @ LAC should be DEN -3.5, updated Fri 10/9, not a best bet: {vec_den}")
+    if "LAC +3.5" not in vec_den or "already priced in" not in vec_den or "DEN \u22123.5" in vec_den or "DEN \u22122" in vec_den or "Conditional" in vec_den or "Best Bet" in vec_den:
+        raise SystemExit(f"Vector DEN @ LAC should be restored LAC +3.5, not a best bet: {vec_den}")
+    vec_ne = entrant_side("LV @ NE", "Vector")
+    if "NE \u22123.5" not in vec_ne or "Updated Fri 10/9" not in vec_ne or "Best Bet" in vec_ne:
+        raise SystemExit(f"Vector NE -3.5 should stay and leave Best Bets: {vec_ne}")
     if "Conditional (LAC OL injuries)" in ai:
         raise SystemExit("AI Picks still lists Vector's LAC conditional flag")
     chatgpt_sides = {
@@ -1818,7 +1825,7 @@ def validate_week5():
         ("PHI", "JAX"): ("PHI +7.5", "Best Bet", "JAX -4.4"),
         ("CHI", "GB"): ("GB +3", "Best Bet", "GB -3.3"),
         ("NYG", "WAS"): ("WAS -3.5", "Provisional", "WAS -5.6"),
-        ("DEN", "LAC"): ("DEN -3.5", "Card", "LAC +1.0"),
+        ("DEN", "LAC"): ("LAC +3.5", "Card", "DEN -1.5"),
         ("BAL", "ATL"): ("BAL +3.5", "Hold", "BAL -1.9"),
         ("SF", "SEA"): ("SF +3", "Card", "SEA -3.4"),
         ("IND", "PIT"): ("IND +2.5", "Best Bet", "PIT -0.9"),

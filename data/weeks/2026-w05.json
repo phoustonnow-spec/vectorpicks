@@ -2,7 +2,7 @@
   "season": 2026,
   "week": 5,
   "as_of": "Thu Oct 8, 2026, 7:31 AM PT",
-  "update_note": "Locked Thursday Oct 8, 2026, 7:31 AM PT, before Thursday Night Football kickoff. Updated Fri 10/9: DEN @ LAC is DEN -3.5, a card side, not a Best Bet. Chargers ruled out LT Joe Alt, G Trevor Penning, G Kayode Awosika, S Derwin James, CB Donte Jackson, and WR Quentin Johnston. WAS and BAL are Provisional and Hold, confirmed Friday/Saturday. TB @ DAL is in progress and left ungraded. KC and CAR are on bye. Lines are the Westgate SuperContest Week 5 card. Entertainment only.",
+  "update_note": "Locked Thursday Oct 8, 2026, 7:31 AM PT, before Thursday Night Football kickoff. Updated Fri 10/9: NE -3.5 stays the side and is a regular pick, not a Best Bet. Patriots ruled out CB Christian Gonzalez, CB Carlton Davis III, CB Karon Prunty, CB Channing Canada, and WR Mack Hollins. Updated Fri 10/9: Chargers' ruled-out players were mostly already priced in; LAC +3.5 restored as a regular pick. WAS and BAL are Provisional and Hold, confirmed Friday/Saturday. TB @ DAL is in progress and left ungraded. KC and CAR are on bye. Lines are the Westgate SuperContest Week 5 card. Entertainment only.",
   "sources": [
     "Vector Week 5 2026 public selections, locked Thu Oct 8, 2026, 7:31 AM PT",
     "Westgate SuperContest Week 5 card"
@@ -15,7 +15,6 @@
       "TB +8.5 vs DAL",
       "PHI +7.5 vs JAX (London)",
       "GB +3 vs CHI",
-      "NE -3.5 vs LV",
       "NO +2.5 vs MIN",
       "IND +2.5 vs PIT"
     ],
@@ -27,7 +26,7 @@
       "BAL +3.5 — Hold (Lamar status)"
     ],
     "passes": [
-      "Card sides, not Best Bets: TEN +7.5, CIN -7, NYJ -2.5, DEN -3.5, ARI +5.5, SF +3, BUF +3"
+      "Card sides, not Best Bets: TEN +7.5, CIN -7, NYJ -2.5, NE -3.5, LAC +3.5, ARI +5.5, SF +3, BUF +3"
     ]
   },
   "games": [
@@ -105,9 +104,9 @@
       "market": "",
       "our": "NE -5.7",
       "gap": 2.2,
-      "tier": "Best Bet",
+      "tier": "Card",
       "pick": "NE -3.5",
-      "note": "Best Bet. Westgate NE -3.5. Vector line NE -5.7. Edge 2.2."
+      "note": "Updated Fri 10/9. Card side, not a Best Bet. Patriots ruled out CB Christian Gonzalez, CB Carlton Davis III, CB Karon Prunty, CB Channing Canada, and WR Mack Hollins. Westgate NE -3.5. Vector line NE -5.7. Edge 2.2."
     },
     {
       "game": "MIN@NO",
@@ -168,11 +167,11 @@
       "date": "2026-10-11",
       "westgate": "LAC +3.5",
       "market": "",
-      "our": "LAC +1.0",
-      "gap": -2.5,
+      "our": "DEN -1.5",
+      "gap": 2.0,
       "tier": "Card",
-      "pick": "DEN -3.5",
-      "note": "Updated Fri 10/9. Card side, not a Best Bet. Chargers ruled out LT Joe Alt, G Trevor Penning, G Kayode Awosika, S Derwin James, CB Donte Jackson, and WR Quentin Johnston. Westgate LAC +3.5. Vector line LAC +1.0."
+      "pick": "LAC +3.5",
+      "note": "Updated Fri 10/9: Chargers' ruled-out players were mostly already priced in; LAC +3.5 restored as a regular pick. Westgate LAC +3.5. Vector line about DEN -1.5."
     },
     {
       "game": "DET@ARI",
