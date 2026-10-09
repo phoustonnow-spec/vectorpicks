@@ -26,7 +26,8 @@ ROOT = os.path.dirname(os.path.abspath(__file__))
 DATA = os.path.join(ROOT, "data")
 OUT = os.path.join(ROOT, "public")
 SHOW_TYPES = ["Tuesday Rankings", "Thursday Picks", "Sunday Update", "Sunday Recap"]
-TIER_CLASS = {"Best Bet": "bestbet", "Lean": "lean", "Card": "card", "Pass": "pass"}
+TIER_CLASS = {"Best Bet": "bestbet", "Lean": "lean", "Card": "card", "Pass": "pass",
+              "Provisional": "provisional", "Conditional": "conditional", "Hold": "hold"}
 e = lambda s: html.escape(str(s), quote=True)
 
 def load(name):
@@ -303,6 +304,8 @@ def build_card(w, tidx, fname):
         pw += f'<tr><td class="rank">{i}</td><td><b>{e(team)}</b></td><td>{minus(f"{h:+.1f}")}</td><td class="{dcls}">{minus(f"{d:+.1f}") if d else "0"}</td><td><b>{minus(f"{a:+.1f}")}</b></td><td class="muted">{e(minus(why))}</td></tr>'
     s = w["summary"]
     li = lambda xs: "".join(f"<li>{e(minus(x))}</li>" for x in xs)
+    flags = s.get("flags") or []
+    flags_html = f'<div class="panel"><h2>Flags</h2><ul class="picks">{li(flags)}</ul><p class="note">Confirmed Friday/Saturday.</p></div>' if flags else ""
     update = f'<p class="note">{e(w["update_note"])}</p>' if w.get("update_note") else ""
     p5_html = pick5_note(w)
     if p5_html:
@@ -319,7 +322,7 @@ def build_card(w, tidx, fname):
 <section class="summary-grid">
 <div class="panel"><h2>{tier_badge('Best Bet')} Best Bets</h2><ul class="picks big">{li(s['best_bets'])}</ul></div>
 <div class="panel"><h2>{tier_badge('Lean')} Leans</h2><ul class="picks">{li(s['leans'])}</ul></div>
-<div class="panel"><h2>{tier_badge('Pass')} Passes</h2><ul class="picks">{li(s['passes'])}</ul></div>
+{flags_html}<div class="panel"><h2>{tier_badge('Pass')} Passes</h2><ul class="picks">{li(s['passes'])}</ul></div>
 </section>
 {p5_html}<section class="panel"><h2>Full card: Market vs Our Spread</h2>
 <p class="note"><b>Westgate</b> = contest line of record (graded here). <b>Market</b> = {e(w['market_source'])}. <b>Gap</b> = points between the Westgate line and Our Spread, toward the card side. {e(w['hfa_note'])}</p>
@@ -471,6 +474,8 @@ def build_home(weeks, rows, tidx, eps, sh):
     p5_html = pick5_note(w)
     if p5_html:
         p5_html += "\n"
+    flags = s.get("flags") or []
+    flags_html = f'<p class="note">Flags: {e(minus("; ".join(str(x) for x in flags)))}. Confirmed Friday/Saturday.</p>\n' if flags else ""
     short_block = (
         f'<section class="panel home-short"><h2>Latest Short</h2>{facade}'
         f'<p class="muted">{e(short_title)}</p>'
@@ -487,7 +492,7 @@ def build_home(weeks, rows, tidx, eps, sh):
 <section class="panel week-card"><div class="wc-head"><h2>Week {w['week']} &middot; {w['season']}</h2><div class="wk-rec"><small>WEEK {w['week']} RECORD</small><b>{wt['rec'][:-2] if wt['P']==0 else wt['rec']}</b></div></div>
 <p class="kicker">{len(s['best_bets'])} Best Bet{'' if len(s['best_bets']) == 1 else 's'}</p><ul class="picks big">{bb}</ul>{cash_html}
 <p class="note">Leans: {e(minus(', '.join(s['leans'])))}.</p>
-{p5_html}{f'<p class="note">{e(w["update_note"])}</p>' if w.get("update_note") else ""}
+{flags_html}{p5_html}{f'<p class="note">{e(w["update_note"])}</p>' if w.get("update_note") else ""}
 <div class="btn-row"><a class="btn" href="card.html">Full card &rarr;</a><a class="btn ghost" href="live.html">Live Board &rarr;</a></div></section>
 {record_box(rows)}
 <section class="panel"><h2>Latest episode</h2>{ep}</section>
@@ -529,7 +534,7 @@ def parse_our(text):
         return None
     return m.group(1), round(float(m.group(2)), 2)
 
-PUBLISHED_TIERS = {"Best Bet", "Lean", "Card"}
+PUBLISHED_TIERS = {"Best Bet", "Lean", "Card", "Provisional", "Conditional", "Hold"}
 
 def published_pick(game, away_abbr, home_abbr):
     """Westgate side we actually publish. Pass and 'No side' stay blank."""
@@ -602,7 +607,7 @@ def build_live(week):
 <section class="panel">
 <p id="live-updated" class="note" hidden></p>
 <div id="live-board" class="table-wrap" aria-live="polite"><p class="muted">Loading lines…</p></div>
-<p class="note">Our Spread is the Week {int(week['week'])} {int(week['season'])} card, restated on the same home-team side as the market number. <b>Gap</b> = Market &minus; Our Spread. A dash means that game has no Our Spread on the card. A pick badge is the published Best Bet, Lean, or Card side at the Westgate line.</p>
+<p class="note">Our Spread is the Week {int(week['week'])} {int(week['season'])} card, restated on the same home-team side as the market number. <b>Gap</b> = Market &minus; Our Spread. A dash means that game has no Our Spread on the card. A pick badge is the published side at the Westgate line (Best Bet, Lean, Card, Provisional, Conditional, or Hold).</p>
 <p class="note">Scores via ESPN; unofficial, may lag.</p>
 <div class="rg"><span class="age">21+</span> <span>Entertainment and opinion only. Not betting advice. Gambling problem? Call <a href="tel:18004262537"><b>1-800-GAMBLER</b></a>.</span></div>
 </section>
@@ -1405,6 +1410,31 @@ def ai_scoreboard(ai_weeks):
     pend_note = f'<p class="note">{" ".join(notes)}</p>' if notes else ""
     return ai_tbl + ref_tbl + pend_note
 
+def card_link_for(w):
+    """Link a week's AI page to that week's card, not whichever card is current."""
+    weeks = globals().get("WEEKS") or []
+    match = next((c for c in weeks if c.get("season") == w.get("season") and int(c.get("week")) == int(w.get("week"))), None)
+    if not match:
+        return ""
+    latest = weeks[-1]
+    current = latest.get("season") == w.get("season") and int(latest.get("week")) == int(w.get("week"))
+    href = "card.html" if current else match["slug"] + ".html"
+    return f' Full numbers on the <a href="{href}">Weekly Card</a>.'
+
+def vector_flag_block(vec, games, shown, res):
+    flag_map = vec.get("flags") if isinstance(vec.get("flags"), dict) else {}
+    items = ""
+    for gid, label in flag_map.items():
+        pk = shown.get(gid)
+        g = games.get(gid)
+        if not pk or not g:
+            continue
+        mark = (res.get(gid) or {}).get(pk)
+        items += pick_li(pk, res=mark, sub=f"{g.get('label') or gid} · {label}")
+    if not items:
+        return ""
+    return f'<div><h3>Flags</h3><ul class="picks">{items}</ul><p class="note">Confirmed Friday/Saturday.</p></div>'
+
 def build_ai_picks(w, ai_weeks, fname):
     ais = w["ais"]
     vec = w.get("vector") or {}
@@ -1422,9 +1452,31 @@ def build_ai_picks(w, ai_weeks, fname):
     for g in w["games"]:
         gid = g["game"]
         final = f'<span class="sub">Final: {e(g["final"])}</span>' if g.get("final") else ""
-        cells = "".join(cell(a["name"], (a.get("sides") or {}).get(gid), gid) for a in ais)
+        if not final and g.get("status_note"):
+            final = f'<span class="sub">{e(g["status_note"])}</span>'
+        cells = ""
+        for a in ais:
+            side = as_pick((a.get("sides") or {}).get(gid))
+            if a.get("pending") and not side:
+                cells += f'<td data-l="{e(a["name"])}" class="muted">pending</td>'
+            else:
+                cells += cell(a["name"], side, gid)
         if vec:
-            cells += cell("Vector", shown.get(gid), gid, "vec-col")
+            pick = shown.get(gid)
+            mark = (res.get(gid) or {}).get(pick) if pick else None
+            cls = " ".join(x for x in ("vec-col", "covered" if mark == "W" else "") if x)
+            attr = f' class="{cls}"' if cls else ""
+            badge = ""
+            if gid in best:
+                badge += " " + tier_badge("Best Bet")
+            flag = (vec.get("flags") or {}).get(gid) if isinstance(vec.get("flags"), dict) else None
+            if flag:
+                short = flag.split()[0]
+                badge += " " + tier_badge(short)
+                rest = flag[len(short):].strip()
+                if rest:
+                    badge += f' <span class="sub">{e(rest)}</span>'
+            cells += f'<td data-l="Vector"{attr}>{ai_cell(pick, res=mark)}{badge}</td>'
         rows += f'<tr><td class="game"><b>{e(g["label"])}</b><span class="sub">{e(g["day"])} {e(g["date"][5:].replace("-", "/"))}{(" &middot; " + e(g["kickoff_pt"])) if g.get("kickoff_pt") else ""}</span>{final}</td><td data-l="Westgate" class="muted">{e(minus(g["westgate"]))}</td>{cells}</tr>'
     head = '<th scope="col">Game</th><th scope="col">Westgate</th>' + "".join(f'<th scope="col">{e(a["name"])}</th>' for a in ais)
     if vec:
@@ -1436,6 +1488,8 @@ def build_ai_picks(w, ai_weeks, fname):
         return None
     cards = ""
     for a in ais:
+        if a.get("pending") and not (a.get("best_bets") or []) and not (a.get("pick5") or []):
+            continue
         bb = "".join(pick_li(b["pick"], res=(res.get(side_gid(a, b["pick"])) or {}).get(b["pick"]), units=b["units"]) for b in a["best_bets"])
         p5 = "".join(pick_li(p, res=(res.get(side_gid(a, p)) or {}).get(p)) for p in a["pick5"])
         stamp = e(a["timing"]) if a.get("timing") else f'Received {e(a.get("received", ""))}'
@@ -1462,15 +1516,19 @@ def build_ai_picks(w, ai_weeks, fname):
             out += pick_li(pk, res=mark, units=bet_units.get(gid) if with_units else None, sub=games[gid]["label"])
         return out
     n_ais = {3: "three", 4: "four", 5: "five"}.get(len(ais), str(len(ais)))
-    card_same_week = any(c.get("season") == w["season"] and int(c.get("week")) == int(w["week"]) for c in (globals().get("WEEKS") or []))
-    card_link = ' Full numbers on the <a href="card.html">Weekly Card</a>.' if card_same_week else ""
-    vec_blurb = f"Vector's own Week {w['week']} card from our model, kept separate from the {n_ais} chatbots.{card_link}"
+    card_link = card_link_for(w)
+    pending_names = [a["name"] for a in ais if a.get("pending") and not (a.get("sides") or {})]
+    if pending_names and len(pending_names) == len(ais):
+        vec_blurb = f"Vector's own Week {w['week']} card from our model. {', '.join(pending_names)} are pending.{card_link}"
+    else:
+        vec_blurb = f"Vector's own Week {w['week']} card from our model, kept separate from the {n_ais} chatbots.{card_link}"
     vec_html = ""
     if vec and leans and not p5_list:
+        flag_html = vector_flag_block(vec, games, shown, res)
         vec_html = f"""<section class="panel vec-block" id="vector"><p class="kicker">Not an AI chatbot entry &middot; our own model</p><h2><span class="g">{e(vec.get('name') or 'Super Agent Vector')}</span></h2>
 <p class="note">{vec_blurb}</p>
 <div class="summary-grid vec-grid"><div><h3>{tier_badge('Best Bet')} Best Bets</h3><ul class="picks big">{vec_li(best)}</ul></div>
-<div><h3>{tier_badge('Lean')} Leans</h3><ul class="picks">{vec_li(leans)}</ul></div></div></section>"""
+<div><h3>{tier_badge('Lean')} Leans</h3><ul class="picks">{vec_li(leans)}</ul></div>{flag_html}</div></section>"""
     elif vec:
         blocks = f'<div><h3>{tier_badge("Best Bet")} Best Bets</h3><ul class="picks big">{vec_li(best, with_units=True)}</ul></div>'
         if leans:
@@ -1482,6 +1540,7 @@ def build_ai_picks(w, ai_weeks, fname):
                 mark = (res.get(gid) or {}).get(p) if gid else None
                 items += pick_li(p, res=mark, sub=(games.get(gid) or {}).get("label") if gid else None)
             blocks += f'<div><h3>Pick 5</h3><ol class="picks">{items}</ol><p class="note">Tiebreaker: {e(vec.get("tiebreaker", ""))}</p></div>'
+        blocks += vector_flag_block(vec, games, shown, res)
         vec_html = f"""<section class="panel vec-block" id="vector"><p class="kicker">Not an AI chatbot entry &middot; our own model</p><h2><span class="g">{e(vec.get('name') or 'Super Agent Vector')}</span></h2>
 <p class="note">{vec_blurb}</p>
 <div class="summary-grid vec-grid">{blocks}</div></section>"""
@@ -1491,6 +1550,8 @@ def build_ai_picks(w, ai_weeks, fname):
         grid_note = f"Each side is graded at the line that entrant listed. Vector is {who}, ours, with a side on every game. Yellow means the side covered. Pushes are not highlighted. Final scores are from ESPN, and games that are not final are not graded."
     else:
         grid_note = f"Each side is graded at the line that entrant listed. Vector is {who}, ours: Best Bets and Leans only, and a dash where we had no side. Yellow means the side covered. Pushes are not highlighted. Final scores are from ESPN, and games that are not final are not graded."
+    if pending_names:
+        grid_note += " " + ", ".join(pending_names) + ": pending."
     cons_block = f'<section class="panel callout"><h2>Consensus</h2><ul class="picks">{cons}</ul></section>\n' if w.get("consensus") else ""
     body = f"""
 <section class="hero hero-sm"><p class="kicker">Week {w['week']} &middot; {w['season']} &middot; AI vs AI</p><h1>AI <span class="g">Picks</span></h1>
@@ -1511,8 +1572,12 @@ def build_ai_picks(w, ai_weeks, fname):
         raise SystemExit(f"{fname}: refused to publish Dr. Bob or WalterFootball / Walt picks")
     archived = fname != "ai-picks.html"
     title = f"AI Picks Week {w['week']} {w['season']}" + (" archive" if archived else "")
-    desc = (f"{'Archived ' if archived else ''}Week {w['week']} {w['season']} NFL picks against the spread from {", ".join(a["name"] for a in ais[:-1])} and {ais[-1]["name"]}, "
-            f"side by side, plus Super Agent Vector's own card. Entertainment only.")
+    if ais and all(a.get("pending") and not (a.get("sides") or {}) for a in ais):
+        desc = (f"{'Archived ' if archived else ''}Week {w['week']} {w['season']} NFL picks against the spread from Super Agent Vector. "
+                f"{', '.join(a['name'] for a in ais)} are pending. Entertainment only.")
+    else:
+        desc = (f"{'Archived ' if archived else ''}Week {w['week']} {w['season']} NFL picks against the spread from {", ".join(a["name"] for a in ais[:-1])} and {ais[-1]["name"]}, "
+                f"side by side, plus Super Agent Vector's own card. Entertainment only.")
     page(fname, title, body, desc=desc, active="ai-picks.html")
 
 # ---------------------------------------------------------------- misc
@@ -1526,6 +1591,70 @@ def build_misc():
     page("404.html", "Page not found", '<section class="hero hero-sm"><h1>404</h1><p class="muted">That page is not on the card. <a href="index.html">Back home</a>.</p></section>',
          desc="That page is not on the Vector Picks card. Go back to the weekly NFL picks.")
     write_manifest()
+
+def validate_week5():
+    """Week 5 card is current, Week 4 stays archived, and TB @ DAL is not graded."""
+    home = open(os.path.join(OUT, "index.html")).read()
+    card = open(os.path.join(OUT, "card.html")).read()
+    ai = open(os.path.join(OUT, "ai-picks.html")).read()
+    archive_ai = open(os.path.join(OUT, "ai-picks-2026-w04.html")).read()
+    archive_card = open(os.path.join(OUT, "card-2026-w04.html")).read()
+    lock = "Locked Thursday Oct 8, 2026, 7:31 AM PT, before Thursday Night Football kickoff."
+    for name, doc in (("home", home), ("card", card), ("ai-picks", ai)):
+        if lock not in doc:
+            raise SystemExit(f"Week 5 lock note missing from {name}")
+    block_m = re.search(r'<section class="panel week-card">.*?</section>', home, re.S)
+    block = block_m.group(0) if block_m else ""
+    for needle in ("Week 5", "TB +8.5", "PHI +7.5", "GB +3", "NO +2.5", "IND +2.5",
+                   "Provisional (QB status Fri)", "Conditional (LAC OL injuries)", "Hold (Lamar status)",
+                   "Confirmed Friday/Saturday."):
+        if needle not in block:
+            raise SystemExit(f"Week 5 home card missing {needle}")
+    if "NE \u22123.5" not in block:
+        raise SystemExit("Week 5 home card missing NE -3.5")
+    for old in ("NYG +1.5 vs ARI", "PHI +3 vs LAR", "CAR +3.5 vs DET"):
+        if old in block:
+            raise SystemExit(f"Week 4 Best Bet still on the home card: {old}")
+    for needle in ("TB +8.5", "PHI +7.5", "DAL \u22126.4", "GB \u22123.3", "BAL \u22121.9",
+                   "Provisional", "Conditional", "Hold", "tiebreaker", "Confirmed Friday/Saturday."):
+        if needle not in card:
+            raise SystemExit(f"Week 5 weekly card missing {needle}")
+    for needle in ("ai-picks-2026-w05.html", "ai-picks-2026-w04.html", "ai-picks-2026-w03.html",
+                   "pending", "In progress, ungraded", "WAS \u22123.5", "LAC +3.5", "BAL +3.5"):
+        if needle not in ai:
+            raise SystemExit(f"Week 5 AI Picks page missing {needle}")
+    tb = re.search(r'<tr><td class="game"><b>TB @ DAL</b>.*?</tr>', ai, re.S)
+    if not tb or "In progress, ungraded" not in tb.group(0) or "Final:" in tb.group(0) or "res-win" in tb.group(0) or "res-loss" in tb.group(0):
+        raise SystemExit("TB @ DAL must stay ungraded on the Week 5 AI Picks page")
+    if "Week 4" not in archive_ai or "NYG +1.5" not in archive_ai:
+        raise SystemExit("Week 4 AI Picks archive was overwritten")
+    if "Week 4" not in archive_card or "NYG +1.5" not in archive_card:
+        raise SystemExit("Week 4 card archive was overwritten")
+    if 'href="card-2026-w04.html"' not in archive_ai:
+        raise SystemExit("Week 4 AI Picks archive should link to the Week 4 card")
+    live = json.load(open(os.path.join(OUT, "live-spreads.json")))
+    if live.get("week") != 5:
+        raise SystemExit(f"live board is Week {live.get('week')}, expected 5")
+    by_mu = {(g["away_abbr"], g["home_abbr"]): g for g in live["games"]}
+    expect = {
+        ("TB", "DAL"): ("TB +8.5", "Best Bet", "DAL -6.4"),
+        ("PHI", "JAX"): ("PHI +7.5", "Best Bet", "JAX -4.4"),
+        ("CHI", "GB"): ("GB +3", "Best Bet", "GB -3.3"),
+        ("NYG", "WAS"): ("WAS -3.5", "Provisional", "WAS -5.6"),
+        ("DEN", "LAC"): ("LAC +3.5", "Conditional", "LAC +1.0"),
+        ("BAL", "ATL"): ("BAL +3.5", "Hold", "BAL -1.9"),
+        ("SF", "SEA"): ("SF +3", "Card", "SEA -3.4"),
+        ("IND", "PIT"): ("IND +2.5", "Best Bet", "PIT -0.9"),
+    }
+    for mu, (label, tier, our) in expect.items():
+        g = by_mu.get(mu)
+        if not g or g.get("pick_label") != label or g.get("tier") != tier or g.get("our_label") != our:
+            raise SystemExit(f"Week 5 live card mismatch for {mu}: {g}")
+    blob = "\n".join((home, card, ai, archive_ai, archive_card))
+    for bad in ("walterfootball", "walter football", "dr. bob", "dr bob", "kevin cole", "unexpected points", "sharp football", "numbers game"):
+        if bad in blob.lower():
+            raise SystemExit(f"third-party handicapper name on a Week 5 page: {bad}")
+    print("OK week 5: current card, Week 4 archived, TB @ DAL ungraded, AI columns pending")
 
 def main():
     global WEEKS, AI_WEEKS
@@ -1578,6 +1707,7 @@ def main():
     if "--validate" in sys.argv:
         validate_feed(os.path.join(OUT, "feed.xml"), expect_items=len(eps))
         validate_live(WEEKS[-1])
+        validate_week5()
         validate_analytics()
         validate_seo()
         test_out = os.path.join(ROOT, "tests", "feed.test.xml")

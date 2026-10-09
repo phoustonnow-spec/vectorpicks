@@ -1,0 +1,238 @@
+{
+  "season": 2026,
+  "week": 5,
+  "as_of": "Thu Oct 8, 2026, 7:31 AM PT",
+  "update_note": "Locked Thursday Oct 8, 2026, 7:31 AM PT, before Thursday Night Football kickoff. WAS, LAC, and BAL are Provisional, Conditional, and Hold, confirmed Friday/Saturday. TB @ DAL is in progress and left ungraded. KC and CAR are on bye. Lines are the Westgate SuperContest Week 5 card. Entertainment only.",
+  "sources": [
+    "Vector Week 5 2026 public selections, locked Thu Oct 8, 2026, 7:31 AM PT",
+    "Westgate SuperContest Week 5 card"
+  ],
+  "line_source": "Westgate SuperContest Week 5 card",
+  "market_source": "no separate market table this week (blank, not invented)",
+  "hfa_note": "Our Spread is Vector's line. Gap is Vector's edge in points toward the card side. BAL @ ATL is stored as BAL -1.9 (the sheet lists ATL +1.9, home-team convention). SF @ SEA has no points edge; the sheet marks that edge as the tiebreaker.",
+  "summary": {
+    "best_bets": [
+      "TB +8.5 vs DAL",
+      "PHI +7.5 vs JAX (London)",
+      "GB +3 vs CHI",
+      "NE -3.5 vs LV",
+      "NO +2.5 vs MIN",
+      "IND +2.5 vs PIT"
+    ],
+    "leans": [
+      "No leans this week"
+    ],
+    "flags": [
+      "WAS -3.5 — Provisional (QB status Fri)",
+      "LAC +3.5 — Conditional (LAC OL injuries)",
+      "BAL +3.5 — Hold (Lamar status)"
+    ],
+    "passes": [
+      "Card sides, not Best Bets: TEN +7.5, CIN -7, NYJ -2.5, ARI +5.5, SF +3, BUF +3"
+    ]
+  },
+  "games": [
+    {
+      "game": "TB@DAL",
+      "label": "TB @ DAL",
+      "day": "Thu",
+      "date": "2026-10-08",
+      "westgate": "DAL -8.5",
+      "market": "",
+      "our": "DAL -6.4",
+      "gap": 2.1,
+      "tier": "Best Bet",
+      "pick": "TB +8.5",
+      "note": "Best Bet. Westgate DAL -8.5. Vector line DAL -6.4. Edge 2.1. In progress, left ungraded."
+    },
+    {
+      "game": "PHI@JAX",
+      "label": "PHI @ JAX (London)",
+      "day": "Sun",
+      "date": "2026-10-11",
+      "westgate": "JAX -7.5",
+      "market": "",
+      "our": "JAX -4.4",
+      "gap": 3.1,
+      "tier": "Best Bet",
+      "pick": "PHI +7.5",
+      "note": "Best Bet. Westgate JAX -7.5. Vector line JAX -4.4. Edge 3.1."
+    },
+    {
+      "game": "CHI@GB",
+      "label": "CHI @ GB",
+      "day": "Sun",
+      "date": "2026-10-11",
+      "westgate": "GB +3",
+      "market": "",
+      "our": "GB -3.3",
+      "gap": 6.3,
+      "tier": "Best Bet",
+      "pick": "GB +3",
+      "note": "Best Bet. Westgate GB +3. Vector line GB -3.3. Edge 6.3."
+    },
+    {
+      "game": "HOU@TEN",
+      "label": "HOU @ TEN",
+      "day": "Sun",
+      "date": "2026-10-11",
+      "westgate": "TEN +7.5",
+      "market": "",
+      "our": "TEN +7.3",
+      "gap": 0.2,
+      "tier": "Card",
+      "pick": "TEN +7.5",
+      "note": "Card side, not a Best Bet. Westgate TEN +7.5. Vector line TEN +7.3. Edge 0.2."
+    },
+    {
+      "game": "CIN@MIA",
+      "label": "CIN @ MIA",
+      "day": "Sun",
+      "date": "2026-10-11",
+      "westgate": "CIN -7",
+      "market": "",
+      "our": "CIN -7.6",
+      "gap": 0.6,
+      "tier": "Card",
+      "pick": "CIN -7",
+      "note": "Card side, not a Best Bet. Westgate CIN -7. Vector line CIN -7.6. Edge 0.6."
+    },
+    {
+      "game": "LV@NE",
+      "label": "LV @ NE",
+      "day": "Sun",
+      "date": "2026-10-11",
+      "westgate": "NE -3.5",
+      "market": "",
+      "our": "NE -5.7",
+      "gap": 2.2,
+      "tier": "Best Bet",
+      "pick": "NE -3.5",
+      "note": "Best Bet. Westgate NE -3.5. Vector line NE -5.7. Edge 2.2."
+    },
+    {
+      "game": "MIN@NO",
+      "label": "MIN @ NO",
+      "day": "Sun",
+      "date": "2026-10-11",
+      "westgate": "NO +2.5",
+      "market": "",
+      "our": "NO -0.1",
+      "gap": 2.6,
+      "tier": "Best Bet",
+      "pick": "NO +2.5",
+      "note": "Best Bet. Westgate NO +2.5. Vector line NO -0.1. Edge 2.6."
+    },
+    {
+      "game": "CLE@NYJ",
+      "label": "CLE @ NYJ",
+      "day": "Sun",
+      "date": "2026-10-11",
+      "westgate": "NYJ -2.5",
+      "market": "",
+      "our": "NYJ -3.3",
+      "gap": 0.8,
+      "tier": "Card",
+      "pick": "NYJ -2.5",
+      "note": "Card side, not a Best Bet. Westgate NYJ -2.5. Vector line NYJ -3.3. Edge 0.8."
+    },
+    {
+      "game": "IND@PIT",
+      "label": "IND @ PIT",
+      "day": "Sun",
+      "date": "2026-10-11",
+      "westgate": "PIT -2.5",
+      "market": "",
+      "our": "PIT -0.9",
+      "gap": 1.6,
+      "tier": "Best Bet",
+      "pick": "IND +2.5",
+      "note": "Best Bet. Westgate PIT -2.5. Vector line PIT -0.9. Edge 1.6."
+    },
+    {
+      "game": "NYG@WAS",
+      "label": "NYG @ WAS",
+      "day": "Sun",
+      "date": "2026-10-11",
+      "westgate": "WAS -3.5",
+      "market": "",
+      "our": "WAS -5.6",
+      "gap": 2.1,
+      "tier": "Provisional",
+      "pick": "WAS -3.5",
+      "note": "Provisional (QB status Fri). Confirmed Friday/Saturday. Westgate WAS -3.5. Vector line WAS -5.6. Edge 2.1."
+    },
+    {
+      "game": "DEN@LAC",
+      "label": "DEN @ LAC",
+      "day": "Sun",
+      "date": "2026-10-11",
+      "westgate": "LAC +3.5",
+      "market": "",
+      "our": "LAC +1.0",
+      "gap": 2.5,
+      "tier": "Conditional",
+      "pick": "LAC +3.5",
+      "note": "Conditional (LAC OL injuries). Confirmed Friday/Saturday. Westgate LAC +3.5. Vector line LAC +1.0. Edge 2.5."
+    },
+    {
+      "game": "DET@ARI",
+      "label": "DET @ ARI",
+      "day": "Sun",
+      "date": "2026-10-11",
+      "westgate": "ARI +5.5",
+      "market": "",
+      "our": "ARI +4.1",
+      "gap": 1.4,
+      "tier": "Card",
+      "pick": "ARI +5.5",
+      "note": "Card side, not a Best Bet. Westgate ARI +5.5. Vector line ARI +4.1. Edge 1.4."
+    },
+    {
+      "game": "SF@SEA",
+      "label": "SF @ SEA",
+      "day": "Sun",
+      "date": "2026-10-11",
+      "westgate": "SEA -3",
+      "market": "",
+      "our": "SEA -3.4",
+      "gap": null,
+      "tier": "Card",
+      "pick": "SF +3",
+      "note": "Card side, not a Best Bet. Westgate SEA -3. Vector line SEA -3.4. Edge listed as tiebreaker."
+    },
+    {
+      "game": "BAL@ATL",
+      "label": "BAL @ ATL",
+      "day": "Sun",
+      "date": "2026-10-11",
+      "westgate": "BAL +3.5",
+      "market": "",
+      "our": "BAL -1.9",
+      "gap": 5.4,
+      "tier": "Hold",
+      "pick": "BAL +3.5",
+      "note": "Hold (Lamar status). Confirmed Friday/Saturday. Westgate BAL +3.5. Vector line BAL -1.9 (the sheet lists ATL +1.9, home-team convention). Edge 5.4."
+    },
+    {
+      "game": "BUF@LAR",
+      "label": "BUF @ LAR",
+      "day": "Mon",
+      "date": "2026-10-12",
+      "westgate": "LAR -3",
+      "market": "",
+      "our": "LAR -1.7",
+      "gap": 1.3,
+      "tier": "Card",
+      "pick": "BUF +3",
+      "note": "Card side, not a Best Bet. Westgate LAR -3. Vector line LAR -1.7. Edge 1.3."
+    }
+  ],
+  "missing": [
+    "No separate market table this week, so that column is blank.",
+    "Claude, Gemini, Grok, and ChatGPT are not in yet. Those columns are pending on AI Picks.",
+    "KC and CAR are on bye.",
+    "No pick 5 or tiebreaker total was on the Week 5 sheet. SF @ SEA's edge is marked tiebreaker, not a points number.",
+    "Ticket vs handle splits: not used this week (blank, not invented)."
+  ]
+}
