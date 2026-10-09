@@ -1662,10 +1662,12 @@ def validate_week5():
         if needle not in card:
             raise SystemExit(f"Week 5 weekly card missing {needle}")
     for needle in ("ai-picks-2026-w05.html", "ai-picks-2026-w04.html", "ai-picks-2026-w03.html",
-                   "needs confirmation", "submitted after kickoff", "In progress, ungraded",
-                   "CHI +3", "DET +5.5", "DAL \u22128.5", "51.5 (Over)", "WAS \u22123.5", "LAC +3.5", "BAL +3.5"):
+                   "submitted after kickoff", "In progress, ungraded",
+                   "DAL \u22128.5", "51.5 (Over)", "WAS \u22123.5", "LAC +3.5", "BAL +3.5"):
         if needle not in ai:
             raise SystemExit(f"Week 5 AI Picks page missing {needle}")
+    if "needs confirmation" in ai or "CHI +3" in ai or "DET +5.5" in ai:
+        raise SystemExit("ChatGPT's corrected CHI and DET sides should not still need confirmation")
     if ">pending<" in ai:
         raise SystemExit("Week 5 AI columns are still pending")
     if "are not in yet" in card:
@@ -1679,10 +1681,10 @@ def validate_week5():
         raise SystemExit("TB @ DAL is not one of the lines that needs confirmation")
     chi = re.search(r'<tr><td class="game"><b>CHI @ GB</b>.*?</tr>', ai, re.S)
     det = re.search(r'<tr><td class="game"><b>DET @ ARI</b>.*?</tr>', ai, re.S)
-    if not chi or chi.group(0).count("needs confirmation") != 1 or "CHI +3" not in chi.group(0):
-        raise SystemExit("ChatGPT CHI +3 must show as needs confirmation")
-    if not det or det.group(0).count("needs confirmation") != 1 or "DET +5.5" not in det.group(0):
-        raise SystemExit("ChatGPT DET +5.5 must show as needs confirmation")
+    if not chi or "CHI \u22123" not in chi.group(0) or "needs confirmation" in chi.group(0):
+        raise SystemExit("ChatGPT CHI @ GB must be CHI -3 with no confirmation note")
+    if not det or "DET \u22125.5" not in det.group(0) or "needs confirmation" in det.group(0):
+        raise SystemExit("ChatGPT DET @ ARI must be DET -5.5 with no confirmation note")
     if "Week 4" not in archive_ai or "NYG +1.5" not in archive_ai:
         raise SystemExit("Week 4 AI Picks archive was overwritten")
     if "Week 4" not in archive_card or "NYG +1.5" not in archive_card:
