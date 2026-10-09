@@ -2,8 +2,8 @@
   "season": 2026,
   "week": 5,
   "as_of": "Thu Oct 8, 2026, 7:31 AM PT",
-  "intro": "Vector's Week 5 sides are locked. Claude, Gemini, Grok, and ChatGPT are pending. Entertainment only. Graded on Westgate SuperContest lines.",
-  "prompt_note": "Locked Thursday Oct 8, 2026, 7:31 AM PT, before Thursday Night Football kickoff. WAS, LAC, and BAL are Provisional, Conditional, and Hold. Confirmed Friday/Saturday. TB @ DAL is in progress and left ungraded.",
+  "intro": "Same prompt, four AIs, and us. Entertainment only. Graded on Westgate SuperContest lines.",
+  "prompt_note": "Received Thu Oct 8, 2026, ~6:33-6:38 PM PT. Locked Thursday Oct 8, 2026, 7:31 AM PT, before Thursday Night Football kickoff. Claude locked DAL -8.5 before kickoff. Gemini, ChatGPT, and Grok submitted TB @ DAL after kickoff. ChatGPT's CHI +3 and DET +5.5 are not on the Westgate card and need confirmation, so they are not graded. TB @ DAL is in progress and left ungraded. WAS, LAC, and BAL are Provisional, Conditional, and Hold, confirmed Friday/Saturday.",
   "line_source": "Westgate SuperContest Week 5 card",
   "score_source": "No finals stored. TB @ DAL is in progress and left ungraded.",
   "games": [
@@ -118,38 +118,210 @@
     {
       "id": "claude",
       "name": "Claude",
-      "pending": true,
-      "received": "pending",
-      "sides": {},
-      "best_bets": [],
-      "pick5": []
+      "received": "Thu Oct 8, 2026 ~6:33-6:38 PM PT",
+      "sides": {
+        "TB@DAL": "DAL -8.5",
+        "PHI@JAX": "PHI +7.5",
+        "CHI@GB": "GB +3",
+        "HOU@TEN": "TEN +7.5",
+        "CIN@MIA": "CIN -7",
+        "LV@NE": "NE -3.5",
+        "MIN@NO": "NO +2.5",
+        "CLE@NYJ": "NYJ -2.5",
+        "IND@PIT": "IND +2.5",
+        "NYG@WAS": "WAS -3.5",
+        "DEN@LAC": "LAC +3.5",
+        "DET@ARI": "DET -5.5",
+        "SF@SEA": "SF +3",
+        "BAL@ATL": "BAL +3.5",
+        "BUF@LAR": "BUF +3"
+      },
+      "best_bets": [
+        {
+          "pick": "NE -3.5",
+          "units": 2
+        },
+        {
+          "pick": "GB +3",
+          "units": 2
+        },
+        {
+          "pick": "SF +3",
+          "units": 1
+        },
+        {
+          "pick": "LAC +3.5",
+          "units": 1
+        },
+        {
+          "pick": "BAL +3.5",
+          "units": 1
+        }
+      ],
+      "pick5": [
+        "NE -3.5",
+        "GB +3",
+        "SF +3",
+        "LAC +3.5",
+        "BAL +3.5"
+      ],
+      "tiebreaker": "47"
     },
     {
       "id": "gemini",
       "name": "Gemini",
-      "pending": true,
-      "received": "pending",
-      "sides": {},
-      "best_bets": [],
-      "pick5": []
+      "received": "Thu Oct 8, 2026 ~6:33-6:38 PM PT",
+      "sides": {
+        "TB@DAL": {
+          "pick": "TB +8.5",
+          "after_kickoff": true
+        },
+        "PHI@JAX": "PHI +7.5",
+        "CHI@GB": "GB +3",
+        "HOU@TEN": "HOU -7.5",
+        "CIN@MIA": "CIN -7",
+        "LV@NE": "LV +3.5",
+        "MIN@NO": "MIN -2.5",
+        "CLE@NYJ": "CLE +2.5",
+        "IND@PIT": "PIT -2.5",
+        "NYG@WAS": "NYG +3.5",
+        "DEN@LAC": "LAC +3.5",
+        "DET@ARI": "DET -5.5",
+        "SF@SEA": "SF +3",
+        "BAL@ATL": "BAL +3.5",
+        "BUF@LAR": "BUF +3"
+      },
+      "best_bets": [
+        {
+          "pick": "DET -5.5",
+          "units": 3
+        },
+        {
+          "pick": "CIN -7",
+          "units": 2
+        },
+        {
+          "pick": "MIN -2.5",
+          "units": 1.5
+        }
+      ],
+      "pick5": [
+        "DET -5.5",
+        "CIN -7",
+        "MIN -2.5",
+        "HOU -7.5",
+        "BUF +3"
+      ],
+      "tiebreaker": "51.5 (Over)"
     },
     {
       "id": "grok",
       "name": "Grok",
-      "pending": true,
-      "received": "pending",
-      "sides": {},
-      "best_bets": [],
-      "pick5": []
+      "received": "Thu Oct 8, 2026 ~6:33-6:38 PM PT",
+      "sides": {
+        "TB@DAL": {
+          "pick": "TB +8.5",
+          "after_kickoff": true
+        },
+        "PHI@JAX": "JAX -7.5",
+        "CHI@GB": "GB +3",
+        "HOU@TEN": "TEN +7.5",
+        "CIN@MIA": "CIN -7",
+        "LV@NE": "LV +3.5",
+        "MIN@NO": "MIN -2.5",
+        "CLE@NYJ": "CLE +2.5",
+        "IND@PIT": "IND +2.5",
+        "NYG@WAS": "WAS -3.5",
+        "DEN@LAC": "DEN -3.5",
+        "DET@ARI": "ARI +5.5",
+        "SF@SEA": "SF +3",
+        "BAL@ATL": "BAL +3.5",
+        "BUF@LAR": "BUF +3"
+      },
+      "best_bets": [
+        {
+          "pick": "GB +3",
+          "units": 3
+        },
+        {
+          "pick": "CLE +2.5",
+          "units": 2
+        },
+        {
+          "pick": "SF +3",
+          "units": 2
+        },
+        {
+          "pick": "MIN -2.5",
+          "units": 1
+        },
+        {
+          "pick": "TB +8.5",
+          "units": 1
+        }
+      ],
+      "pick5": [
+        "GB +3",
+        "CLE +2.5",
+        "SF +3",
+        "MIN -2.5",
+        "BUF +3"
+      ],
+      "tiebreaker": "48"
     },
     {
       "id": "chatgpt",
       "name": "ChatGPT",
-      "pending": true,
-      "received": "pending",
-      "sides": {},
-      "best_bets": [],
-      "pick5": []
+      "received": "Thu Oct 8, 2026 ~6:33-6:38 PM PT",
+      "sides": {
+        "TB@DAL": {
+          "pick": "TB +8.5",
+          "after_kickoff": true
+        },
+        "PHI@JAX": "PHI +7.5",
+        "CHI@GB": {
+          "pick": "CHI +3",
+          "needs_confirmation": true
+        },
+        "HOU@TEN": "HOU -7.5",
+        "CIN@MIA": "CIN -7",
+        "LV@NE": "NE -3.5",
+        "MIN@NO": "MIN -2.5",
+        "CLE@NYJ": "CLE +2.5",
+        "IND@PIT": "IND +2.5",
+        "NYG@WAS": "NYG +3.5",
+        "DEN@LAC": "DEN -3.5",
+        "DET@ARI": {
+          "pick": "DET +5.5",
+          "needs_confirmation": true
+        },
+        "SF@SEA": "SF +3",
+        "BAL@ATL": "BAL +3.5",
+        "BUF@LAR": "BUF +3"
+      },
+      "best_bets": [
+        {
+          "pick": "CIN -7",
+          "units": 2
+        },
+        {
+          "pick": "MIN -2.5",
+          "units": 1.5
+        },
+        {
+          "pick": "DET +5.5",
+          "units": 1.5,
+          "needs_confirmation": true
+        }
+      ],
+      "pick5": [
+        "CIN -7",
+        "MIN -2.5",
+        "DET +5.5",
+        "IND +2.5",
+        "PHI +7.5"
+      ],
+      "tiebreaker": "47"
     }
   ],
   "vector": {
@@ -220,15 +392,15 @@
         0,
         0
       ],
-      "sides_pending": 0,
+      "sides_pending": 15,
       "best_bet_units": 0,
-      "best_bets_pending": 0,
+      "best_bets_pending": 5,
       "pick5": [
         0,
         0,
         0
       ],
-      "pick5_pending": 0
+      "pick5_pending": 5
     },
     "gemini": {
       "sides": [
@@ -236,15 +408,15 @@
         0,
         0
       ],
-      "sides_pending": 0,
+      "sides_pending": 15,
       "best_bet_units": 0,
-      "best_bets_pending": 0,
+      "best_bets_pending": 3,
       "pick5": [
         0,
         0,
         0
       ],
-      "pick5_pending": 0
+      "pick5_pending": 5
     },
     "grok": {
       "sides": [
@@ -252,15 +424,15 @@
         0,
         0
       ],
-      "sides_pending": 0,
+      "sides_pending": 15,
       "best_bet_units": 0,
-      "best_bets_pending": 0,
+      "best_bets_pending": 5,
       "pick5": [
         0,
         0,
         0
       ],
-      "pick5_pending": 0
+      "pick5_pending": 5
     },
     "chatgpt": {
       "sides": [
@@ -268,15 +440,15 @@
         0,
         0
       ],
-      "sides_pending": 0,
+      "sides_pending": 15,
       "best_bet_units": 0,
-      "best_bets_pending": 0,
+      "best_bets_pending": 3,
       "pick5": [
         0,
         0,
         0
       ],
-      "pick5_pending": 0
+      "pick5_pending": 5
     },
     "vector": {
       "sides": [

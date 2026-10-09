@@ -1218,13 +1218,32 @@ def regrade_ai_week(w):
     def add(gid, pick):
         if gid in games and isinstance(pick, str) and pick.strip():
             picks.setdefault(gid, set()).add(pick.strip())
+    def side_pick(raw):
+        return as_pick(raw)
+    def hold_pick(raw):
+        return isinstance(raw, dict) and raw.get("needs_confirmation")
     for a in w.get("ais") or []:
-        for gid, pick in (a.get("sides") or {}).items():
+        held = set()
+        for gid, raw in (a.get("sides") or {}).items():
+            pick = side_pick(raw)
+            if hold_pick(raw):
+                if pick:
+                    held.add(pick)
+                continue
             add(gid, pick)
+        def gid_for(pick):
+            if pick in held:
+                return None
+            for gid, raw in (a.get("sides") or {}).items():
+                if side_pick(raw) == pick and not hold_pick(raw):
+                    return gid
+            return None
         for b in a.get("best_bets") or []:
-            add(next((gid for gid, pk in (a.get("sides") or {}).items() if pk == b.get("pick")), None), b.get("pick"))
+            if b.get("needs_confirmation"):
+                continue
+            add(gid_for(b.get("pick")), b.get("pick"))
         for pick in a.get("pick5") or []:
-            add(next((gid for gid, pk in (a.get("sides") or {}).items() if pk == pick), None), pick)
+            add(gid_for(pick), pick)
     for gid, pick in {**best, **leans, **shown}.items():
         add(gid, pick)
     results = {}
@@ -1242,12 +1261,12 @@ def regrade_ai_week(w):
         return (results.get(gid) or {}).get(pick)
     def side_gid(a, pick):
         for gid, pk in (a.get("sides") or {}).items():
-            if pk == pick:
+            if as_pick(pk) == pick:
                 return gid
         return None
     grades = {}
     for a in w.get("ais") or []:
-        side_marks = [mark_of(gid, pick) for gid, pick in (a.get("sides") or {}).items()]
+        side_marks = [mark_of(gid, as_pick(raw)) for gid, raw in (a.get("sides") or {}).items()]
         sides, sides_pending = tally_marks(side_marks)
         units = 0.0
         bb_marks = []
@@ -1456,11 +1475,21 @@ def build_ai_picks(w, ai_weeks, fname):
             final = f'<span class="sub">{e(g["status_note"])}</span>'
         cells = ""
         for a in ais:
-            side = as_pick((a.get("sides") or {}).get(gid))
+            raw = (a.get("sides") or {}).get(gid)
+            side = as_pick(raw)
             if a.get("pending") and not side:
                 cells += f'<td data-l="{e(a["name"])}" class="muted">pending</td>'
-            else:
-                cells += cell(a["name"], side, gid)
+                continue
+            held = isinstance(raw, dict) and raw.get("needs_confirmation")
+            mark = None if held else ((res.get(gid) or {}).get(side) if side else None)
+            cls = "covered" if mark == "W" else ""
+            attr = f' class="{cls}"' if cls else ""
+            extra = ""
+            if held:
+                extra += ' <span class="needs-confirm">needs confirmation</span>'
+            if isinstance(raw, dict) and raw.get("after_kickoff"):
+                extra += ' <span class="late-note">submitted after kickoff</span>'
+            cells += f'<td data-l="{e(a["name"])}"{attr}>{ai_cell(side, res=mark)}{extra}</td>'
         if vec:
             pick = shown.get(gid)
             mark = (res.get(gid) or {}).get(pick) if pick else None
@@ -1483,15 +1512,28 @@ def build_ai_picks(w, ai_weeks, fname):
         head += '<th scope="col">Vector<span class="sub">ours</span></th>'
     def side_gid(a, pick):
         for gid, pk in (a.get("sides") or {}).items():
-            if pk == pick:
+            if as_pick(pk) == pick:
                 return gid
         return None
+    def needs_confirmation(a, pick):
+        for raw in (a.get("sides") or {}).values():
+            if isinstance(raw, dict) and raw.get("needs_confirmation") and as_pick(raw) == pick:
+                return True
+        return False
     cards = ""
     for a in ais:
         if a.get("pending") and not (a.get("best_bets") or []) and not (a.get("pick5") or []):
             continue
-        bb = "".join(pick_li(b["pick"], res=(res.get(side_gid(a, b["pick"])) or {}).get(b["pick"]), units=b["units"]) for b in a["best_bets"])
-        p5 = "".join(pick_li(p, res=(res.get(side_gid(a, p)) or {}).get(p)) for p in a["pick5"])
+        bb = ""
+        for b in a["best_bets"]:
+            held = b.get("needs_confirmation") or needs_confirmation(a, b.get("pick"))
+            mark = None if held else (res.get(side_gid(a, b["pick"])) or {}).get(b["pick"])
+            bb += pick_li(b["pick"], res=mark, units=b["units"], sub="needs confirmation" if held else None)
+        p5 = ""
+        for p in a["pick5"]:
+            held = needs_confirmation(a, p)
+            mark = None if held else (res.get(side_gid(a, p)) or {}).get(p)
+            p5 += pick_li(p, res=mark, sub="needs confirmation" if held else None)
         stamp = e(a["timing"]) if a.get("timing") else f'Received {e(a.get("received", ""))}'
         cards += f'<div class="panel"><h2>{e(a["name"])}</h2><p class="sub">{stamp}</p><h3>Best bets</h3><ul class="picks big">{bb}</ul><h3>Pick 5</h3><ol class="picks">{p5}</ol><p class="note">Tiebreaker: {e(a.get("tiebreaker", ""))}</p></div>'
     if vec:
@@ -1620,12 +1662,27 @@ def validate_week5():
         if needle not in card:
             raise SystemExit(f"Week 5 weekly card missing {needle}")
     for needle in ("ai-picks-2026-w05.html", "ai-picks-2026-w04.html", "ai-picks-2026-w03.html",
-                   "pending", "In progress, ungraded", "WAS \u22123.5", "LAC +3.5", "BAL +3.5"):
+                   "needs confirmation", "submitted after kickoff", "In progress, ungraded",
+                   "CHI +3", "DET +5.5", "DAL \u22128.5", "51.5 (Over)", "WAS \u22123.5", "LAC +3.5", "BAL +3.5"):
         if needle not in ai:
             raise SystemExit(f"Week 5 AI Picks page missing {needle}")
+    if ">pending<" in ai:
+        raise SystemExit("Week 5 AI columns are still pending")
+    if "are not in yet" in card:
+        raise SystemExit("weekly card still says the AI columns are not in")
     tb = re.search(r'<tr><td class="game"><b>TB @ DAL</b>.*?</tr>', ai, re.S)
     if not tb or "In progress, ungraded" not in tb.group(0) or "Final:" in tb.group(0) or "res-win" in tb.group(0) or "res-loss" in tb.group(0):
         raise SystemExit("TB @ DAL must stay ungraded on the Week 5 AI Picks page")
+    if tb.group(0).count("submitted after kickoff") != 3:
+        raise SystemExit("TB @ DAL should mark Gemini, ChatGPT, and Grok as submitted after kickoff")
+    if "needs confirmation" in tb.group(0):
+        raise SystemExit("TB @ DAL is not one of the lines that needs confirmation")
+    chi = re.search(r'<tr><td class="game"><b>CHI @ GB</b>.*?</tr>', ai, re.S)
+    det = re.search(r'<tr><td class="game"><b>DET @ ARI</b>.*?</tr>', ai, re.S)
+    if not chi or chi.group(0).count("needs confirmation") != 1 or "CHI +3" not in chi.group(0):
+        raise SystemExit("ChatGPT CHI +3 must show as needs confirmation")
+    if not det or det.group(0).count("needs confirmation") != 1 or "DET +5.5" not in det.group(0):
+        raise SystemExit("ChatGPT DET +5.5 must show as needs confirmation")
     if "Week 4" not in archive_ai or "NYG +1.5" not in archive_ai:
         raise SystemExit("Week 4 AI Picks archive was overwritten")
     if "Week 4" not in archive_card or "NYG +1.5" not in archive_card:
@@ -1654,7 +1711,7 @@ def validate_week5():
     for bad in ("walterfootball", "walter football", "dr. bob", "dr bob", "kevin cole", "unexpected points", "sharp football", "numbers game"):
         if bad in blob.lower():
             raise SystemExit(f"third-party handicapper name on a Week 5 page: {bad}")
-    print("OK week 5: current card, Week 4 archived, TB @ DAL ungraded, AI columns pending")
+    print("OK week 5: current card, Week 4 archived, TB @ DAL ungraded, AI columns filled")
 
 def main():
     global WEEKS, AI_WEEKS

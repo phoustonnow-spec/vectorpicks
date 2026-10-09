@@ -52,6 +52,8 @@ ul.picks.big li{font-family:Anton;font-weight:400;font-size:1.9rem;border:0;padd
 .how ol{padding-left:1.2rem}.how li{margin:.25rem 0}
 .tier{display:inline-block;font-family:Montserrat;font-weight:800;font-size:.7rem;text-transform:uppercase;letter-spacing:.04em;padding:.18rem .5rem;border-radius:999px;white-space:nowrap}
 .tier-bestbet{background:var(--green);color:var(--navy)}.tier-lean{background:var(--blue);color:#fff}.tier-card{background:#475569;color:#fff}.tier-pass{background:var(--amber);color:var(--navy)}.tier-provisional{background:#38bdf8;color:var(--navy)}.tier-conditional{background:#c4b5fd;color:var(--navy)}.tier-hold{background:#fb7185;color:#fff}
+.needs-confirm{display:inline-block;margin-left:.3rem;font-size:.68rem;font-weight:800;letter-spacing:.03em;text-transform:uppercase;color:var(--navy);background:var(--gold);border-radius:999px;padding:.1rem .4rem;vertical-align:middle}
+.late-note{display:inline;margin-left:.3rem;font-size:.72rem;font-weight:700;color:var(--gold)}
 .res{font-weight:800;font-size:.72rem;padding:.12rem .45rem;border-radius:6px;white-space:nowrap}
 .res-win{background:var(--green);color:var(--navy)}.res-loss{background:var(--red);color:#fff}.res-push{background:var(--grey);color:var(--navy)}.res-pend{background:transparent;color:var(--grey);border:1px solid var(--dim)}
 .sub{display:block;font-size:.72rem;color:var(--grey);font-weight:600}
