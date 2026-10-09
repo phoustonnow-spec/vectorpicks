@@ -3,7 +3,7 @@
   "week": 5,
   "as_of": "Thu Oct 8, 2026, 7:31 AM PT",
   "intro": "Same prompt, four AIs, and us. Entertainment only. Graded on Westgate SuperContest lines.",
-  "prompt_note": "Received Thu Oct 8, 2026, ~6:33-6:38 PM PT. Locked Thursday Oct 8, 2026, 7:31 AM PT, before Thursday Night Football kickoff. Claude locked DAL -8.5 before kickoff. Gemini, ChatGPT, and Grok submitted TB @ DAL after kickoff. ChatGPT's CHI +3 and DET +5.5 are not on the Westgate card and need confirmation, so they are not graded. TB @ DAL is in progress and left ungraded. WAS, LAC, and BAL are Provisional, Conditional, and Hold, confirmed Friday/Saturday.",
+  "prompt_note": "Received Thu Oct 8, 2026, ~6:33-6:38 PM PT. Locked Thursday Oct 8, 2026, 7:31 AM PT, before Thursday Night Football kickoff. Claude locked DAL -8.5 before kickoff. Gemini, ChatGPT, and Grok submitted TB @ DAL after kickoff. TB @ DAL is in progress and left ungraded. WAS, LAC, and BAL are Provisional, Conditional, and Hold, confirmed Friday/Saturday.",
   "line_source": "Westgate SuperContest Week 5 card",
   "score_source": "No finals stored. TB @ DAL is in progress and left ungraded.",
   "games": [
@@ -279,10 +279,7 @@
           "after_kickoff": true
         },
         "PHI@JAX": "PHI +7.5",
-        "CHI@GB": {
-          "pick": "CHI +3",
-          "needs_confirmation": true
-        },
+        "CHI@GB": "CHI -3",
         "HOU@TEN": "HOU -7.5",
         "CIN@MIA": "CIN -7",
         "LV@NE": "NE -3.5",
@@ -291,10 +288,7 @@
         "IND@PIT": "IND +2.5",
         "NYG@WAS": "NYG +3.5",
         "DEN@LAC": "DEN -3.5",
-        "DET@ARI": {
-          "pick": "DET +5.5",
-          "needs_confirmation": true
-        },
+        "DET@ARI": "DET -5.5",
         "SF@SEA": "SF +3",
         "BAL@ATL": "BAL +3.5",
         "BUF@LAR": "BUF +3"
@@ -307,17 +301,12 @@
         {
           "pick": "MIN -2.5",
           "units": 1.5
-        },
-        {
-          "pick": "DET +5.5",
-          "units": 1.5,
-          "needs_confirmation": true
         }
       ],
       "pick5": [
         "CIN -7",
         "MIN -2.5",
-        "DET +5.5",
+        "DET -5.5",
         "IND +2.5",
         "PHI +7.5"
       ],
@@ -442,7 +431,7 @@
       ],
       "sides_pending": 15,
       "best_bet_units": 0,
-      "best_bets_pending": 3,
+      "best_bets_pending": 2,
       "pick5": [
         0,
         0,
