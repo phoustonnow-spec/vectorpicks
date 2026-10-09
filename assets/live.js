@@ -209,7 +209,7 @@
     return "Lines updated " + when + " PT \u00b7 refreshes about every 4 hours";
   }
 
-  var PUBLISHED = { "Best Bet": 1, Lean: 1, Card: 1 };
+  var PUBLISHED = { "Best Bet": 1, Lean: 1, Card: 1, Provisional: 1, Conditional: 1, Hold: 1 };
   var SCORE_POLL_LIVE = 60000;
   var SCORE_POLL_IDLE = 600000;
 

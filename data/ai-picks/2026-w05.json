@@ -1,0 +1,311 @@
+{
+  "season": 2026,
+  "week": 5,
+  "as_of": "Thu Oct 8, 2026, 7:31 AM PT",
+  "intro": "Vector's Week 5 sides are locked. Claude, Gemini, Grok, and ChatGPT are pending. Entertainment only. Graded on Westgate SuperContest lines.",
+  "prompt_note": "Locked Thursday Oct 8, 2026, 7:31 AM PT, before Thursday Night Football kickoff. WAS, LAC, and BAL are Provisional, Conditional, and Hold. Confirmed Friday/Saturday. TB @ DAL is in progress and left ungraded.",
+  "line_source": "Westgate SuperContest Week 5 card",
+  "score_source": "No finals stored. TB @ DAL is in progress and left ungraded.",
+  "games": [
+    {
+      "game": "TB@DAL",
+      "label": "TB @ DAL",
+      "day": "Thu",
+      "date": "2026-10-08",
+      "westgate": "DAL -8.5",
+      "status_note": "In progress, ungraded"
+    },
+    {
+      "game": "PHI@JAX",
+      "label": "PHI @ JAX (London)",
+      "day": "Sun",
+      "date": "2026-10-11",
+      "westgate": "JAX -7.5"
+    },
+    {
+      "game": "CHI@GB",
+      "label": "CHI @ GB",
+      "day": "Sun",
+      "date": "2026-10-11",
+      "westgate": "GB +3"
+    },
+    {
+      "game": "HOU@TEN",
+      "label": "HOU @ TEN",
+      "day": "Sun",
+      "date": "2026-10-11",
+      "westgate": "TEN +7.5"
+    },
+    {
+      "game": "CIN@MIA",
+      "label": "CIN @ MIA",
+      "day": "Sun",
+      "date": "2026-10-11",
+      "westgate": "CIN -7"
+    },
+    {
+      "game": "LV@NE",
+      "label": "LV @ NE",
+      "day": "Sun",
+      "date": "2026-10-11",
+      "westgate": "NE -3.5"
+    },
+    {
+      "game": "MIN@NO",
+      "label": "MIN @ NO",
+      "day": "Sun",
+      "date": "2026-10-11",
+      "westgate": "NO +2.5"
+    },
+    {
+      "game": "CLE@NYJ",
+      "label": "CLE @ NYJ",
+      "day": "Sun",
+      "date": "2026-10-11",
+      "westgate": "NYJ -2.5"
+    },
+    {
+      "game": "IND@PIT",
+      "label": "IND @ PIT",
+      "day": "Sun",
+      "date": "2026-10-11",
+      "westgate": "PIT -2.5"
+    },
+    {
+      "game": "NYG@WAS",
+      "label": "NYG @ WAS",
+      "day": "Sun",
+      "date": "2026-10-11",
+      "westgate": "WAS -3.5"
+    },
+    {
+      "game": "DEN@LAC",
+      "label": "DEN @ LAC",
+      "day": "Sun",
+      "date": "2026-10-11",
+      "westgate": "LAC +3.5"
+    },
+    {
+      "game": "DET@ARI",
+      "label": "DET @ ARI",
+      "day": "Sun",
+      "date": "2026-10-11",
+      "westgate": "ARI +5.5"
+    },
+    {
+      "game": "SF@SEA",
+      "label": "SF @ SEA",
+      "day": "Sun",
+      "date": "2026-10-11",
+      "westgate": "SEA -3"
+    },
+    {
+      "game": "BAL@ATL",
+      "label": "BAL @ ATL",
+      "day": "Sun",
+      "date": "2026-10-11",
+      "westgate": "BAL +3.5"
+    },
+    {
+      "game": "BUF@LAR",
+      "label": "BUF @ LAR",
+      "day": "Mon",
+      "date": "2026-10-12",
+      "westgate": "LAR -3"
+    }
+  ],
+  "ais": [
+    {
+      "id": "claude",
+      "name": "Claude",
+      "pending": true,
+      "received": "pending",
+      "sides": {},
+      "best_bets": [],
+      "pick5": []
+    },
+    {
+      "id": "gemini",
+      "name": "Gemini",
+      "pending": true,
+      "received": "pending",
+      "sides": {},
+      "best_bets": [],
+      "pick5": []
+    },
+    {
+      "id": "grok",
+      "name": "Grok",
+      "pending": true,
+      "received": "pending",
+      "sides": {},
+      "best_bets": [],
+      "pick5": []
+    },
+    {
+      "id": "chatgpt",
+      "name": "ChatGPT",
+      "pending": true,
+      "received": "pending",
+      "sides": {},
+      "best_bets": [],
+      "pick5": []
+    }
+  ],
+  "vector": {
+    "name": "Super Agent Vector",
+    "received": "Thu Oct 8, 2026, 7:31 AM PT",
+    "sides": {
+      "TB@DAL": "TB +8.5",
+      "PHI@JAX": "PHI +7.5",
+      "CHI@GB": "GB +3",
+      "HOU@TEN": "TEN +7.5",
+      "CIN@MIA": "CIN -7",
+      "LV@NE": "NE -3.5",
+      "MIN@NO": "NO +2.5",
+      "CLE@NYJ": "NYJ -2.5",
+      "IND@PIT": "IND +2.5",
+      "NYG@WAS": "WAS -3.5",
+      "DEN@LAC": "LAC +3.5",
+      "DET@ARI": "ARI +5.5",
+      "SF@SEA": "SF +3",
+      "BAL@ATL": "BAL +3.5",
+      "BUF@LAR": "BUF +3"
+    },
+    "flags": {
+      "NYG@WAS": "Provisional (QB status Fri)",
+      "DEN@LAC": "Conditional (LAC OL injuries)",
+      "BAL@ATL": "Hold (Lamar status)"
+    },
+    "best_bets": [
+      {
+        "pick": "TB +8.5",
+        "game": "TB@DAL",
+        "edge": 2.1
+      },
+      {
+        "pick": "PHI +7.5",
+        "game": "PHI@JAX",
+        "edge": 3.1
+      },
+      {
+        "pick": "GB +3",
+        "game": "CHI@GB",
+        "edge": 6.3
+      },
+      {
+        "pick": "NE -3.5",
+        "game": "LV@NE",
+        "edge": 2.2
+      },
+      {
+        "pick": "NO +2.5",
+        "game": "MIN@NO",
+        "edge": 2.6
+      },
+      {
+        "pick": "IND +2.5",
+        "game": "IND@PIT",
+        "edge": 1.6
+      }
+    ],
+    "leans": null
+  },
+  "consensus": [],
+  "results": {},
+  "grades": {
+    "claude": {
+      "sides": [
+        0,
+        0,
+        0
+      ],
+      "sides_pending": 0,
+      "best_bet_units": 0,
+      "best_bets_pending": 0,
+      "pick5": [
+        0,
+        0,
+        0
+      ],
+      "pick5_pending": 0
+    },
+    "gemini": {
+      "sides": [
+        0,
+        0,
+        0
+      ],
+      "sides_pending": 0,
+      "best_bet_units": 0,
+      "best_bets_pending": 0,
+      "pick5": [
+        0,
+        0,
+        0
+      ],
+      "pick5_pending": 0
+    },
+    "grok": {
+      "sides": [
+        0,
+        0,
+        0
+      ],
+      "sides_pending": 0,
+      "best_bet_units": 0,
+      "best_bets_pending": 0,
+      "pick5": [
+        0,
+        0,
+        0
+      ],
+      "pick5_pending": 0
+    },
+    "chatgpt": {
+      "sides": [
+        0,
+        0,
+        0
+      ],
+      "sides_pending": 0,
+      "best_bet_units": 0,
+      "best_bets_pending": 0,
+      "pick5": [
+        0,
+        0,
+        0
+      ],
+      "pick5_pending": 0
+    },
+    "vector": {
+      "sides": [
+        0,
+        0,
+        0
+      ],
+      "sides_pending": 15,
+      "best_bet_units": 0,
+      "best_bets_pending": 6,
+      "pick5": null
+    }
+  },
+  "ungraded_games": [
+    "TB@DAL",
+    "PHI@JAX",
+    "CHI@GB",
+    "HOU@TEN",
+    "CIN@MIA",
+    "LV@NE",
+    "MIN@NO",
+    "CLE@NYJ",
+    "IND@PIT",
+    "NYG@WAS",
+    "DEN@LAC",
+    "DET@ARI",
+    "SF@SEA",
+    "BAL@ATL",
+    "BUF@LAR"
+  ],
+  "graded": false
+}
