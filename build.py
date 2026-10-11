@@ -1640,7 +1640,7 @@ def build_misc():
     write_manifest()
 
 def validate_week5():
-    """Week 5 card is current, Week 4 stays archived, and TB @ DAL is not graded."""
+    """Week 5 card is current, Week 4 stays archived, and finished games are graded."""
     home = open(os.path.join(OUT, "index.html")).read()
     card = open(os.path.join(OUT, "card.html")).read()
     ai = open(os.path.join(OUT, "ai-picks.html")).read()
@@ -1679,23 +1679,104 @@ def validate_week5():
     if "Conditional (LAC OL injuries)" in card:
         raise SystemExit("weekly card still lists the LAC conditional flag")
     for needle in ("ai-picks-2026-w05.html", "ai-picks-2026-w04.html", "ai-picks-2026-w03.html",
-                   "submitted after kickoff", "In progress, ungraded",
+                   "submitted after kickoff", "Final: TB 24, DAL 16", "Running Week 5 records",
                    "DAL \u22128.5", "Under 47.5", "Gemini revised Thu 10/8 7 PM PT", "WAS \u22123.5", "LAC +3.5", "BAL +3.5"):
         if needle not in ai:
             raise SystemExit(f"Week 5 AI Picks page missing {needle}")
+    if "In progress, ungraded" in ai or "left ungraded" in ai:
+        raise SystemExit("Week 5 AI Picks still says a finished game is ungraded")
     if "needs confirmation" in ai or "CHI +3" in ai or "CHI \u22123" in ai or "DET +5.5" in ai:
         raise SystemExit("ChatGPT's old CHI and DET sides should be gone")
     if ">pending<" in ai:
         raise SystemExit("Week 5 AI columns are still pending")
     if "are not in yet" in card:
         raise SystemExit("weekly card still says the AI columns are not in")
-    tb = re.search(r'<tr><td class="game"><b>TB @ DAL</b>.*?</tr>', ai, re.S)
-    if not tb or "In progress, ungraded" not in tb.group(0) or "Final:" in tb.group(0) or "res-win" in tb.group(0) or "res-loss" in tb.group(0):
-        raise SystemExit("TB @ DAL must stay ungraded on the Week 5 AI Picks page")
-    if tb.group(0).count("submitted after kickoff") != 3:
+    rows_by_label = {}
+    for row in re.findall(r'<tr><td class="game"><b>(.*?)</b>(.*?)</tr>', re.search(r'<table class="rec-table ai-grid">.*?</table>', ai, re.S).group(0), re.S):
+        rows_by_label[row[0]] = row[0] + row[1]
+    def row_mark(label, name):
+        row = rows_by_label.get(label, "")
+        cell = re.search(rf'<td data-l="{re.escape(name)}"[^>]*>(.*?)</td>', row, re.S)
+        html_cell = cell.group(1) if cell else ""
+        marks = [m for m, token in (("W", "res-win"), ("L", "res-loss"), ("P", "res-push")) if token in html_cell]
+        return marks[0] if len(marks) == 1 else (None if not marks else "multi")
+    expected = {
+        "TB @ DAL": ("Final: TB 24, DAL 16", {"Claude": "L", "Gemini": "W", "Grok": "W", "ChatGPT": "W", "Vector": "W"}),
+        "PHI @ JAX (London)": ("Final: PHI 17, JAX 19", {"Claude": "W", "Gemini": "L", "Grok": "L", "ChatGPT": "W", "Vector": "W"}),
+        "CHI @ GB": ("Final: CHI 7, GB 31", {"Claude": "W", "Gemini": "W", "Grok": "W", "ChatGPT": "W", "Vector": "W"}),
+        "HOU @ TEN": ("Final: HOU 26, TEN 3", {"Claude": "L", "Gemini": "W", "Grok": "W", "ChatGPT": "W", "Vector": "L"}),
+        "CIN @ MIA": ("Final: CIN 31, MIA 24", {"Claude": "P", "Gemini": "P", "Grok": "P", "ChatGPT": "P", "Vector": "P"}),
+        "LV @ NE": ("Final: LV 17, NE 45", {"Claude": "W", "Gemini": "W", "Grok": "W", "ChatGPT": "W", "Vector": "W"}),
+        "MIN @ NO": ("Final: MIN 23, NO 13", {"Claude": "L", "Gemini": "W", "Grok": "W", "ChatGPT": "L", "Vector": "L"}),
+        "CLE @ NYJ": ("Final: CLE 12, NYJ 17", {"Claude": "W", "Gemini": "W", "Grok": "W", "ChatGPT": "L", "Vector": "W"}),
+        "IND @ PIT": ("Final: IND 22, PIT 34", {"Claude": "L", "Gemini": "W", "Grok": "L", "ChatGPT": "L", "Vector": "L"}),
+        "NYG @ WAS": ("Final: NYG 27, WAS 27", {"Claude": "L", "Gemini": "L", "Grok": "L", "ChatGPT": "L", "Vector": "L"}),
+    }
+    pending_labels = ["DEN @ LAC", "DET @ ARI", "SF @ SEA", "BAL @ ATL", "BUF @ LAR"]
+    totals = {name: {"W": 0, "L": 0, "P": 0} for name in ("Claude", "Gemini", "Grok", "ChatGPT", "Vector")}
+    for label, (final, marks) in expected.items():
+        row = rows_by_label.get(label, "")
+        if final not in row:
+            raise SystemExit(f"{label} missing {final}")
+        for name, want in marks.items():
+            got = row_mark(label, name)
+            if got != want:
+                raise SystemExit(f"{name} {label} graded {got}, expected {want}")
+            totals[name][want] += 1
+    want_records = {
+        "Vector": (5, 4, 1),
+        "Claude": (4, 5, 1),
+        "ChatGPT": (5, 4, 1),
+        "Gemini": (7, 2, 1),
+        "Grok": (6, 3, 1),
+    }
+    for name, (w, l, p) in want_records.items():
+        got = totals[name]
+        if (got["W"], got["L"], got["P"]) != (w, l, p):
+            raise SystemExit(f"{name} Week 5 record {got['W']}-{got['L']}-{got['P']}, expected {w}-{l}-{p}")
+    for label in pending_labels:
+        row = rows_by_label.get(label, "")
+        if ">Pending<" not in row and "Pending" not in row:
+            raise SystemExit(f"{label} should be marked pending")
+        if "Final:" in row or "res-win" in row or "res-loss" in row or "res-push" in row:
+            raise SystemExit(f"{label} should stay ungraded")
+    tb = rows_by_label.get("TB @ DAL", "")
+    if tb.count("submitted after kickoff") != 3:
         raise SystemExit("TB @ DAL should mark Gemini, ChatGPT, and Grok as submitted after kickoff")
-    if "needs confirmation" in tb.group(0):
+    if "needs confirmation" in tb:
         raise SystemExit("TB @ DAL is not one of the lines that needs confirmation")
+    vec_best = re.search(r'id="vector">.*?<h3><span class="tier tier-bestbet">Best Bet</span> Best Bets</h3><ul class="picks big">(.*?)</ul>', ai, re.S)
+    if not vec_best:
+        raise SystemExit("Vector best bets missing on AI Picks")
+    best_html = vec_best.group(1)
+    for needle, res in (("TB +8.5", "res-win"), ("PHI +7.5", "res-win"), ("GB +3", "res-win"), ("NO +2.5", "res-loss"), ("IND +2.5", "res-loss")):
+        item = re.search(rf'<li[^>]*>{re.escape(needle)}.*?</li>', best_html, re.S)
+        if not item or res not in item.group(0):
+            raise SystemExit(f"Vector best bet {needle} missing {res}")
+    if "NE" in best_html or "LAC" in best_html:
+        raise SystemExit("NE and LAC are not Vector best bets")
+    card_expect = {
+        "TB @ DAL": ("res-win", "TB 24, DAL 16"),
+        "PHI @ JAX (London)": ("res-win", "PHI 17, JAX 19"),
+        "CHI @ GB": ("res-win", "CHI 7, GB 31"),
+        "HOU @ TEN": ("res-loss", "HOU 26, TEN 3"),
+        "CIN @ MIA": ("res-push", "CIN 31, MIA 24"),
+        "LV @ NE": ("res-win", "LV 17, NE 45"),
+        "MIN @ NO": ("res-loss", "MIN 23, NO 13"),
+        "CLE @ NYJ": ("res-win", "CLE 12, NYJ 17"),
+        "IND @ PIT": ("res-loss", "IND 22, PIT 34"),
+        "NYG @ WAS": ("res-loss", "NYG 27, WAS 27"),
+    }
+    for label, (res, score) in card_expect.items():
+        row = re.search(rf'<td class="game"><b>{re.escape(label)}</b>.*?</tr>', card, re.S)
+        if not row or res not in row.group(0) or score not in row.group(0):
+            raise SystemExit(f"weekly card missing {label} {res} {score}")
+    for label in pending_labels:
+        row = re.search(rf'<td class="game"><b>{re.escape(label)}</b>.*?</tr>', card, re.S)
+        if not row or "PENDING" not in row.group(0) or "res-win" in row.group(0) or "res-loss" in row.group(0) or "res-push" in row.group(0):
+            raise SystemExit(f"weekly card should leave {label} pending")
+    if "5-4-1" not in block or "Best Bets 3-2" not in block:
+        raise SystemExit("home Week 5 record should be 5-4-1 with Best Bets 3-2")
     def entrant_side(label, name):
         row = re.search(rf'<tr><td class="game"><b>{re.escape(label)}</b>.*?</tr>', ai, re.S)
         cell = re.search(rf'<td data-l="{re.escape(name)}"[^>]*>(.*?)</td>', row.group(0) if row else "", re.S)
@@ -1792,7 +1873,7 @@ def validate_week5():
             raise SystemExit(f"Gemini card still has the old pick {old}")
     def gemini_side(label):
         row = re.search(rf'<tr><td class="game"><b>{re.escape(label)}</b>.*?</tr>', ai, re.S)
-        cell = re.search(r'<td data-l="Gemini">(.*?)</td>', row.group(0) if row else "", re.S)
+        cell = re.search(r'<td data-l="Gemini"[^>]*>(.*?)</td>', row.group(0) if row else "", re.S)
         return cell.group(1) if cell else ""
     expect_sides = {
         "TB @ DAL": "TB +8.5",
@@ -1838,7 +1919,7 @@ def validate_week5():
     for bad in ("walterfootball", "walter football", "dr. bob", "dr bob", "kevin cole", "unexpected points", "sharp football", "numbers game"):
         if bad in blob.lower():
             raise SystemExit(f"third-party handicapper name on a Week 5 page: {bad}")
-    print("OK week 5: current card, Week 4 archived, TB @ DAL ungraded, AI columns filled")
+    print("OK week 5: current card, Week 4 archived, finished games graded, five games pending")
 
 def main():
     global WEEKS, AI_WEEKS
