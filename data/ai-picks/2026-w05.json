@@ -3,9 +3,9 @@
   "week": 5,
   "as_of": "Thu Oct 8, 2026, 7:31 AM PT",
   "intro": "Same prompt, four AIs, and us. Entertainment only. Graded on Westgate SuperContest lines.",
-  "prompt_note": "Received Thu Oct 8, 2026, ~6:33-6:38 PM PT. Locked Thursday Oct 8, 2026, 7:31 AM PT, before Thursday Night Football kickoff. Claude locked DAL -8.5 before kickoff. Gemini, ChatGPT, and Grok submitted TB @ DAL after kickoff. TB @ DAL is in progress and left ungraded. Updated Fri 10/9: NE -3.5 stays the side and is a regular pick, not a Best Bet. Patriots ruled out CB Christian Gonzalez, CB Carlton Davis III, CB Karon Prunty, CB Channing Canada, and WR Mack Hollins. Updated Fri 10/9: Chargers' ruled-out players were mostly already priced in; LAC +3.5 restored as a regular pick. WAS and BAL are Provisional and Hold, confirmed Friday/Saturday.",
+  "prompt_note": "Received Thu Oct 8, 2026, ~6:33-6:38 PM PT. Locked Thursday Oct 8, 2026, 7:31 AM PT, before Thursday Night Football kickoff. Claude locked DAL -8.5 before kickoff. Gemini, ChatGPT, and Grok submitted TB @ DAL after kickoff. Finished games are graded at the Westgate line. Running Week 5 records: Vector 5-4-1; Vector best bets 3-2 (TB W, PHI W, GB W, NO L, IND L; LAC pending; NE is not a Best Bet); Claude 4-5-1; ChatGPT 5-4-1; Gemini 7-2-1; Grok 6-3-1. DEN @ LAC, DET @ ARI, SF @ SEA, BAL @ ATL, and BUF @ LAR are pending. Updated Fri 10/9: NE -3.5 stays the side and is a regular pick, not a Best Bet. Patriots ruled out CB Christian Gonzalez, CB Carlton Davis III, CB Karon Prunty, CB Channing Canada, and WR Mack Hollins. Updated Fri 10/9: Chargers' ruled-out players were mostly already priced in; LAC +3.5 restored as a regular pick. WAS and BAL are Provisional and Hold, confirmed Friday/Saturday.",
   "line_source": "Westgate SuperContest Week 5 card",
-  "score_source": "No finals stored. TB @ DAL is in progress and left ungraded.",
+  "score_source": "Final scores for completed Week 5 games, graded at the Westgate line already on this page. Pending: DEN @ LAC, DET @ ARI, SF @ SEA, BAL @ ATL, BUF @ LAR.",
   "games": [
     {
       "game": "TB@DAL",
@@ -13,105 +13,169 @@
       "day": "Thu",
       "date": "2026-10-08",
       "westgate": "DAL -8.5",
-      "status_note": "In progress, ungraded"
+      "score": {
+        "away": 24,
+        "home": 16,
+        "status": "final"
+      },
+      "final": "TB 24, DAL 16"
     },
     {
       "game": "PHI@JAX",
       "label": "PHI @ JAX (London)",
       "day": "Sun",
       "date": "2026-10-11",
-      "westgate": "JAX -7.5"
+      "westgate": "JAX -7.5",
+      "score": {
+        "away": 17,
+        "home": 19,
+        "status": "final"
+      },
+      "final": "PHI 17, JAX 19"
     },
     {
       "game": "CHI@GB",
       "label": "CHI @ GB",
       "day": "Sun",
       "date": "2026-10-11",
-      "westgate": "GB +3"
+      "westgate": "GB +3",
+      "score": {
+        "away": 7,
+        "home": 31,
+        "status": "final"
+      },
+      "final": "CHI 7, GB 31"
     },
     {
       "game": "HOU@TEN",
       "label": "HOU @ TEN",
       "day": "Sun",
       "date": "2026-10-11",
-      "westgate": "TEN +7.5"
+      "westgate": "TEN +7.5",
+      "score": {
+        "away": 26,
+        "home": 3,
+        "status": "final"
+      },
+      "final": "HOU 26, TEN 3"
     },
     {
       "game": "CIN@MIA",
       "label": "CIN @ MIA",
       "day": "Sun",
       "date": "2026-10-11",
-      "westgate": "CIN -7"
+      "westgate": "CIN -7",
+      "score": {
+        "away": 31,
+        "home": 24,
+        "status": "final"
+      },
+      "final": "CIN 31, MIA 24"
     },
     {
       "game": "LV@NE",
       "label": "LV @ NE",
       "day": "Sun",
       "date": "2026-10-11",
-      "westgate": "NE -3.5"
+      "westgate": "NE -3.5",
+      "score": {
+        "away": 17,
+        "home": 45,
+        "status": "final"
+      },
+      "final": "LV 17, NE 45"
     },
     {
       "game": "MIN@NO",
       "label": "MIN @ NO",
       "day": "Sun",
       "date": "2026-10-11",
-      "westgate": "NO +2.5"
+      "westgate": "NO +2.5",
+      "score": {
+        "away": 23,
+        "home": 13,
+        "status": "final"
+      },
+      "final": "MIN 23, NO 13"
     },
     {
       "game": "CLE@NYJ",
       "label": "CLE @ NYJ",
       "day": "Sun",
       "date": "2026-10-11",
-      "westgate": "NYJ -2.5"
+      "westgate": "NYJ -2.5",
+      "score": {
+        "away": 12,
+        "home": 17,
+        "status": "final"
+      },
+      "final": "CLE 12, NYJ 17"
     },
     {
       "game": "IND@PIT",
       "label": "IND @ PIT",
       "day": "Sun",
       "date": "2026-10-11",
-      "westgate": "PIT -2.5"
+      "westgate": "PIT -2.5",
+      "score": {
+        "away": 22,
+        "home": 34,
+        "status": "final"
+      },
+      "final": "IND 22, PIT 34"
     },
     {
       "game": "NYG@WAS",
       "label": "NYG @ WAS",
       "day": "Sun",
       "date": "2026-10-11",
-      "westgate": "WAS -3.5"
+      "westgate": "WAS -3.5",
+      "score": {
+        "away": 27,
+        "home": 27,
+        "status": "final"
+      },
+      "final": "NYG 27, WAS 27"
     },
     {
       "game": "DEN@LAC",
       "label": "DEN @ LAC",
       "day": "Sun",
       "date": "2026-10-11",
-      "westgate": "LAC +3.5"
+      "westgate": "LAC +3.5",
+      "status_note": "Pending"
     },
     {
       "game": "DET@ARI",
       "label": "DET @ ARI",
       "day": "Sun",
       "date": "2026-10-11",
-      "westgate": "ARI +5.5"
+      "westgate": "ARI +5.5",
+      "status_note": "Pending"
     },
     {
       "game": "SF@SEA",
       "label": "SF @ SEA",
       "day": "Sun",
       "date": "2026-10-11",
-      "westgate": "SEA -3"
+      "westgate": "SEA -3",
+      "status_note": "Pending"
     },
     {
       "game": "BAL@ATL",
       "label": "BAL @ ATL",
       "day": "Sun",
       "date": "2026-10-11",
-      "westgate": "BAL +3.5"
+      "westgate": "BAL +3.5",
+      "status_note": "Pending"
     },
     {
       "game": "BUF@LAR",
       "label": "BUF @ LAR",
       "day": "Mon",
       "date": "2026-10-12",
-      "westgate": "LAR -3"
+      "westgate": "LAR -3",
+      "status_note": "Pending"
     }
   ],
   "ais": [
@@ -383,95 +447,122 @@
     "leans": null
   },
   "consensus": [],
-  "results": {},
+  "results": {
+    "TB@DAL": {
+      "DAL -8.5": "L",
+      "TB +8.5": "W"
+    },
+    "PHI@JAX": {
+      "JAX -7.5": "L",
+      "PHI +7.5": "W"
+    },
+    "CHI@GB": {
+      "GB +3": "W"
+    },
+    "HOU@TEN": {
+      "HOU -7.5": "W",
+      "TEN +7.5": "L"
+    },
+    "CIN@MIA": {
+      "CIN -7": "P"
+    },
+    "LV@NE": {
+      "NE -3.5": "W"
+    },
+    "MIN@NO": {
+      "MIN -2.5": "W",
+      "NO +2.5": "L"
+    },
+    "CLE@NYJ": {
+      "CLE +2.5": "L",
+      "NYJ -2.5": "W"
+    },
+    "IND@PIT": {
+      "IND +2.5": "L",
+      "PIT -2.5": "W"
+    },
+    "NYG@WAS": {
+      "WAS -3.5": "L"
+    }
+  },
   "grades": {
     "claude": {
       "sides": [
-        0,
-        0,
-        0
+        4,
+        5,
+        1
       ],
-      "sides_pending": 15,
-      "best_bet_units": 0,
-      "best_bets_pending": 5,
+      "sides_pending": 5,
+      "best_bet_units": 4,
+      "best_bets_pending": 3,
       "pick5": [
-        0,
+        2,
         0,
         0
       ],
-      "pick5_pending": 5
+      "pick5_pending": 3
     },
     "gemini": {
       "sides": [
-        0,
-        0,
-        0
+        7,
+        2,
+        1
       ],
-      "sides_pending": 15,
-      "best_bet_units": 0,
-      "best_bets_pending": 3,
+      "sides_pending": 5,
+      "best_bet_units": 4.5,
+      "best_bets_pending": 1,
       "pick5": [
-        0,
-        0,
+        2,
+        1,
         0
       ],
-      "pick5_pending": 5
+      "pick5_pending": 2
     },
     "grok": {
       "sides": [
-        0,
-        0,
-        0
+        6,
+        3,
+        1
       ],
-      "sides_pending": 15,
-      "best_bet_units": 0,
-      "best_bets_pending": 6,
+      "sides_pending": 5,
+      "best_bet_units": 4,
+      "best_bets_pending": 2,
       "pick5": [
+        1,
         0,
-        0,
-        0
+        1
       ],
-      "pick5_pending": 5
+      "pick5_pending": 3
     },
     "chatgpt": {
       "sides": [
-        0,
-        0,
-        0
+        5,
+        4,
+        1
       ],
-      "sides_pending": 15,
-      "best_bet_units": 0,
-      "best_bets_pending": 3,
+      "sides_pending": 5,
+      "best_bet_units": 3.5,
+      "best_bets_pending": 1,
       "pick5": [
-        0,
+        2,
         0,
         0
       ],
-      "pick5_pending": 5
+      "pick5_pending": 3
     },
     "vector": {
       "sides": [
-        0,
-        0,
-        0
+        5,
+        4,
+        1
       ],
-      "sides_pending": 15,
-      "best_bet_units": 0,
-      "best_bets_pending": 5,
+      "sides_pending": 5,
+      "best_bet_units": 1,
+      "best_bets_pending": 0,
       "pick5": null
     }
   },
   "ungraded_games": [
-    "TB@DAL",
-    "PHI@JAX",
-    "CHI@GB",
-    "HOU@TEN",
-    "CIN@MIA",
-    "LV@NE",
-    "MIN@NO",
-    "CLE@NYJ",
-    "IND@PIT",
-    "NYG@WAS",
     "DEN@LAC",
     "DET@ARI",
     "SF@SEA",

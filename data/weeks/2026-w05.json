@@ -2,7 +2,7 @@
   "season": 2026,
   "week": 5,
   "as_of": "Thu Oct 8, 2026, 7:31 AM PT",
-  "update_note": "Locked Thursday Oct 8, 2026, 7:31 AM PT, before Thursday Night Football kickoff. Updated Fri 10/9: NE -3.5 stays the side and is a regular pick, not a Best Bet. Patriots ruled out CB Christian Gonzalez, CB Carlton Davis III, CB Karon Prunty, CB Channing Canada, and WR Mack Hollins. Updated Fri 10/9: Chargers' ruled-out players were mostly already priced in; LAC +3.5 restored as a regular pick. WAS and BAL are Provisional and Hold, confirmed Friday/Saturday. TB @ DAL is in progress and left ungraded. KC and CAR are on bye. Lines are the Westgate SuperContest Week 5 card. Entertainment only.",
+  "update_note": "Locked Thursday Oct 8, 2026, 7:31 AM PT, before Thursday Night Football kickoff. Updated Fri 10/9: NE -3.5 stays the side and is a regular pick, not a Best Bet. Patriots ruled out CB Christian Gonzalez, CB Carlton Davis III, CB Karon Prunty, CB Channing Canada, and WR Mack Hollins. Updated Fri 10/9: Chargers' ruled-out players were mostly already priced in; LAC +3.5 restored as a regular pick. WAS and BAL are Provisional and Hold, confirmed Friday/Saturday. Finished games graded at the Westgate line: Week 5 record 5-4-1, Best Bets 3-2 (TB W, PHI W, GB W, NO L, IND L). DEN @ LAC, DET @ ARI, SF @ SEA, BAL @ ATL, and BUF @ LAR are pending. KC and CAR are on bye. Lines are the Westgate SuperContest Week 5 card. Entertainment only.",
   "sources": [
     "Vector Week 5 2026 public selections, locked Thu Oct 8, 2026, 7:31 AM PT",
     "Westgate SuperContest Week 5 card"
@@ -41,7 +41,7 @@
       "gap": 2.1,
       "tier": "Best Bet",
       "pick": "TB +8.5",
-      "note": "Best Bet. Westgate DAL -8.5. Vector line DAL -6.4. Edge 2.1. In progress, left ungraded."
+      "note": "Best Bet. Westgate DAL -8.5. Vector line DAL -6.4. Edge 2.1. Final TB 24, DAL 16. TB +8.5 wins."
     },
     {
       "game": "PHI@JAX",
