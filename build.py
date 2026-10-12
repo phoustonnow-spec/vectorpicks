@@ -1711,8 +1711,11 @@ def validate_week5():
         "CLE @ NYJ": ("Final: CLE 12, NYJ 17", {"Claude": "W", "Gemini": "W", "Grok": "W", "ChatGPT": "L", "Vector": "W"}),
         "IND @ PIT": ("Final: IND 22, PIT 34", {"Claude": "L", "Gemini": "W", "Grok": "L", "ChatGPT": "L", "Vector": "L"}),
         "NYG @ WAS": ("Final: NYG 27, WAS 27", {"Claude": "L", "Gemini": "L", "Grok": "L", "ChatGPT": "L", "Vector": "L"}),
+        "DEN @ LAC": ("Final: DEN 23, LAC 17", {"Claude": "L", "Gemini": "L", "Grok": "L", "ChatGPT": "L", "Vector": "L"}),
+        "DET @ ARI": ("Final: DET 45, ARI 21", {"Claude": "W", "Gemini": "W", "Grok": "W", "ChatGPT": "L", "Vector": "L"}),
+        "SF @ SEA": ("Final: SF 32, SEA 29", {"Claude": "W", "Gemini": "W", "Grok": "W", "ChatGPT": "W", "Vector": "W"}),
     }
-    pending_labels = ["DEN @ LAC", "DET @ ARI", "SF @ SEA", "BAL @ ATL", "BUF @ LAR"]
+    pending_labels = ["BAL @ ATL", "BUF @ LAR"]
     totals = {name: {"W": 0, "L": 0, "P": 0} for name in ("Claude", "Gemini", "Grok", "ChatGPT", "Vector")}
     for label, (final, marks) in expected.items():
         row = rows_by_label.get(label, "")
@@ -1724,11 +1727,11 @@ def validate_week5():
                 raise SystemExit(f"{name} {label} graded {got}, expected {want}")
             totals[name][want] += 1
     want_records = {
-        "Vector": (5, 4, 1),
-        "Claude": (4, 5, 1),
-        "ChatGPT": (5, 4, 1),
-        "Gemini": (7, 2, 1),
-        "Grok": (6, 3, 1),
+        "Vector": (6, 6, 1),
+        "Claude": (6, 6, 1),
+        "ChatGPT": (6, 6, 1),
+        "Gemini": (9, 3, 1),
+        "Grok": (8, 4, 1),
     }
     for name, (w, l, p) in want_records.items():
         got = totals[name]
@@ -1766,6 +1769,9 @@ def validate_week5():
         "CLE @ NYJ": ("res-win", "CLE 12, NYJ 17"),
         "IND @ PIT": ("res-loss", "IND 22, PIT 34"),
         "NYG @ WAS": ("res-loss", "NYG 27, WAS 27"),
+        "DEN @ LAC": ("res-loss", "DEN 23, LAC 17"),
+        "DET @ ARI": ("res-loss", "DET 45, ARI 21"),
+        "SF @ SEA": ("res-win", "SF 32, SEA 29"),
     }
     for label, (res, score) in card_expect.items():
         row = re.search(rf'<td class="game"><b>{re.escape(label)}</b>.*?</tr>', card, re.S)
@@ -1775,8 +1781,8 @@ def validate_week5():
         row = re.search(rf'<td class="game"><b>{re.escape(label)}</b>.*?</tr>', card, re.S)
         if not row or "PENDING" not in row.group(0) or "res-win" in row.group(0) or "res-loss" in row.group(0) or "res-push" in row.group(0):
             raise SystemExit(f"weekly card should leave {label} pending")
-    if "5-4-1" not in block or "Best Bets 3-2" not in block:
-        raise SystemExit("home Week 5 record should be 5-4-1 with Best Bets 3-2")
+    if "6-6-1" not in block or "Best Bets 3-2" not in block:
+        raise SystemExit("home Week 5 record should be 6-6-1 with Best Bets 3-2")
     def entrant_side(label, name):
         row = re.search(rf'<tr><td class="game"><b>{re.escape(label)}</b>.*?</tr>', ai, re.S)
         cell = re.search(rf'<td data-l="{re.escape(name)}"[^>]*>(.*?)</td>', row.group(0) if row else "", re.S)
@@ -1919,7 +1925,7 @@ def validate_week5():
     for bad in ("walterfootball", "walter football", "dr. bob", "dr bob", "kevin cole", "unexpected points", "sharp football", "numbers game"):
         if bad in blob.lower():
             raise SystemExit(f"third-party handicapper name on a Week 5 page: {bad}")
-    print("OK week 5: current card, Week 4 archived, finished games graded, five games pending")
+    print("OK week 5: current card, Week 4 archived, afternoon games graded, BAL and BUF pending")
 
 def main():
     global WEEKS, AI_WEEKS

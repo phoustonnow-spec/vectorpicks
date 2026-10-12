@@ -3,9 +3,9 @@
   "week": 5,
   "as_of": "Thu Oct 8, 2026, 7:31 AM PT",
   "intro": "Same prompt, four AIs, and us. Entertainment only. Graded on Westgate SuperContest lines.",
-  "prompt_note": "Received Thu Oct 8, 2026, ~6:33-6:38 PM PT. Locked Thursday Oct 8, 2026, 7:31 AM PT, before Thursday Night Football kickoff. Claude locked DAL -8.5 before kickoff. Gemini, ChatGPT, and Grok submitted TB @ DAL after kickoff. Finished games are graded at the Westgate line. Running Week 5 records: Vector 5-4-1; Vector best bets 3-2 (TB W, PHI W, GB W, NO L, IND L; LAC pending; NE is not a Best Bet); Claude 4-5-1; ChatGPT 5-4-1; Gemini 7-2-1; Grok 6-3-1. DEN @ LAC, DET @ ARI, SF @ SEA, BAL @ ATL, and BUF @ LAR are pending. Updated Fri 10/9: NE -3.5 stays the side and is a regular pick, not a Best Bet. Patriots ruled out CB Christian Gonzalez, CB Carlton Davis III, CB Karon Prunty, CB Channing Canada, and WR Mack Hollins. Updated Fri 10/9: Chargers' ruled-out players were mostly already priced in; LAC +3.5 restored as a regular pick. WAS and BAL are Provisional and Hold, confirmed Friday/Saturday.",
+  "prompt_note": "Received Thu Oct 8, 2026, ~6:33-6:38 PM PT. Locked Thursday Oct 8, 2026, 7:31 AM PT, before Thursday Night Football kickoff. Claude locked DAL -8.5 before kickoff. Gemini, ChatGPT, and Grok submitted TB @ DAL after kickoff. Finished games are graded at the Westgate line. Running Week 5 records: Vector 6-6-1; Vector best bets 3-2 (TB W, PHI W, GB W, NO L, IND L; LAC +3.5 lost as a card side, not a Best Bet; NE is not a Best Bet); Claude 6-6-1; ChatGPT 6-6-1; Gemini 9-3-1; Grok 8-4-1. BAL @ ATL and BUF @ LAR are pending. Updated Fri 10/9: NE -3.5 stays the side and is a regular pick, not a Best Bet. Patriots ruled out CB Christian Gonzalez, CB Carlton Davis III, CB Karon Prunty, CB Channing Canada, and WR Mack Hollins. Updated Fri 10/9: Chargers' ruled-out players were mostly already priced in; LAC +3.5 restored as a regular pick. WAS and BAL are Provisional and Hold, confirmed Friday/Saturday.",
   "line_source": "Westgate SuperContest Week 5 card",
-  "score_source": "Final scores for completed Week 5 games, graded at the Westgate line already on this page. Pending: DEN @ LAC, DET @ ARI, SF @ SEA, BAL @ ATL, BUF @ LAR.",
+  "score_source": "ESPN NFL scoreboard (https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?week=5&seasontype=2&dates=2026). Only games with status final are stored. DEN@LAC, DET@ARI, and SF@SEA final. BAL@ATL in progress, left pending. BUF@LAR not started, left pending.",
   "games": [
     {
       "game": "TB@DAL",
@@ -143,7 +143,12 @@
       "day": "Sun",
       "date": "2026-10-11",
       "westgate": "LAC +3.5",
-      "status_note": "Pending"
+      "score": {
+        "away": 23,
+        "home": 17,
+        "status": "final"
+      },
+      "final": "DEN 23, LAC 17"
     },
     {
       "game": "DET@ARI",
@@ -151,7 +156,12 @@
       "day": "Sun",
       "date": "2026-10-11",
       "westgate": "ARI +5.5",
-      "status_note": "Pending"
+      "score": {
+        "away": 45,
+        "home": 21,
+        "status": "final"
+      },
+      "final": "DET 45, ARI 21"
     },
     {
       "game": "SF@SEA",
@@ -159,7 +169,12 @@
       "day": "Sun",
       "date": "2026-10-11",
       "westgate": "SEA -3",
-      "status_note": "Pending"
+      "score": {
+        "away": 32,
+        "home": 29,
+        "status": "final"
+      },
+      "final": "SF 32, SEA 29"
     },
     {
       "game": "BAL@ATL",
@@ -483,33 +498,75 @@
     },
     "NYG@WAS": {
       "WAS -3.5": "L"
+    },
+    "DEN@LAC": {
+      "LAC +3.5": "L"
+    },
+    "DET@ARI": {
+      "ARI +5.5": "L",
+      "DET -5.5": "W"
+    },
+    "SF@SEA": {
+      "SF +3": "W"
     }
   },
   "grades": {
     "claude": {
       "sides": [
-        4,
-        5,
+        6,
+        6,
         1
       ],
-      "sides_pending": 5,
+      "sides_pending": 2,
       "best_bet_units": 4,
-      "best_bets_pending": 3,
+      "best_bets_pending": 1,
       "pick5": [
-        2,
-        0,
+        3,
+        1,
         0
       ],
-      "pick5_pending": 3
+      "pick5_pending": 1
     },
     "gemini": {
       "sides": [
-        7,
-        2,
+        9,
+        3,
         1
       ],
-      "sides_pending": 5,
-      "best_bet_units": 4.5,
+      "sides_pending": 2,
+      "best_bet_units": 7.5,
+      "best_bets_pending": 0,
+      "pick5": [
+        3,
+        2,
+        0
+      ],
+      "pick5_pending": 0
+    },
+    "grok": {
+      "sides": [
+        8,
+        4,
+        1
+      ],
+      "sides_pending": 2,
+      "best_bet_units": 5,
+      "best_bets_pending": 0,
+      "pick5": [
+        2,
+        1,
+        1
+      ],
+      "pick5_pending": 1
+    },
+    "chatgpt": {
+      "sides": [
+        6,
+        6,
+        1
+      ],
+      "sides_pending": 2,
+      "best_bet_units": 3.5,
       "best_bets_pending": 1,
       "pick5": [
         2,
@@ -518,54 +575,19 @@
       ],
       "pick5_pending": 2
     },
-    "grok": {
-      "sides": [
-        6,
-        3,
-        1
-      ],
-      "sides_pending": 5,
-      "best_bet_units": 4,
-      "best_bets_pending": 2,
-      "pick5": [
-        1,
-        0,
-        1
-      ],
-      "pick5_pending": 3
-    },
-    "chatgpt": {
-      "sides": [
-        5,
-        4,
-        1
-      ],
-      "sides_pending": 5,
-      "best_bet_units": 3.5,
-      "best_bets_pending": 1,
-      "pick5": [
-        2,
-        0,
-        0
-      ],
-      "pick5_pending": 3
-    },
     "vector": {
       "sides": [
-        5,
-        4,
+        6,
+        6,
         1
       ],
-      "sides_pending": 5,
+      "sides_pending": 2,
       "best_bet_units": 1,
       "best_bets_pending": 0,
       "pick5": null
     }
   },
   "ungraded_games": [
-    "DEN@LAC",
-    "DET@ARI",
-    "SF@SEA",
     "BAL@ATL",
     "BUF@LAR"
   ],
