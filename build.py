@@ -1670,20 +1670,31 @@ def game_pickers_table(g):
         f'</td></tr>{rows}</tbody></table></div>'
     )
 
+def game_lock_bits(g):
+    missing = [key for key in ("line", "line_note", "locked_note") if not str(g.get(key) or "").strip()]
+    if missing:
+        raise SystemExit(f"game.json missing {', '.join(missing)}")
+    blob = f"{g['line_note']} {g['locked_note']}".lower()
+    for bad in ("provisional", "card pending", "not in yet", "card line yet"):
+        if bad in blob:
+            raise SystemExit(f"game.json still marks the TNF line pending ({bad})")
+    return e(minus(g["line"])), e(g["line_note"]), e(g["locked_note"])
+
 def game_section(g):
-    line = e(minus(g["line"]))
+    line, line_note, locked = game_lock_bits(g)
     return f"""<section class="panel" id="week-6"><p class="kicker">Week {g['week']} &middot; {g['season']} &middot; Thursday Night Football</p>
 <h2><a href="game.html">{e(g['label'])}</a></h2>
-<p class="note">Line: <b>{line}</b> <span class="tier tier-provisional">{e(g['line_note'])}</span></p>
+<p class="note">{line_note}: <b>{line}</b></p>
+<p class="note">{locked}</p>
 <p class="note">Consensus: <b>{e(g['consensus'])}</b>. <a href="game.html">Game handicap &rarr;</a></p>
 {game_pickers_table(g)}
-<p class="note">Entertainment only. The Westgate card for this game is not in yet, so the line above is provisional.</p></section>
+<p class="note">Entertainment only.</p></section>
 """
 
 def build_game_page(g):
     if not g:
         return
-    line = e(minus(g["line"]))
+    line, line_note, locked = game_lock_bits(g)
     fair = e(minus(g["fair_line"]))
     market = e(minus(g["market"]))
     lean = e(minus(g["lean"]))
@@ -1700,7 +1711,8 @@ def build_game_page(g):
 <h1>{e(g['label'])}</h1>
 <p class="muted">{e(g['day'])} {e(g['date'][5:].replace('-', '/'))} &middot; {e(g['kickoff_pt'])}</p>
 <p class="formula">{line}</p>
-<p class="note"><span class="tier tier-provisional">{e(g['line_note'])}</span></p></section>
+<p class="note">{line_note}: {line}</p>
+<p class="note">{locked}</p></section>
 <section class="panel vec-block"><p class="kicker">Vector</p><h2>Play: <span class="g">{e(minus(g['vector_pick']))}</span></h2>
 <p>{e(minus(g['vector_note']))}</p></section>
 <section class="panel"><h2>Game handicap</h2>
@@ -1711,12 +1723,13 @@ def build_game_page(g):
 <p class="note">Final injury check: {e(g['injury'])}.</p></section>
 <section class="panel callout"><h2>Consensus</h2><p><b>{e(g['consensus'])}</b></p></section>
 {writeups}
-<p class="note"><a href="ai-picks.html">All AI picks &rarr;</a> Entertainment only. Not a Westgate card line yet.</p>
+<p class="note"><a href="ai-picks.html">All AI picks &rarr;</a> Entertainment only.</p>
 """
     if BANNED_PUBLIC.search(body):
         raise SystemExit("game.html: refused to publish a paid-source handicapper name")
     page("game.html", f"{g['label']} Week {g['week']} {g['season']}", body,
-         desc=f"Week {g['week']} {g['season']} {g['label']} game handicap. Line {g['line']} ({g['line_note']}). Entertainment only.",
+         desc=(f"Week {g['week']} {g['season']} {g['label']} game handicap. "
+               f"{g['line_note']}: {g['line']}. {g['locked_note']}. Entertainment only."),
          active="ai-picks.html", extra_head=GAME_STYLE)
 
 def validate_game():
@@ -1725,7 +1738,10 @@ def validate_game():
     if not os.path.exists(path):
         raise SystemExit("game.html was not built")
     doc = open(path).read()
-    for needle in ("SEA @ DEN", "5:15 PM PT", "provisional, Westgate card pending",
+    lock = "Locked Thu Oct 15 2026, before kickoff"
+    line_stmt = "Westgate Week 6 line of record"
+    line_disp = "SEA \u22122.5 / DEN +2.5"
+    for needle in ("SEA @ DEN", "5:15 PM PT", lock, line_stmt, line_disp,
                    "DEN +2.5", "SEA \u22122.5", "DEN \u22120.2", "3-2 Denver",
                    "2.35 points", "Tyrice Knight", "Pat Surtain II", "Talanoa Hufanga",
                    "modest, not maximum", "Moss (DEN) questionable",
@@ -1734,15 +1750,26 @@ def validate_game():
                    "1-unit play at most.",
                    "limited Bo Nix",
                    "Best-bet candidate", "DEN 21, SEA 20", "SEA 20, DEN 17",
-                   "SEA 24, DEN 21", "SEA 24, DEN 17", "href=\"ai-picks.html\""):
+                   "SEA 24, DEN 21", "SEA 24, DEN 17", "href=\"ai-picks.html\"",
+                   'Play: <span class="g">DEN +2.5</span>'):
         if needle not in doc:
             raise SystemExit(f"game.html missing {needle}")
+    for bad in ("provisional", "westgate card pending", "not in yet", "not a westgate card line yet"):
+        if bad in doc.lower():
+            raise SystemExit(f"game.html still has pending-card language: {bad}")
+    tnf_m = re.search(r'<section class="panel" id="week-6">.*?</section>', ai, re.S)
+    if not tnf_m:
+        raise SystemExit("AI Picks page missing Week 6 TNF section")
+    tnf = tnf_m.group(0)
     for needle in ("id=\"week-6\"", "href=\"game.html\"", "Week 6", "SEA @ DEN",
-                   "provisional, Westgate card pending", "3-2 Denver",
-                   "Best-bet candidate", "DEN 21, SEA 20", "Medium-low",
+                   lock, line_stmt, line_disp, "3-2 Denver",
+                   "Best-bet candidate", "DEN +2.5", "DEN 21, SEA 20", "Medium-low",
                    "status is the swing.", "limited Bo Nix"):
-        if needle not in ai:
+        if needle not in tnf:
             raise SystemExit(f"AI Picks page missing Week 6 TNF {needle}")
+    for bad in ("provisional", "westgate card pending", "not in yet", "card pending"):
+        if bad in tnf.lower():
+            raise SystemExit(f"AI Picks TNF section still has pending-card language: {bad}")
     archive = open(os.path.join(OUT, "ai-picks-2026-w05.html")).read()
     if "id=\"week-6\"" in archive or "href=\"game.html\"" in archive:
         raise SystemExit("Week 5 AI archive should stay free of the Week 6 TNF section")
