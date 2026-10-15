@@ -1,0 +1,56 @@
+{
+  "season": 2026,
+  "week": 6,
+  "game": "SEA@DEN",
+  "label": "SEA @ DEN",
+  "day": "Thu",
+  "date": "2026-10-15",
+  "kickoff_pt": "5:15 PM PT",
+  "line": "DEN +2.5 / SEA -2.5",
+  "line_note": "provisional, Westgate card pending",
+  "consensus": "3-2 Denver",
+  "vector_pick": "DEN +2.5",
+  "vector_note": "Vector's v3 number makes Denver a slight favorite (DEN -0.2) after charging the Surtain and Hufanga absences in full, so getting +2.5 is about 2.35 points of value. Seattle losing LB Drake Thomas is a small extra nudge toward Denver, and Smith-Njigba playing with no tag was already priced in. Note: +2.5 is still under the +3 we'd normally want, so this is a modest, not maximum, play.",
+  "handicap": "Seattle comes in rated better overall, but the gap is smaller than the market suggests once home field is counted. Denver's secondary is short-handed without Pat Surtain II and Talanoa Hufanga, and that's the matchup Seattle's passing game wants to attack. But our ratings already account for both absences, and Denver at home still comes out roughly a pick'em. Seattle is without Drake Thomas, so Tyrice Knight starts at linebacker, which slightly weakens the run defense Denver will lean on. Short-week Thursday games tend to be lower-scoring and closer, which makes getting points more valuable.",
+  "fair_line": "DEN -0.2",
+  "market": "DEN +2.5",
+  "lean": "DEN +2.5",
+  "injury": "Moss (DEN) questionable",
+  "pickers": [
+    {
+      "name": "Vector",
+      "pick": "DEN +2.5",
+      "score": "DEN slight fav (fair line DEN -0.2)",
+      "confidence": "Best-bet candidate",
+      "handicap": "Vector has Denver a hair better at home even after charging Surtain and Hufanga in full. Getting 2.5 in a short-week Thursday game is about 2.3 points of value, and Seattle loses LB Drake Thomas."
+    },
+    {
+      "name": "Claude",
+      "pick": "DEN +2.5",
+      "score": "DEN 21, SEA 20",
+      "confidence": "Low",
+      "handicap": "Denver's injured corners force more zone, which Darnold likes, but Denver's interior line limits Seattle's four-man rush, and Darnold holds the ball long against a front that gets sacks. A low total makes the points more valuable to the dog. Smith-Njigba's status is the swing."
+    },
+    {
+      "name": "Grok",
+      "pick": "DEN +2.5",
+      "score": "SEA 20, DEN 17",
+      "confidence": "Medium",
+      "handicap": "Seattle's offense was poor last week, and now it's on a short week, on the road, at altitude. Seattle may be the better team, but laying 2.5 here is the wrong side of a small number."
+    },
+    {
+      "name": "ChatGPT",
+      "pick": "SEA -2.5",
+      "score": "SEA 24, DEN 21",
+      "confidence": "Medium-low",
+      "handicap": "Denver's missing secondary gives Seattle its biggest passing edge. Denver's pass protection and home field keep it close; a 1-unit play at most."
+    },
+    {
+      "name": "Gemini",
+      "pick": "SEA -2.5",
+      "score": "SEA 24, DEN 17",
+      "confidence": "High",
+      "handicap": "Losing Surtain and Hufanga (with Moss banged up) wrecks Denver's man coverage, and a limited Bo Nix on a short week struggles to sustain drives against Seattle's pressure."
+    }
+  ]
+}

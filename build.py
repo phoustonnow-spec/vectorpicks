@@ -1043,7 +1043,10 @@ def load_ai_weeks():
 def fmt_units(u):
     return (f"{u:g}U")
 
-BANNED_PUBLIC = re.compile(r"dr\.?\s*bob|walterfootball|walter football|\bwalt\b", re.I)
+BANNED_PUBLIC = re.compile(
+    r"dr\.?\s*bob|walterfootball|walter football|\bwalt\b|sharp football|numbers game|cynthia|frelund|unexpected points|kevin cole",
+    re.I,
+)
 PICK_RE = re.compile(r"^([A-Z]{2,3})\s+([+-])(\d+(?:\.\d+)?)$")
 FINAL_RE = re.compile(r"^([A-Z]{2,3})\s+(\d+),\s*([A-Z]{2,3})\s+(\d+)$")
 ATS_BADGE = {"W": ("win", "WIN"), "L": ("loss", "LOSS"), "P": ("push", "PUSH")}
@@ -1615,6 +1618,11 @@ def build_ai_picks(w, ai_weeks, fname):
     if fname == "ai-picks.html" and len(ai_weeks) > 1:
         items = "".join(f'<li><a href="{x["slug"]}.html">Week {x["week"]} &middot; {x["season"]}</a></li>' for x in reversed(ai_weeks))
         body += f'<section class="panel"><h2>All AI pick weeks</h2><ul class="weeklist">{items}</ul></section>\n'
+    extra_head = ""
+    game = load_game()
+    if fname == "ai-picks.html" and game:
+        body = game_section(game) + body
+        extra_head = GAME_STYLE
     if BANNED_PUBLIC.search(body) or any(BANNED_PUBLIC.search(a.get("name") or "") or BANNED_PUBLIC.search(a.get("id") or "") for a in ais):
         raise SystemExit(f"{fname}: refused to publish Dr. Bob or WalterFootball / Walt picks")
     archived = fname != "ai-picks.html"
@@ -1625,13 +1633,131 @@ def build_ai_picks(w, ai_weeks, fname):
     else:
         desc = (f"{'Archived ' if archived else ''}Week {w['week']} {w['season']} NFL picks against the spread from {", ".join(a["name"] for a in ais[:-1])} and {ais[-1]["name"]}, "
                 f"side by side, plus Super Agent Vector's own card. Entertainment only.")
-    page(fname, title, body, desc=desc, active="ai-picks.html")
+    page(fname, title, body, desc=desc, active="ai-picks.html", extra_head=extra_head)
+
+# ---------------------------------------------------------------- current game (overwritten each week)
+GAME_STYLE = """<style>
+@media (max-width:759px){
+ .tnf-table tr{grid-template-columns:1fr 1fr}
+ .tnf-table td.why,.tnf-table td.game{grid-column:1/-1}
+}
+.tnf-table td.why{color:var(--grey);font-size:.82rem}
+</style>
+"""
+
+def load_game():
+    path = os.path.join(DATA, "game.json")
+    if not os.path.exists(path):
+        return None
+    return json.load(open(path))
+
+def game_pickers_table(g):
+    rows = ""
+    for p in g["pickers"]:
+        rows += (
+            f'<tr><td class="game" data-l="Picker"><b>{e(p["name"])}</b></td>'
+            f'<td data-l="Pick" class="pick">{e(minus(p["pick"]))}</td>'
+            f'<td data-l="Score">{e(minus(p["score"]))}</td>'
+            f'<td data-l="Confidence">{e(p["confidence"])}</td>'
+            f'<td class="why" data-l="Handicap">{e(p["handicap"])}</td></tr>'
+        )
+    return (
+        '<div class="table-wrap"><table class="rec-table tnf-table"><thead><tr>'
+        '<th scope="col">Picker</th><th scope="col">Pick</th><th scope="col">Score</th>'
+        '<th scope="col">Confidence</th><th scope="col">Handicap</th>'
+        f'</tr></thead><tbody><tr><td class="game" colspan="5"><a href="game.html"><b>{e(g["label"])}</b></a>'
+        f'<span class="sub">{e(g["day"])} {e(g["date"][5:].replace("-", "/"))} &middot; {e(g["kickoff_pt"])}</span>'
+        f'</td></tr>{rows}</tbody></table></div>'
+    )
+
+def game_section(g):
+    line = e(minus(g["line"]))
+    return f"""<section class="panel" id="week-6"><p class="kicker">Week {g['week']} &middot; {g['season']} &middot; Thursday Night Football</p>
+<h2><a href="game.html">{e(g['label'])}</a></h2>
+<p class="note">Line: <b>{line}</b> <span class="tier tier-provisional">{e(g['line_note'])}</span></p>
+<p class="note">Consensus: <b>{e(g['consensus'])}</b>. <a href="game.html">Game handicap &rarr;</a></p>
+{game_pickers_table(g)}
+<p class="note">Entertainment only. The Westgate card for this game is not in yet, so the line above is provisional.</p></section>
+"""
+
+def build_game_page(g):
+    if not g:
+        return
+    line = e(minus(g["line"]))
+    fair = e(minus(g["fair_line"]))
+    market = e(minus(g["market"]))
+    lean = e(minus(g["lean"]))
+    writeups = ""
+    for p in g["pickers"]:
+        writeups += (
+            f'<div class="panel"><h2>{e(p["name"])}</h2>'
+            f'<p class="pick"><b>{e(minus(p["pick"]))}</b> <span class="sub">{e(p["confidence"])}</span></p>'
+            f'<p class="note">Score: {e(minus(p["score"]))}</p>'
+            f'<p>{e(p["handicap"])}</p></div>'
+        )
+    body = f"""
+<section class="hero hero-sm"><p class="kicker">Week {g['week']} &middot; {g['season']} &middot; Thursday Night Football</p>
+<h1>{e(g['label'])}</h1>
+<p class="muted">{e(g['day'])} {e(g['date'][5:].replace('-', '/'))} &middot; {e(g['kickoff_pt'])}</p>
+<p class="formula">{line}</p>
+<p class="note"><span class="tier tier-provisional">{e(g['line_note'])}</span></p></section>
+<section class="panel vec-block"><p class="kicker">Vector</p><h2>Play: <span class="g">{e(minus(g['vector_pick']))}</span></h2>
+<p>{e(minus(g['vector_note']))}</p></section>
+<section class="panel"><h2>Game handicap</h2>
+<p>{e(minus(g['handicap']))}</p>
+<div class="rec-grid"><div class="rec-cell"><div class="rec-label">Fair line</div><div class="rec-num">{fair}</div></div>
+<div class="rec-cell"><div class="rec-label">Market</div><div class="rec-num">{market}</div></div>
+<div class="rec-cell"><div class="rec-label">Lean</div><div class="rec-num">{lean}</div></div></div>
+<p class="note">Final injury check: {e(g['injury'])}.</p></section>
+<section class="panel callout"><h2>Consensus</h2><p><b>{e(g['consensus'])}</b></p></section>
+{writeups}
+<p class="note"><a href="ai-picks.html">All AI picks &rarr;</a> Entertainment only. Not a Westgate card line yet.</p>
+"""
+    if BANNED_PUBLIC.search(body):
+        raise SystemExit("game.html: refused to publish a paid-source handicapper name")
+    page("game.html", f"{g['label']} Week {g['week']} {g['season']}", body,
+         desc=f"Week {g['week']} {g['season']} {g['label']} game handicap. Line {g['line']} ({g['line_note']}). Entertainment only.",
+         active="ai-picks.html", extra_head=GAME_STYLE)
+
+def validate_game():
+    path = os.path.join(OUT, "game.html")
+    ai = open(os.path.join(OUT, "ai-picks.html")).read()
+    if not os.path.exists(path):
+        raise SystemExit("game.html was not built")
+    doc = open(path).read()
+    for needle in ("SEA @ DEN", "5:15 PM PT", "provisional, Westgate card pending",
+                   "DEN +2.5", "SEA \u22122.5", "DEN \u22120.2", "3-2 Denver",
+                   "2.35 points", "Tyrice Knight", "Pat Surtain II", "Talanoa Hufanga",
+                   "modest, not maximum", "Moss (DEN) questionable",
+                   "status is the swing.",
+                   "laying 2.5 here is the wrong side",
+                   "1-unit play at most.",
+                   "limited Bo Nix",
+                   "Best-bet candidate", "DEN 21, SEA 20", "SEA 20, DEN 17",
+                   "SEA 24, DEN 21", "SEA 24, DEN 17", "href=\"ai-picks.html\""):
+        if needle not in doc:
+            raise SystemExit(f"game.html missing {needle}")
+    for needle in ("id=\"week-6\"", "href=\"game.html\"", "Week 6", "SEA @ DEN",
+                   "provisional, Westgate card pending", "3-2 Denver",
+                   "Best-bet candidate", "DEN 21, SEA 20", "Medium-low",
+                   "status is the swing.", "limited Bo Nix"):
+        if needle not in ai:
+            raise SystemExit(f"AI Picks page missing Week 6 TNF {needle}")
+    archive = open(os.path.join(OUT, "ai-picks-2026-w05.html")).read()
+    if "id=\"week-6\"" in archive or "href=\"game.html\"" in archive:
+        raise SystemExit("Week 5 AI archive should stay free of the Week 6 TNF section")
+    blob = doc + "\n" + ai
+    for bad in ("walterfootball", "walter football", "dr. bob", "dr bob", "kevin cole",
+                "unexpected points", "sharp football", "numbers game", "cynthia", "frelund"):
+        if bad in blob.lower():
+            raise SystemExit(f"paid-source name on the TNF pages: {bad}")
+    print("OK game: SEA @ DEN TNF on AI Picks and game.html, prior weeks untouched")
 
 # ---------------------------------------------------------------- misc
 def build_misc():
     pages = ["", "card.html", "live.html", "record.html", "methodology.html", "episodes.html", "shorts.html"] + \
             [f"{w['slug']}.html" for w in WEEKS] + \
-            (["ai-picks.html"] + [f"{w['slug']}.html" for w in AI_WEEKS] if AI_WEEKS else [])
+            (["ai-picks.html", "game.html"] + [f"{w['slug']}.html" for w in AI_WEEKS] if AI_WEEKS else ["game.html"])
     urls = "".join(f"<url><loc>{BASE}/{p}</loc></url>" for p in pages)
     open(os.path.join(OUT, "sitemap.xml"), "w").write(f'<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">{urls}</urlset>\n')
     open(os.path.join(OUT, "robots.txt"), "w").write(f"User-agent: *\nAllow: /\nSitemap: {BASE}/sitemap.xml\n")
@@ -1973,6 +2099,7 @@ def main():
         build_ai_picks(aw, AI_WEEKS, aw["slug"] + ".html")
     if AI_WEEKS:
         build_ai_picks(AI_WEEKS[-1], AI_WEEKS, "ai-picks.html")
+    build_game_page(load_game())
     build_episodes(eps)
     build_shorts(sh)
     build_home(WEEKS, rows, tidx, eps, sh)
@@ -1987,6 +2114,7 @@ def main():
         validate_feed(os.path.join(OUT, "feed.xml"), expect_items=len(eps))
         validate_live(WEEKS[-1])
         validate_week5()
+        validate_game()
         validate_analytics()
         validate_seo()
         test_out = os.path.join(ROOT, "tests", "feed.test.xml")
