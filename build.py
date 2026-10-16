@@ -1642,6 +1642,7 @@ GAME_STYLE = """<style>
  .tnf-table td.why,.tnf-table td.game{grid-column:1/-1}
 }
 .tnf-table td.why{color:var(--grey);font-size:.82rem}
+.tnf-table td.covered b{color:#ffd84d}
 </style>
 """
 
@@ -1654,30 +1655,41 @@ def load_game():
 def game_pickers_table(g):
     rows = ""
     for p in g["pickers"]:
+        res = p.get("ats")
+        covered = " covered" if res == "W" else ""
         rows += (
             f'<tr><td class="game" data-l="Picker"><b>{e(p["name"])}</b></td>'
-            f'<td data-l="Pick" class="pick">{e(minus(p["pick"]))}</td>'
+            f'<td data-l="Pick" class="pick{covered}"><b>{e(minus(p["pick"]))}</b>{ats_badge(res)}</td>'
             f'<td data-l="Score">{e(minus(p["score"]))}</td>'
             f'<td data-l="Confidence">{e(p["confidence"])}</td>'
             f'<td class="why" data-l="Handicap">{e(p["handicap"])}</td></tr>'
         )
+    meta = f'{e(g["day"])} {e(g["date"][5:].replace("-", "/"))} &middot; {e(g["kickoff_pt"])}'
+    if g.get("final"):
+        meta += f' &middot; Final: {e(g["final"])}'
     return (
         '<div class="table-wrap"><table class="rec-table tnf-table"><thead><tr>'
         '<th scope="col">Picker</th><th scope="col">Pick</th><th scope="col">Score</th>'
         '<th scope="col">Confidence</th><th scope="col">Handicap</th>'
         f'</tr></thead><tbody><tr><td class="game" colspan="5"><a href="game.html"><b>{e(g["label"])}</b></a>'
-        f'<span class="sub">{e(g["day"])} {e(g["date"][5:].replace("-", "/"))} &middot; {e(g["kickoff_pt"])}</span>'
+        f'<span class="sub">{meta}</span>'
         f'</td></tr>{rows}</tbody></table></div>'
     )
 
 def game_section(g):
-    line = e(minus(g["line"]))
+    if g.get("final") and g.get("westgate"):
+        other = g["line"].split(" / ", 1)[-1]
+        line_html = f'<b>Westgate {e(minus(g["westgate"]))}</b> <span class="sub">{e(minus(other))}</span>'
+        foot = "Entertainment only."
+    else:
+        line_html = f'<b>{e(minus(g["line"]))}</b> <span class="tier tier-provisional">{e(g["line_note"])}</span>'
+        foot = "Entertainment only. The Westgate card for this game is not in yet, so the line above is provisional."
     return f"""<section class="panel" id="week-6"><p class="kicker">Week {g['week']} &middot; {g['season']} &middot; Thursday Night Football</p>
 <h2><a href="game.html">{e(g['label'])}</a></h2>
-<p class="note">Line: <b>{line}</b> <span class="tier tier-provisional">{e(g['line_note'])}</span></p>
+<p class="note">Line: {line_html}</p>
 <p class="note">Consensus: <b>{e(g['consensus'])}</b>. <a href="game.html">Game handicap &rarr;</a></p>
 {game_pickers_table(g)}
-<p class="note">Entertainment only. The Westgate card for this game is not in yet, so the line above is provisional.</p></section>
+<p class="note">{foot}</p></section>
 """
 
 def build_game_page(g):
@@ -1687,21 +1699,35 @@ def build_game_page(g):
     fair = e(minus(g["fair_line"]))
     market = e(minus(g["market"]))
     lean = e(minus(g["lean"]))
+    posted = bool(g.get("final") and g.get("westgate"))
+    vec = next((p for p in g["pickers"] if p["name"] == "Vector"), None)
+    grade = {"W": "WIN (covered)", "L": "LOSS", "P": "PUSH"}.get((vec or {}).get("ats"), "")
     writeups = ""
     for p in g["pickers"]:
         writeups += (
             f'<div class="panel"><h2>{e(p["name"])}</h2>'
-            f'<p class="pick"><b>{e(minus(p["pick"]))}</b> <span class="sub">{e(p["confidence"])}</span></p>'
+            f'<p class="pick"><b>{e(minus(p["pick"]))}</b>{ats_badge(p.get("ats"))} <span class="sub">{e(p["confidence"])}</span></p>'
             f'<p class="note">Score: {e(minus(p["score"]))}</p>'
             f'<p>{e(p["handicap"])}</p></div>'
         )
+    if posted:
+        formula = f'Westgate {line}'
+        banner = f'<div class="cashed">FINAL {e(g["final"])}<span>Vector {e(minus(g["vector_pick"]))}: {e(grade)}</span></div>'
+        footer = "Entertainment only."
+        desc = (f"Week {g['week']} {g['season']} {g['label']} game handicap. "
+                f"Westgate {g['line']}. Final {g['final']}. Entertainment only.")
+    else:
+        formula = line
+        banner = f'<p class="note"><span class="tier tier-provisional">{e(g["line_note"])}</span></p>'
+        footer = "Entertainment only. Not a Westgate card line yet."
+        desc = f"Week {g['week']} {g['season']} {g['label']} game handicap. Line {g['line']} ({g['line_note']}). Entertainment only."
     body = f"""
 <section class="hero hero-sm"><p class="kicker">Week {g['week']} &middot; {g['season']} &middot; Thursday Night Football</p>
 <h1>{e(g['label'])}</h1>
 <p class="muted">{e(g['day'])} {e(g['date'][5:].replace('-', '/'))} &middot; {e(g['kickoff_pt'])}</p>
-<p class="formula">{line}</p>
-<p class="note"><span class="tier tier-provisional">{e(g['line_note'])}</span></p></section>
-<section class="panel vec-block"><p class="kicker">Vector</p><h2>Play: <span class="g">{e(minus(g['vector_pick']))}</span></h2>
+<p class="formula">{formula}</p>
+{banner}</section>
+<section class="panel vec-block"><p class="kicker">Vector</p><h2>Play: <span class="g">{e(minus(g['vector_pick']))}</span>{ats_badge((vec or {}).get("ats"))}</h2>
 <p>{e(minus(g['vector_note']))}</p></section>
 <section class="panel"><h2>Game handicap</h2>
 <p>{e(minus(g['handicap']))}</p>
@@ -1711,13 +1737,12 @@ def build_game_page(g):
 <p class="note">Final injury check: {e(g['injury'])}.</p></section>
 <section class="panel callout"><h2>Consensus</h2><p><b>{e(g['consensus'])}</b></p></section>
 {writeups}
-<p class="note"><a href="ai-picks.html">All AI picks &rarr;</a> Entertainment only. Not a Westgate card line yet.</p>
+<p class="note"><a href="ai-picks.html">All AI picks &rarr;</a> {footer}</p>
 """
     if BANNED_PUBLIC.search(body):
         raise SystemExit("game.html: refused to publish a paid-source handicapper name")
     page("game.html", f"{g['label']} Week {g['week']} {g['season']}", body,
-         desc=f"Week {g['week']} {g['season']} {g['label']} game handicap. Line {g['line']} ({g['line_note']}). Entertainment only.",
-         active="ai-picks.html", extra_head=GAME_STYLE)
+         desc=desc, active="ai-picks.html", extra_head=GAME_STYLE)
 
 def validate_game():
     path = os.path.join(OUT, "game.html")
@@ -1725,8 +1750,10 @@ def validate_game():
     if not os.path.exists(path):
         raise SystemExit("game.html was not built")
     doc = open(path).read()
-    for needle in ("SEA @ DEN", "5:15 PM PT", "provisional, Westgate card pending",
-                   "DEN +2.5", "SEA \u22122.5", "DEN \u22120.2", "3-2 Denver",
+    for needle in ("SEA @ DEN", "5:15 PM PT", "Westgate DEN +2.5",
+                   "SEA \u22122.5", "FINAL DEN 17, SEA 14",
+                   "Vector DEN +2.5: WIN (covered)",
+                   "DEN \u22120.2", "3-2 Denver",
                    "2.35 points", "Tyrice Knight", "Pat Surtain II", "Talanoa Hufanga",
                    "modest, not maximum", "Moss (DEN) questionable",
                    "status is the swing.",
@@ -1737,12 +1764,32 @@ def validate_game():
                    "SEA 24, DEN 21", "SEA 24, DEN 17", "href=\"ai-picks.html\""):
         if needle not in doc:
             raise SystemExit(f"game.html missing {needle}")
-    for needle in ("id=\"week-6\"", "href=\"game.html\"", "Week 6", "SEA @ DEN",
-                   "provisional, Westgate card pending", "3-2 Denver",
+    if "provisional" in doc.lower() or "not in yet" in doc.lower() or "tier-provisional" in doc:
+        raise SystemExit("game.html still treats the Westgate line as provisional")
+    for name, mark in (("Vector", "res-win"), ("Claude", "res-win"), ("Grok", "res-win"),
+                       ("ChatGPT", "res-loss"), ("Gemini", "res-loss")):
+        block = re.search(rf'<div class="panel"><h2>{name}</h2>.*?</div>', doc, re.S)
+        if not block or mark not in block.group(0):
+            raise SystemExit(f"game.html {name} missing {mark}")
+    sec_m = re.search(r'<section class="panel" id="week-6">.*?</section>', ai, re.S)
+    if not sec_m:
+        raise SystemExit("AI Picks page missing the Week 6 TNF section")
+    sec = sec_m.group(0)
+    for needle in ("Westgate DEN +2.5", "Final: DEN 17, SEA 14", "3-2 Denver",
                    "Best-bet candidate", "DEN 21, SEA 20", "Medium-low",
-                   "status is the swing.", "limited Bo Nix"):
-        if needle not in ai:
+                   "status is the swing.", "limited Bo Nix", "href=\"game.html\""):
+        if needle not in sec:
             raise SystemExit(f"AI Picks page missing Week 6 TNF {needle}")
+    if "provisional" in sec.lower() or "not in yet" in sec.lower() or "card pending" in sec.lower():
+        raise SystemExit("AI Picks TNF section still says the line is provisional")
+    for name, mark, side in (("Vector", "res-win", "DEN +2.5"),
+                             ("Claude", "res-win", "DEN +2.5"),
+                             ("Grok", "res-win", "DEN +2.5"),
+                             ("ChatGPT", "res-loss", "SEA \u22122.5"),
+                             ("Gemini", "res-loss", "SEA \u22122.5")):
+        row = re.search(rf'<tr><td class="game" data-l="Picker"><b>{name}</b>.*?</tr>', sec, re.S)
+        if not row or mark not in row.group(0) or side not in row.group(0):
+            raise SystemExit(f"AI Picks TNF {name} grade is wrong")
     archive = open(os.path.join(OUT, "ai-picks-2026-w05.html")).read()
     if "id=\"week-6\"" in archive or "href=\"game.html\"" in archive:
         raise SystemExit("Week 5 AI archive should stay free of the Week 6 TNF section")
