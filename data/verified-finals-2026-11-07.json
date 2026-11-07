@@ -1,0 +1,1061 @@
+{
+  "captured": "2026-11-07",
+  "timezone": "source times are ESPN competition timestamps; card dates stay the US game date",
+  "source": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?seasontype=2&dates=2026",
+  "weeks": {
+    "3": [
+      {
+        "game": "ATL@GB",
+        "away_abbr": "ATL",
+        "home_abbr": "GB",
+        "away_score": 35,
+        "home_score": 14,
+        "state": "post",
+        "detail": "Final",
+        "date_utc": "2026-09-25"
+      },
+      {
+        "game": "LAC@BUF",
+        "away_abbr": "LAC",
+        "home_abbr": "BUF",
+        "away_score": 16,
+        "home_score": 24,
+        "state": "post",
+        "detail": "Final",
+        "date_utc": "2026-09-27"
+      },
+      {
+        "game": "CAR@CLE",
+        "away_abbr": "CAR",
+        "home_abbr": "CLE",
+        "away_score": 18,
+        "home_score": 21,
+        "state": "post",
+        "detail": "Final",
+        "date_utc": "2026-09-27"
+      },
+      {
+        "game": "NYJ@DET",
+        "away_abbr": "NYJ",
+        "home_abbr": "DET",
+        "away_score": 24,
+        "home_score": 31,
+        "state": "post",
+        "detail": "Final",
+        "date_utc": "2026-09-27"
+      },
+      {
+        "game": "HOU@IND",
+        "away_abbr": "HOU",
+        "home_abbr": "IND",
+        "away_score": 17,
+        "home_score": 19,
+        "state": "post",
+        "detail": "Final",
+        "date_utc": "2026-09-27"
+      },
+      {
+        "game": "KC@MIA",
+        "away_abbr": "KC",
+        "home_abbr": "MIA",
+        "away_score": 24,
+        "home_score": 10,
+        "state": "post",
+        "detail": "Final",
+        "date_utc": "2026-09-27"
+      },
+      {
+        "game": "TEN@NYG",
+        "away_abbr": "TEN",
+        "home_abbr": "NYG",
+        "away_score": 7,
+        "home_score": 12,
+        "state": "post",
+        "detail": "Final",
+        "date_utc": "2026-09-27"
+      },
+      {
+        "game": "CIN@PIT",
+        "away_abbr": "CIN",
+        "home_abbr": "PIT",
+        "away_score": 27,
+        "home_score": 30,
+        "state": "post",
+        "detail": "Final",
+        "date_utc": "2026-09-27"
+      },
+      {
+        "game": "SEA@WAS",
+        "away_abbr": "SEA",
+        "home_abbr": "WAS",
+        "away_score": 31,
+        "home_score": 33,
+        "state": "post",
+        "detail": "Final",
+        "date_utc": "2026-09-27"
+      },
+      {
+        "game": "NE@JAX",
+        "away_abbr": "NE",
+        "home_abbr": "JAX",
+        "away_score": 6,
+        "home_score": 35,
+        "state": "post",
+        "detail": "Final",
+        "date_utc": "2026-09-27"
+      },
+      {
+        "game": "ARI@SF",
+        "away_abbr": "ARI",
+        "home_abbr": "SF",
+        "away_score": 30,
+        "home_score": 36,
+        "state": "post",
+        "detail": "Final",
+        "date_utc": "2026-09-27"
+      },
+      {
+        "game": "MIN@TB",
+        "away_abbr": "MIN",
+        "home_abbr": "TB",
+        "away_score": 23,
+        "home_score": 16,
+        "state": "post",
+        "detail": "Final",
+        "date_utc": "2026-09-27"
+      },
+      {
+        "game": "BAL@DAL",
+        "away_abbr": "BAL",
+        "home_abbr": "DAL",
+        "away_score": 34,
+        "home_score": 31,
+        "state": "post",
+        "detail": "Final",
+        "date_utc": "2026-09-27"
+      },
+      {
+        "game": "LV@NO",
+        "away_abbr": "LV",
+        "home_abbr": "NO",
+        "away_score": 35,
+        "home_score": 27,
+        "state": "post",
+        "detail": "Final",
+        "date_utc": "2026-09-27"
+      },
+      {
+        "game": "LAR@DEN",
+        "away_abbr": "LAR",
+        "home_abbr": "DEN",
+        "away_score": 26,
+        "home_score": 30,
+        "state": "post",
+        "detail": "Final",
+        "date_utc": "2026-09-28"
+      },
+      {
+        "game": "PHI@CHI",
+        "away_abbr": "PHI",
+        "home_abbr": "CHI",
+        "away_score": 7,
+        "home_score": 27,
+        "state": "post",
+        "detail": "Final",
+        "date_utc": "2026-09-29"
+      }
+    ],
+    "4": [
+      {
+        "game": "PIT@CLE",
+        "away_abbr": "PIT",
+        "home_abbr": "CLE",
+        "away_score": 24,
+        "home_score": 27,
+        "state": "post",
+        "detail": "Final",
+        "date_utc": "2026-10-02"
+      },
+      {
+        "game": "IND@WAS",
+        "away_abbr": "IND",
+        "home_abbr": "WAS",
+        "away_score": 30,
+        "home_score": 13,
+        "state": "post",
+        "detail": "Final",
+        "date_utc": "2026-10-04"
+      },
+      {
+        "game": "NE@BUF",
+        "away_abbr": "NE",
+        "home_abbr": "BUF",
+        "away_score": 29,
+        "home_score": 26,
+        "state": "post",
+        "detail": "Final",
+        "date_utc": "2026-10-04"
+      },
+      {
+        "game": "NYJ@CHI",
+        "away_abbr": "NYJ",
+        "home_abbr": "CHI",
+        "away_score": 12,
+        "home_score": 23,
+        "state": "post",
+        "detail": "Final",
+        "date_utc": "2026-10-04"
+      },
+      {
+        "game": "JAX@CIN",
+        "away_abbr": "JAX",
+        "home_abbr": "CIN",
+        "away_score": 22,
+        "home_score": 17,
+        "state": "post",
+        "detail": "Final",
+        "date_utc": "2026-10-04"
+      },
+      {
+        "game": "ARI@NYG",
+        "away_abbr": "ARI",
+        "home_abbr": "NYG",
+        "away_score": 24,
+        "home_score": 36,
+        "state": "post",
+        "detail": "Final",
+        "date_utc": "2026-10-04"
+      },
+      {
+        "game": "LAR@PHI",
+        "away_abbr": "LAR",
+        "home_abbr": "PHI",
+        "away_score": 24,
+        "home_score": 20,
+        "state": "post",
+        "detail": "Final",
+        "date_utc": "2026-10-04"
+      },
+      {
+        "game": "GB@TB",
+        "away_abbr": "GB",
+        "home_abbr": "TB",
+        "away_score": 17,
+        "home_score": 14,
+        "state": "post",
+        "detail": "Final",
+        "date_utc": "2026-10-04"
+      },
+      {
+        "game": "TEN@BAL",
+        "away_abbr": "TEN",
+        "home_abbr": "BAL",
+        "away_score": 18,
+        "home_score": 24,
+        "state": "post",
+        "detail": "Final",
+        "date_utc": "2026-10-04"
+      },
+      {
+        "game": "DAL@HOU",
+        "away_abbr": "DAL",
+        "home_abbr": "HOU",
+        "away_score": 34,
+        "home_score": 30,
+        "state": "post",
+        "detail": "Final",
+        "date_utc": "2026-10-04"
+      },
+      {
+        "game": "MIA@MIN",
+        "away_abbr": "MIA",
+        "home_abbr": "MIN",
+        "away_score": 10,
+        "home_score": 15,
+        "state": "post",
+        "detail": "Final",
+        "date_utc": "2026-10-04"
+      },
+      {
+        "game": "KC@LV",
+        "away_abbr": "KC",
+        "home_abbr": "LV",
+        "away_score": 30,
+        "home_score": 27,
+        "state": "post",
+        "detail": "Final",
+        "date_utc": "2026-10-04"
+      },
+      {
+        "game": "DEN@SF",
+        "away_abbr": "DEN",
+        "home_abbr": "SF",
+        "away_score": 14,
+        "home_score": 24,
+        "state": "post",
+        "detail": "Final",
+        "date_utc": "2026-10-04"
+      },
+      {
+        "game": "LAC@SEA",
+        "away_abbr": "LAC",
+        "home_abbr": "SEA",
+        "away_score": 23,
+        "home_score": 30,
+        "state": "post",
+        "detail": "Final",
+        "date_utc": "2026-10-04"
+      },
+      {
+        "game": "DET@CAR",
+        "away_abbr": "DET",
+        "home_abbr": "CAR",
+        "away_score": 26,
+        "home_score": 32,
+        "state": "post",
+        "detail": "Final",
+        "date_utc": "2026-10-05"
+      },
+      {
+        "game": "ATL@NO",
+        "away_abbr": "ATL",
+        "home_abbr": "NO",
+        "away_score": 45,
+        "home_score": 24,
+        "state": "post",
+        "detail": "Final",
+        "date_utc": "2026-10-06"
+      }
+    ],
+    "5": [
+      {
+        "game": "TB@DAL",
+        "away_abbr": "TB",
+        "home_abbr": "DAL",
+        "away_score": 24,
+        "home_score": 16,
+        "state": "post",
+        "detail": "Final",
+        "date_utc": "2026-10-09"
+      },
+      {
+        "game": "PHI@JAX",
+        "away_abbr": "PHI",
+        "home_abbr": "JAX",
+        "away_score": 17,
+        "home_score": 19,
+        "state": "post",
+        "detail": "Final",
+        "date_utc": "2026-10-11"
+      },
+      {
+        "game": "CHI@GB",
+        "away_abbr": "CHI",
+        "home_abbr": "GB",
+        "away_score": 7,
+        "home_score": 31,
+        "state": "post",
+        "detail": "Final",
+        "date_utc": "2026-10-11"
+      },
+      {
+        "game": "HOU@TEN",
+        "away_abbr": "HOU",
+        "home_abbr": "TEN",
+        "away_score": 26,
+        "home_score": 3,
+        "state": "post",
+        "detail": "Final",
+        "date_utc": "2026-10-11"
+      },
+      {
+        "game": "CIN@MIA",
+        "away_abbr": "CIN",
+        "home_abbr": "MIA",
+        "away_score": 31,
+        "home_score": 24,
+        "state": "post",
+        "detail": "Final",
+        "date_utc": "2026-10-11"
+      },
+      {
+        "game": "LV@NE",
+        "away_abbr": "LV",
+        "home_abbr": "NE",
+        "away_score": 17,
+        "home_score": 45,
+        "state": "post",
+        "detail": "Final",
+        "date_utc": "2026-10-11"
+      },
+      {
+        "game": "MIN@NO",
+        "away_abbr": "MIN",
+        "home_abbr": "NO",
+        "away_score": 23,
+        "home_score": 13,
+        "state": "post",
+        "detail": "Final",
+        "date_utc": "2026-10-11"
+      },
+      {
+        "game": "CLE@NYJ",
+        "away_abbr": "CLE",
+        "home_abbr": "NYJ",
+        "away_score": 12,
+        "home_score": 17,
+        "state": "post",
+        "detail": "Final",
+        "date_utc": "2026-10-11"
+      },
+      {
+        "game": "IND@PIT",
+        "away_abbr": "IND",
+        "home_abbr": "PIT",
+        "away_score": 22,
+        "home_score": 34,
+        "state": "post",
+        "detail": "Final",
+        "date_utc": "2026-10-11"
+      },
+      {
+        "game": "NYG@WAS",
+        "away_abbr": "NYG",
+        "home_abbr": "WAS",
+        "away_score": 27,
+        "home_score": 27,
+        "state": "post",
+        "detail": "Final/OT",
+        "date_utc": "2026-10-11"
+      },
+      {
+        "game": "DEN@LAC",
+        "away_abbr": "DEN",
+        "home_abbr": "LAC",
+        "away_score": 23,
+        "home_score": 17,
+        "state": "post",
+        "detail": "Final",
+        "date_utc": "2026-10-11"
+      },
+      {
+        "game": "DET@ARI",
+        "away_abbr": "DET",
+        "home_abbr": "ARI",
+        "away_score": 45,
+        "home_score": 21,
+        "state": "post",
+        "detail": "Final",
+        "date_utc": "2026-10-11"
+      },
+      {
+        "game": "SF@SEA",
+        "away_abbr": "SF",
+        "home_abbr": "SEA",
+        "away_score": 32,
+        "home_score": 29,
+        "state": "post",
+        "detail": "Final",
+        "date_utc": "2026-10-11"
+      },
+      {
+        "game": "BAL@ATL",
+        "away_abbr": "BAL",
+        "home_abbr": "ATL",
+        "away_score": 30,
+        "home_score": 23,
+        "state": "post",
+        "detail": "Final/OT",
+        "date_utc": "2026-10-12"
+      },
+      {
+        "game": "BUF@LAR",
+        "away_abbr": "BUF",
+        "home_abbr": "LAR",
+        "away_score": 37,
+        "home_score": 34,
+        "state": "post",
+        "detail": "Final/OT",
+        "date_utc": "2026-10-13"
+      }
+    ],
+    "6": [
+      {
+        "game": "SEA@DEN",
+        "away_abbr": "SEA",
+        "home_abbr": "DEN",
+        "away_score": 14,
+        "home_score": 17,
+        "state": "post",
+        "detail": "Final/OT",
+        "date_utc": "2026-10-16"
+      },
+      {
+        "game": "HOU@JAX",
+        "away_abbr": "HOU",
+        "home_abbr": "JAX",
+        "away_score": 34,
+        "home_score": 31,
+        "state": "post",
+        "detail": "Final",
+        "date_utc": "2026-10-18"
+      },
+      {
+        "game": "CHI@ATL",
+        "away_abbr": "CHI",
+        "home_abbr": "ATL",
+        "away_score": 31,
+        "home_score": 23,
+        "state": "post",
+        "detail": "Final",
+        "date_utc": "2026-10-18"
+      },
+      {
+        "game": "BAL@CLE",
+        "away_abbr": "BAL",
+        "home_abbr": "CLE",
+        "away_score": 10,
+        "home_score": 13,
+        "state": "post",
+        "detail": "Final",
+        "date_utc": "2026-10-18"
+      },
+      {
+        "game": "TEN@IND",
+        "away_abbr": "TEN",
+        "home_abbr": "IND",
+        "away_score": 26,
+        "home_score": 20,
+        "state": "post",
+        "detail": "Final",
+        "date_utc": "2026-10-18"
+      },
+      {
+        "game": "NYJ@NE",
+        "away_abbr": "NYJ",
+        "home_abbr": "NE",
+        "away_score": 19,
+        "home_score": 26,
+        "state": "post",
+        "detail": "Final",
+        "date_utc": "2026-10-18"
+      },
+      {
+        "game": "NO@NYG",
+        "away_abbr": "NO",
+        "home_abbr": "NYG",
+        "away_score": 34,
+        "home_score": 27,
+        "state": "post",
+        "detail": "Final",
+        "date_utc": "2026-10-18"
+      },
+      {
+        "game": "CAR@PHI",
+        "away_abbr": "CAR",
+        "home_abbr": "PHI",
+        "away_score": 25,
+        "home_score": 14,
+        "state": "post",
+        "detail": "Final",
+        "date_utc": "2026-10-18"
+      },
+      {
+        "game": "PIT@TB",
+        "away_abbr": "PIT",
+        "home_abbr": "TB",
+        "away_score": 26,
+        "home_score": 19,
+        "state": "post",
+        "detail": "Final/OT",
+        "date_utc": "2026-10-18"
+      },
+      {
+        "game": "ARI@LAR",
+        "away_abbr": "ARI",
+        "home_abbr": "LAR",
+        "away_score": 18,
+        "home_score": 16,
+        "state": "post",
+        "detail": "Final",
+        "date_utc": "2026-10-18"
+      },
+      {
+        "game": "LAC@KC",
+        "away_abbr": "LAC",
+        "home_abbr": "KC",
+        "away_score": 6,
+        "home_score": 22,
+        "state": "post",
+        "detail": "Final",
+        "date_utc": "2026-10-18"
+      },
+      {
+        "game": "BUF@LV",
+        "away_abbr": "BUF",
+        "home_abbr": "LV",
+        "away_score": 33,
+        "home_score": 30,
+        "state": "post",
+        "detail": "Final",
+        "date_utc": "2026-10-18"
+      },
+      {
+        "game": "DAL@GB",
+        "away_abbr": "DAL",
+        "home_abbr": "GB",
+        "away_score": 13,
+        "home_score": 23,
+        "state": "post",
+        "detail": "Final",
+        "date_utc": "2026-10-19"
+      },
+      {
+        "game": "WAS@SF",
+        "away_abbr": "WAS",
+        "home_abbr": "SF",
+        "away_score": 17,
+        "home_score": 23,
+        "state": "post",
+        "detail": "Final",
+        "date_utc": "2026-10-20"
+      }
+    ],
+    "7": [
+      {
+        "game": "NE@CHI",
+        "away_abbr": "NE",
+        "home_abbr": "CHI",
+        "away_score": 24,
+        "home_score": 30,
+        "state": "post",
+        "detail": "Final",
+        "date_utc": "2026-10-23"
+      },
+      {
+        "game": "PIT@NO",
+        "away_abbr": "PIT",
+        "home_abbr": "NO",
+        "away_score": 16,
+        "home_score": 10,
+        "state": "post",
+        "detail": "Final",
+        "date_utc": "2026-10-25"
+      },
+      {
+        "game": "SF@ATL",
+        "away_abbr": "SF",
+        "home_abbr": "ATL",
+        "away_score": 20,
+        "home_score": 29,
+        "state": "post",
+        "detail": "Final",
+        "date_utc": "2026-10-25"
+      },
+      {
+        "game": "CLE@TEN",
+        "away_abbr": "CLE",
+        "home_abbr": "TEN",
+        "away_score": 27,
+        "home_score": 24,
+        "state": "post",
+        "detail": "Final",
+        "date_utc": "2026-10-25"
+      },
+      {
+        "game": "IND@MIN",
+        "away_abbr": "IND",
+        "home_abbr": "MIN",
+        "away_score": 10,
+        "home_score": 16,
+        "state": "post",
+        "detail": "Final",
+        "date_utc": "2026-10-25"
+      },
+      {
+        "game": "MIA@NYJ",
+        "away_abbr": "MIA",
+        "home_abbr": "NYJ",
+        "away_score": 28,
+        "home_score": 25,
+        "state": "post",
+        "detail": "Final",
+        "date_utc": "2026-10-25"
+      },
+      {
+        "game": "TB@CAR",
+        "away_abbr": "TB",
+        "home_abbr": "CAR",
+        "away_score": 43,
+        "home_score": 13,
+        "state": "post",
+        "detail": "Final",
+        "date_utc": "2026-10-25"
+      },
+      {
+        "game": "CIN@BAL",
+        "away_abbr": "CIN",
+        "home_abbr": "BAL",
+        "away_score": 35,
+        "home_score": 13,
+        "state": "post",
+        "detail": "Final",
+        "date_utc": "2026-10-25"
+      },
+      {
+        "game": "NYG@HOU",
+        "away_abbr": "NYG",
+        "home_abbr": "HOU",
+        "away_score": 27,
+        "home_score": 21,
+        "state": "post",
+        "detail": "Final/OT",
+        "date_utc": "2026-10-25"
+      },
+      {
+        "game": "DEN@ARI",
+        "away_abbr": "DEN",
+        "home_abbr": "ARI",
+        "away_score": 30,
+        "home_score": 16,
+        "state": "post",
+        "detail": "Final",
+        "date_utc": "2026-10-25"
+      },
+      {
+        "game": "GB@DET",
+        "away_abbr": "GB",
+        "home_abbr": "DET",
+        "away_score": 17,
+        "home_score": 20,
+        "state": "post",
+        "detail": "Final",
+        "date_utc": "2026-10-25"
+      },
+      {
+        "game": "LAR@LV",
+        "away_abbr": "LAR",
+        "home_abbr": "LV",
+        "away_score": 35,
+        "home_score": 21,
+        "state": "post",
+        "detail": "Final",
+        "date_utc": "2026-10-25"
+      },
+      {
+        "game": "KC@SEA",
+        "away_abbr": "KC",
+        "home_abbr": "SEA",
+        "away_score": 3,
+        "home_score": 20,
+        "state": "post",
+        "detail": "Final",
+        "date_utc": "2026-10-26"
+      },
+      {
+        "game": "DAL@PHI",
+        "away_abbr": "DAL",
+        "home_abbr": "PHI",
+        "away_score": 38,
+        "home_score": 21,
+        "state": "post",
+        "detail": "Final",
+        "date_utc": "2026-10-27"
+      }
+    ],
+    "8": [
+      {
+        "game": "CAR@GB",
+        "away_abbr": "CAR",
+        "home_abbr": "GB",
+        "away_score": 19,
+        "home_score": 27,
+        "state": "post",
+        "detail": "Final",
+        "date_utc": "2026-10-30"
+      },
+      {
+        "game": "BAL@BUF",
+        "away_abbr": "BAL",
+        "home_abbr": "BUF",
+        "away_score": 10,
+        "home_score": 36,
+        "state": "post",
+        "detail": "Final",
+        "date_utc": "2026-11-01"
+      },
+      {
+        "game": "TEN@CIN",
+        "away_abbr": "TEN",
+        "home_abbr": "CIN",
+        "away_score": 36,
+        "home_score": 43,
+        "state": "post",
+        "detail": "Final/OT",
+        "date_utc": "2026-11-01"
+      },
+      {
+        "game": "ARI@DAL",
+        "away_abbr": "ARI",
+        "home_abbr": "DAL",
+        "away_score": 33,
+        "home_score": 30,
+        "state": "post",
+        "detail": "Final/OT",
+        "date_utc": "2026-11-01"
+      },
+      {
+        "game": "MIN@DET",
+        "away_abbr": "MIN",
+        "home_abbr": "DET",
+        "away_score": 15,
+        "home_score": 19,
+        "state": "post",
+        "detail": "Final",
+        "date_utc": "2026-11-01"
+      },
+      {
+        "game": "LV@NYJ",
+        "away_abbr": "LV",
+        "home_abbr": "NYJ",
+        "away_score": 38,
+        "home_score": 33,
+        "state": "post",
+        "detail": "Final",
+        "date_utc": "2026-11-01"
+      },
+      {
+        "game": "CLE@PIT",
+        "away_abbr": "CLE",
+        "home_abbr": "PIT",
+        "away_score": 6,
+        "home_score": 27,
+        "state": "post",
+        "detail": "Final",
+        "date_utc": "2026-11-01"
+      },
+      {
+        "game": "ATL@TB",
+        "away_abbr": "ATL",
+        "home_abbr": "TB",
+        "away_score": 0,
+        "home_score": 16,
+        "state": "post",
+        "detail": "Final",
+        "date_utc": "2026-11-01"
+      },
+      {
+        "game": "IND@JAX",
+        "away_abbr": "IND",
+        "home_abbr": "JAX",
+        "away_score": 7,
+        "home_score": 42,
+        "state": "post",
+        "detail": "Final",
+        "date_utc": "2026-11-01"
+      },
+      {
+        "game": "LAC@LAR",
+        "away_abbr": "LAC",
+        "home_abbr": "LAR",
+        "away_score": 9,
+        "home_score": 24,
+        "state": "post",
+        "detail": "Final",
+        "date_utc": "2026-11-01"
+      },
+      {
+        "game": "KC@DEN",
+        "away_abbr": "KC",
+        "home_abbr": "DEN",
+        "away_score": 24,
+        "home_score": 28,
+        "state": "post",
+        "detail": "Final",
+        "date_utc": "2026-11-01"
+      },
+      {
+        "game": "NE@MIA",
+        "away_abbr": "NE",
+        "home_abbr": "MIA",
+        "away_score": 24,
+        "home_score": 19,
+        "state": "post",
+        "detail": "Final",
+        "date_utc": "2026-11-01"
+      },
+      {
+        "game": "PHI@WAS",
+        "away_abbr": "PHI",
+        "home_abbr": "WAS",
+        "away_score": 10,
+        "home_score": 27,
+        "state": "post",
+        "detail": "Final",
+        "date_utc": "2026-11-02"
+      },
+      {
+        "game": "CHI@SEA",
+        "away_abbr": "CHI",
+        "home_abbr": "SEA",
+        "away_score": 34,
+        "home_score": 17,
+        "state": "post",
+        "detail": "Final",
+        "date_utc": "2026-11-03"
+      }
+    ],
+    "9": [
+      {
+        "game": "JAX@BAL",
+        "away_abbr": "JAX",
+        "home_abbr": "BAL",
+        "away_score": 33,
+        "home_score": 10,
+        "state": "post",
+        "detail": "Final",
+        "date_utc": "2026-11-06"
+      },
+      {
+        "game": "CIN@ATL",
+        "away_abbr": "CIN",
+        "home_abbr": "ATL",
+        "away_score": 0,
+        "home_score": 0,
+        "state": "pre",
+        "detail": "11/8 - 9:30 AM EST",
+        "date_utc": "2026-11-08"
+      },
+      {
+        "game": "DAL@IND",
+        "away_abbr": "DAL",
+        "home_abbr": "IND",
+        "away_score": 0,
+        "home_score": 0,
+        "state": "pre",
+        "detail": "11/8 - 1:00 PM EST",
+        "date_utc": "2026-11-08"
+      },
+      {
+        "game": "NYJ@KC",
+        "away_abbr": "NYJ",
+        "home_abbr": "KC",
+        "away_score": 0,
+        "home_score": 0,
+        "state": "pre",
+        "detail": "11/8 - 1:00 PM EST",
+        "date_utc": "2026-11-08"
+      },
+      {
+        "game": "DET@MIA",
+        "away_abbr": "DET",
+        "home_abbr": "MIA",
+        "away_score": 0,
+        "home_score": 0,
+        "state": "pre",
+        "detail": "11/8 - 1:00 PM EST",
+        "date_utc": "2026-11-08"
+      },
+      {
+        "game": "CLE@NO",
+        "away_abbr": "CLE",
+        "home_abbr": "NO",
+        "away_score": 0,
+        "home_score": 0,
+        "state": "pre",
+        "detail": "11/8 - 1:00 PM EST",
+        "date_utc": "2026-11-08"
+      },
+      {
+        "game": "NYG@PHI",
+        "away_abbr": "NYG",
+        "home_abbr": "PHI",
+        "away_score": 0,
+        "home_score": 0,
+        "state": "pre",
+        "detail": "11/8 - 1:00 PM EST",
+        "date_utc": "2026-11-08"
+      },
+      {
+        "game": "LAR@WAS",
+        "away_abbr": "LAR",
+        "home_abbr": "WAS",
+        "away_score": 0,
+        "home_score": 0,
+        "state": "pre",
+        "detail": "11/8 - 1:00 PM EST",
+        "date_utc": "2026-11-08"
+      },
+      {
+        "game": "DEN@CAR",
+        "away_abbr": "DEN",
+        "home_abbr": "CAR",
+        "away_score": 0,
+        "home_score": 0,
+        "state": "pre",
+        "detail": "11/8 - 1:00 PM EST",
+        "date_utc": "2026-11-08"
+      },
+      {
+        "game": "HOU@LAC",
+        "away_abbr": "HOU",
+        "home_abbr": "LAC",
+        "away_score": 0,
+        "home_score": 0,
+        "state": "pre",
+        "detail": "11/8 - 4:05 PM EST",
+        "date_utc": "2026-11-08"
+      },
+      {
+        "game": "GB@NE",
+        "away_abbr": "GB",
+        "home_abbr": "NE",
+        "away_score": 0,
+        "home_score": 0,
+        "state": "pre",
+        "detail": "11/8 - 4:25 PM EST",
+        "date_utc": "2026-11-08"
+      },
+      {
+        "game": "LV@SF",
+        "away_abbr": "LV",
+        "home_abbr": "SF",
+        "away_score": 0,
+        "home_score": 0,
+        "state": "pre",
+        "detail": "11/8 - 4:25 PM EST",
+        "date_utc": "2026-11-08"
+      },
+      {
+        "game": "ARI@SEA",
+        "away_abbr": "ARI",
+        "home_abbr": "SEA",
+        "away_score": 0,
+        "home_score": 0,
+        "state": "pre",
+        "detail": "11/8 - 4:25 PM EST",
+        "date_utc": "2026-11-08"
+      },
+      {
+        "game": "TB@CHI",
+        "away_abbr": "TB",
+        "home_abbr": "CHI",
+        "away_score": 0,
+        "home_score": 0,
+        "state": "pre",
+        "detail": "11/8 - 8:20 PM EST",
+        "date_utc": "2026-11-09"
+      },
+      {
+        "game": "BUF@MIN",
+        "away_abbr": "BUF",
+        "home_abbr": "MIN",
+        "away_score": 0,
+        "home_score": 0,
+        "state": "pre",
+        "detail": "11/9 - 8:15 PM EST",
+        "date_utc": "2026-11-10"
+      }
+    ]
+  }
+}

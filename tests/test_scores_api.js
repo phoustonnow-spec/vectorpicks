@@ -232,6 +232,19 @@ async function testUpstreamError() {
   assert.strictEqual(gaps.headers["Cache-Control"], "public, s-maxage=600, stale-while-revalidate=3600");
 }
 
+async function testWeekQuery() {
+  const seen = mockFetch({ events: [] });
+  const res = await invoke("/api/scores?season=2026&week=9");
+  assert.strictEqual(res.statusCode, 200);
+  assert.strictEqual(seen(), SCORE_URL + "?week=9&seasontype=2&dates=2026");
+  const both = await invoke("/api/scores?season=2026&week=9&dates=20261105");
+  assert.strictEqual(both.statusCode, 400);
+  const bad = await invoke("/api/scores?season=1999&week=9");
+  assert.strictEqual(bad.statusCode, 400);
+  const junk = await invoke("/api/scores?week=../1&season=2026");
+  assert.strictEqual(junk.statusCode, 400);
+}
+
 async function main() {
   await testPre();
   await testInProgress();
@@ -239,6 +252,7 @@ async function main() {
   await testQueryObject();
   await testBadDates();
   await testUpstreamError();
+  await testWeekQuery();
   console.log("OK api/scores.js: pre, in progress, final, error");
 }
 

@@ -1,0 +1,34 @@
+name: build
+
+on:
+  pull_request:
+  push:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Install Pillow for image handling in the build
+        run: pip install pillow
+      - name: Build and validate
+        env:
+          TZ: America/Los_Angeles
+          VECTORPICKS_TODAY: "2026-11-07"
+        run: python3 build.py --validate
+      - name: Recovery guards
+        env:
+          TZ: America/Los_Angeles
+          VECTORPICKS_TODAY: "2026-11-07"
+        run: python3 tests/test_recovery.py
+      - name: API and live-board tests
+        run: |
+          node tests/test_live_board.js
+          node tests/test_scores_api.js
+          node tests/test_odds_api.js

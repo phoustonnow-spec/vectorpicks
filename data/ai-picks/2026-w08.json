@@ -1,0 +1,844 @@
+{
+  "season": 2026,
+  "week": 8,
+  "as_of": "Sat Oct 31, 2026",
+  "intro": "Same prompt, four AIs, and us. Entertainment only. Graded at the Westgate SuperContest line each side was asked.",
+  "prompt_note": "Asked Saturday Oct 31, 2026 on the Westgate SuperContest Week 8 lines. CAR @ GB (Thursday) is excluded. Top 5s are graded at flat 1 unit. All 13 games are pending.",
+  "line_source": "Westgate SuperContest Week 8 sheet (Thu Oct 29, 2026)",
+  "line_label": "Westgate line",
+  "score_source": "ESPN NFL scoreboard week 8 seasontype 2 dates 2026, snapshot data/verified-finals-2026-11-07.json. All 13 games on this board are final. CAR @ GB is not on this board. Lines unchanged from the original Westgate board.",
+  "games": [
+    {
+      "game": "MIN@DET",
+      "label": "MIN @ DET",
+      "day": "Sun",
+      "date": "2026-11-01",
+      "westgate": "DET -3.5",
+      "score": {
+        "away": 15,
+        "home": 19,
+        "status": "final"
+      },
+      "final": "MIN 15, DET 19"
+    },
+    {
+      "game": "LV@NYJ",
+      "label": "LV @ NYJ",
+      "day": "Sun",
+      "date": "2026-11-01",
+      "westgate": "NYJ -1.5",
+      "score": {
+        "away": 38,
+        "home": 33,
+        "status": "final"
+      },
+      "final": "LV 38, NYJ 33"
+    },
+    {
+      "game": "ARI@DAL",
+      "label": "ARI @ DAL",
+      "day": "Sun",
+      "date": "2026-11-01",
+      "westgate": "DAL -6.5",
+      "score": {
+        "away": 33,
+        "home": 30,
+        "status": "final"
+      },
+      "final": "ARI 33, DAL 30"
+    },
+    {
+      "game": "ATL@TB",
+      "label": "ATL @ TB",
+      "day": "Sun",
+      "date": "2026-11-01",
+      "westgate": "TB -2.5",
+      "score": {
+        "away": 0,
+        "home": 16,
+        "status": "final"
+      },
+      "final": "ATL 0, TB 16"
+    },
+    {
+      "game": "BAL@BUF",
+      "label": "BAL @ BUF",
+      "day": "Sun",
+      "date": "2026-11-01",
+      "westgate": "BUF -3.5",
+      "score": {
+        "away": 10,
+        "home": 36,
+        "status": "final"
+      },
+      "final": "BAL 10, BUF 36"
+    },
+    {
+      "game": "IND@JAX",
+      "label": "IND @ JAX",
+      "day": "Sun",
+      "date": "2026-11-01",
+      "westgate": "JAX -9.5",
+      "score": {
+        "away": 7,
+        "home": 42,
+        "status": "final"
+      },
+      "final": "IND 7, JAX 42"
+    },
+    {
+      "game": "TEN@CIN",
+      "label": "TEN @ CIN",
+      "day": "Sun",
+      "date": "2026-11-01",
+      "westgate": "CIN -10.5",
+      "score": {
+        "away": 36,
+        "home": 43,
+        "status": "final"
+      },
+      "final": "TEN 36, CIN 43"
+    },
+    {
+      "game": "CLE@PIT",
+      "label": "CLE @ PIT",
+      "day": "Sun",
+      "date": "2026-11-01",
+      "westgate": "PIT -3.5",
+      "score": {
+        "away": 6,
+        "home": 27,
+        "status": "final"
+      },
+      "final": "CLE 6, PIT 27"
+    },
+    {
+      "game": "LAC@LAR",
+      "label": "LAC @ LAR",
+      "day": "Sun",
+      "date": "2026-11-01",
+      "westgate": "LAR -6.5",
+      "score": {
+        "away": 9,
+        "home": 24,
+        "status": "final"
+      },
+      "final": "LAC 9, LAR 24"
+    },
+    {
+      "game": "KC@DEN",
+      "label": "KC @ DEN",
+      "day": "Sun",
+      "date": "2026-11-01",
+      "westgate": "DEN +1",
+      "score": {
+        "away": 24,
+        "home": 28,
+        "status": "final"
+      },
+      "final": "KC 24, DEN 28"
+    },
+    {
+      "game": "NE@MIA",
+      "label": "NE @ MIA",
+      "day": "Sun",
+      "date": "2026-11-01",
+      "westgate": "MIA +7",
+      "score": {
+        "away": 24,
+        "home": 19,
+        "status": "final"
+      },
+      "final": "NE 24, MIA 19"
+    },
+    {
+      "game": "PHI@WAS",
+      "label": "PHI @ WAS",
+      "day": "Sun",
+      "date": "2026-11-01",
+      "westgate": "WAS -5.5",
+      "score": {
+        "away": 10,
+        "home": 27,
+        "status": "final"
+      },
+      "final": "PHI 10, WAS 27"
+    },
+    {
+      "game": "CHI@SEA",
+      "label": "CHI @ SEA",
+      "day": "Mon",
+      "date": "2026-11-02",
+      "westgate": "SEA -3",
+      "score": {
+        "away": 34,
+        "home": 17,
+        "status": "final"
+      },
+      "final": "CHI 34, SEA 17"
+    }
+  ],
+  "ais": [
+    {
+      "id": "claude",
+      "name": "Claude",
+      "received": "Sat Oct 31, 2026",
+      "sides": {
+        "MIN@DET": {
+          "pick": "MIN +3.5",
+          "score": "DET 20, MIN 17",
+          "confidence": "Medium",
+          "reason": "Detroit opened -4.5 and the money has pushed it toward Minnesota, and Caesars says it will likely need the Vikings and the under. No Vikings game since Week 1 has topped 39 combined points, Detroit is without S Kerby Joseph, and the hook over 3 matters in a 46-point game."
+        },
+        "LV@NYJ": {
+          "pick": "NYJ -1.5",
+          "score": "NYJ 24, LV 21",
+          "confidence": "Low",
+          "reason": "Coin flip, but Vegas ranks 31st in EPA per rush and 32nd in rushing success, has allowed multiple passing TDs in five straight games and faces a 10 a.m. body-clock kickoff. The Jets' offense moves the ball and gets the softest defense it has seen."
+        },
+        "ARI@DAL": {
+          "pick": "DAL -6.5",
+          "score": "DAL 31, ARI 20",
+          "confidence": "Medium",
+          "reason": "Arizona has given up 30 or more in six games, is again missing RG Jon Gaines and DT Walter Nolen, and stays with Brissett at Dallas. Dallas ran for 204 on Philly, sharps took the Cowboys at -6 and -6.5, and this 6.5 beats the books' 7."
+        },
+        "ATL@TB": {
+          "pick": "TB -2.5",
+          "score": "TB 23, ATL 20",
+          "confidence": "Low",
+          "reason": "Tampa's defense has quietly played at an elite level and Mayfield is back after an 11-attempt tune-up. Egbuka is out, so this rides the run game and the defense; the market cut Bijan's rushing line, a sign it expects Tampa's front to hold."
+        },
+        "BAL@BUF": {
+          "pick": "BAL +3.5",
+          "score": "BUF 30, BAL 28",
+          "confidence": "Medium",
+          "reason": "Lamar returns against a Bills defense that ranks last in EPA per play and has allowed 30 or more four times. Sharp money moved books from Ravens +4 to +3, the SuperContest still gives the hook, and Kincaid, DJ Moore and Spencer Brown are all questionable for Buffalo."
+        },
+        "IND@JAX": {
+          "pick": "IND +9.5",
+          "score": "JAX 24, IND 16",
+          "confidence": "Medium",
+          "reason": "The number jumped two full points on the Nelson and Buckner trades; power-rating models make it closer to 6.5. Jacksonville's run defense will bottle Taylor, but Lawrence's passing line has dropped 12 yards and this Jags offense is not built to run away. Warren is back for Jones."
+        },
+        "TEN@CIN": {
+          "pick": "CIN -10.5",
+          "score": "CIN 31, TEN 14",
+          "confidence": "Medium",
+          "reason": "Tennessee traded Simmons on Thursday after giving up 491 yards to Cleveland and now plays without Tate and Spears. Cincinnati scored on five straight drives after a 13-0 halftime deficit in Baltimore; this 10.5 sits one to two points under the books, where sharps hit the Bengals from -7 up to -12.5."
+        },
+        "CLE@PIT": {
+          "pick": "PIT -3.5",
+          "score": "PIT 23, CLE 17",
+          "confidence": "Low",
+          "reason": "Watt, Highsmith and Ramsey are all in for a defense that held its last three opponents to 22, 19 and 10. Cleveland's wins keep coming by three to five points and it converts 32.6% on third down; the Paris hangover and the hook are the risks."
+        },
+        "LAC@LAR": {
+          "pick": "LAR -6.5",
+          "score": "LAR 27, LAC 16",
+          "confidence": "Medium",
+          "reason": "The Chargers are 0-6 and 0-5-1 ATS and lose Derwin James and G Kayode Awosika. The Rams' run game got going against Vegas, and power-rating models show this as the biggest gap on the board."
+        },
+        "KC@DEN": {
+          "pick": "DEN +1",
+          "score": "DEN 20, KC 17",
+          "confidence": "Medium",
+          "reason": "Kansas City managed 213 yards in Seattle and still lacks a deep threat even with Rice back. Denver is 3-0 ATS at home and covered its one home-dog spot, sharps took Broncos +2, and Denver has beaten KC three straight at Mile High. Risk: Walker ran for 173 on this run defense in Week 1."
+        },
+        "NE@MIA": {
+          "pick": "NE -7",
+          "score": "NE 27, MIA 17",
+          "confidence": "Medium",
+          "reason": "Maye has finished QB1, QB1, QB3 and QB2 the past four weeks and faces a Miami defense with six sacks all season, which blunts the two missing guards. Miami ranks 27th in points per drive and 29th in score rate with Willis at QB; A.J. Brown's Saturday status is the swing."
+        },
+        "PHI@WAS": {
+          "pick": "WAS -5.5",
+          "score": "WAS 24, PHI 13",
+          "confidence": "High",
+          "reason": "The Eagles are 1-6 ATS, start McKee with Hurts on IR, lost Smith and Wicks, and play a short week against a Washington team off its bye. This 5.5 beats the books' 6, and Smith and Wicks are both out. Payne and Kinlaw out invite Barkley, the lone risk."
+        },
+        "CHI@SEA": {
+          "pick": "CHI +3",
+          "score": "SEA 24, CHI 23",
+          "confidence": "Low",
+          "reason": "Chicago has scored 30 or more in every game Williams started and finished, has the rest edge off Thursday and adds Simmons inside. Seattle's offense is not rolling and Byron Murphy is questionable; three is the key number, and Seattle's defense is the reason this is not a top-five play."
+        }
+      },
+      "best_bets": [
+        {
+          "pick": "WAS -5.5",
+          "game": "PHI@WAS"
+        },
+        {
+          "pick": "DEN +1",
+          "game": "KC@DEN"
+        },
+        {
+          "pick": "LAR -6.5",
+          "game": "LAC@LAR"
+        },
+        {
+          "pick": "BAL +3.5",
+          "game": "BAL@BUF"
+        },
+        {
+          "pick": "NE -7",
+          "game": "NE@MIA"
+        }
+      ],
+      "pick5": [
+        "WAS -5.5",
+        "DEN +1",
+        "LAR -6.5",
+        "BAL +3.5",
+        "NE -7"
+      ]
+    },
+    {
+      "id": "gemini",
+      "name": "Gemini",
+      "received": "Sat Oct 31, 2026",
+      "sides": {
+        "MIN@DET": {
+          "pick": "MIN +3.5",
+          "score": "DET 23, MIN 21",
+          "confidence": "Medium",
+          "reason": "Minnesota's undefeated 6-0 defense is elite at generating pressure and disguising coverages, while Detroit is missing top safety Kerby Joseph. With Aaron Jones and Brian O'Neill cleared to play, the Vikings have enough balance to stay inside the key number of three even with Jahmyr Gibbs and Amon-Ra St. Brown active for the Lions."
+        },
+        "LV@NYJ": {
+          "pick": "LV +1.5",
+          "score": "LV 20, NYJ 17",
+          "confidence": "Low",
+          "reason": "The Jets are banged up in the trenches with T'Vondre Sweat, Joseph Ossai, and Max Mitchell ruled out, and Breece Hall questionable with a quad injury. Despite a four-game skid against a tough schedule, the Raiders are the healthier, better-coached squad and shouldn't be catching points here."
+        },
+        "ARI@DAL": {
+          "pick": "DAL -6.5",
+          "score": "DAL 28, ARI 20",
+          "confidence": "Medium",
+          "reason": "Saving the crucial half-point off the current -7 market line makes Dallas the clear side against a vulnerable Arizona run defense allowing over 126 yards per game. Even without KaVontae Turpin and Dee Winters, Dallas's offense will score too efficiently for an Arizona unit missing OL Jon Gaines II and DL Walter Nolen."
+        },
+        "ATL@TB": {
+          "pick": "TB -2.5",
+          "score": "TB 24, ATL 20",
+          "confidence": "Medium",
+          "reason": "Atlanta's upset of the 49ers last week was fueled by a +4 turnover margin despite being outgained by 1.5 yards per play. Even with rookie WR Emeka Egbuka out, Baker Mayfield and the Bucs' superior defense should handle an inconsistent Falcons squad beneath the key field-goal number."
+        },
+        "BAL@BUF": {
+          "pick": "BAL +3.5",
+          "score": "BUF 24, BAL 23",
+          "confidence": "High",
+          "reason": "Getting the hook on a historical field-goal rivalry where the last three meetings were decided by three points or fewer is prime SuperContest value. Lamar Jackson carries no injury designation returning from his ankle issue, and Buffalo has key questionables across the board in Dalton Kincaid, DJ Moore, and Spencer Brown."
+        },
+        "IND@JAX": {
+          "pick": "IND +9.5",
+          "score": "JAX 23, IND 16",
+          "confidence": "Medium",
+          "reason": "Indianapolis is shipping off talent in a rebuild, but laying nearly double digits with an inconsistent Jacksonville squad is overpriced. Power-rating models put this closer to JAX -6.5, so there is solid line value holding our noses with the divisional underdog."
+        },
+        "TEN@CIN": {
+          "pick": "CIN -10.5",
+          "score": "CIN 31, TEN 14",
+          "confidence": "High",
+          "reason": "Tennessee just waved the white flag on their season by trading cornerstone DT Jeffery Simmons to Chicago, and they will also be without offensive playmakers Tyjae Spears and Carnell Tate. Cincinnati ranks top-eight in both scoring offense and scoring defense, setting up a decisive blowout at Paycor Stadium."
+        },
+        "CLE@PIT": {
+          "pick": "CLE +3.5",
+          "score": "PIT 19, CLE 17",
+          "confidence": "Medium",
+          "reason": "Returning from Paris with no bye week puts a 22-PPG Steelers offense in a sluggish spot for a gritty AFC North divisional grinder with a 39.5 total. First-place Cleveland has covered five straight divisional games, making the hook above a field goal very valuable."
+        },
+        "LAC@LAR": {
+          "pick": "LAR -6.5",
+          "score": "LAR 27, LAC 16",
+          "confidence": "High",
+          "reason": "The winless Chargers cannot get out of their own way and will now be without star safety Derwin James, Deane Leonard, and guard Kayode Awosika. Backing Sean McVay's surging Rams aligns with the biggest power-rating edge of the week."
+        },
+        "KC@DEN": {
+          "pick": "KC -1",
+          "score": "KC 23, DEN 17",
+          "confidence": "Medium",
+          "reason": "Following an embarrassing 20-3 loss to Seattle, the Chiefs get Rashee Rice, Travis Kelce, and OT Jaylon Moore cleared to play. Meanwhile, Denver is missing safety Talanoa Hufanga and RB RJ Harvey, with OT Garett Bolles and DL Zach Allen questionable."
+        },
+        "NE@MIA": {
+          "pick": "MIA +7",
+          "score": "NE 23, MIA 19",
+          "confidence": "Low",
+          "reason": "New England is missing both starting guards and likely plays without A.J. Brown (missed Thursday/Friday practice), while RB TreVeyon Henderson is battling an illness. Miami got its first win last week, and Malik Willis's rushing ability should keep the Dolphins inside a full touchdown at home."
+        },
+        "PHI@WAS": {
+          "pick": "WAS -5.5",
+          "score": "WAS 24, PHI 17",
+          "confidence": "Medium",
+          "reason": "While Washington's defensive interior is depleted without Daron Payne and Javon Kinlaw to slow Saquon Barkley, the Eagles have dropped five straight and are decimated with DeVonta Smith, Dontayvion Wicks, Jihaad Campbell, and Jonathan Jones all out. Coming off a bye with a half-point discount vs. the current -6 market, Washington pulls away late."
+        },
+        "CHI@SEA": {
+          "pick": "CHI +3",
+          "score": "SEA 20, CHI 20 (OT: CHI 23, SEA 20)",
+          "confidence": "Medium",
+          "reason": "Thursday's blockbuster acquisition of Jeffery Simmons immediately upgrades a 5-2 ATS Bears defense facing a Seattle interior where DT Byron Murphy is questionable and RB Zach Charbonnet is limited. Caleb Williams and Rome Odunze are clicking well enough to take this heavyweight NFC clash down to the wire."
+        }
+      },
+      "best_bets": [
+        {
+          "pick": "LAR -6.5",
+          "game": "LAC@LAR"
+        },
+        {
+          "pick": "CIN -10.5",
+          "game": "TEN@CIN"
+        },
+        {
+          "pick": "BAL +3.5",
+          "game": "BAL@BUF"
+        },
+        {
+          "pick": "WAS -5.5",
+          "game": "PHI@WAS"
+        },
+        {
+          "pick": "CLE +3.5",
+          "game": "CLE@PIT"
+        }
+      ],
+      "pick5": [
+        "LAR -6.5",
+        "CIN -10.5",
+        "BAL +3.5",
+        "WAS -5.5",
+        "CLE +3.5"
+      ]
+    },
+    {
+      "id": "grok",
+      "name": "Grok",
+      "received": "Sat Oct 31, 2026",
+      "sides": {
+        "MIN@DET": {
+          "pick": "MIN +3.5",
+          "score": "MIN 17 DET 20",
+          "confidence": "Medium",
+          "reason": "Vikings' historically elite defense (league-best points allowed ~12.3 PPG, #1 in multiple advanced metrics) should keep the undefeated club competitive on the road against a high-scoring Lions team; power-rating models see only a 1-point Lions edge."
+        },
+        "LV@NYJ": {
+          "pick": "NYJ -1.5",
+          "score": "NYJ 23 LV 20",
+          "confidence": "Medium",
+          "reason": "Home Jets get the slight edge in a matchup of struggling teams, and the Raiders have been inconsistent."
+        },
+        "ARI@DAL": {
+          "pick": "DAL -6.5",
+          "score": "DAL 28 ARI 17",
+          "confidence": "Medium",
+          "reason": "Cowboys' higher-powered offense at home should exploit a weak Cardinals defense (2-5, poor point differential); the market and power-rating models both land near this number."
+        },
+        "ATL@TB": {
+          "pick": "TB -2.5",
+          "score": "TB 23 ATL 20",
+          "confidence": "Low",
+          "reason": "Close game between middling NFC South sides; Tampa's home field and a slight model lean offset Egbuka being out."
+        },
+        "BAL@BUF": {
+          "pick": "BUF -3.5",
+          "score": "BUF 26 BAL 20",
+          "confidence": "Medium",
+          "reason": "Bills and Josh Allen at home off the bye face a Ravens team with Lamar returning (full practice, no designation) but still not fully sharp."
+        },
+        "IND@JAX": {
+          "pick": "IND +9.5",
+          "score": "IND 20 JAX 27",
+          "confidence": "Medium",
+          "reason": "Large number against a struggling Colts squad; power-rating models have Jacksonville only ~6.5 points better."
+        },
+        "TEN@CIN": {
+          "pick": "CIN -10.5",
+          "score": "CIN 28 TEN 16",
+          "confidence": "Medium",
+          "reason": "Titans are depleted (Spears and Carnell Tate out) against a solid Bengals team with Burrow playing well; power-rating models land exactly on the number."
+        },
+        "CLE@PIT": {
+          "pick": "PIT -3.5",
+          "score": "PIT 23 CLE 19",
+          "confidence": "Medium",
+          "reason": "Home division game for the Steelers after the Paris trip; power-rating models see them nearly 6 points better and their defense is solid even if the offense averages ~22 PPG."
+        },
+        "LAC@LAR": {
+          "pick": "LAR -6.5",
+          "score": "LAR 27 LAC 16",
+          "confidence": "High",
+          "reason": "Winless Chargers (0-6) missing Derwin James face a better Rams team at home; the biggest power-rating gap from the market (model ~10.4)."
+        },
+        "KC@DEN": {
+          "pick": "DEN +1",
+          "score": "DEN 21 KC 20",
+          "confidence": "Medium",
+          "reason": "Tight AFC West matchup; power-rating models have Denver a slight favorite, and the Broncos have been solid at home despite Harvey and Hufanga out (Rice/Kelce cleared for KC)."
+        },
+        "NE@MIA": {
+          "pick": "NE -7",
+          "score": "NE 24 MIA 14",
+          "confidence": "High",
+          "reason": "Clear talent gap against a depleted Dolphins side (Achane out for the season), despite A.J. Brown being questionable and some OL issues."
+        },
+        "PHI@WAS": {
+          "pick": "WAS -5.5",
+          "score": "WAS 24 PHI 17",
+          "confidence": "High",
+          "reason": "Eagles without Jalen Hurts (out for the season, Tanner McKee starting) and missing top WRs (Smith and Wicks out); Barkley plays but the Commanders get the home edge and model support."
+        },
+        "CHI@SEA": {
+          "pick": "SEA -3",
+          "score": "SEA 22 CHI 19",
+          "confidence": "Low",
+          "reason": "Seahawks home edge against a strong Bears team; power-rating models are basically on the number, a close call with limited edge."
+        }
+      },
+      "best_bets": [
+        {
+          "pick": "LAR -6.5",
+          "game": "LAC@LAR"
+        },
+        {
+          "pick": "WAS -5.5",
+          "game": "PHI@WAS"
+        },
+        {
+          "pick": "NE -7",
+          "game": "NE@MIA"
+        },
+        {
+          "pick": "DAL -6.5",
+          "game": "ARI@DAL"
+        },
+        {
+          "pick": "IND +9.5",
+          "game": "IND@JAX"
+        }
+      ],
+      "pick5": [
+        "LAR -6.5",
+        "WAS -5.5",
+        "NE -7",
+        "DAL -6.5",
+        "IND +9.5"
+      ]
+    },
+    {
+      "id": "chatgpt",
+      "name": "ChatGPT",
+      "received": "Sat Oct 31, 2026",
+      "sides": {
+        "MIN@DET": {
+          "pick": "MIN +3.5",
+          "score": "MIN 24–DET 27",
+          "confidence": "Medium",
+          "reason": "Power-rating models make Detroit closer to a one-point favorite than 3.5; Kerby Joseph is out and Roger McCreary is questionable, although Gibbs and St. Brown are available. I like Minnesota's ability to keep this within a field goal."
+        },
+        "LV@NYJ": {
+          "pick": "NYJ -1.5",
+          "score": "LV 20–NYJ 23",
+          "confidence": "Medium",
+          "reason": "The short home number is reasonable. Breece Hall is questionable and David Bailey doubtful, so I wouldn't make this a high-confidence play."
+        },
+        "ARI@DAL": {
+          "pick": "DAL -6.5",
+          "score": "ARI 20–DAL 27",
+          "confidence": "Medium",
+          "reason": "Arizona has significant concerns in the trenches, with guard Jon Gaines out, defensive tackle Walter Nolen out and center Hjalte Froholdt questionable. Dallas has its own absences, but I prefer laying the Westgate 6.5 rather than the seven appearing elsewhere."
+        },
+        "ATL@TB": {
+          "pick": "TB -2.5",
+          "score": "ATL 20–TB 27",
+          "confidence": "Medium",
+          "reason": "Tampa gets the home-field advantage, and Baker Mayfield and Chris Godwin are available; Emeka Egbuka is out, but Atlanta also loses Brian Robinson and has several defensive players questionable. Power-rating models support the favorite."
+        },
+        "BAL@BUF": {
+          "pick": "BAL +3.5",
+          "score": "BAL 24–BUF 27",
+          "confidence": "Low",
+          "reason": "Lamar Jackson has no game designation and practiced fully, which makes Baltimore dangerous with more than a field goal. Buffalo has several questionable contributors, including Spencer Brown and Dalton Kincaid, but Baltimore's offensive-line concerns keep this from being a stronger pick."
+        },
+        "IND@JAX": {
+          "pick": "JAX -9.5",
+          "score": "IND 17–JAX 30",
+          "confidence": "Medium",
+          "reason": "This is where the Colts' late-week trades matter: losing Nelson and Buckner weakens both sides of their line. Nine and a half is a big number, but I believe Jacksonville has a better chance of creating a decisive trench advantage than the earlier power ratings suggest."
+        },
+        "TEN@CIN": {
+          "pick": "CIN -10.5",
+          "score": "TEN 17–CIN 31",
+          "confidence": "Medium",
+          "reason": "Tennessee has traded away Jeffery Simmons and is also without Tyjae Spears and Carnell Tate; Calvin Ridley remains questionable. Cincinnati has Ja'Marr Chase available, and I expect the Bengals to exploit Tennessee's reduced depth."
+        },
+        "CLE@PIT": {
+          "pick": "CLE +3.5",
+          "score": "CLE 20–PIT 23",
+          "confidence": "Medium",
+          "reason": "I respect Pittsburgh's home-field advantage, but Cleveland is 5-2 and has the defense to keep this close. Coming back from the Paris game last week and averaging roughly 22 points per game offensively, Pittsburgh doesn't convince me to lay more than a field goal."
+        },
+        "LAC@LAR": {
+          "pick": "LAR -6.5",
+          "score": "LAC 20–LAR 30",
+          "confidence": "High",
+          "reason": "This is my strongest favorite: power-rating models project the Rams near -10, and the Chargers are 0-6 while missing Derwin James, guard Kayode Awosika and defensive back Deane Leonard. I see a substantial matchup advantage for the Rams."
+        },
+        "KC@DEN": {
+          "pick": "DEN +1",
+          "score": "KC 23–DEN 24",
+          "confidence": "Medium",
+          "reason": "I think Denver is undervalued at home. Pat Surtain II is expected to return, although Hufanga and RJ Harvey are out and four Broncos remain questionable; Kansas City's Rice, Kelce and Moore are available."
+        },
+        "NE@MIA": {
+          "pick": "MIA +7",
+          "score": "NE 27–MIA 23",
+          "confidence": "Medium",
+          "reason": "Seven points is a lot to lay with New England given A.J. Brown's questionable status after missing the final two practices and the absence of both starting guards from the active roster. Miami's offensive-line injury is a concern, but I prefer the points."
+        },
+        "PHI@WAS": {
+          "pick": "WAS -5.5",
+          "score": "PHI 20–WAS 27",
+          "confidence": "Medium",
+          "reason": "Philadelphia is missing DeVonta Smith, Wicks, Campbell and Jonathan Jones, significantly reducing its available receiving and defensive options. Washington's losses of Payne and Kinlaw are important, especially with Barkley available, but I still like the Commanders at -5.5."
+        },
+        "CHI@SEA": {
+          "pick": "CHI +3",
+          "score": "CHI 23–SEA 24",
+          "confidence": "Low",
+          "reason": "Seattle's acquisition of Quenton Nelson improves its offensive line, but Charles Cross and Anthony Bradford did not practice Friday, while Charbonnet was limited. Chicago's acquisition of Simmons strengthens the case for taking the points, although his immediate integration is an uncertainty."
+        }
+      },
+      "best_bets": [
+        {
+          "pick": "LAR -6.5",
+          "game": "LAC@LAR"
+        },
+        {
+          "pick": "MIN +3.5",
+          "game": "MIN@DET"
+        },
+        {
+          "pick": "JAX -9.5",
+          "game": "IND@JAX"
+        },
+        {
+          "pick": "TB -2.5",
+          "game": "ATL@TB"
+        },
+        {
+          "pick": "WAS -5.5",
+          "game": "PHI@WAS"
+        }
+      ],
+      "pick5": [
+        "LAR -6.5",
+        "MIN +3.5",
+        "JAX -9.5",
+        "TB -2.5",
+        "WAS -5.5"
+      ]
+    }
+  ],
+  "vector": {
+    "name": "Super Agent Vector",
+    "received": "Thu Oct 29, 2026",
+    "sides": {
+      "MIN@DET": "MIN +3.5",
+      "LV@NYJ": "",
+      "ARI@DAL": "DAL -6.5",
+      "ATL@TB": "",
+      "BAL@BUF": "BAL +3.5",
+      "IND@JAX": "IND +9.5",
+      "TEN@CIN": "",
+      "CLE@PIT": "PIT -3.5",
+      "LAC@LAR": "LAR -6.5",
+      "KC@DEN": "",
+      "NE@MIA": "MIA +7",
+      "PHI@WAS": "PHI +5.5",
+      "CHI@SEA": "SEA -3"
+    },
+    "best_bets": [
+      {
+        "pick": "MIA +7",
+        "game": "NE@MIA"
+      }
+    ],
+    "leans": [
+      {
+        "pick": "MIN +3.5",
+        "game": "MIN@DET"
+      },
+      {
+        "pick": "DAL -6.5",
+        "game": "ARI@DAL"
+      },
+      {
+        "pick": "BAL +3.5",
+        "game": "BAL@BUF"
+      },
+      {
+        "pick": "IND +9.5",
+        "game": "IND@JAX"
+      },
+      {
+        "pick": "PIT -3.5",
+        "game": "CLE@PIT"
+      },
+      {
+        "pick": "LAR -6.5",
+        "game": "LAC@LAR"
+      },
+      {
+        "pick": "PHI +5.5",
+        "game": "PHI@WAS"
+      },
+      {
+        "pick": "SEA -3",
+        "game": "CHI@SEA"
+      }
+    ],
+    "lean_label": "Leans",
+    "pick5": []
+  },
+  "consensus": [
+    "MIN +3.5: all four AIs. Vector took MIN +3.5.",
+    "NYJ -1.5: Claude, Grok, and ChatGPT. Gemini took LV +1.5. Vector passed.",
+    "DAL -6.5: all four AIs. Vector took DAL -6.5.",
+    "TB -2.5: all four AIs. Vector passed.",
+    "BAL +3.5: Claude, Gemini, and ChatGPT. Grok took BUF -3.5. Vector took BAL +3.5.",
+    "IND +9.5: Claude, Gemini, and Grok. ChatGPT took JAX -9.5. Vector took IND +9.5.",
+    "CIN -10.5: all four AIs. Vector passed.",
+    "Split: PIT -3.5 (Claude and Grok) against CLE +3.5 (Gemini and ChatGPT). Vector took PIT -3.5.",
+    "LAR -6.5: all four AIs. Vector took LAR -6.5.",
+    "DEN +1: Claude, Grok, and ChatGPT. Gemini took KC -1. Vector passed.",
+    "Split: NE -7 (Claude and Grok) against MIA +7 (Gemini and ChatGPT). Vector took MIA +7.",
+    "WAS -5.5: all four AIs. Vector took PHI +5.5.",
+    "CHI +3: Claude, Gemini, and ChatGPT. Grok took SEA -3. Vector took SEA -3."
+  ],
+  "results": {
+    "MIN@DET": {
+      "MIN +3.5": "L"
+    },
+    "LV@NYJ": {
+      "LV +1.5": "W",
+      "NYJ -1.5": "L"
+    },
+    "ARI@DAL": {
+      "DAL -6.5": "L"
+    },
+    "ATL@TB": {
+      "TB -2.5": "W"
+    },
+    "BAL@BUF": {
+      "BAL +3.5": "L",
+      "BUF -3.5": "W"
+    },
+    "IND@JAX": {
+      "IND +9.5": "L",
+      "JAX -9.5": "W"
+    },
+    "TEN@CIN": {
+      "CIN -10.5": "L"
+    },
+    "CLE@PIT": {
+      "CLE +3.5": "L",
+      "PIT -3.5": "W"
+    },
+    "LAC@LAR": {
+      "LAR -6.5": "W"
+    },
+    "KC@DEN": {
+      "DEN +1": "W",
+      "KC -1": "L"
+    },
+    "NE@MIA": {
+      "MIA +7": "W",
+      "NE -7": "L"
+    },
+    "PHI@WAS": {
+      "PHI +5.5": "L",
+      "WAS -5.5": "W"
+    },
+    "CHI@SEA": {
+      "CHI +3": "W",
+      "SEA -3": "L"
+    }
+  },
+  "grades": {
+    "claude": {
+      "sides": [
+        6,
+        7,
+        0
+      ],
+      "sides_pending": 0,
+      "best_bet_units": 1,
+      "best_bets_pending": 0,
+      "pick5": [
+        3,
+        2,
+        0
+      ],
+      "pick5_pending": 0
+    },
+    "gemini": {
+      "sides": [
+        6,
+        7,
+        0
+      ],
+      "sides_pending": 0,
+      "best_bet_units": -1,
+      "best_bets_pending": 0,
+      "pick5": [
+        2,
+        3,
+        0
+      ],
+      "pick5_pending": 0
+    },
+    "grok": {
+      "sides": [
+        6,
+        7,
+        0
+      ],
+      "sides_pending": 0,
+      "best_bet_units": -1,
+      "best_bets_pending": 0,
+      "pick5": [
+        2,
+        3,
+        0
+      ],
+      "pick5_pending": 0
+    },
+    "chatgpt": {
+      "sides": [
+        7,
+        6,
+        0
+      ],
+      "sides_pending": 0,
+      "best_bet_units": 3,
+      "best_bets_pending": 0,
+      "pick5": [
+        4,
+        1,
+        0
+      ],
+      "pick5_pending": 0
+    },
+    "vector": {
+      "sides": [
+        3,
+        6,
+        0
+      ],
+      "sides_pending": 0,
+      "best_bet_units": 1,
+      "best_bets_pending": 0,
+      "pick5": null
+    }
+  },
+  "ungraded_games": [],
+  "graded": true,
+  "grade_note": "Finals added Nov 7, 2026 from the ESPN snapshot. Sides stay on the original Westgate lines in this file. CAR @ GB was not on this AI board. The Saturday short's tier changes are not written into these original responses."
+}

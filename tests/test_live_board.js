@@ -63,6 +63,8 @@ function testMath() {
   assert.strictEqual(live.fmtSigned(-4.75), "\u22124.75");
   assert.strictEqual(live.fmtSigned(-2.4), "\u22122.4");
   assert.strictEqual(live.fmtSigned(0.8), "+0.8");
+  assert.strictEqual(live.scoresUrl({ score_week: 9, score_season: 2026 }), "/api/scores?season=2026&week=9");
+  assert.strictEqual(live.scoresUrl({}), "/api/scores");
 }
 
 function row(html, matchup) {

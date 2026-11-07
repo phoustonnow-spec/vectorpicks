@@ -484,9 +484,18 @@
     return { games: [], teams: {} };
   }
 
-  async function loadScores() {
+  function scoresUrl(card) {
+    var week = card && card.score_week;
+    var season = card && card.score_season;
+    if (week && season) {
+      return "/api/scores?season=" + encodeURIComponent(season) + "&week=" + encodeURIComponent(week);
+    }
+    return "/api/scores";
+  }
+
+  async function loadScores(card) {
     try {
-      var res = await fetch("/api/scores", { headers: { accept: "application/json" }, cache: "no-store" });
+      var res = await fetch(scoresUrl(card), { headers: { accept: "application/json" }, cache: "no-store" });
       var data = await readJson(res);
       if (!res.ok || !data || data.error || !Array.isArray(data.games)) return null;
       return data;
@@ -533,7 +542,7 @@
         clearTimeout(timer);
         timer = null;
       }
-      var scores = await loadScores();
+      var scores = await loadScores(card);
       paint(scores);
       if (typeof document !== "undefined" && document.hidden) return;
       var delay = scores ? nextScoresDelay(scores.games) : SCORE_POLL_LIVE;
@@ -574,6 +583,7 @@
     mergeBoard: mergeBoard,
     nextScoresDelay: nextScoresDelay,
     sortBucket: sortBucket,
+    scoresUrl: scoresUrl,
   };
 
   if (typeof module !== "undefined" && module.exports) module.exports = api;

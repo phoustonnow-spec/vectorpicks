@@ -1,0 +1,834 @@
+{
+  "season": 2026,
+  "week": 9,
+  "as_of": "Wed Nov 4, 2026",
+  "intro": "Same prompt, four AIs, and us. Entertainment only. Graded at the DraftKings line each side was asked.",
+  "prompt_note": "Asked Wednesday Nov 4, 2026 (about 2 PM PT) on the DraftKings line, before the Westgate card was out. CIN @ ATL is in Madrid. Byes: PIT, TEN. Top 5s are graded at flat 1 unit. Vector has no official card or Best Bet yet, so its sides against the DraftKings line are shown as Leans, with no top 5. All 15 games are pending.",
+  "line_source": "DraftKings line, Wednesday Nov 4, 2026 (about 2 PM PT)",
+  "line_label": "DraftKings line",
+  "score_source": "ESPN NFL scoreboard week 9 seasontype 2 dates 2026, snapshot data/verified-finals-2026-11-07.json. Only JAX @ BAL is final (JAX 33, BAL 10). Other games were not final on Nov 7, 2026. Lines unchanged from the original DraftKings board.",
+  "games": [
+    {
+      "game": "JAX@BAL",
+      "label": "JAX @ BAL",
+      "day": "Thu",
+      "date": "2026-11-05",
+      "westgate": "BAL +10",
+      "kickoff_pt": "Thu night",
+      "score": {
+        "away": 33,
+        "home": 10,
+        "status": "final"
+      },
+      "final": "JAX 33, BAL 10"
+    },
+    {
+      "game": "CIN@ATL",
+      "label": "CIN @ ATL",
+      "day": "Sun",
+      "date": "2026-11-08",
+      "westgate": "ATL +3",
+      "kickoff_pt": "Madrid, 6:30 AM PT"
+    },
+    {
+      "game": "DEN@CAR",
+      "label": "DEN @ CAR",
+      "day": "Sun",
+      "date": "2026-11-08",
+      "westgate": "CAR +2.5"
+    },
+    {
+      "game": "CLE@NO",
+      "label": "CLE @ NO",
+      "day": "Sun",
+      "date": "2026-11-08",
+      "westgate": "NO -3"
+    },
+    {
+      "game": "DAL@IND",
+      "label": "DAL @ IND",
+      "day": "Sun",
+      "date": "2026-11-08",
+      "westgate": "IND +5.5"
+    },
+    {
+      "game": "DET@MIA",
+      "label": "DET @ MIA",
+      "day": "Sun",
+      "date": "2026-11-08",
+      "westgate": "MIA +7"
+    },
+    {
+      "game": "NYJ@KC",
+      "label": "NYJ @ KC",
+      "day": "Sun",
+      "date": "2026-11-08",
+      "westgate": "KC -10"
+    },
+    {
+      "game": "LAR@WAS",
+      "label": "LAR @ WAS",
+      "day": "Sun",
+      "date": "2026-11-08",
+      "westgate": "WAS +5.5"
+    },
+    {
+      "game": "NYG@PHI",
+      "label": "NYG @ PHI",
+      "day": "Sun",
+      "date": "2026-11-08",
+      "westgate": "PHI +3.5"
+    },
+    {
+      "game": "HOU@LAC",
+      "label": "HOU @ LAC",
+      "day": "Sun",
+      "date": "2026-11-08",
+      "westgate": "LAC +4.5"
+    },
+    {
+      "game": "LV@SF",
+      "label": "LV @ SF",
+      "day": "Sun",
+      "date": "2026-11-08",
+      "westgate": "SF -10"
+    },
+    {
+      "game": "ARI@SEA",
+      "label": "ARI @ SEA",
+      "day": "Sun",
+      "date": "2026-11-08",
+      "westgate": "SEA -8.5"
+    },
+    {
+      "game": "GB@NE",
+      "label": "GB @ NE",
+      "day": "Sun",
+      "date": "2026-11-08",
+      "westgate": "NE -3"
+    },
+    {
+      "game": "TB@CHI",
+      "label": "TB @ CHI",
+      "day": "Sun",
+      "date": "2026-11-08",
+      "westgate": "CHI -6",
+      "kickoff_pt": "Sun night"
+    },
+    {
+      "game": "BUF@MIN",
+      "label": "BUF @ MIN",
+      "day": "Mon",
+      "date": "2026-11-09",
+      "westgate": "MIN +3.5",
+      "kickoff_pt": "Mon night"
+    }
+  ],
+  "ais": [
+    {
+      "id": "claude",
+      "name": "Claude",
+      "received": "Wed Nov 4, 2026",
+      "sides": {
+        "JAX@BAL": {
+          "pick": "JAX -10",
+          "score": "JAX 27, BAL 13",
+          "confidence": "Medium",
+          "reason": "Undrafted rookie Joe Fagnano makes his first NFL start on a short week with Kedon Slovis as the backup, against an offense that averages 28 points and just hammered Indianapolis 42-7. The power-rating models' BAL +2.6 can't include a third-string QB, so it gets no weight here; the risk is Roquan Smith and Hendrickson back at full practice and a run-heavy script keeping it 23-13."
+        },
+        "CIN@ATL": {
+          "pick": "CIN -3",
+          "score": "CIN 30, ATL 24",
+          "confidence": "Low",
+          "reason": "Burrow threw for 462 yards last week and Cincinnati averages 29.4 points; Atlanta was shut out 16-0 in Tampa and is 3-5 straight up and against the spread. Low because the Bengals needed 43 points to beat Tennessee by 7 and Bijan can keep a neutral-site game inside the field goal."
+        },
+        "DEN@CAR": {
+          "pick": "CAR +2.5",
+          "score": "CAR 24, DEN 21",
+          "confidence": "Medium",
+          "reason": "More than 80% of the money is on Denver and the number still sits at 2.5 after trading at 3 on Tuesday: books are holding the Panthers side. Carolina has 10 days of rest off its Thursday loss, Denver flies east for an 11 a.m. body-clock kickoff, and the Broncos have injury concerns at both safety spots against a Carolina offense averaging 25.4."
+        },
+        "CLE@NO": {
+          "pick": "CLE +3",
+          "score": "NO 19, CLE 17",
+          "confidence": "Low",
+          "reason": "Watson is in concussion protocol and Shedeur Sanders is in line to start, and the market moved only a half point on it, which says Watson wasn't carrying the 5-3 record. Cleveland's defense keeps a 2-5 Saints team coming off its bye inside the field goal; the worry is Barber, Collins and Quincy Williams also missing practice."
+        },
+        "DAL@IND": {
+          "pick": "DAL -5.5",
+          "score": "DAL 31, IND 20",
+          "confidence": "Medium",
+          "reason": "Indianapolis fired its GM, traded Nelson and Buckner and is shopping Jonathan Taylor, and its offense has 15 turnovers in eight games. It's the public side at more than 80% of the money, but a sell-mode roster with Daniel Jones can't trade scores with Dak; the risk is Taylor against the league's worst run defense with Downs and Locke in concussion protocol."
+        },
+        "DET@MIA": {
+          "pick": "MIA +7",
+          "score": "DET 27, MIA 21",
+          "confidence": "Low",
+          "reason": "Key number 7 for a cold-weather team playing a 1 p.m. game in Miami heat, after Detroit won its last two by 3 and 4 and lost Jack Campbell to a hospital stay with a neck injury. The Lions' 29 points a game is why it's Low."
+        },
+        "NYJ@KC": {
+          "pick": "KC -10",
+          "score": "KC 30, NYJ 17",
+          "confidence": "Low",
+          "reason": "Kansas City allows 18.7 a game, fourth best, and the Jets have two wins; New York just gave up 38 to Las Vegas. Low because the Chiefs scored 3 in Seattle two weeks ago and 10 is a lot for an offense still looking for itself."
+        },
+        "LAR@WAS": {
+          "pick": "WAS +5.5",
+          "score": "LAR 24, WAS 21",
+          "confidence": "High",
+          "reason": "Power-rating models make the Rams 2.6 points weaker than the market and another model has Washington covering almost 60% of the time. Stafford's arm soreness has pulled the total from 50.5 to 47.5, the Rams draw the West Coast 10 a.m. body-clock kickoff, and Washington just held Philadelphia to 10."
+        },
+        "NYG@PHI": {
+          "pick": "NYG -3.5",
+          "score": "NYG 23, PHI 13",
+          "confidence": "Medium",
+          "reason": "The number went from 2.5 through 3 to 3.5, a sharp buy on a Giants team off its bye. Philadelphia starts Milton over McKee for an offense ranked 30th at 17.1 points a game with DeVonta Smith's hamstring in question; power-rating models rate the Eagles below the market too."
+        },
+        "HOU@LAC": {
+          "pick": "HOU -4.5",
+          "score": "HOU 23, LAC 13",
+          "confidence": "Medium",
+          "reason": "The Chargers average 14.1 points and are 0-7 after scoring 9 on the Rams; Houston comes off its bye with the defense to hold that offense under two touchdowns. It's 91% public and the line moved with the crowd from 3 to 4.5, so the extra points are the only thing keeping this from High."
+        },
+        "LV@SF": {
+          "pick": "SF -10",
+          "score": "SF 34, LV 20",
+          "confidence": "Low",
+          "reason": "San Francisco averages 28.1, comes off its bye at home, and Las Vegas allowed 33 to the Jets and 35 to the Rams the last two weeks. Low because the Raiders scored 38 and 21 in those games and the number already climbed from 8.5."
+        },
+        "ARI@SEA": {
+          "pick": "ARI +8.5",
+          "score": "SEA 23, ARI 17",
+          "confidence": "Medium",
+          "reason": "Darnold is out and Drew Lock starts, a week after the elbow made him the emergency third QB behind Milroe on Monday night, now on a short week. Seattle's defense keeps it in front, but a Lock offense scoring the 25 this number needs is a stretch; the caveat is Arizona's own losses at running back and receiver."
+        },
+        "GB@NE": {
+          "pick": "GB +3",
+          "score": "GB 24, NE 21",
+          "confidence": "High",
+          "reason": "Power-rating models have New England 2 points weaker than the market, FPI makes it Patriots by 1.7, and another model sides with Green Bay 23-20. The Packers have 10 days of rest off Thursday night while both teams score about 21 a game: a full field goal in a coin flip."
+        },
+        "TB@CHI": {
+          "pick": "TB +6",
+          "score": "CHI 24, TB 21",
+          "confidence": "Medium",
+          "reason": "Power-rating models make Chicago about a 3-point favorite, not 6, and the Bears play Sunday night six days after a Monday night game in Seattle. Tampa's defense just shut out Atlanta; the hole is Diaby out, which loosens the rush on Caleb Williams."
+        },
+        "BUF@MIN": {
+          "pick": "MIN +3.5",
+          "score": "BUF 24, MIN 21",
+          "confidence": "Medium",
+          "reason": "Buffalo is drawing 79% of the early handle and the number still hasn't moved past 3.5, a tell toward the home dog with the hook past 3. Minnesota's defense is why it's 6-1 with an offense ranked 29th in yards; Murray hasn't practiced and Wentz would start, which barely changes what this offense is."
+        }
+      },
+      "best_bets": [
+        {
+          "pick": "WAS +5.5",
+          "game": "LAR@WAS"
+        },
+        {
+          "pick": "GB +3",
+          "game": "GB@NE"
+        },
+        {
+          "pick": "CAR +2.5",
+          "game": "DEN@CAR"
+        },
+        {
+          "pick": "TB +6",
+          "game": "TB@CHI"
+        },
+        {
+          "pick": "NYG -3.5",
+          "game": "NYG@PHI"
+        }
+      ],
+      "pick5": [
+        "WAS +5.5",
+        "GB +3",
+        "CAR +2.5",
+        "TB +6",
+        "NYG -3.5"
+      ]
+    },
+    {
+      "id": "gemini",
+      "name": "Gemini",
+      "received": "Wed Nov 4, 2026",
+      "sides": {
+        "JAX@BAL": {
+          "pick": "JAX -10",
+          "score": "JAX 27, BAL 13",
+          "confidence": "High",
+          "reason": "Baltimore turns to an emergency third-string passer on a short week without Lamar Jackson or Tyler Huntley, leaving an already compromised offense vulnerable to Jacksonville's front."
+        },
+        "CIN@ATL": {
+          "pick": "CIN -3",
+          "score": "CIN 26, ATL 20",
+          "confidence": "Medium",
+          "reason": "Cincinnati's explosive passing offense holds a distinct tactical edge over an Atlanta defense coming off a shutout loss, making the Madrid neutral field favorable for the Bengals."
+        },
+        "DEN@CAR": {
+          "pick": "DEN -2.5",
+          "score": "DEN 23, CAR 17",
+          "confidence": "Medium",
+          "reason": "Denver's defense remains stout coming off an upset win over Kansas City, and laying under a field goal is strong value against an inconsistent Carolina attack."
+        },
+        "CLE@NO": {
+          "pick": "NO -3",
+          "score": "NO 21, CLE 16",
+          "confidence": "Low",
+          "reason": "With Deshaun Watson missing practice and Cleveland struggling to generate points on the road, New Orleans has the defensive stability at home to cover the key number."
+        },
+        "DAL@IND": {
+          "pick": "DAL -5.5",
+          "score": "DAL 27, IND 20",
+          "confidence": "Medium",
+          "reason": "Indianapolis was dismantled by Jacksonville last week and lacks the secondary discipline to contain Dallas's aerial attack, even with minor concussions impacting the Cowboys' peripheral depth."
+        },
+        "DET@MIA": {
+          "pick": "DET -7",
+          "score": "DET 31, MIA 21",
+          "confidence": "High",
+          "reason": "Detroit's potent run-game and offensive line create a major mismatch in the trenches against a 1-6 Miami team struggling to string together defensive stops."
+        },
+        "NYJ@KC": {
+          "pick": "NYJ +10",
+          "score": "KC 24, NYJ 17",
+          "confidence": "Medium",
+          "reason": "Kansas City's offense has not consistently separated by double digits, and catching ten full points offers cushion against a Jets team capable of turning this into an ugly, low-event game."
+        },
+        "LAR@WAS": {
+          "pick": "WAS +5.5",
+          "score": "LAR 24, WAS 20",
+          "confidence": "Medium",
+          "reason": "With Matthew Stafford managing elbow/arm soreness and power-rating models marking the Rams as overvalued, Washington's defensive front can keep this within a one-possession margin at home."
+        },
+        "NYG@PHI": {
+          "pick": "NYG -3.5",
+          "score": "NYG 23, PHI 16",
+          "confidence": "High",
+          "reason": "Philadelphia's offense is fundamentally compromised with Jalen Hurts on IR and Joe Milton stepping under center, allowing New York's aggressive front to dictate terms."
+        },
+        "HOU@LAC": {
+          "pick": "HOU -4.5",
+          "score": "HOU 24, LAC 16",
+          "confidence": "Medium",
+          "reason": "The Chargers remain winless at 0-7 and have cratered offensively, making Houston's balanced pass-rush unit well positioned to cover the road number."
+        },
+        "LV@SF": {
+          "pick": "SF -10",
+          "score": "SF 30, LV 17",
+          "confidence": "High",
+          "reason": "San Francisco is clicking at 6-1 and possesses the trench dominance to pull away late against a Raiders squad that concedes chunk plays in bunches."
+        },
+        "ARI@SEA": {
+          "pick": "ARI +8.5",
+          "score": "SEA 24, ARI 20",
+          "confidence": "High",
+          "reason": "Seattle loses significant offensive efficiency with Sam Darnold ruled out and Drew Lock battling elbow soreness, giving Gardner Minshew and Arizona ample room to cover this inflated spread."
+        },
+        "GB@NE": {
+          "pick": "GB +3",
+          "score": "GB 23, NE 21",
+          "confidence": "Medium",
+          "reason": "Power-rating models flag New England as roughly two points overvalued by the market, creating strong leverage on Green Bay as a full field-goal underdog."
+        },
+        "TB@CHI": {
+          "pick": "TB +6",
+          "score": "CHI 23, TB 20",
+          "confidence": "Medium",
+          "reason": "Chicago has built a strong record but sits inflated as nearly a touchdown favorite on Sunday night; Tampa Bay's defensive structure keeps this tight despite YaYa Diaby's absence."
+        },
+        "BUF@MIN": {
+          "pick": "BUF -3.5",
+          "score": "BUF 27, MIN 21",
+          "confidence": "Medium",
+          "reason": "Buffalo is firing on all cylinders after routing Baltimore, and Kyler Murray's lingering hamstring issue threatens Minnesota's ability to trade blows in a high-leverage primetime spot."
+        }
+      },
+      "best_bets": [
+        {
+          "pick": "ARI +8.5",
+          "game": "ARI@SEA"
+        },
+        {
+          "pick": "NYG -3.5",
+          "game": "NYG@PHI"
+        },
+        {
+          "pick": "JAX -10",
+          "game": "JAX@BAL"
+        },
+        {
+          "pick": "SF -10",
+          "game": "LV@SF"
+        },
+        {
+          "pick": "DET -7",
+          "game": "DET@MIA"
+        }
+      ],
+      "pick5": [
+        "ARI +8.5",
+        "NYG -3.5",
+        "JAX -10",
+        "SF -10",
+        "DET -7"
+      ]
+    },
+    {
+      "id": "grok",
+      "name": "Grok",
+      "received": "Wed Nov 4, 2026",
+      "sides": {
+        "JAX@BAL": {
+          "pick": "JAX -10",
+          "score": "JAX 27, BAL 14",
+          "confidence": "High",
+          "reason": "Jacksonville's efficient offense and defense face an undrafted rookie in Joe Fagnano making his first start on a short week after a rough debut vs. Buffalo; the Ravens' QB depth is gutted with Jackson and Huntley out."
+        },
+        "CIN@ATL": {
+          "pick": "CIN -3",
+          "score": "CIN 29, ATL 23",
+          "confidence": "Medium",
+          "reason": "Burrow and the Bengals' offense have been productive, and Cincinnati is the more complete team in this neutral-site game in Madrid against a struggling Falcons squad."
+        },
+        "DEN@CAR": {
+          "pick": "DEN -2.5",
+          "score": "DEN 24, CAR 17",
+          "confidence": "Medium",
+          "reason": "The 6-2 Broncos are more stable; Carolina's defense has been leaky (leading to a coordinator firing) and is facing a solid Denver team on the road."
+        },
+        "CLE@NO": {
+          "pick": "NO -3",
+          "score": "NO 20, CLE 16",
+          "confidence": "Medium",
+          "reason": "Deshaun Watson is in concussion protocol and unlikely to play, pushing Shedeur Sanders into the lineup; the Saints at home off the bye have a clearer path against a Browns offense that has been inconsistent."
+        },
+        "DAL@IND": {
+          "pick": "DAL -5.5",
+          "score": "DAL 26, IND 18",
+          "confidence": "Medium",
+          "reason": "Dallas has the better offensive talent and is favored on the road against a struggling 2-6 Colts team, even with some Cowboys injury questions on the injury report."
+        },
+        "DET@MIA": {
+          "pick": "DET -7",
+          "score": "DET 31, MIA 17",
+          "confidence": "High",
+          "reason": "Clear mismatch: the 5-2 Lions' offense and defense are superior to a 1-6 Dolphins team that has struggled to generate points or stops."
+        },
+        "NYJ@KC": {
+          "pick": "KC -10",
+          "score": "KC 28, NYJ 14",
+          "confidence": "Medium",
+          "reason": "Mahomes and the Chiefs at home should control against a limited Jets team; Kansas City's talent edge is significant even if the number is large."
+        },
+        "LAR@WAS": {
+          "pick": "LAR -5.5",
+          "score": "LAR 24, WAS 17",
+          "confidence": "Medium",
+          "reason": "Stafford is expected to play and the Rams have been more efficient; Washington is a weaker opponent despite power-rating models' slight downgrade on the Rams relative to the market."
+        },
+        "NYG@PHI": {
+          "pick": "NYG -3.5",
+          "score": "NYG 21, PHI 13",
+          "confidence": "High",
+          "reason": "The Eagles are in freefall at 2-6 and just switched to Joe Milton after Tanner McKee's struggles; the Giants (4-2-1) are the better team and should handle a depleted Philadelphia offense."
+        },
+        "HOU@LAC": {
+          "pick": "HOU -4.5",
+          "score": "HOU 20, LAC 13",
+          "confidence": "Medium",
+          "reason": "The Chargers are 0-7 and have shown little resistance; Houston is far from elite but should control this matchup on the road against a bottom-tier team."
+        },
+        "LV@SF": {
+          "pick": "SF -10",
+          "score": "SF 31, LV 17",
+          "confidence": "High",
+          "reason": "The 49ers come off a bye as one of the league's most efficient teams and are strong at home; the Raiders don't match up well against San Francisco's talent and scheme."
+        },
+        "ARI@SEA": {
+          "pick": "SEA -8.5",
+          "score": "SEA 27, ARI 16",
+          "confidence": "Medium",
+          "reason": "Drew Lock starts with Sam Darnold out, but Lock previously beat these Cardinals convincingly; Seattle is at home and Arizona is starting Minshew with limited supporting firepower."
+        },
+        "GB@NE": {
+          "pick": "GB +3",
+          "score": "GB 23, NE 20",
+          "confidence": "Medium",
+          "reason": "Close contest between similar 5-3 teams; power-rating models have New England a bit weaker than the market, and the Packers have enough offense to keep this within the number on the road."
+        },
+        "TB@CHI": {
+          "pick": "CHI -6",
+          "score": "CHI 27, TB 20",
+          "confidence": "Medium",
+          "reason": "Chicago is surging after a statement win over Seattle and has momentum at home; Tampa is 3-5 with Diaby out, though power-rating models see Chicago as a slightly smaller favorite than the market."
+        },
+        "BUF@MIN": {
+          "pick": "BUF -3.5",
+          "score": "BUF 24, MIN 19",
+          "confidence": "Medium",
+          "reason": "The Bills are strong and on the road against a Vikings team with Kyler Murray's hamstring status unresolved (Wentz possible); Minnesota's defense is solid but the Bills' offense should create enough separation."
+        }
+      },
+      "best_bets": [
+        {
+          "pick": "DET -7",
+          "game": "DET@MIA"
+        },
+        {
+          "pick": "SF -10",
+          "game": "LV@SF"
+        },
+        {
+          "pick": "NYG -3.5",
+          "game": "NYG@PHI"
+        },
+        {
+          "pick": "JAX -10",
+          "game": "JAX@BAL"
+        },
+        {
+          "pick": "KC -10",
+          "game": "NYJ@KC"
+        }
+      ],
+      "pick5": [
+        "DET -7",
+        "SF -10",
+        "NYG -3.5",
+        "JAX -10",
+        "KC -10"
+      ]
+    },
+    {
+      "id": "chatgpt",
+      "name": "ChatGPT",
+      "received": "Wed Nov 4, 2026",
+      "sides": {
+        "JAX@BAL": {
+          "pick": "JAX -10",
+          "score": "JAX 27–BAL 13",
+          "confidence": "Medium",
+          "reason": "Baltimore has to start undrafted rookie Joe Fagnano in his first NFL start, with Lamar Jackson and Tyler Huntley unavailable. The Brissett trade won't be completed in time for Thursday, making this a major disadvantage against Jacksonville."
+        },
+        "CIN@ATL": {
+          "pick": "CIN -3",
+          "score": "CIN 28–ATL 23",
+          "confidence": "Medium",
+          "reason": "Cincinnati has the No. 3 overall offense and No. 2 passing offense, giving it an advantage at a neutral site. Atlanta's ability to generate pressure and exploit Cincinnati's vulnerable explosive-play defense makes this a tougher matchup than the records suggest."
+        },
+        "DEN@CAR": {
+          "pick": "DEN -2.5",
+          "score": "DEN 23–CAR 17",
+          "confidence": "Medium",
+          "reason": "Denver's defense ranks No. 4 overall, and Carolina's offense faces difficult passing and pressure matchups. I like Denver's defensive advantage more than I worry about its relatively average offense."
+        },
+        "CLE@NO": {
+          "pick": "CLE +3",
+          "score": "NO 20–CLE 19",
+          "confidence": "Low",
+          "reason": "Watson's concussion-protocol situation creates real uncertainty for Cleveland's offense, but the Browns have a strong defense that should limit New Orleans. Cleveland's rushing matchup against the Saints also gives the underdog a path to stay within the number."
+        },
+        "DAL@IND": {
+          "pick": "IND +5.5",
+          "score": "DAL 28–IND 24",
+          "confidence": "Low",
+          "reason": "Dallas has the better passing matchup, but Indianapolis has the No. 4 rushing offense against a Cowboys defense ranked poorly against the run. Dallas also has important secondary injury concerns involving Caleb Downs and P.J. Locke."
+        },
+        "DET@MIA": {
+          "pick": "DET -7",
+          "score": "DET 31–MIA 20",
+          "confidence": "High",
+          "reason": "Detroit's No. 5 offense faces Miami's No. 28 defense, with advantages in passing, rushing and explosive plays. Miami's offense has struggled, and I expect Detroit to create separation."
+        },
+        "NYJ@KC": {
+          "pick": "KC -10",
+          "score": "KC 28–NYJ 17",
+          "confidence": "Medium",
+          "reason": "Kansas City's No. 6 offense has a significant overall matchup advantage against the Jets' No. 24 defense. New York is also without Breece Hall, while Kansas City's home-field advantage helps justify laying the points."
+        },
+        "LAR@WAS": {
+          "pick": "WAS +5.5",
+          "score": "LAR 24–WAS 20",
+          "confidence": "Medium",
+          "reason": "The Rams are clearly the stronger team, but I think this number is a little inflated. The power-rating models' 2.6-point disagreement matters, and Stafford's arm soreness adds some uncertainty even though he is expected to play."
+        },
+        "NYG@PHI": {
+          "pick": "NYG -3.5",
+          "score": "NYG 23–PHI 16",
+          "confidence": "Medium",
+          "reason": "Philadelphia is turning to Joe Milton, who has not played in 2026, with Hurts on injured reserve. The Eagles' offense ranks last in the matchup ratings, and this quarterback situation makes it difficult to trust Philadelphia at home."
+        },
+        "HOU@LAC": {
+          "pick": "HOU -4.5",
+          "score": "HOU 24–LAC 17",
+          "confidence": "Medium",
+          "reason": "Houston's defense ranks No. 12 against a Chargers offense ranked No. 31. Houston's offense has its own challenges against a respectable Chargers defense, but the overall matchup favors the Texans."
+        },
+        "LV@SF": {
+          "pick": "SF -10",
+          "score": "SF 34–LV 20",
+          "confidence": "High",
+          "reason": "This is one of the clearest statistical mismatches on the card: San Francisco's offense ranks No. 1, while Las Vegas' defense ranks No. 32. The 49ers have advantages in passing, rushing, pressure and explosive plays."
+        },
+        "ARI@SEA": {
+          "pick": "ARI +8.5",
+          "score": "SEA 23–ARI 17",
+          "confidence": "Medium",
+          "reason": "Seattle's defense is excellent, but Darnold is out and Lock is dealing with an elbow issue. Minshew is officially Arizona's starter, and I don't want to lay 8.5 with Seattle's quarterback uncertainty."
+        },
+        "GB@NE": {
+          "pick": "GB +3",
+          "score": "NE 23–GB 21",
+          "confidence": "Medium",
+          "reason": "The matchup ratings show two fairly evenly matched teams: Green Bay's offense against New England's defense and New England's offense against Green Bay's defense. Power-rating models' lower rating of New England reinforces my preference for taking the points with Green Bay."
+        },
+        "TB@CHI": {
+          "pick": "TB +6",
+          "score": "CHI 26–TB 23",
+          "confidence": "Medium",
+          "reason": "Chicago is playing well, but six points feels generous. Tampa's defense ranks No. 2 in the relevant matchup ratings, which gives the Buccaneers a chance to keep this close; Diaby being out and Egbuka questionable are important drawbacks."
+        },
+        "BUF@MIN": {
+          "pick": "MIN +3.5",
+          "score": "BUF 24–MIN 23",
+          "confidence": "Low",
+          "reason": "Minnesota's defense ranks No. 3 against Buffalo's No. 4 offense, and getting the points at home is attractive. Murray's hamstring remains unresolved, though, so this is the pick most dependent on a late quarterback update."
+        }
+      },
+      "best_bets": [
+        {
+          "pick": "JAX -10",
+          "game": "JAX@BAL"
+        },
+        {
+          "pick": "SF -10",
+          "game": "LV@SF"
+        },
+        {
+          "pick": "DET -7",
+          "game": "DET@MIA"
+        },
+        {
+          "pick": "DEN -2.5",
+          "game": "DEN@CAR"
+        },
+        {
+          "pick": "NYG -3.5",
+          "game": "NYG@PHI"
+        }
+      ],
+      "pick5": [
+        "JAX -10",
+        "SF -10",
+        "DET -7",
+        "DEN -2.5",
+        "NYG -3.5"
+      ]
+    }
+  ],
+  "vector": {
+    "name": "Super Agent Vector",
+    "received": "Wed Nov 4, 2026",
+    "sides": {
+      "JAX@BAL": "BAL +10",
+      "CIN@ATL": "CIN -3",
+      "DEN@CAR": "CAR +2.5",
+      "CLE@NO": "NO -3",
+      "DAL@IND": "IND +5.5",
+      "DET@MIA": "MIA +7",
+      "NYJ@KC": "NYJ +10",
+      "LAR@WAS": "WAS +5.5",
+      "NYG@PHI": "PHI +3.5",
+      "HOU@LAC": "LAC +4.5",
+      "LV@SF": "LV +10",
+      "ARI@SEA": "SEA -8.5",
+      "GB@NE": "NE -3",
+      "TB@CHI": "",
+      "BUF@MIN": "MIN +3.5"
+    },
+    "best_bets": [],
+    "leans": [
+      {
+        "pick": "BAL +10",
+        "game": "JAX@BAL"
+      },
+      {
+        "pick": "CIN -3",
+        "game": "CIN@ATL"
+      },
+      {
+        "pick": "CAR +2.5",
+        "game": "DEN@CAR"
+      },
+      {
+        "pick": "NO -3",
+        "game": "CLE@NO"
+      },
+      {
+        "pick": "IND +5.5",
+        "game": "DAL@IND"
+      },
+      {
+        "pick": "MIA +7",
+        "game": "DET@MIA"
+      },
+      {
+        "pick": "NYJ +10",
+        "game": "NYJ@KC"
+      },
+      {
+        "pick": "WAS +5.5",
+        "game": "LAR@WAS"
+      },
+      {
+        "pick": "PHI +3.5",
+        "game": "NYG@PHI"
+      },
+      {
+        "pick": "LAC +4.5",
+        "game": "HOU@LAC"
+      },
+      {
+        "pick": "LV +10",
+        "game": "LV@SF"
+      },
+      {
+        "pick": "SEA -8.5",
+        "game": "ARI@SEA"
+      },
+      {
+        "pick": "NE -3",
+        "game": "GB@NE"
+      },
+      {
+        "pick": "MIN +3.5",
+        "game": "BUF@MIN"
+      }
+    ],
+    "lean_label": "Leans",
+    "pick5": []
+  },
+  "consensus": [
+    "JAX -10: all four AIs. Vector leans BAL +10.",
+    "CIN -3: all four AIs. Vector leans CIN -3.",
+    "DEN -2.5: Gemini, Grok, and ChatGPT. Claude took CAR +2.5. Vector leans CAR +2.5.",
+    "Split: CLE +3 (Claude and ChatGPT) against NO -3 (Gemini and Grok). Vector leans NO -3.",
+    "DAL -5.5: Claude, Gemini, and Grok. ChatGPT took IND +5.5. Vector leans IND +5.5.",
+    "DET -7: Gemini, Grok, and ChatGPT. Claude took MIA +7. Vector leans MIA +7.",
+    "KC -10: Claude, Grok, and ChatGPT. Gemini took NYJ +10. Vector leans NYJ +10.",
+    "WAS +5.5: Claude, Gemini, and ChatGPT. Grok took LAR -5.5. Vector leans WAS +5.5.",
+    "NYG -3.5: all four AIs. Vector leans PHI +3.5.",
+    "HOU -4.5: all four AIs. Vector leans LAC +4.5.",
+    "SF -10: all four AIs. Vector leans LV +10.",
+    "ARI +8.5: Claude, Gemini, and ChatGPT. Grok took SEA -8.5. Vector leans SEA -8.5.",
+    "GB +3: all four AIs. Vector leans NE -3.",
+    "TB +6: Claude, Gemini, and ChatGPT. Grok took CHI -6. Vector has no side.",
+    "Split: MIN +3.5 (Claude and ChatGPT) against BUF -3.5 (Gemini and Grok). Vector leans MIN +3.5."
+  ],
+  "results": {
+    "JAX@BAL": {
+      "BAL +10": "L",
+      "JAX -10": "W"
+    }
+  },
+  "grades": {
+    "claude": {
+      "sides": [
+        1,
+        0,
+        0
+      ],
+      "sides_pending": 14,
+      "best_bet_units": 0,
+      "best_bets_pending": 5,
+      "pick5": [
+        0,
+        0,
+        0
+      ],
+      "pick5_pending": 5
+    },
+    "gemini": {
+      "sides": [
+        1,
+        0,
+        0
+      ],
+      "sides_pending": 14,
+      "best_bet_units": 1,
+      "best_bets_pending": 4,
+      "pick5": [
+        1,
+        0,
+        0
+      ],
+      "pick5_pending": 4
+    },
+    "grok": {
+      "sides": [
+        1,
+        0,
+        0
+      ],
+      "sides_pending": 14,
+      "best_bet_units": 1,
+      "best_bets_pending": 4,
+      "pick5": [
+        1,
+        0,
+        0
+      ],
+      "pick5_pending": 4
+    },
+    "chatgpt": {
+      "sides": [
+        1,
+        0,
+        0
+      ],
+      "sides_pending": 14,
+      "best_bet_units": 1,
+      "best_bets_pending": 4,
+      "pick5": [
+        1,
+        0,
+        0
+      ],
+      "pick5_pending": 4
+    },
+    "vector": {
+      "sides": [
+        0,
+        1,
+        0
+      ],
+      "sides_pending": 13,
+      "best_bet_units": 0,
+      "best_bets_pending": 0,
+      "pick5": null
+    }
+  },
+  "ungraded_games": [
+    "CIN@ATL",
+    "DEN@CAR",
+    "CLE@NO",
+    "DAL@IND",
+    "DET@MIA",
+    "NYJ@KC",
+    "LAR@WAS",
+    "NYG@PHI",
+    "HOU@LAC",
+    "LV@SF",
+    "ARI@SEA",
+    "GB@NE",
+    "TB@CHI",
+    "BUF@MIN"
+  ],
+  "graded": false,
+  "grade_note": "Asked Wednesday Nov 4, 2026, about 2 PM PT, on DraftKings. This board is not Westgate. JAX @ BAL is final, JAX 33, BAL 10, so BAL +10 is a loss at this DraftKings line. It is a graded loss, not an open pick. The other games have not been played. TB @ CHI was left blank in the original response and is not filled in. The Thursday Vector card is a separate board.",
+  "coverage_gap": "The original Wednesday DraftKings response has a side on every game except TB @ CHI, which was left blank. That blank is not a full no-pass card and it was not filled in after the game was scheduled."
+}

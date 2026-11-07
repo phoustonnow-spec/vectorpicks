@@ -1,0 +1,218 @@
+{
+  "season": 2026,
+  "week": 6,
+  "as_of": "Tracker card, audited Nov 7, 2026",
+  "pass_policy": "historical",
+  "line_column": "Tracker line",
+  "line_source": "Audited tracker lines. SEA @ DEN is DEN +2.5, the same number as the published game page, which calls that price Westgate. The other Week 6 lines were not re-checked against a Westgate sheet in this repo.",
+  "market_source": "no separate market table in the recovery package (blank, not invented)",
+  "hfa_note": "Our Spread is the number stored on the tracker row. This card does not claim a new model run.",
+  "update_note": "Week 6 archive from the audited tracker. Grades use ESPN finals checked Nov 7, 2026, at the stored line. SEA @ DEN stays a Lean here. The game page calls that same DEN +2.5 price a best-bet candidate; this row does not upgrade it.",
+  "summary": {
+    "best_bets": [
+      "DAL +1.5 vs GB",
+      "NYJ +7.5 vs NE"
+    ],
+    "leans": [
+      "DEN +2.5 vs SEA",
+      "LV +5.5 vs BUF",
+      "HOU +2.5 vs JAX",
+      "TB +2.5 vs PIT"
+    ],
+    "passes": [
+      "No side: ARI @ LAR",
+      "No side: BAL @ CLE",
+      "No side: CAR @ PHI",
+      "No side: NO @ NYG",
+      "No side: TEN @ IND",
+      "No side: WAS @ SF"
+    ]
+  },
+  "games": [
+    {
+      "game": "SEA@DEN",
+      "label": "SEA @ DEN",
+      "day": "Thu",
+      "date": "2026-10-15",
+      "westgate": "DEN +2.5",
+      "market": "",
+      "our": "DEN +0.2",
+      "gap": 2.35,
+      "tier": "Lean",
+      "pick": "DEN +2.5",
+      "note": "Thursday-or-week card side stored in the audited tracker. Graded at that line."
+    },
+    {
+      "game": "ARI@LAR",
+      "label": "ARI @ LAR",
+      "day": "Sun",
+      "date": "2026-10-18",
+      "westgate": "LAR -12.5",
+      "market": "",
+      "our": "LAR -12.7",
+      "gap": 0.22,
+      "tier": "Pass",
+      "pick": "No side",
+      "note": "Thursday-or-week card side stored in the audited tracker. Graded at that line."
+    },
+    {
+      "game": "BAL@CLE",
+      "label": "BAL @ CLE",
+      "day": "Sun",
+      "date": "2026-10-18",
+      "westgate": "BAL -5.5",
+      "market": "",
+      "our": "CLE +5.9",
+      "gap": 0.6,
+      "tier": "Pass",
+      "pick": "No side",
+      "note": "Thursday-or-week card side stored in the audited tracker. Graded at that line."
+    },
+    {
+      "game": "BUF@LV",
+      "label": "BUF @ LV",
+      "day": "Sun",
+      "date": "2026-10-18",
+      "westgate": "LV +5.5",
+      "market": "",
+      "our": "LV +4.0",
+      "gap": 1.51,
+      "tier": "Lean",
+      "pick": "LV +5.5",
+      "note": "Thursday-or-week card side stored in the audited tracker. Graded at that line."
+    },
+    {
+      "game": "CAR@PHI",
+      "label": "CAR @ PHI",
+      "day": "Sun",
+      "date": "2026-10-18",
+      "westgate": "CAR -1.5",
+      "market": "",
+      "our": "PHI -2.1",
+      "gap": 3.58,
+      "tier": "Pass",
+      "pick": "No side",
+      "note": "Thursday-or-week card side stored in the audited tracker. Graded at that line."
+    },
+    {
+      "game": "CHI@ATL",
+      "label": "CHI @ ATL",
+      "day": "Sun",
+      "date": "2026-10-18",
+      "westgate": "ATL +1.5",
+      "market": "",
+      "our": "ATL +0.6",
+      "gap": 0.92,
+      "tier": "Card",
+      "pick": "ATL +1.5",
+      "note": "Thursday-or-week card side stored in the audited tracker. Graded at that line."
+    },
+    {
+      "game": "DAL@GB",
+      "label": "DAL @ GB",
+      "day": "Sun",
+      "date": "2026-10-18",
+      "westgate": "DAL +1.5",
+      "market": "",
+      "our": "GB +0.9",
+      "gap": 2.62,
+      "tier": "Best Bet",
+      "pick": "DAL +1.5",
+      "note": "Thursday-or-week card side stored in the audited tracker. Graded at that line."
+    },
+    {
+      "game": "HOU@JAX",
+      "label": "HOU @ JAX",
+      "day": "Sun",
+      "date": "2026-10-18",
+      "westgate": "HOU +2.5",
+      "market": "",
+      "our": "JAX -1.3",
+      "gap": 1.17,
+      "tier": "Lean",
+      "pick": "HOU +2.5",
+      "note": "Thursday-or-week card side stored in the audited tracker. Graded at that line."
+    },
+    {
+      "game": "LAC@KC",
+      "label": "LAC @ KC",
+      "day": "Sun",
+      "date": "2026-10-18",
+      "westgate": "LAC +8.5",
+      "market": "",
+      "our": "KC -7.6",
+      "gap": 0.9,
+      "tier": "Card",
+      "pick": "LAC +8.5",
+      "note": "Thursday-or-week card side stored in the audited tracker. Graded at that line."
+    },
+    {
+      "game": "NO@NYG",
+      "label": "NO @ NYG",
+      "day": "Sun",
+      "date": "2026-10-18",
+      "westgate": "NYG +1.5",
+      "market": "",
+      "our": "NYG +1.5",
+      "gap": 0.0,
+      "tier": "Pass",
+      "pick": "No side",
+      "note": "Thursday-or-week card side stored in the audited tracker. Graded at that line."
+    },
+    {
+      "game": "NYJ@NE",
+      "label": "NYJ @ NE",
+      "day": "Sun",
+      "date": "2026-10-18",
+      "westgate": "NYJ +7.5",
+      "market": "",
+      "our": "NE -5.2",
+      "gap": 1.99,
+      "tier": "Best Bet",
+      "pick": "NYJ +7.5",
+      "note": "Thursday-or-week card side stored in the audited tracker. Graded at that line."
+    },
+    {
+      "game": "PIT@TB",
+      "label": "PIT @ TB",
+      "day": "Sun",
+      "date": "2026-10-18",
+      "westgate": "TB +2.5",
+      "market": "",
+      "our": "TB +0.5",
+      "gap": 2.01,
+      "tier": "Lean",
+      "pick": "TB +2.5",
+      "note": "Thursday-or-week card side stored in the audited tracker. Graded at that line."
+    },
+    {
+      "game": "TEN@IND",
+      "label": "TEN @ IND",
+      "day": "Sun",
+      "date": "2026-10-18",
+      "westgate": "IND -7",
+      "market": "",
+      "our": "IND -7.0",
+      "gap": 0.0,
+      "tier": "Pass",
+      "pick": "No side",
+      "note": "Thursday-or-week card side stored in the audited tracker. Graded at that line."
+    },
+    {
+      "game": "WAS@SF",
+      "label": "WAS @ SF",
+      "day": "Mon",
+      "date": "2026-10-19",
+      "westgate": "SF -7.5",
+      "market": "",
+      "our": "SF -7.7",
+      "gap": 0.16,
+      "tier": "Pass",
+      "pick": "No side",
+      "note": "Thursday-or-week card side stored in the audited tracker. Graded at that line."
+    }
+  ],
+  "missing": [
+    "No separate public market table in this recovery package."
+  ]
+}

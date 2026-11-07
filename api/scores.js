@@ -5,7 +5,9 @@
  *
  * Server-side proxy for ESPN's public NFL scoreboard.
  * No API key. Optional ?dates=YYYYMMDD (exactly eight digits) is forwarded.
- * Anything else in dates is rejected and not sent upstream.
+ * Optional ?season=YYYY&week=N (week 1-18, season 2020-2035) requests that
+ * NFL week instead of ESPN's default scoreboard. dates and week together
+ * are rejected. Anything else is not sent upstream.
  *
  * Success (200):
  *   {
@@ -42,6 +44,23 @@ function send(res, status, payload, cache) {
   res.end(JSON.stringify(payload));
 }
 
+function oneQuery(req, key) {
+  let raw = req && req.query ? req.query[key] : undefined;
+  if ((raw == null || raw === "") && req && req.url) {
+    const match = String(req.url).match(new RegExp("[?&]" + key + "=([^&]*)"));
+    if (match) {
+      try {
+        raw = decodeURIComponent(match[1]);
+      } catch (err) {
+        raw = match[1];
+      }
+    }
+  }
+  if (Array.isArray(raw)) raw = raw[0];
+  if (raw == null || raw === "") return "";
+  return String(raw);
+}
+
 function datesQuery(req) {
   let raw = req && req.query ? req.query.dates : undefined;
   if ((raw == null || raw === "") && req && req.url) {
@@ -59,6 +78,19 @@ function datesQuery(req) {
   const dates = String(raw);
   if (!/^\d{8}$/.test(dates)) return { ok: false, dates: null };
   return { ok: true, dates: dates };
+}
+
+function weekQuery(req) {
+  const season = oneQuery(req, "season");
+  const week = oneQuery(req, "week");
+  if (!season && !week) return { ok: true, season: null, week: null };
+  if (!/^\d{4}$/.test(season) || Number(season) < 2020 || Number(season) > 2035) {
+    return { ok: false };
+  }
+  if (!/^\d{1,2}$/.test(week) || Number(week) < 1 || Number(week) > 18) {
+    return { ok: false };
+  }
+  return { ok: true, season: season, week: String(Number(week)) };
 }
 
 function asObject(value) {
@@ -183,12 +215,15 @@ async function handler(req, res) {
   }
 
   const dates = datesQuery(req);
-  if (!dates.ok) {
+  const week = weekQuery(req);
+  if (!dates.ok || !week.ok || (dates.dates && week.week)) {
     send(res, 400, ERROR_BODY, CACHE_ERR);
     return;
   }
 
-  const url = dates.dates ? SCORE_URL + "?dates=" + dates.dates : SCORE_URL;
+  let url = SCORE_URL;
+  if (dates.dates) url += "?dates=" + dates.dates;
+  else if (week.week) url += "?week=" + week.week + "&seasontype=2&dates=" + week.season;
   let upstream;
   try {
     upstream = await fetch(url, { headers: { accept: "application/json" } });
