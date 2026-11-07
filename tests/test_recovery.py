@@ -1,0 +1,95 @@
+#!/usr/bin/env python3
+"""Guards for the Week 9 recovery. No network.
+
+  python3 tests/test_recovery.py
+"""
+import os
+import sys
+from datetime import date
+
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+import build
+
+
+def test_calendar():
+    assert build.nfl_week(date(2026, 11, 7)) == 9
+    assert build.nfl_week(date(2026, 11, 5)) == 9
+    assert build.nfl_week(date(2026, 11, 9)) == 9
+    assert build.nfl_week(date(2026, 11, 4)) == 9  # gap day belongs to the next week
+    assert build.nfl_week(date(2026, 11, 2)) == 8
+    assert build.nfl_week(date(2026, 10, 8)) == 5
+    assert build.nfl_week(date(2026, 9, 9)) == 1
+    assert build.game_date_ok("2026-11-05", 9, 2026)
+    assert not build.game_date_ok("2026-10-08", 9, 2026)
+    assert not build.game_date_ok("2026-11-04", 9, 2026)
+
+
+def test_tnf_grade():
+    game = {"game": "JAX@BAL", "score": {"away": 33, "home": 10, "status": "final"}}
+    assert build.grade_ats("BAL +10", game) == "L"
+    assert build.grade_ats("JAX -10", game) == "W"
+    assert build.grade_ats("BAL +10", {"game": "JAX@BAL"}) is None
+
+
+def test_names_and_private_video():
+    assert build.BANNED_PUBLIC.search("Walter Nolen is out") is None
+    assert build.BANNED_PUBLIC.search("walter football")
+    assert build.BANNED_PUBLIC.search("Kevin Cole")
+    try:
+        build.assert_public_video("cXnzFQPN7mE", "test")
+    except SystemExit as err:
+        assert "cXnzFQPN7mE" in str(err)
+    else:
+        raise AssertionError("private video was allowed")
+
+
+def test_built_pages():
+    root = build.OUT
+    home = open(os.path.join(root, "index.html"), encoding="utf-8").read()
+    ai = open(os.path.join(root, "ai-picks.html"), encoding="utf-8").read()
+    card = open(os.path.join(root, "card.html"), encoding="utf-8").read()
+    assert "Week 9" in home and "Saturday, Nov 7, 2026 PT" in home
+    assert "BAL +10" in home and "LOSS" in home and "JAX 33, BAL 10" in home
+    assert "q2OazIWZ5vE" in home
+    assert "cXnzFQPN7mE" not in home + ai + card
+    assert "DraftKings line" in ai and "Westgate line" not in ai.split("ai-grid", 1)[-1][:500]
+    assert "Thu card line" in card
+    assert "This is not a publish" not in home
+    text = open(os.path.join(build.ROOT, "build.py"), encoding="utf-8").read()
+    assert "This is not a publish." in text
+    assert "Published successfully" not in text
+
+
+def test_full_card_rule_rejects_a_pass():
+    weeks = [{
+        "season": 2026,
+        "week": 10,
+        "line_column": "Posted line",
+        "line_source": "example",
+        "pass_policy": "full",
+        "games": [{
+            "game": "NYJ@KC",
+            "date": "2026-11-15",
+            "tier": "Pass",
+            "pick": "No side",
+        }],
+    }]
+    try:
+        build.validate_sources(weeks, [], {"shorts": [], "never_embed": ["cXnzFQPN7mE"]})
+    except SystemExit as err:
+        assert "side on every game" in str(err)
+    else:
+        raise AssertionError("a Week 10 pass was accepted")
+
+
+def main():
+    test_calendar()
+    test_tnf_grade()
+    test_names_and_private_video()
+    test_built_pages()
+    test_full_card_rule_rejects_a_pass()
+    print("OK recovery guards")
+
+
+if __name__ == "__main__":
+    main()

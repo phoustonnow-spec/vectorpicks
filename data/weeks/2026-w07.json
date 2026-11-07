@@ -1,0 +1,220 @@
+{
+  "season": 2026,
+  "week": 7,
+  "as_of": "Tracker card, audited Nov 7, 2026",
+  "pass_policy": "historical",
+  "line_column": "Tracker line",
+  "line_source": "Audited tracker lines. These are not the DraftKings lines on the Week 7 AI Picks page. Do not regrade one board with the other.",
+  "market_source": "no separate market table in the recovery package (blank, not invented)",
+  "hfa_note": "Our Spread is the number stored on the tracker row. This card does not claim a new model run.",
+  "update_note": "Week 7 archive from the audited tracker. The AI Picks page for this week is the original DraftKings board and keeps those lines. A pass on this card is the historical tracker row, not a full no-pass card.",
+  "summary": {
+    "best_bets": [
+      "DET -3.5 vs GB",
+      "ATL +3.5 vs SF",
+      "CAR -3 vs TB"
+    ],
+    "leans": [
+      "CHI -3 vs NE",
+      "CIN +2.5 vs BAL",
+      "TEN +1.5 vs CLE",
+      "DEN -4.5 vs ARI",
+      "IND +6.5 vs MIN",
+      "NYJ -4.5 vs MIA",
+      "NO +3.5 vs PIT"
+    ],
+    "passes": [
+      "No side: KC @ SEA",
+      "No side: LAR @ LV",
+      "No side: NYG @ HOU",
+      "No side: DAL @ PHI"
+    ]
+  },
+  "games": [
+    {
+      "game": "NE@CHI",
+      "label": "NE @ CHI",
+      "day": "Thu",
+      "date": "2026-10-22",
+      "westgate": "CHI -3",
+      "market": "",
+      "our": "CHI -4.5",
+      "gap": 1.5,
+      "tier": "Lean",
+      "pick": "CHI -3",
+      "note": "Tracker line of record for this row. Not the DraftKings AI-board price unless the two happen to match."
+    },
+    {
+      "game": "CIN@BAL",
+      "label": "CIN @ BAL",
+      "day": "Sun",
+      "date": "2026-10-25",
+      "westgate": "CIN +2.5",
+      "market": "",
+      "our": "BAL PK",
+      "gap": 2.5,
+      "tier": "Lean",
+      "pick": "CIN +2.5",
+      "note": "Tracker line of record for this row. Not the DraftKings AI-board price unless the two happen to match."
+    },
+    {
+      "game": "CLE@TEN",
+      "label": "CLE @ TEN",
+      "day": "Sun",
+      "date": "2026-10-25",
+      "westgate": "TEN +1.5",
+      "market": "",
+      "our": "TEN +0.1",
+      "gap": 1.4,
+      "tier": "Lean",
+      "pick": "TEN +1.5",
+      "note": "Tracker line of record for this row. Not the DraftKings AI-board price unless the two happen to match."
+    },
+    {
+      "game": "DEN@ARI",
+      "label": "DEN @ ARI",
+      "day": "Sun",
+      "date": "2026-10-25",
+      "westgate": "DEN -4.5",
+      "market": "",
+      "our": "ARI +6.2",
+      "gap": 1.7,
+      "tier": "Lean",
+      "pick": "DEN -4.5",
+      "note": "Tracker line of record for this row. Not the DraftKings AI-board price unless the two happen to match."
+    },
+    {
+      "game": "GB@DET",
+      "label": "GB @ DET",
+      "day": "Sun",
+      "date": "2026-10-25",
+      "westgate": "DET -3.5",
+      "market": "",
+      "our": "DET -8.6",
+      "gap": 5.1,
+      "tier": "Best Bet",
+      "pick": "DET -3.5",
+      "note": "Tracker line of record for this row. Not the DraftKings AI-board price unless the two happen to match."
+    },
+    {
+      "game": "IND@MIN",
+      "label": "IND @ MIN",
+      "day": "Sun",
+      "date": "2026-10-25",
+      "westgate": "IND +6.5",
+      "market": "",
+      "our": "MIN -5.4",
+      "gap": 1.1,
+      "tier": "Lean",
+      "pick": "IND +6.5",
+      "note": "Tracker line of record for this row. Not the DraftKings AI-board price unless the two happen to match."
+    },
+    {
+      "game": "KC@SEA",
+      "label": "KC @ SEA",
+      "day": "Sun",
+      "date": "2026-10-25",
+      "westgate": "SEA -2.5",
+      "market": "",
+      "our": "SEA -2.3",
+      "gap": 0.2,
+      "tier": "Pass",
+      "pick": "No side",
+      "note": "Tracker line of record for this row. Not the DraftKings AI-board price unless the two happen to match."
+    },
+    {
+      "game": "LAR@LV",
+      "label": "LAR @ LV",
+      "day": "Sun",
+      "date": "2026-10-25",
+      "westgate": "LAR -4",
+      "market": "",
+      "our": "LV +3.7",
+      "gap": 0.3,
+      "tier": "Pass",
+      "pick": "No side",
+      "note": "Tracker line of record for this row. Not the DraftKings AI-board price unless the two happen to match."
+    },
+    {
+      "game": "MIA@NYJ",
+      "label": "MIA @ NYJ",
+      "day": "Sun",
+      "date": "2026-10-25",
+      "westgate": "NYJ -4.5",
+      "market": "",
+      "our": "NYJ -6.0",
+      "gap": 1.5,
+      "tier": "Lean",
+      "pick": "NYJ -4.5",
+      "note": "Tracker line of record for this row. Not the DraftKings AI-board price unless the two happen to match."
+    },
+    {
+      "game": "NYG@HOU",
+      "label": "NYG @ HOU",
+      "day": "Sun",
+      "date": "2026-10-25",
+      "westgate": "HOU -9.5",
+      "market": "",
+      "our": "HOU -10.6",
+      "gap": 1.1,
+      "tier": "Pass",
+      "pick": "No side",
+      "note": "Tracker line of record for this row. Not the DraftKings AI-board price unless the two happen to match."
+    },
+    {
+      "game": "PIT@NO (Paris)",
+      "label": "PIT @ NO (Paris)",
+      "day": "Sun",
+      "date": "2026-10-25",
+      "westgate": "NO +3.5",
+      "market": "",
+      "our": "NO +2.1",
+      "gap": 1.4,
+      "tier": "Lean",
+      "pick": "NO +3.5",
+      "note": "Tracker line of record for this row. Not the DraftKings AI-board price unless the two happen to match."
+    },
+    {
+      "game": "SF@ATL",
+      "label": "SF @ ATL",
+      "day": "Sun",
+      "date": "2026-10-25",
+      "westgate": "ATL +3.5",
+      "market": "",
+      "our": "ATL +1.9",
+      "gap": 1.6,
+      "tier": "Best Bet",
+      "pick": "ATL +3.5",
+      "note": "Tracker line of record for this row. Not the DraftKings AI-board price unless the two happen to match."
+    },
+    {
+      "game": "TB@CAR",
+      "label": "TB @ CAR",
+      "day": "Sun",
+      "date": "2026-10-25",
+      "westgate": "CAR -3",
+      "market": "",
+      "our": "CAR -4.7",
+      "gap": 1.7,
+      "tier": "Best Bet",
+      "pick": "CAR -3",
+      "note": "Tracker line of record for this row. Not the DraftKings AI-board price unless the two happen to match."
+    },
+    {
+      "game": "DAL@PHI",
+      "label": "DAL @ PHI",
+      "day": "Mon",
+      "date": "2026-10-26",
+      "westgate": "DAL -4.5",
+      "market": "",
+      "our": "PHI +3.9",
+      "gap": 0.6,
+      "tier": "Pass",
+      "pick": "No side",
+      "note": "Tracker line of record for this row. Not the DraftKings AI-board price unless the two happen to match."
+    }
+  ],
+  "missing": [
+    "Week 7 DraftKings AI board is a different page and a different line."
+  ]
+}

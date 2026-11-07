@@ -1,0 +1,27 @@
+{
+  "entries": [
+    {
+      "week": 9,
+      "season": 2026,
+      "published_at_pt": "2026-11-07",
+      "dedup_key": "2026-w09-saturday-site",
+      "source": "website-recovery package read on Nov 7, 2026, plus the ESPN snapshot in data/verified-finals-2026-11-07.json",
+      "included": [
+        "Week 9 Thursday Vector card, historical passes kept",
+        "Week 9 AI board labeled DraftKings",
+        "Week 8 AI board labeled Westgate",
+        "Audited tracker grades for Weeks 3-8 and Week 9 TNF",
+        "Public Shorts listed in data/shorts.json"
+      ],
+      "public_video_ids": ["q2OazIWZ5vE", "KuluxlblwY0", "81Pq1yT8hQQ", "3af_Zhpcq2Y", "m8SIcKmxAAs"],
+      "never_embed": ["cXnzFQPN7mE"],
+      "gaps": [
+        "No Saturday Week 9 model rerun",
+        "No Week 9 Westgate sheet file in the repo",
+        "Week 9 injury ledger not reconciled",
+        "Week 4 tracker rows that contradict the published pass card were left out",
+        "Contest-leader rows are not Vector and were left out"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,232 @@
+{
+  "season": 2026,
+  "week": 8,
+  "as_of": "Thu Oct 29, 2026, about 9 AM PT",
+  "pass_policy": "historical",
+  "line_column": "Westgate",
+  "line_source": "Westgate SuperContest Week 8 sheet, as labeled on the Week 8 AI board (Thu Oct 29, 2026). Our Spread is the Thursday card. The Saturday public Short is a separate change and is not folded into these rows.",
+  "market_source": "no separate market table in the recovery package (blank, not invented)",
+  "hfa_note": "The Thursday card file says v3 home field on this card was 1.91. That is the recorded Thursday assumption, not a new run.",
+  "update_note": "Original Thursday Oct 29 card. Grades are ESPN finals checked Nov 7, 2026, at these Thursday lines.",
+  "saturday_update": {
+    "as_of": "Sat Oct 31, 2026",
+    "source": "Public YouTube Short https://www.youtube.com/shorts/KuluxlblwY0",
+    "folded_into_grades": false,
+    "items": [
+      "CAR +3.5 lost Thursday. Final Packers 27, Panthers 19 (ESPN CAR 19, GB 27).",
+      "MIA +7 stayed a Best Bet on the Saturday short.",
+      "PIT -3.5 moved from Lean to Best Bet before Sunday. The short cites Jalen Ramsey cleared on the Friday injury report.",
+      "SEA -3 moved from Lean to Pass before Monday. The short says the corrected number was SEA -3.35, at the line, after Montez Sweat was active.",
+      "These Saturday changes are not written over the Thursday rows and are not added again into the season total."
+    ]
+  },
+  "summary": {
+    "best_bets": [
+      "CAR +3.5 vs GB",
+      "MIA +7 vs NE"
+    ],
+    "leans": [
+      "DAL -6.5 vs ARI",
+      "BAL +3.5 vs BUF",
+      "PIT -3.5 vs CLE",
+      "IND +9.5 vs JAX",
+      "LAR -6.5 vs LAC",
+      "MIN +3.5 vs DET",
+      "PHI +5.5 vs WAS",
+      "SEA -3 vs CHI"
+    ],
+    "passes": [
+      "No side: ATL @ TB",
+      "No side: KC @ DEN",
+      "No side: LV @ NYJ",
+      "No side: TEN @ CIN"
+    ]
+  },
+  "games": [
+    {
+      "game": "CAR@GB",
+      "label": "CAR @ GB",
+      "day": "Thu",
+      "date": "2026-10-29",
+      "westgate": "GB -3.5",
+      "market": "",
+      "our": "GB -0.9",
+      "gap": 2.6,
+      "tier": "Best Bet",
+      "pick": "CAR +3.5",
+      "note": "5/5 hits. Edge is all GB injury layer (no layer = no edge); market already moved -7 -> -3.5."
+    },
+    {
+      "game": "NE@MIA",
+      "label": "NE @ MIA",
+      "day": "Sun",
+      "date": "2026-11-01",
+      "westgate": "NE -7",
+      "market": "",
+      "our": "MIA +4.7",
+      "gap": 2.3,
+      "tier": "Best Bet",
+      "pick": "MIA +7",
+      "note": "5/5 hits. ~1.9 of it is the NE layer. Don't take +6.5."
+    },
+    {
+      "game": "CLE@PIT",
+      "label": "CLE @ PIT",
+      "day": "Sun",
+      "date": "2026-11-01",
+      "westgate": "PIT -3.5",
+      "market": "",
+      "our": "PIT -6.3",
+      "gap": 2.8,
+      "tier": "Lean",
+      "pick": "PIT -3.5",
+      "note": "Market moved 2 against since open (-5.5); Ramsey DNP on our side. Upgrade Sat if Ramsey clears."
+    },
+    {
+      "game": "ARI@DAL",
+      "label": "ARI @ DAL",
+      "day": "Sun",
+      "date": "2026-11-01",
+      "westgate": "DAL -6.5",
+      "market": "",
+      "our": "DAL -11.6",
+      "gap": 5.1,
+      "tier": "Lean",
+      "pick": "DAL -6.5",
+      "note": "Market moved 4 against (look-ahead -10.5), no injury cause; Pickens/Q. Williams limited; 6-day turn after MNF. Size small."
+    },
+    {
+      "game": "PHI@WAS",
+      "label": "PHI @ WAS",
+      "day": "Sun",
+      "date": "2026-11-01",
+      "westgate": "WAS -5.5",
+      "market": "",
+      "our": "WAS -2.5",
+      "gap": 3.0,
+      "tier": "Lean",
+      "pick": "PHI +5.5",
+      "note": "Barkley/D. Smith DNP (unresolved, our side); market moved ~8 against; outside rating is opposite."
+    },
+    {
+      "game": "MIN@DET",
+      "label": "MIN @ DET",
+      "day": "Sun",
+      "date": "2026-11-01",
+      "westgate": "DET -3.5",
+      "market": "",
+      "our": "DET -1.6",
+      "gap": 1.9,
+      "tier": "Lean",
+      "pick": "MIN +3.5",
+      "note": "A. Jones DNP, Huber DNP, O'Neill LP (our side). Gibbs/St. Brown DNP Wed (DET, not charged)."
+    },
+    {
+      "game": "BAL@BUF",
+      "label": "BAL @ BUF",
+      "day": "Sun",
+      "date": "2026-11-01",
+      "westgate": "BUF -3.5",
+      "market": "",
+      "our": "BUF -2.5",
+      "gap": 1.0,
+      "tier": "Lean",
+      "pick": "BAL +3.5",
+      "note": "QB swing: if Lamar sits, flips hard to BUF."
+    },
+    {
+      "game": "IND@JAX",
+      "label": "IND @ JAX",
+      "day": "Sun",
+      "date": "2026-11-01",
+      "westgate": "JAX -9.5",
+      "market": "",
+      "our": "JAX -8.5",
+      "gap": 1.0,
+      "tier": "Lean",
+      "pick": "IND +9.5",
+      "note": "Colts selling (Nelson, Buckner gone); more trades could move it."
+    },
+    {
+      "game": "CHI@SEA",
+      "label": "CHI @ SEA",
+      "day": "Mon",
+      "date": "2026-11-02",
+      "westgate": "SEA -3",
+      "market": "",
+      "our": "SEA -4.0",
+      "gap": 1.0,
+      "tier": "Lean",
+      "pick": "SEA -3",
+      "note": "Simmons to CHI trims it; C. Cross doubtful charged."
+    },
+    {
+      "game": "LAC@LAR",
+      "label": "LAC @ LAR",
+      "day": "Sun",
+      "date": "2026-11-01",
+      "westgate": "LAR -6.5",
+      "market": "",
+      "our": "LAR -7.4",
+      "gap": 0.9,
+      "tier": "Lean",
+      "pick": "LAR -6.5",
+      "note": "Thursday original card."
+    },
+    {
+      "game": "TEN@CIN",
+      "label": "TEN @ CIN",
+      "day": "Sun",
+      "date": "2026-11-01",
+      "westgate": "CIN -10.5",
+      "market": "",
+      "our": "CIN -12.1",
+      "gap": 1.6,
+      "tier": "Pass",
+      "pick": "No side",
+      "note": "Big favorite past 7 needs 2.0+; also past the -10 limit."
+    },
+    {
+      "game": "LV@NYJ",
+      "label": "LV @ NYJ",
+      "day": "Sun",
+      "date": "2026-11-01",
+      "westgate": "NYJ -1.5",
+      "market": "",
+      "our": "NYJ -0.9",
+      "gap": 0.6,
+      "tier": "Pass",
+      "pick": "No side",
+      "note": "Thursday original card."
+    },
+    {
+      "game": "ATL@TB",
+      "label": "ATL @ TB",
+      "day": "Sun",
+      "date": "2026-11-01",
+      "westgate": "TB -2.5",
+      "market": "",
+      "our": "TB -2.2",
+      "gap": 0.3,
+      "tier": "Pass",
+      "pick": "No side",
+      "note": "Thursday original card."
+    },
+    {
+      "game": "KC@DEN",
+      "label": "KC @ DEN",
+      "day": "Sun",
+      "date": "2026-11-01",
+      "westgate": "KC -1",
+      "market": "",
+      "our": "DEN +0.8",
+      "gap": 0.2,
+      "tier": "Pass",
+      "pick": "No side",
+      "note": "Thursday original card."
+    }
+  ],
+  "missing": [
+    "Private injury-probability notes from the Thursday file are not on this page."
+  ]
+}

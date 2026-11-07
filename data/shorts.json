@@ -1,11 +1,50 @@
 {
-  "_comment": "Add YouTube Shorts as {\"title\", \"date\", \"week\", \"youtube_url\", \"thumbnail\"}. youtube_url may be a youtube.com/shorts/ID or watch?v=ID link. Empty list = placeholder slots are shown.",
-  "placeholder_slots": 3,
+  "_comment": "Public YouTube Shorts only. never_embed ids are refused by the build even if a URL is added later. Week 8 items are archive. The current item is the Week 9 Saturday short. Dates are the NFL week day used for ordering, not a claimed upload timestamp, except 2026-11-07 for the Saturday short posted that morning.",
+  "never_embed": ["cXnzFQPN7mE"],
+  "placeholder_slots": 0,
   "shorts": [
+    {
+      "title": "Week 9 Saturday Update: Colts Pool Value, Bengals & Saints | Vector Picks",
+      "date": "2026-11-07",
+      "week": 9,
+      "role": "current",
+      "youtube_url": "https://www.youtube.com/shorts/q2OazIWZ5vE",
+      "tiktok_url": "https://www.tiktok.com/@vector_picks/video/7705433829246340366",
+      "note": "Saturday update. The TikTok, posted Nov 7, 2026 at 6:19 AM PT, names Cincinnati and New Orleans and does not state spreads. No Saturday line change is in the source package."
+    },
+    {
+      "title": "Week 8 Saturday Update · PIT −3.5 New Best Bet · SEA −3 to Pass | Vector Picks",
+      "date": "2026-10-31",
+      "week": 8,
+      "role": "archive",
+      "youtube_url": "https://www.youtube.com/shorts/KuluxlblwY0"
+    },
+    {
+      "title": "Week 8 Westgate SuperContest Top 5 Leaders | Rigged NFL-1 Leads at 27-7-1 #Shorts",
+      "date": "2026-10-30",
+      "week": 8,
+      "role": "archive",
+      "youtube_url": "https://www.youtube.com/shorts/81Pq1yT8hQQ"
+    },
+    {
+      "title": "Week 8 NFL AI Picks: CAR +3.5, MIA +7 Best Bets | Vector Picks",
+      "date": "2026-10-29",
+      "week": 8,
+      "role": "archive",
+      "youtube_url": "https://www.youtube.com/shorts/3af_Zhpcq2Y"
+    },
+    {
+      "title": "TNF Best Bet: Panthers +3.5 at Packers | Vector Picks #Shorts",
+      "date": "2026-10-29",
+      "week": 8,
+      "role": "archive",
+      "youtube_url": "https://www.youtube.com/shorts/m8SIcKmxAAs"
+    },
     {
       "title": "Week 4 Westgate SuperContest Top 5 Leaders | 3 Entries at 13-2",
       "date": "2026-10-04",
       "week": 4,
+      "role": "archive",
       "youtube_url": "https://youtube.com/shorts/_99qQd5Py98",
       "thumbnail": "assets/shorts/wk4-2026-leaders-thumbnail.webp"
     },
@@ -13,6 +52,7 @@
       "title": "Week 4 Saturday Update · CAR demoted · NYG + PHI Best Bets · Vector Picks",
       "date": "2026-10-03",
       "week": 4,
+      "role": "archive",
       "youtube_url": "https://youtube.com/shorts/_QbUq9lv_g4",
       "thumbnail": "assets/shorts/wk4-2026-sat-thumbnail.webp"
     },
@@ -20,6 +60,7 @@
       "title": "Week 4 NFL AI Picks: Best Bets After 3-0 Week · NYG +1.5, PHI +3, CAR +3.5 #Shorts",
       "date": "2026-10-01",
       "week": 4,
+      "role": "archive",
       "youtube_url": "https://youtube.com/shorts/sR2kezQwius",
       "thumbnail": "assets/shorts/wk4-2026-thumbnail.webp"
     },
@@ -27,16 +68,9 @@
       "title": "Week 3 NFL AI Picks: 3 Best Bets After ATL +5.5 Cashed 35-14",
       "date": "2026-09-25",
       "week": 3,
+      "role": "archive",
       "youtube_url": "https://youtube.com/shorts/lF1RWrbgARw",
       "thumbnail": "assets/shorts/wk3-2026-thumbnail.webp"
     }
-  ],
-  "latest_local": {
-    "title": "Week 4 2026: Westgate SuperContest Top 5 Leaders · 3 Entries at 13-2",
-    "week": 4,
-    "season": 2026,
-    "thumbnail": "assets/shorts/wk4-2026-leaders-thumbnail.webp",
-    "video": "assets/shorts/wk4-2026-leaders-short.mp4",
-    "youtube_url": "https://youtube.com/shorts/_99qQd5Py98"
-  }
+  ]
 }

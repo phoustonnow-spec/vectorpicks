@@ -11,7 +11,7 @@ make_art.py         brand art (podcast cover 3000x3000, favicon, og-image); need
 vercel.json         Vercel config: serve public/ as-is, feed.xml + mp3 content-type headers
 data/
   site_config.json  base_url (domain lives here only), titles, podcast owner/email/artwork
-  weeks/2026-w03.json  one file per week -> card-YYYY-wNN.html; newest also = card.html
+  weeks/2026-wNN.json  one file per week -> card-YYYY-wNN.html; the Pacific calendar week is card.html
   ats-tracker.csv   graded picks -> record.html + home record box
   episodes.json     podcast episodes -> episodes.html + feed.xml
   shorts.json       YouTube Shorts links (placeholder slots while empty)
@@ -29,16 +29,18 @@ python3 -m http.server 8765 -d public   # preview at http://localhost:8765
 ```
 
 `public/` is wiped and regenerated on every build, except `public/episodes/` (drop mp3s there).
-If `/workspace/shorts/ats-tracker.csv` exists (box workflow), the build copies it into `data/` first.
+The committed `data/ats-tracker.csv` is the tracker. A local box file is not copied unless `VECTORPICKS_SYNC_TRACKER=1`.
+
+The current week is the 2026 NFL week for today's Pacific date, not whichever week file happens to be newest. See `docs/OPERATING.md` for the source, build, pull request, merge, and live-check steps. A green build is not a publish.
 
 ## Weekly routine
 
-1. **New week card:** add `data/weeks/2026-wNN.json` (same shape as `2026-w03.json`). Use only numbers from the week's board files. No invented lines, splits, injuries or scores.
-2. **Results:** update the tracker CSV (`ATS Result` W/L/P, `Final Score`, `Units`); add rows for new weeks. Optional `Season` column (defaults to 2026).
+1. **New week card:** add `data/weeks/2026-wNN.json`. From Week 10 on, every game needs a Vector side. Use only numbers from that week's named board. No invented lines, splits, injuries, or scores. A Saturday change is a separate dated note, not a rewrite of the original card.
+2. **Results:** grade a row only when `data/verified-finals-2026-11-07.json` (or its successor snapshot) has that final. Update `ATS Result`, `Final Score`, and `Units` at the row's own line. A finished game left `pending` fails the build.
 3. **Episode:** put the mp3 in `public/episodes/`, add an entry to `data/episodes.json`:
    `{"title","date":"YYYY-MM-DD","show_type":"Tuesday Rankings|Thursday Picks|Sunday Update|Sunday Recap","mp3":"episodes/file.mp3","duration":"HH:MM:SS","description"}`. `bytes` is filled in automatically.
-4. **Short:** add `{"title","date","week","youtube_url"}` to `data/shorts.json`.
-5. `python3 build.py --validate`, commit, push. Vercel redeploys automatically.
+4. **Short:** add a public `{"title","date","week","youtube_url"}` to `data/shorts.json`. Never add `cXnzFQPN7mE`.
+5. `python3 build.py --validate`, then `python3 tests/test_recovery.py` and the `node tests/test_*.js` files. Open a pull request. After merge, run `python3 scripts/verify_live.py`.
 
 ## Deploy (GitHub + Vercel)
 
