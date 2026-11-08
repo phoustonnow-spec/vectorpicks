@@ -385,10 +385,13 @@ def build_card(w, tidx, fname):
     saturday_html = ""
     if saturday:
         items = "".join(f"<li>{e(x)}</li>" for x in saturday.get("items") or [])
+        related_items = saturday.get("related") or []
+        related = "".join(f'<p class="note">{e(x)}</p>\n' for x in related_items)
         folded = "These notes are not folded into the graded rows." if not saturday.get("folded_into_grades") else ""
+        extra = f"\n{related}" if related_items else ""
         saturday_html = f'''<section class="panel callout"><h2>Saturday update, separate from the original card</h2>
 <p class="note">As of {e(saturday.get("as_of",""))}. Source: {e(saturday.get("source",""))}. {e(folded)}</p>
-<ul class="picks">{items}</ul></section>'''
+<ul class="picks">{items}</ul>{extra}</section>'''
     powers_html = ""
     if w.get("powers"):
         powers_html = f"""<section class="panel" id="powers"><h2>{e(w.get("powers_title", "Power ratings: healthy &rarr; injury-adjusted"))}</h2>
@@ -505,6 +508,19 @@ def newest_short(sh):
         return lt
     return None
 
+def other_shorts_same_week(sh, featured):
+    """Other public Shorts from the same NFL week as the one the home page features."""
+    if not featured:
+        return []
+    week = int(featured.get("week") or 0)
+    current = yt_id(featured.get("youtube_url"))
+    found = []
+    for s in sh.get("shorts") or []:
+        vid = yt_id(s.get("youtube_url"))
+        if vid and vid != current and int(s.get("week") or 0) == week:
+            found.append(s)
+    return found
+
 def yt_facade(item):
     vid = yt_id(item.get("youtube_url") if item else "")
     if not vid:
@@ -603,6 +619,14 @@ def build_home(weeks, rows, tidx, eps, sh, featured, today):
     short = newest_short(sh)
     facade = yt_facade(short) if short else ""
     short_title = (short or {}).get("title") or "Latest Short"
+    others = other_shorts_same_week(sh, short)
+    also_html = ""
+    if others:
+        links = " &middot; ".join(
+            f'<a href="{e(s.get("youtube_url") or "")}" target="_blank" rel="noopener">{e(s.get("title") or "Short")}</a>'
+            for s in others
+        )
+        also_html = f'<p class="note">Also this week: {links}.</p>'
     p5_html = pick5_note(w)
     if p5_html:
         p5_html += "\n"
@@ -611,6 +635,7 @@ def build_home(weeks, rows, tidx, eps, sh, featured, today):
     short_block = (
         f'<section class="panel home-short"><h2>Latest Short</h2>{facade}'
         f'<p class="muted">{e(short_title)}</p>'
+        f'{also_html}'
         f'<p><a href="shorts.html">All Shorts &rarr;</a></p></section>'
         if facade else
         '<section class="panel"><h2>Latest Short</h2><p class="muted">A new Short is on the way.</p><p><a href="shorts.html">Shorts &rarr;</a></p></section>'
@@ -2464,10 +2489,32 @@ def validate_week9():
     if "cXnzFQPN7mE" in home + card + ai + record:
         raise SystemExit("private video id was published")
     shorts = open(os.path.join(OUT, "shorts.html"), encoding="utf-8").read()
-    if "q2OazIWZ5vE" not in shorts or "cXnzFQPN7mE" in shorts:
+    if "cXnzFQPN7mE" in shorts or "cXnzFQPN7mE" in home or "cXnzFQPN7mE" in card:
         raise SystemExit("shorts page has the wrong current video")
-    if "Week 9 Saturday Update" not in home:
-        raise SystemExit("home is not featuring the Week 9 Saturday short")
+    for vid in ("4-NrBHuRlUE", "q2OazIWZ5vE", "81Pq1yT8hQQ"):
+        if vid not in shorts:
+            raise SystemExit(f"shorts page is missing {vid}")
+    if shorts.find("4-NrBHuRlUE") > shorts.find("q2OazIWZ5vE"):
+        raise SystemExit("Week 9 leaders short is not first on the shorts page")
+    for older in ("Week 8 Westgate SuperContest Top 5 Leaders", "Week 4 Westgate SuperContest Top 5 Leaders", "Week 3 NFL AI Picks"):
+        if older not in shorts:
+            raise SystemExit(f"shorts page dropped {older}")
+    if "LAMBDA LAMBDA LAMBDA-1 29-10-1" not in shorts or "RIGGED NFL-1 29-10-1" not in shorts:
+        raise SystemExit("shorts page is missing the Week 9 leader records")
+    if "Entertainment and opinion only. Not betting advice." not in shorts:
+        raise SystemExit("shorts page is missing the entertainment line")
+    if 'data-yt="4-NrBHuRlUE"' not in home:
+        raise SystemExit("home is not featuring the Week 9 leaders short")
+    if "Week 9 Saturday Update" not in home or "q2OazIWZ5vE" not in home:
+        raise SystemExit("home dropped the Week 9 Saturday short")
+    if "4-NrBHuRlUE" not in card or "q2OazIWZ5vE" not in card:
+        raise SystemExit("Week 9 card is missing a public Short link")
+    if "BAL +10" not in card or "Thu card line" not in card:
+        raise SystemExit("Week 9 card rows changed while adding the leaders Short")
+    blob = (home + card + shorts).lower()
+    for bad in ("walterfootball", "walter football", "unexpected points", "oddstrader", "odds trader"):
+        if bad in blob:
+            raise SystemExit(f"paid-source name on a Week 9 page: {bad}")
     method = open(os.path.join(OUT, "methodology.html"), encoding="utf-8").read()
     if "0.35" not in method or "about 2 points" not in method:
         raise SystemExit("methodology is still missing the v3 blend")
