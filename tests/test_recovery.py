@@ -50,8 +50,15 @@ def test_built_pages():
     card = open(os.path.join(root, "card.html"), encoding="utf-8").read()
     assert "Week 9" in home and "Saturday, Nov 7, 2026 PT" in home
     assert "BAL +10" in home and "LOSS" in home and "JAX 33, BAL 10" in home
-    assert "q2OazIWZ5vE" in home
-    assert "cXnzFQPN7mE" not in home + ai + card
+    shorts = open(os.path.join(root, "shorts.html"), encoding="utf-8").read()
+    assert "4-NrBHuRlUE" in home and 'data-yt="4-NrBHuRlUE"' in home
+    assert "q2OazIWZ5vE" in home and "Week 9 Saturday Update" in home
+    assert "4-NrBHuRlUE" in shorts and shorts.find("4-NrBHuRlUE") < shorts.find("q2OazIWZ5vE")
+    assert "81Pq1yT8hQQ" in shorts and "Week 4 Westgate SuperContest Top 5 Leaders" in shorts
+    assert "LAMBDA LAMBDA LAMBDA-1 29-10-1" in shorts and "RIGGED NFL-1 29-10-1" in shorts
+    assert "Entertainment and opinion only. Not betting advice." in shorts
+    assert "4-NrBHuRlUE" in card and "q2OazIWZ5vE" in card and "Thu card line" in card
+    assert "cXnzFQPN7mE" not in home + ai + card + shorts
     assert "DraftKings line" in ai and "Westgate line" not in ai.split("ai-grid", 1)[-1][:500]
     assert "Thu card line" in card
     assert "This is not a publish" not in home

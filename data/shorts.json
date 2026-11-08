@@ -1,8 +1,16 @@
 {
-  "_comment": "Public YouTube Shorts only. never_embed ids are refused by the build even if a URL is added later. Week 8 items are archive. The current item is the Week 9 Saturday short. Dates are the NFL week day used for ordering, not a claimed upload timestamp, except 2026-11-07 for the Saturday short posted that morning.",
+  "_comment": "Public YouTube Shorts only. never_embed ids are refused by the build even if a URL is added later. Weeks 3, 4, and 8 are archive. Week 9 shorts are current. Dates order the home page. 2026-11-07 and 2026-11-08 are the Pacific mornings those Shorts were posted.",
   "never_embed": ["cXnzFQPN7mE"],
   "placeholder_slots": 0,
   "shorts": [
+    {
+      "title": "Week 9 Westgate SuperContest Top 5 Leaders | Two Tied at 29-10-1 #Shorts",
+      "date": "2026-11-08",
+      "week": 9,
+      "role": "current",
+      "youtube_url": "https://www.youtube.com/shorts/4-NrBHuRlUE",
+      "note": "Posted Sun Nov 8, 2026, about 6:50 AM PT. Top 5 SuperContest entries after Week 8 and their Week 9 picks (Westgate SC lines): 1T LAMBDA LAMBDA LAMBDA-1 29-10-1: CLE +3, NYG -3.5, KC -9.5, LV +9.5, NE -3. 1T RIGGED NFL-1 29-10-1: WAS +5.5, CAR +2.5, GB +3, TB +6.5, MIN +3.5. 3 MATTLEGEND27-1 29-11: NO -3, NYG -3.5, HOU -4.5, GB +3, ARI +12.5. 4T JJ & JF-1 28-12 (also tied 1st in SuperContest Gold): NO -3, PHI +3.5, CAR +2.5, TB +6.5, MIN +3.5. 4T RJ551155-3 28-12: LV +9.5, HOU -4.5, GB +3, ARI +12.5, BUF -3.5. Shared sides: GB +3 (3 of 5); NYG -3.5, LV +9.5, CAR +2.5, TB +6.5, MIN +3.5, NO -3, HOU -4.5, ARI +12.5 (2 of 5 each). Vector's Thursday Week 9 card agrees with CAR, TB, MIN, NO, ARI; fades GB (Vector NE -3), NYG (Vector PHI +3.5), HOU (Vector LAC +4.5); had no side in LV@SF. Contest-leader rows are not Vector picks. Entertainment and opinion only. Not betting advice."
+    },
     {
       "title": "Week 9 Saturday Update: Colts Pool Value, Bengals & Saints | Vector Picks",
       "date": "2026-11-07",

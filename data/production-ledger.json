@@ -22,6 +22,22 @@
         "Week 4 tracker rows that contradict the published pass card were left out",
         "Contest-leader rows are not Vector and were left out"
       ]
+    },
+    {
+      "week": 9,
+      "season": 2026,
+      "published_at_pt": "2026-11-08",
+      "dedup_key": "2026-w09-leaders-short",
+      "source": "Public YouTube Short https://www.youtube.com/shorts/4-NrBHuRlUE on Vector Picks. Leader records and Week 9 Westgate SC picks are the supplied official-sheet figures. No Week 9 Westgate sheet file was added.",
+      "included": [
+        "Week 9 Westgate SuperContest Top 5 Leaders Short"
+      ],
+      "public_video_ids": ["4-NrBHuRlUE"],
+      "never_embed": ["cXnzFQPN7mE"],
+      "gaps": [
+        "No Week 9 Westgate sheet file in the repo",
+        "Contest-leader rows are not Vector and were left off the record"
+      ]
     }
   ]
 }
