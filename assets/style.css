@@ -160,6 +160,15 @@ td.rank{color:var(--grey)}
 .ai-score tr.vec-row td{background:rgba(34,197,94,.08)}
 .vec-block ul.picks li .sub{display:inline;margin:0 .4rem}
 .vec-card{border:2px solid var(--green)}
+.top5-block{border-color:var(--gold);box-shadow:0 0 0 1px rgba(250,204,21,.28)}
+.top5-head{display:flex;justify-content:space-between;align-items:flex-end;gap:1rem;flex-wrap:wrap}
+.top5-list{list-style:none;padding:0;margin:.2rem 0 .2rem}
+.top5-list li{font-family:Anton,Impact,sans-serif;font-weight:400;font-size:clamp(1.45rem,4.5vw,2rem);line-height:1.25;padding:.45rem 0;border-bottom:1px solid var(--line)}
+.top5-list li .sub{font-family:Montserrat,system-ui,sans-serif;font-size:.82rem;font-weight:600;color:var(--grey)}
+.top5-list li .res{font-family:Montserrat,system-ui,sans-serif;vertical-align:middle}
+.top5-list li.covered{color:#ffd84d}
+.top5-list li.covered .sub{color:var(--grey);font-weight:600}
+.top5-next{border-style:dashed}
 .ai-grid th .sub{display:block;font-size:.62rem;letter-spacing:.04em;text-transform:uppercase}
 .ai-cards li .sub{display:inline;margin:0 .35rem}
 /* Covered sides: yellow pick text only. No background box. Pushes and losses stay white. */

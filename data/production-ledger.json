@@ -56,6 +56,26 @@
         "BUF@MIN (Monday night) is pending",
         "Contest-leader rows are not Vector and were left off the record"
       ]
+    },
+    {
+      "week": 9,
+      "season": 2026,
+      "published_at_pt": "2026-11-09",
+      "dedup_key": "2026-w09-sunday-grades-top5",
+      "source": "ESPN finals in data/verified-finals-2026-11-09.json. Vector Top 5 is the published Saturday Westgate card. Week 10 early look is provisional DraftKings only.",
+      "included": [
+        "Week 9 AI board graded at the Wednesday DraftKings lines, BUF@MIN pending",
+        "Thursday Vector card graded at its own lines, BUF@MIN pending",
+        "Vector Top 5 Westgate SuperContest section, record 2-3",
+        "Week 10 early look, provisional"
+      ],
+      "public_video_ids": [],
+      "never_embed": ["cXnzFQPN7mE"],
+      "gaps": [
+        "BUF@MIN (Monday night) is pending",
+        "Week 10 early look is provisional DraftKings, not a final card",
+        "No Week 9 Westgate sheet file in the repo; Top 5 uses the published Saturday card"
+      ]
     }
   ]
 }

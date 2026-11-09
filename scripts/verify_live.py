@@ -12,9 +12,10 @@ import urllib.request
 HOME_URL = "https://www.vectorpicks.com/"
 SHORTS_URL = "https://www.vectorpicks.com/shorts.html"
 CARD_URL = "https://www.vectorpicks.com/card.html"
+AI_URL = "https://www.vectorpicks.com/ai-picks.html"
 HOME_MARKERS = (
     "Week 9",
-    "Sunday, Nov 8, 2026 PT",
+    "Monday, Nov 9, 2026 PT",
     "JAX 33, BAL 10",
     "4-NrBHuRlUE",
     "q2OazIWZ5vE",
@@ -54,6 +55,30 @@ CARD_MARKERS = (
     "Thu card line",
     "BAL +10",
     "JAX 33, BAL 10",
+    "DAL 27, IND 23",
+    "CLE 22, NO 23 (OT)",
+)
+AI_MARKERS = (
+    'id="vector-top5"',
+    "Vector Top 5",
+    "Westgate SuperContest",
+    "ARI +12.5",
+    ">2-3<",
+    "Final: CIN 34, ATL 17",
+    "Final: CLE 22, NO 23 (OT)",
+    "Monday night, pending",
+    "Week 10 early look — provisional, lines will move, final card Thursday",
+    "DAL +4.5",
+    "NYJ +8.5",
+    "MIN +3",
+    "NO +1.5",
+    "HOU \u22124.5",
+    "Byes: CHI, DEN, PHI, TB",
+    "49-36-2",
+    "48-37-2",
+    "33-33-2",
+    "20-10-0",
+    "BUF @ MIN not final",
 )
 FORBIDDEN = (
     "cXnzFQPN7mE",
@@ -64,6 +89,8 @@ FORBIDDEN = (
     "dr bob",
     "dr. bob",
     "oddstrader",
+    "all 15 games are pending",
+    "no top 5",
 )
 
 
@@ -105,6 +132,7 @@ def main():
         ("homepage", HOME_URL, HOME_MARKERS),
         ("shorts", SHORTS_URL, SHORTS_MARKERS),
         ("card", CARD_URL, CARD_MARKERS),
+        ("ai-picks", AI_URL, AI_MARKERS),
     ):
         status, body = fetch(url)
         ok = check(name, status, body, markers) and ok
