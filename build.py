@@ -11,7 +11,7 @@ Inputs (data/):
   weeks/*.json       one file per week (e.g. 2026-w04.json); newest = "latest card"
   ats-tracker.csv    graded picks (synced from tracker_sync_from if that path exists)
   episodes.json      podcast episodes -> episodes.html + feed.xml
-  shorts.json        YouTube Shorts list (+ local latest Short)
+  shorts.json        YouTube Shorts list (+ local latest Short, unofficial contest-leader grades)
   methodology.html   methodology body
 Static files in assets/ are copied to public/assets/.
 The Live Board (live.html) reads /api/odds in the browser and joins it to
@@ -541,6 +541,191 @@ def assert_public_video(vid, where):
     if vid in banned or vid in extra:
         raise SystemExit(f"refusing to embed private or blocked video {vid} in {where}")
 
+def wl_pending(wins, losses, pending):
+    rec = f"{int(wins)}-{int(losses)}"
+    if int(pending):
+        return f"{rec} with {int(pending)} pending"
+    return rec
+
+def contest_games_index(games, pending_games):
+    """Team -> (game id, (away, home) or None when that game has not been played)."""
+    if not games:
+        raise SystemExit("contest results have no games")
+    idx = {}
+    pending = []
+    for g in games:
+        gid = g.get("game") or ""
+        parts = gid.split("@")
+        if len(parts) != 2 or not all(re.fullmatch(r"[A-Z]{2,3}", t) for t in parts):
+            raise SystemExit(f"contest game {gid!r} is not away@home")
+        away, home = parts
+        if away in idx or home in idx:
+            raise SystemExit(f"team repeats on the contest board: {gid}")
+        if g.get("pending"):
+            if "away" in g or "home" in g:
+                raise SystemExit(f"{gid} is pending and also has a score")
+            score = None
+            pending.append(gid)
+        else:
+            try:
+                score = (int(g["away"]), int(g["home"]))
+            except (KeyError, TypeError, ValueError):
+                raise SystemExit(f"{gid} is final and has no score")
+        idx[away] = (gid, score)
+        idx[home] = (gid, score)
+    if pending != list(pending_games or []):
+        raise SystemExit(f"pending games {pending} do not match {list(pending_games or [])}")
+    return idx
+
+def grade_contest_pick(pick, idx):
+    if not parse_ats_pick(pick):
+        raise SystemExit(f"contest pick is not a side: {pick!r}")
+    team = parse_ats_pick(pick)[0]
+    if team not in idx:
+        raise SystemExit(f"contest pick {pick!r} is not on this board")
+    gid, score = idx[team]
+    if score is None:
+        return "pending", gid
+    g = {"game": gid, "score": {"away": score[0], "home": score[1], "status": "final"}}
+    res = grade_ats(pick, g)
+    if res not in ("W", "L", "P"):
+        raise SystemExit(f"could not grade {pick} on {gid}")
+    return res, gid
+
+def grade_leader_block(block):
+    """Grade contest-leader cards. Expected W-L-pending totals must match the arithmetic."""
+    if not isinstance(block, dict):
+        raise SystemExit("leader results are missing")
+    raw = json.dumps(block)
+    if BANNED_PUBLIC.search(raw):
+        raise SystemExit("leader results include a paid-source name")
+    for bad in ("splash", "bman", "oddstrader", "odds trader"):
+        if bad in raw.lower():
+            raise SystemExit(f"leader results name another pool: {bad}")
+    idx = contest_games_index(block.get("games"), block.get("pending_games"))
+    if block.get("pending_games") != ["BUF@MIN"]:
+        raise SystemExit("BUF@MIN is the only contest game that may still be pending")
+    contests = []
+    seen_ids = []
+    for contest in block.get("contests") or []:
+        cid = contest.get("id")
+        seen_ids.append(cid)
+        entries = []
+        tw = tl = tp = 0
+        names = []
+        for ent in contest.get("entries") or []:
+            picks = ent.get("picks") or []
+            if len(picks) != 5 or len(set(picks)) != 5:
+                raise SystemExit(f"{ent.get('name')} needs five different picks")
+            names.append(ent.get("name"))
+            results = []
+            w = l = pushes = pnd = 0
+            for pick in picks:
+                res, gid = grade_contest_pick(pick, idx)
+                if res == "pending" and gid != "BUF@MIN":
+                    raise SystemExit(f"{pick} is pending on {gid}, not BUF@MIN")
+                results.append({"pick": pick, "result": res, "game": gid})
+                if res == "W":
+                    w += 1
+                elif res == "L":
+                    l += 1
+                elif res == "P":
+                    pushes += 1
+                else:
+                    pnd += 1
+            if pushes:
+                raise SystemExit(f"{ent.get('name')} has a push; this unofficial card does not")
+            got = (w, l, pnd)
+            want = (int(ent["wins"]), int(ent["losses"]), int(ent["pending"]))
+            if got != want:
+                raise SystemExit(f"{ent.get('name')} graded {got[0]}-{got[1]} with {got[2]} pending, data says {want[0]}-{want[1]} with {want[2]} pending")
+            tw += w
+            tl += l
+            tp += pnd
+            entries.append({**ent, "results": results})
+        if len(names) != len(set(names)):
+            raise SystemExit(f"{contest.get('name')} lists the same entry twice")
+        got = (tw, tl, tp)
+        want = (int(contest["wins"]), int(contest["losses"]), int(contest["pending"]))
+        if got != want:
+            raise SystemExit(f"{contest.get('name')} group graded {got[0]}-{got[1]} with {got[2]} pending, data says {want[0]}-{want[1]} with {want[2]} pending")
+        if cid == "supercontest" and len(entries) != 5:
+            raise SystemExit("SuperContest results must list the top 5")
+        if cid == "gold" and len(entries) != 6:
+            raise SystemExit("SuperContest Gold results must list 6 entries when fifth is tied")
+        contests.append({**contest, "entries": entries})
+    if seen_ids != ["supercontest", "gold"]:
+        raise SystemExit(f"leader results contests are {seen_ids}, expected SuperContest then Gold")
+    return {**block, "contests": contests}
+
+def leader_badge(res):
+    if res == "pending":
+        return ' <span class="res res-pend">Pending</span>'
+    return ats_badge(res)
+
+def leader_results_html(block):
+    graded = grade_leader_block(block)
+    week = int(graded["week"])
+    panels = ""
+    for i, contest in enumerate(graded["contests"]):
+        total = wl_pending(contest["wins"], contest["losses"], contest["pending"])
+        cards = ""
+        for ent in contest["entries"]:
+            rec = wl_pending(ent["wins"], ent["losses"], ent["pending"])
+            items = ""
+            for row in ent["results"]:
+                extra = ""
+                if row["result"] == "pending":
+                    extra = ' <span class="sub">BUF@MIN, Monday night</span>'
+                items += f'<li>{e(minus(row["pick"]))}{leader_badge(row["result"])}{extra}</li>'
+            note = f'<p class="note">{e(ent["note"])}</p>' if ent.get("note") else ""
+            cards += (
+                f'<article class="panel"><p class="kicker">{e(ent["place"])} &middot; entered {e(ent["entering"])}</p>'
+                f'<p><b>{e(ent["name"])}</b></p>'
+                f'<p class="note">Week {week}: <b>{e(rec)}</b></p>{note}'
+                f'<ul class="picks">{items}</ul></article>'
+            )
+        if i == 0:
+            intro = (
+                f'<div class="callout"><b>Unofficial.</b> Graded {e(graded["as_of"])} from public final scores '
+                f'against the Westgate lines on these cards. Not Westgate official standings. '
+                f'These stay unofficial until Westgate posts the Week {week} standings. '
+                f'BUF@MIN (Monday night) is Pending.</div>'
+            )
+            anchor = ' id="week-9-results"'
+            closer = ""
+        else:
+            intro = (
+                '<p class="note">Same unofficial grade. Not Westgate official standings. '
+                'BUF@MIN (Monday night) is Pending.</p>'
+            )
+            anchor = ""
+            closer = (
+                '<p class="note">Contest-leader cards are not Vector picks. '
+                'Entertainment and opinion only. Not betting advice.</p>'
+            )
+        panels += (
+            f'<section class="panel"{anchor}>'
+            f'<h2>Week {week} {e(contest["heading"])}</h2>{intro}'
+            f'<p class="note">{e(contest["blurb"])} Group total: {e(total)}.</p>'
+            f'<div class="summary-grid">{cards}</div>{closer}</section>'
+        )
+    return panels
+
+def leader_home_note(sh, week):
+    block = sh.get("leader_results")
+    if not block or int(block.get("week") or 0) != int(week):
+        return ""
+    graded = grade_leader_block(block)
+    bits = [
+        f'{c["name"]} {wl_pending(c["wins"], c["losses"], c["pending"])}'
+        for c in graded["contests"]
+    ]
+    return (
+        f'<p class="note">Unofficial Week {int(week)} leader grades, not Westgate official standings: '
+        f'<a href="shorts.html#week-9-results">{e("; ".join(bits))}</a>. BUF@MIN is Pending.</p>'
+    )
+
 def build_shorts(sh):
     blocked = set(PRIVATE_VIDEO_IDS) | set(sh.get("never_embed") or [])
     cards = ""
@@ -580,8 +765,9 @@ def build_shorts(sh):
         latest = f"""<section class="panel latest-short"><h2>Latest Short &middot; Week {lt['week']} {lt['season']}</h2>
 <div class="short-feature">{media}
 <div><h3>{e(lt['title'])}</h3><p class="muted">Vertical 9:16 recap. {'<a href="'+e(lt['youtube_url'])+'" target="_blank" rel="noopener">Watch on YouTube</a>' if lt.get('youtube_url') else 'Follow <a href="'+e(CFG.get('youtube_url',''))+'" target="_blank" rel="noopener">'+e(CFG.get('youtube_handle',''))+'</a> on YouTube for every Short.'}</p></div></div></section>"""
+    results = leader_results_html(sh["leader_results"]) if sh.get("leader_results") else ""
     body = f"""<section class="hero hero-sm"><p class="kicker">60 seconds, every week</p><h1><span class="g">Shorts</span></h1></section>
-{latest}<section class="panel"><h2>On YouTube</h2><div class="shorts-grid">{cards}</div></section>"""
+{latest}{results}<section class="panel"><h2>On YouTube</h2><div class="shorts-grid">{cards}</div></section>"""
     page("shorts.html", "Shorts", body, desc="Weekly NFL Shorts from Vector Picks: the card and power ratings in about a minute, on YouTube.")
 
 def result_lines(wk_rows):
@@ -632,10 +818,12 @@ def build_home(weeks, rows, tidx, eps, sh, featured, today):
         p5_html += "\n"
     flags = s.get("flags") or []
     flags_html = f'<p class="note">Flags: {e(minus("; ".join(str(x) for x in flags)))}. Confirmed Friday/Saturday.</p>\n' if flags else ""
+    results_note = leader_home_note(sh, w["week"])
     short_block = (
         f'<section class="panel home-short"><h2>Latest Short</h2>{facade}'
         f'<p class="muted">{e(short_title)}</p>'
         f'{also_html}'
+        f'{results_note}'
         f'<p><a href="shorts.html">All Shorts &rarr;</a></p></section>'
         if facade else
         '<section class="panel"><h2>Latest Short</h2><p class="muted">A new Short is on the way.</p><p><a href="shorts.html">Shorts &rarr;</a></p></section>'
@@ -2416,6 +2604,8 @@ def validate_sources(weeks, rows, shorts):
                 raise SystemExit(f"blocked video id in short {field}")
     if len(seen) != len(set(seen)):
         raise SystemExit("duplicate YouTube id in shorts.json")
+    if shorts.get("leader_results"):
+        grade_leader_block(shorts["leader_results"])
     ledger_path = os.path.join(DATA, "production-ledger.json")
     if os.path.exists(ledger_path):
         ledger = json.load(open(ledger_path))
@@ -2503,6 +2693,48 @@ def validate_week9():
         raise SystemExit("shorts page is missing the Week 9 leader records")
     if "Entertainment and opinion only. Not betting advice." not in shorts:
         raise SystemExit("shorts page is missing the entertainment line")
+    for needle in (
+        'id="week-9-results"',
+        "Unofficial.",
+        "Not Westgate official standings",
+        "until Westgate posts the Week 9 standings",
+        "SuperContest top 5",
+        "SuperContest Gold top 6",
+        "tie for fifth",
+        "11-11 with 3 pending",
+        "9-16 with 5 pending",
+        "THREAD CLOD FOOL-1",
+        "JERRYDABEST-1",
+        "JUST WIN BABY-1",
+        "RJ551155-1",
+        "RJ551155-3",
+        "JD3-1",
+        "MATTLEGEND27-1",
+        "BUF@MIN (Monday night) is Pending",
+        "Week 9: <b>3-2</b>",
+        "Week 9: <b>0-4 with 1 pending</b>",
+        "Week 9: <b>1-3 with 1 pending</b>",
+        "Week 9: <b>2-3</b>",
+    ):
+        if needle not in shorts:
+            raise SystemExit(f"shorts page is missing contest result {needle}")
+    if shorts.count('res-win">WIN') != 20 or shorts.count('res-loss">LOSS') != 27 or shorts.count('res-pend">Pending') != 8:
+        raise SystemExit(
+            "contest result badges are "
+            f"{shorts.count('res-win\">WIN')} wins, "
+            f"{shorts.count('res-loss\">LOSS')} losses, "
+            f"{shorts.count('res-pend\">Pending')} pending"
+        )
+    if "11-11 with 3 pending" not in home or "9-16 with 5 pending" not in home or "shorts.html#week-9-results" not in home:
+        raise SystemExit("home is missing the unofficial contest totals")
+    results_html = shorts.split('id="week-9-results"', 1)[-1]
+    if BANNED_PUBLIC.search(results_html):
+        raise SystemExit("paid-source name on the contest results")
+    for bad in ("kevin cole", "unexpected points", "walterfootball", "walter football", "dr bob", "dr. bob"):
+        if bad in results_html.lower():
+            raise SystemExit(f"contest results name a source that stays off the site: {bad}")
+    if re.search(r"\b(splash|bman)\b", results_html, re.I):
+        raise SystemExit("contest results name another pool")
     if 'data-yt="4-NrBHuRlUE"' not in home:
         raise SystemExit("home is not featuring the Week 9 leaders short")
     if "Week 9 Saturday Update" not in home or "q2OazIWZ5vE" not in home:

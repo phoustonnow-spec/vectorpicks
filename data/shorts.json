@@ -1,7 +1,155 @@
 {
-  "_comment": "Public YouTube Shorts only. never_embed ids are refused by the build even if a URL is added later. Weeks 3, 4, and 8 are archive. Week 9 shorts are current. Dates order the home page. 2026-11-07 and 2026-11-08 are the Pacific mornings those Shorts were posted.",
+  "_comment": "Public YouTube Shorts only. never_embed ids are refused by the build even if a URL is added later. Weeks 3, 4, and 8 are archive. Week 9 shorts are current. Dates order the home page. 2026-11-07 and 2026-11-08 are the Pacific mornings those Shorts were posted. leader_results is the unofficial Week 9 contest grade shown on the Shorts page. It is not a Vector record.",
   "never_embed": ["cXnzFQPN7mE"],
   "placeholder_slots": 0,
+  "leader_results": {
+    "week": 9,
+    "season": 2026,
+    "as_of": "Sun Nov 8, 2026, about 10:10 PM PT",
+    "pending_games": ["BUF@MIN"],
+    "games": [
+      {"game": "JAX@BAL", "away": 33, "home": 10},
+      {"game": "CIN@ATL", "away": 34, "home": 17},
+      {"game": "CLE@NO", "away": 22, "home": 23},
+      {"game": "DET@MIA", "away": 19, "home": 9},
+      {"game": "LAR@WAS", "away": 20, "home": 13},
+      {"game": "DAL@IND", "away": 27, "home": 23},
+      {"game": "NYG@PHI", "away": 19, "home": 11},
+      {"game": "NYJ@KC", "away": 12, "home": 35},
+      {"game": "DEN@CAR", "away": 26, "home": 21},
+      {"game": "LV@SF", "away": 17, "home": 38},
+      {"game": "HOU@LAC", "away": 44, "home": 22},
+      {"game": "GB@NE", "away": 45, "home": 27},
+      {"game": "ARI@SEA", "away": 3, "home": 17},
+      {"game": "TB@CHI", "away": 24, "home": 27},
+      {"game": "BUF@MIN", "pending": true}
+    ],
+    "contests": [
+      {
+        "id": "supercontest",
+        "name": "SuperContest",
+        "heading": "SuperContest top 5",
+        "blurb": "Entering Week 9 from the Week 8 standings.",
+        "wins": 11,
+        "losses": 11,
+        "pending": 3,
+        "entries": [
+          {
+            "place": "1T",
+            "name": "LAMBDA LAMBDA LAMBDA-1",
+            "entering": "29-10-1",
+            "wins": 3,
+            "losses": 2,
+            "pending": 0,
+            "picks": ["CLE +3", "NYG -3.5", "KC -9.5", "LV +9.5", "NE -3"]
+          },
+          {
+            "place": "1T",
+            "name": "RIGGED NFL-1",
+            "entering": "29-10-1",
+            "wins": 2,
+            "losses": 2,
+            "pending": 1,
+            "picks": ["WAS +5.5", "CAR +2.5", "GB +3", "TB +6.5", "MIN +3.5"]
+          },
+          {
+            "place": "3",
+            "name": "MATTLEGEND27-1",
+            "entering": "29-11",
+            "wins": 3,
+            "losses": 2,
+            "pending": 0,
+            "picks": ["NO -3", "NYG -3.5", "HOU -4.5", "GB +3", "ARI +12.5"]
+          },
+          {
+            "place": "4T",
+            "name": "JJ & JF-1",
+            "entering": "28-12",
+            "wins": 1,
+            "losses": 3,
+            "pending": 1,
+            "picks": ["NO -3", "PHI +3.5", "CAR +2.5", "TB +6.5", "MIN +3.5"]
+          },
+          {
+            "place": "4T",
+            "name": "RJ551155-3",
+            "entering": "28-12",
+            "wins": 2,
+            "losses": 2,
+            "pending": 1,
+            "picks": ["LV +9.5", "HOU -4.5", "GB +3", "ARI +12.5", "BUF -3.5"]
+          }
+        ]
+      },
+      {
+        "id": "gold",
+        "name": "SuperContest Gold",
+        "heading": "SuperContest Gold top 6",
+        "blurb": "Six entries because of a tie for fifth.",
+        "wins": 9,
+        "losses": 16,
+        "pending": 5,
+        "entries": [
+          {
+            "place": "1T",
+            "name": "JJ & JF-1",
+            "entering": "28-12",
+            "wins": 1,
+            "losses": 3,
+            "pending": 1,
+            "note": "Same five picks as the SuperContest ticket. Separate contest.",
+            "picks": ["NO -3", "PHI +3.5", "CAR +2.5", "TB +6.5", "MIN +3.5"]
+          },
+          {
+            "place": "1T",
+            "name": "THREAD CLOD FOOL-1",
+            "entering": "28-12",
+            "wins": 2,
+            "losses": 2,
+            "pending": 1,
+            "picks": ["LAR -5.5", "PHI +3.5", "SF -9.5", "ARI +12.5", "MIN +3.5"]
+          },
+          {
+            "place": "3",
+            "name": "JERRYDABEST-1",
+            "entering": "26-13-1",
+            "wins": 2,
+            "losses": 2,
+            "pending": 1,
+            "picks": ["NO -3", "DAL -5.5", "DEN -2.5", "TB +6.5", "MIN +3.5"]
+          },
+          {
+            "place": "4",
+            "name": "JUST WIN BABY-1",
+            "entering": "25-14-1",
+            "wins": 2,
+            "losses": 3,
+            "pending": 0,
+            "picks": ["PHI +3.5", "DEN -2.5", "LV +9.5", "ARI +12.5", "TB +6.5"]
+          },
+          {
+            "place": "5T",
+            "name": "RJ551155-1",
+            "entering": "25-15",
+            "wins": 2,
+            "losses": 2,
+            "pending": 1,
+            "note": "Same five teams as SuperContest RJ551155-3. Separate ticket.",
+            "picks": ["LV +9.5", "HOU -4.5", "GB +3", "ARI +12.5", "BUF -3.5"]
+          },
+          {
+            "place": "5T",
+            "name": "JD3-1",
+            "entering": "25-15",
+            "wins": 0,
+            "losses": 4,
+            "pending": 1,
+            "picks": ["WAS +5.5", "PHI +3.5", "ARI +12.5", "CHI -6.5", "MIN +3.5"]
+          }
+        ]
+      }
+    ]
+  },
   "shorts": [
     {
       "title": "Week 9 Westgate SuperContest Top 5 Leaders | Two Tied at 29-10-1 #Shorts",
@@ -9,7 +157,7 @@
       "week": 9,
       "role": "current",
       "youtube_url": "https://www.youtube.com/shorts/4-NrBHuRlUE",
-      "note": "Posted Sun Nov 8, 2026, about 6:50 AM PT. Top 5 SuperContest entries after Week 8 and their Week 9 picks (Westgate SC lines): 1T LAMBDA LAMBDA LAMBDA-1 29-10-1: CLE +3, NYG -3.5, KC -9.5, LV +9.5, NE -3. 1T RIGGED NFL-1 29-10-1: WAS +5.5, CAR +2.5, GB +3, TB +6.5, MIN +3.5. 3 MATTLEGEND27-1 29-11: NO -3, NYG -3.5, HOU -4.5, GB +3, ARI +12.5. 4T JJ & JF-1 28-12 (also tied 1st in SuperContest Gold): NO -3, PHI +3.5, CAR +2.5, TB +6.5, MIN +3.5. 4T RJ551155-3 28-12: LV +9.5, HOU -4.5, GB +3, ARI +12.5, BUF -3.5. Shared sides: GB +3 (3 of 5); NYG -3.5, LV +9.5, CAR +2.5, TB +6.5, MIN +3.5, NO -3, HOU -4.5, ARI +12.5 (2 of 5 each). Vector's Thursday Week 9 card agrees with CAR, TB, MIN, NO, ARI; fades GB (Vector NE -3), NYG (Vector PHI +3.5), HOU (Vector LAC +4.5); had no side in LV@SF. Contest-leader rows are not Vector picks. Entertainment and opinion only. Not betting advice."
+      "note": "Posted Sun Nov 8, 2026, about 6:50 AM PT. Top 5 SuperContest entries after Week 8 and their Week 9 picks (Westgate SC lines): 1T LAMBDA LAMBDA LAMBDA-1 29-10-1: CLE +3, NYG -3.5, KC -9.5, LV +9.5, NE -3. 1T RIGGED NFL-1 29-10-1: WAS +5.5, CAR +2.5, GB +3, TB +6.5, MIN +3.5. 3 MATTLEGEND27-1 29-11: NO -3, NYG -3.5, HOU -4.5, GB +3, ARI +12.5. 4T JJ & JF-1 28-12 (also tied 1st in SuperContest Gold): NO -3, PHI +3.5, CAR +2.5, TB +6.5, MIN +3.5. 4T RJ551155-3 28-12: LV +9.5, HOU -4.5, GB +3, ARI +12.5, BUF -3.5. Shared sides: GB +3 (3 of 5); NYG -3.5, LV +9.5, CAR +2.5, TB +6.5, MIN +3.5, NO -3, HOU -4.5, ARI +12.5 (2 of 5 each). Vector's Thursday Week 9 card agrees with CAR, TB, MIN, NO, ARI; fades GB (Vector NE -3), NYG (Vector PHI +3.5), HOU (Vector LAC +4.5); had no side in LV@SF. Contest-leader rows are not Vector picks. Entertainment and opinion only. Not betting advice. Unofficial Sunday night grades (not Westgate official standings) are on this page: SuperContest top 5 went 11-11 with 3 pending; SuperContest Gold top 6 (a tie for fifth) went 9-16 with 5 pending. BUF@MIN is Pending."
     },
     {
       "title": "Week 9 Saturday Update: Colts Pool Value, Bengals & Saints | Vector Picks",
