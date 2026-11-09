@@ -74,6 +74,14 @@ def test_built_pages():
     assert "4-NrBHuRlUE" in card and "q2OazIWZ5vE" in card and "Thu card line" in card
     assert "cXnzFQPN7mE" not in home + ai + card + shorts
     assert "DraftKings line" in ai and "Westgate line" not in ai.split("ai-grid", 1)[-1][:500]
+    assert 'id="vector-top5"' in ai and "Vector Top 5" in ai and "Westgate SuperContest" in ai
+    assert "ARI +12.5" in ai and ">2-3<" in ai
+    assert "Week 10 early look" in ai and "DAL +4.5" in ai and "Byes: CHI, DEN, PHI, TB" in ai
+    assert "SEA@LV" not in ai and "SEA @ LV" not in ai
+    assert "all 15 games are pending" not in ai.lower() and "no top 5" not in ai.lower()
+    assert "Monday night, pending" in ai and "BUF @ MIN not final" in ai
+    assert "Final: CIN 34, ATL 17" in ai and "Final: CLE 22, NO 23 (OT)" in ai
+    assert "49-36-2" in ai and "48-37-2" in ai and "33-33-2" in ai
     assert "Thu card line" in card
     assert "This is not a publish" not in home
     text = open(os.path.join(build.ROOT, "build.py"), encoding="utf-8").read()

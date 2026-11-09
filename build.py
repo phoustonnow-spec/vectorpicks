@@ -1397,7 +1397,7 @@ BANNED_PUBLIC = re.compile(
     re.I,
 )
 PICK_RE = re.compile(r"^([A-Z]{2,3})\s+([+-])(\d+(?:\.\d+)?)$")
-FINAL_RE = re.compile(r"^([A-Z]{2,3})\s+(\d+),\s*([A-Z]{2,3})\s+(\d+)$")
+FINAL_RE = re.compile(r"^([A-Z]{2,3})\s+(\d+),\s*([A-Z]{2,3})\s+(\d+)(?:\s*\(OT\))?$")
 ATS_BADGE = {"W": ("win", "WIN"), "L": ("loss", "LOSS"), "P": ("push", "PUSH")}
 
 def parse_ats_pick(pick):
@@ -1564,7 +1564,11 @@ def regrade_ai_week(w):
         if not scored:
             continue
         away, home = g["game"].split("@")
-        g["final"] = f"{away} {scored[0]}, {home} {scored[1]}"
+        ot = ""
+        sc = g.get("score")
+        if isinstance(sc, dict) and sc.get("overtime"):
+            ot = " (OT)"
+        g["final"] = f"{away} {scored[0]}, {home} {scored[1]}{ot}"
     best, leans, shown, bet_units = vector_published(w.get("vector") or {}, w["games"])
     picks = {}
     def add(gid, pick):
@@ -1808,6 +1812,62 @@ def vector_flag_block(vec, games, shown, res):
         return ""
     return f'<div><h3>Flags</h3><ul class="picks">{items}</ul><p class="note">Confirmed Friday/Saturday.</p></div>'
 
+def vector_top5_section(w):
+    """Westgate Vector Top 5, plus an optional provisional next-week look.
+
+    This is a different board from the DraftKings AI grid. It renders only
+    when the week file publishes it.
+    """
+    block = w.get("vector_top5")
+    if not isinstance(block, dict) or not block.get("picks"):
+        return ""
+    items = ""
+    for p in block["picks"]:
+        res = str(p.get("result") or "").strip().upper()
+        mark = {"WIN": "W", "LOSS": "L", "PUSH": "P"}.get(res)
+        if res and mark is None:
+            raise SystemExit(f"Vector Top 5 result {res!r} is not WIN, LOSS, or PUSH")
+        cls = ' class="covered"' if mark == "W" else ""
+        label = f"{p.get('rank', '')}. {p.get('pick', '')}"
+        if p.get("matchup"):
+            label += f" {p['matchup']}"
+        extra = ats_badge(mark)
+        if p.get("final"):
+            extra += f' <span class="sub">{e(p["final"])}</span>'
+        if p.get("note"):
+            extra += f' <span class="sub">{e(p["note"])}</span>'
+        items += f"<li{cls}>{e(minus(label))}{extra}</li>"
+    note = f'<p class="note">{e(block["note"])}</p>' if block.get("note") else ""
+    rec = e(block.get("record") or "")
+    kicker = e(block.get("kicker") or "Westgate SuperContest lines")
+    html_block = f'''<section class="panel top5-block" id="vector-top5"><div class="top5-head"><div><p class="kicker">{kicker}</p><h2>Vector <span class="g">Top 5</span></h2></div><div class="wk-rec"><small>WEEK {int(w["week"])}</small><b>{rec}</b></div></div>
+{note}<ol class="picks top5-list">{items}</ol></section>'''
+    nxt = w.get("vector_top5_next")
+    if isinstance(nxt, dict) and nxt.get("edges"):
+        rows = ""
+        for edge in nxt["edges"]:
+            label = f"{edge.get('rank', '')}. {edge.get('side', '')}"
+            if edge.get("matchup"):
+                label += f" {edge['matchup']}"
+            rows += f"<li>{e(minus(label))}</li>"
+        byes = [str(b) for b in (nxt.get("byes") or [])]
+        bits = [nxt.get("label") or "Week 10 early look — provisional, lines will move, final card Thursday"]
+        if nxt.get("line_source"):
+            bits.append(f"Lines: {nxt['line_source']}.")
+        if byes:
+            bits.append("Byes: " + ", ".join(byes) + ".")
+        if nxt.get("note"):
+            bits.append(nxt["note"])
+        html_block += f'''<section class="panel top5-next" id="week-10-early"><p class="kicker">Not a locked card</p><h2>Week 10 <span class="g">early look</span></h2>
+<p class="note">{e(" ".join(bits))}</p>
+<ul class="picks">{rows}</ul></section>'''
+        early = html_block.split('id="week-10-early"', 1)[-1]
+        if re.search(r"SEA\s*@\s*LV", early):
+            raise SystemExit("Week 10 early look must not publish SEA@LV")
+    if BANNED_PUBLIC.search(html_block):
+        raise SystemExit("Vector Top 5 section names a source that stays off the site")
+    return html_block
+
 def build_ai_picks(w, ai_weeks, fname):
     ais = w["ais"]
     vec = w.get("vector") or {}
@@ -1975,12 +2035,13 @@ def build_ai_picks(w, ai_weeks, fname):
     if pending_names:
         grid_note += " " + ", ".join(pending_names) + ": pending."
     cons_block = f'<section class="panel callout"><h2>Consensus</h2><ul class="picks">{cons}</ul></section>\n' if w.get("consensus") else ""
+    top5_html = vector_top5_section(w)
     body = f"""
 <section class="hero hero-sm"><p class="kicker">Week {w['week']} &middot; {w['season']} &middot; AI vs AI</p><h1>AI <span class="g">Picks</span></h1>
 <p class="muted">{e(w['intro'])}</p><p class="note">{e(w.get('prompt_note', ''))}</p>
 {f'<p class="note">{e(w["grade_note"])}</p>' if w.get("grade_note") else ''}
 {f'<p class="note">{e(w["coverage_gap"])}</p>' if w.get("coverage_gap") else ''}</section>
-{cons_block}<section class="panel"><h2>Game by game: {names}, plus Vector</h2>
+{top5_html}{cons_block}<section class="panel"><h2>Game by game: {names}, plus Vector</h2>
 <p class="note">{grid_note}</p>
 <div class="table-wrap"><table class="rec-table ai-grid"><thead><tr>{head}</tr></thead><tbody>{rows}</tbody></table></div>
 <p class="note">Lines: {e(w['line_source'])}</p></section>
@@ -2518,6 +2579,46 @@ def load_finals_index():
     for week, games in (snap.get("weeks") or {}).items():
         for g in games:
             out[(int(week), g["game"])] = g
+    newer_path = os.path.join(DATA, "verified-finals-2026-11-09.json")
+    if not os.path.exists(newer_path):
+        raise SystemExit("missing data/verified-finals-2026-11-09.json")
+    newer = json.load(open(newer_path))
+    games = newer.get("games") or {}
+    pending = set(newer.get("pending") or [])
+    week9 = [gid for (week, gid) in out if week == 9]
+    if not week9:
+        raise SystemExit("Week 9 is missing from the Nov 7 scoreboard")
+    for gid in week9:
+        if gid not in games:
+            raise SystemExit(f"Nov 9 snapshot is missing Week 9 game {gid}")
+    for gid, g in games.items():
+        key = (9, gid)
+        if key not in out:
+            raise SystemExit(f"Nov 9 snapshot game {gid} is not on the Week 9 board")
+        status = g.get("status")
+        if gid in pending or status == "pending":
+            if status == "final":
+                raise SystemExit(f"{gid} is both pending and final")
+            row = dict(out[key])
+            row["state"] = "pre"
+            row["away_score"] = 0
+            row["home_score"] = 0
+            row["detail"] = "Pending"
+            out[key] = row
+            continue
+        if status != "final":
+            raise SystemExit(f"{gid} status {status!r} is not final or pending")
+        try:
+            away_score = int(g["away"])
+            home_score = int(g["home"])
+        except (KeyError, TypeError, ValueError):
+            raise SystemExit(f"{gid} final is missing an away or home score")
+        row = dict(out[key])
+        row["state"] = "post"
+        row["away_score"] = away_score
+        row["home_score"] = home_score
+        row["detail"] = "Final/OT" if "OT" in str(g.get("final") or "") else "Final"
+        out[key] = row
     return out
 
 def validate_sources(weeks, rows, shorts):
@@ -2752,7 +2853,72 @@ def validate_week9():
         raise SystemExit("methodology is still missing the v3 blend")
     if re.search(r"current\s*<strong>v2</strong>", method):
         raise SystemExit("methodology still calls v2 the current method")
-    print("OK week 9: Thursday card, DraftKings AI board, BAL +10 graded loss")
+    low = ai.lower()
+    if "all 15 games are pending" in low or "no top 5" in low:
+        raise SystemExit("Week 9 AI notes still say the board is ungraded or has no top 5")
+    if 'id="vector-top5"' not in ai or "Vector <span class=\"g\">Top 5</span>" not in ai:
+        raise SystemExit("Week 9 AI page is missing the Vector Top 5 section")
+    if "Westgate SuperContest" not in ai:
+        raise SystemExit("Vector Top 5 is not labeled as the Westgate SuperContest card")
+    top = ai.split('id="vector-top5"', 1)[-1].split('id="week-10-early"', 1)[0]
+    for needle in ("IND +5.5", "WAS +5.5", "ARI +12.5", "CIN \u22123", "MIA +7",
+                   "DAL 27, IND 23", "LAR 20, WAS 13", "ARI 3, SEA 17",
+                   "CIN 34, ATL 17", "DET 19, MIA 9", ">2-3<",
+                   "res-win", "res-loss", "Lower confidence"):
+        if needle not in top:
+            raise SystemExit(f"Vector Top 5 is missing {needle}")
+    if top.count('res-win">WIN') != 2 or top.count('res-loss">LOSS') != 3:
+        raise SystemExit("Vector Top 5 should be 2 wins and 3 losses")
+    early = ai.split('id="week-10-early"', 1)[-1].split("</section>", 1)[0]
+    for needle in ("Week 10 early look \u2014 provisional, lines will move, final card Thursday",
+                   "DAL +4.5", "NYJ +8.5", "MIN +3", "NO +1.5", "HOU \u22124.5",
+                   "Byes: CHI, DEN, PHI, TB"):
+        if needle not in early:
+            raise SystemExit(f"Week 10 early look is missing {needle}")
+    if re.search(r"SEA\s*@\s*LV", early) or "res-win" in early or "res-loss" in early:
+        raise SystemExit("Week 10 early look published a result or SEA@LV")
+    buf = re.search(r'<tr><td class="game"><b>BUF @ MIN</b>.*?</tr>', ai, re.S)
+    if not buf or "Final:" in buf.group(0) or "res-win" in buf.group(0) or "res-loss" in buf.group(0):
+        raise SystemExit("BUF @ MIN must stay pending on the DraftKings AI board")
+    if "Monday night, pending" not in buf.group(0):
+        raise SystemExit("BUF @ MIN is missing the pending note")
+    for label, needles in (
+        ("CIN @ ATL", ("Final: CIN 34, ATL 17", "res-win")),
+        ("CLE @ NO", ("Final: CLE 22, NO 23 (OT)",)),
+        ("DAL @ IND", ("Final: DAL 27, IND 23",)),
+        ("TB @ CHI", ("Final: TB 24, CHI 27",)),
+        ("GB @ NE", ("Final: GB 45, NE 27",)),
+    ):
+        row = re.search(rf'<tr><td class="game"><b>{re.escape(label)}</b>.*?</tr>', ai, re.S)
+        if not row or any(n not in row.group(0) for n in needles):
+            raise SystemExit(f"Week 9 AI board is missing the {label} final")
+    for needle in ("49-36-2", "43-42-2", "48-37-2", "33-33-2",
+                   "+10U", "+3U", "+9.5U", "+6.25U", "+7.5U",
+                   "20-10-0", "15-15-0", "17-13-1", "16-13-1", "6-3-1",
+                   "BUF @ MIN not final"):
+        if needle not in ai:
+            raise SystemExit(f"Week 9 season scoreboard is missing {needle}")
+    def card_row(label):
+        m = re.search(rf'<td class="game"><b>{re.escape(label)}</b>.*?</tr>', card, re.S)
+        if not m:
+            raise SystemExit(f"Thursday card is missing {label}")
+        return m.group(0)
+    was = card_row("LAR @ WAS")
+    if "WAS +5.5" not in was or "LOSS" not in was or "LAR 20, WAS 13" not in was:
+        raise SystemExit("Thursday card WAS +5.5 should be a loss")
+    ind = card_row("DAL @ IND")
+    if "IND +5.5" not in ind or "WIN" not in ind or "DAL 27, IND 23" not in ind:
+        raise SystemExit("Thursday card IND +5.5 should be a win")
+    tb = card_row("TB @ CHI")
+    if "TB +6.5" not in tb or "WIN" not in tb or "TB 24, CHI 27" not in tb:
+        raise SystemExit("Thursday card TB +6.5 should be a win at its own line")
+    buf_card = card_row("BUF @ MIN")
+    if "PENDING" not in buf_card or "res-win" in buf_card or "res-loss" in buf_card:
+        raise SystemExit("Thursday card BUF @ MIN must stay pending")
+    cle = card_row("CLE @ NO")
+    if "CLE 22, NO 23 (OT)" not in cle or "LOSS" not in cle:
+        raise SystemExit("Thursday card NO -3 should be an overtime loss")
+    print("OK week 9: Thursday card, DraftKings AI board, Sunday grades, Vector Top 5, BUF @ MIN pending")
 
 def main():
     global WEEKS, AI_WEEKS
