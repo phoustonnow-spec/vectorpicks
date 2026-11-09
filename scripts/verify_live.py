@@ -18,6 +18,10 @@ HOME_MARKERS = (
     "JAX 33, BAL 10",
     "4-NrBHuRlUE",
     "q2OazIWZ5vE",
+    "11-11 with 3 pending",
+    "9-16 with 5 pending",
+    "shorts.html#week-9-results",
+    "BUF@MIN is Pending",
 )
 SHORTS_MARKERS = (
     "4-NrBHuRlUE",
@@ -27,6 +31,22 @@ SHORTS_MARKERS = (
     "Week 4 Westgate SuperContest Top 5 Leaders",
     "LAMBDA LAMBDA LAMBDA-1 29-10-1",
     "Entertainment and opinion only. Not betting advice.",
+    'id="week-9-results"',
+    "Unofficial.",
+    "Not Westgate official standings",
+    "until Westgate posts the Week 9 standings",
+    "SuperContest top 5",
+    "SuperContest Gold top 6",
+    "tie for fifth",
+    "11-11 with 3 pending",
+    "9-16 with 5 pending",
+    "THREAD CLOD FOOL-1",
+    "JERRYDABEST-1",
+    "JUST WIN BABY-1",
+    "RJ551155-1",
+    "JD3-1",
+    "BUF@MIN (Monday night) is Pending",
+    "Week 9: <b>0-4 with 1 pending</b>",
 )
 CARD_MARKERS = (
     "4-NrBHuRlUE",
@@ -35,11 +55,20 @@ CARD_MARKERS = (
     "BAL +10",
     "JAX 33, BAL 10",
 )
-FORBIDDEN = ("cXnzFQPN7mE", "walterfootball", "unexpected points", "oddstrader")
+FORBIDDEN = (
+    "cXnzFQPN7mE",
+    "walterfootball",
+    "walter football",
+    "unexpected points",
+    "kevin cole",
+    "dr bob",
+    "dr. bob",
+    "oddstrader",
+)
 
 
 def fetch(url):
-    bust = url + ("&" if "?" in url else "?") + "cb=20261108w9leaders"
+    bust = url + ("&" if "?" in url else "?") + "cb=20261109w9results"
     request = urllib.request.Request(bust, headers={
         "Cache-Control": "no-cache",
         "Pragma": "no-cache",
