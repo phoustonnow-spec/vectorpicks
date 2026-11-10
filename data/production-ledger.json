@@ -13,8 +13,16 @@
         "Audited tracker grades for Weeks 3-8 and Week 9 TNF",
         "Public Shorts listed in data/shorts.json"
       ],
-      "public_video_ids": ["q2OazIWZ5vE", "KuluxlblwY0", "81Pq1yT8hQQ", "3af_Zhpcq2Y", "m8SIcKmxAAs"],
-      "never_embed": ["cXnzFQPN7mE"],
+      "public_video_ids": [
+        "q2OazIWZ5vE",
+        "KuluxlblwY0",
+        "81Pq1yT8hQQ",
+        "3af_Zhpcq2Y",
+        "m8SIcKmxAAs"
+      ],
+      "never_embed": [
+        "cXnzFQPN7mE"
+      ],
       "gaps": [
         "No Saturday Week 9 model rerun",
         "No Week 9 Westgate sheet file in the repo",
@@ -32,8 +40,12 @@
       "included": [
         "Week 9 Westgate SuperContest Top 5 Leaders Short"
       ],
-      "public_video_ids": ["4-NrBHuRlUE"],
-      "never_embed": ["cXnzFQPN7mE"],
+      "public_video_ids": [
+        "4-NrBHuRlUE"
+      ],
+      "never_embed": [
+        "cXnzFQPN7mE"
+      ],
       "gaps": [
         "No Week 9 Westgate sheet file in the repo",
         "Contest-leader rows are not Vector and were left off the record"
@@ -50,7 +62,9 @@
         "Unofficial Week 9 SuperContest Gold top 6 results, tie for fifth"
       ],
       "public_video_ids": [],
-      "never_embed": ["cXnzFQPN7mE"],
+      "never_embed": [
+        "cXnzFQPN7mE"
+      ],
       "gaps": [
         "Grades are unofficial until Westgate posts Week 9 standings",
         "BUF@MIN (Monday night) is pending",
@@ -70,11 +84,36 @@
         "Week 10 early look, provisional"
       ],
       "public_video_ids": [],
-      "never_embed": ["cXnzFQPN7mE"],
+      "never_embed": [
+        "cXnzFQPN7mE"
+      ],
       "gaps": [
         "BUF@MIN (Monday night) is pending",
         "Week 10 early look is provisional DraftKings, not a final card",
         "No Week 9 Westgate sheet file in the repo; Top 5 uses the published Saturday card"
+      ]
+    },
+    {
+      "week": 10,
+      "season": 2026,
+      "published_at_pt": "2026-11-10",
+      "dedup_key": "2026-w10-tuesday-rankings",
+      "source": "Tuesday public package generated 2026-11-10 ~9:45 AM PT. Week 9 Monday night final is BUF 23, MIN 6. No Week 10 contest card was in the package.",
+      "included": [
+        "Week 9 Thursday Vector card graded at its original lines, including BUF @ MIN as a loss",
+        "Week 10 power rankings, 1 through 32, with the provisional injury note",
+        "Week 10 status: the card publishes after the official contest lines are posted"
+      ],
+      "public_video_ids": [],
+      "never_embed": [
+        "cXnzFQPN7mE"
+      ],
+      "gaps": [
+        "No Week 10 Westgate card, so no Week 10 picks, edges, or line comparisons were added",
+        "Injury adjustments are provisional; a full player-level reconciliation is still pending",
+        "No Week 9 Westgate sheet file in the repo",
+        "Contest-leader rows stay the Sunday snapshot and are not on the Vector record",
+        "The record is the audited tracker since Week 3, not a full-season total"
       ]
     }
   ]

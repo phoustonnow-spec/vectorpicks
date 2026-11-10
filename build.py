@@ -332,17 +332,110 @@ def result_badge(r):
     label = {"W": "WIN", "L": "LOSS", "P": "PUSH", "n/a": "NO SIDE", "pending": "PENDING", "": "\u2014"}.get(res, res)
     return f'<span class="res res-{cls}">{e(label)}</span>'
 
-def record_box(rows, heading="Season record"):
+def record_box(rows, heading="Tracked weeks"):
     cells = ""
     for label, tier in (("Best Bets", "Best Bet"), ("Leans", "Lean"), ("Full card", None)):
         t = tally(rows, tier)
         u = f"{t['units']:+d}u" if t["units"] else "0u"
         cells += f'<div class="rec-cell"><div class="rec-label">{label}</div><div class="rec-num">{t["rec"]}</div><div class="rec-sub">{u} &middot; {t["pending"]} pending</div></div>'
     s = CFG["record_start"]
-    return f'<section class="panel record-box"><h2 class="kicker">{e(heading)}</h2><div class="rec-grid">{cells}</div><p class="note">W-L-P at each row\'s posted line, flat 1 unit, since Week {s["week"]} {s["season"]}. Pending means the game has not been played. A final with no grade is a gap, not a result. <a href="record.html">Every pick &rarr;</a></p></section>'
+    return f'<section class="panel record-box"><h2 class="kicker">{e(heading)}</h2><div class="rec-grid">{cells}</div><p class="note">W-L-P at each row\'s posted line, flat 1 unit. Tracked weeks since Week {s["week"]} {s["season"]}. Weeks 1 and 2 are not in this tracker. This is not a full-season total. Pending means the game has not been played. A final with no grade is a gap, not a result. <a href="record.html">Every pick &rarr;</a></p></section>'
+
+def load_rankings(current=None):
+    """Latest power-rankings file. None when it is not the file for this calendar week."""
+    paths = sorted(glob.glob(os.path.join(DATA, "rankings", "*.json")))
+    if not paths:
+        return None
+    data = json.load(open(paths[-1]))
+    rows = data.get("rows") or []
+    if len(rows) != 32:
+        raise SystemExit(f"rankings have {len(rows)} rows, expected 32")
+    if [r.get("rank") for r in rows] != list(range(1, 33)):
+        raise SystemExit("rankings are not listed 1 through 32")
+    teams = [r.get("team") for r in rows]
+    if len(teams) != len(set(teams)):
+        raise SystemExit("rankings repeat a team")
+    for r in rows:
+        if "rating" not in r or "move" not in r or "last_week_rank" not in r or "team" not in r:
+            raise SystemExit(f"rankings row {r.get('team')} is missing a field")
+    if current is not None and int(data.get("week") or 0) != int(current):
+        return None
+    return data
+
+def fmt_rating(n):
+    return minus(f"{float(n):.1f}")
+
+def fmt_move(n):
+    n = int(n)
+    if n > 0:
+        return f"+{n}", "pos"
+    if n < 0:
+        return minus(str(n)), "neg"
+    return "0", ""
+
+def week_status_html(rankings, rankings_href="index.html#rankings"):
+    if not rankings or not rankings.get("status"):
+        return ""
+    week = int(rankings["week"])
+    return (
+        f'<section class="panel callout" id="week-{week}-status"><h2>Week {week} <span class="g">status</span></h2>'
+        f'<p>{e(rankings["status"])}</p>'
+        f'<p class="note">No Week {week} picks, edges, or line comparisons are published here. '
+        f'<a href="{e(rankings_href)}">Week {week} power rankings</a>.</p></section>'
+    )
+
+def rankings_html(rankings):
+    if not rankings:
+        return ""
+    body = ""
+    for r in rankings["rows"]:
+        move_txt, cls = fmt_move(r["move"])
+        attr = f' class="{cls}"' if cls else ""
+        body += (
+            f'<tr><td class="rank">{int(r["rank"])}</td><td><b>{e(r["team"])}</b></td>'
+            f'<td>{e(fmt_rating(r["rating"]))}</td><td>{int(r["last_week_rank"])}</td>'
+            f'<td{attr}>{e(move_txt)}</td></tr>'
+        )
+    week = int(rankings["week"])
+    return (
+        f'<section class="panel" id="rankings"><h2>Week {week} <span class="g">power rankings</span></h2>'
+        f'<p class="note">{e(rankings.get("label") or "")}</p>'
+        f'<div class="table-wrap"><table class="rank-table"><thead><tr>'
+        f'<th scope="col">#</th><th scope="col">Team</th><th scope="col">Rating</th>'
+        f'<th scope="col">Last week</th><th scope="col">Move</th>'
+        f'</tr></thead><tbody>{body}</tbody></table></div>'
+        f'<p class="note">{e(rankings.get("note") or "")}</p></section>'
+    )
+
+def played_rows(rows, season, week):
+    out = []
+    for r in rows:
+        if r["Season"] != season or int(r["Week"]) != week:
+            continue
+        if r["Tier"] == "Pass" or str(r["Pick"]).startswith("No side"):
+            continue
+        out.append(r)
+    return out
+
+def rec_text(rs):
+    t = tally(rs)
+    return t["rec"][:-2] if t["P"] == 0 else t["rec"]
+
+def week_final_sentence(rows, season, week):
+    """Graded W-L for one week, from the tracker. Empty while a side is still pending."""
+    played = played_rows(rows, season, week)
+    if not played or any(r["_res"] not in ("W", "L", "P") for r in played):
+        return ""
+    bb = [r for r in played if r["Tier"] == "Best Bet"]
+    leans = [r for r in played if r["Tier"] == "Lean"]
+    text = f"Week {int(week)} final {rec_text(played)} (Best Bets {rec_text(bb)}, Leans {rec_text(leans)})."
+    buf = next((r for r in played if r["Game"] == "BUF@MIN"), None)
+    if buf and buf["_res"] == "L":
+        text += f' {buf["Pick"]} {buf["Line"]} is a loss, {buf["Final Score"]}.'
+    return text
 
 # ---------------------------------------------------------------- pages
-def build_card(w, tidx, fname):
+def build_card(w, tidx, fname, preface=""):
     line_col = w.get("line_column") or "Westgate"
     rows = ""
     for g in w["games"]:
@@ -399,7 +492,7 @@ def build_card(w, tidx, fname):
 <div class="table-wrap"><table class="power-table"><thead><tr><th scope="col">#</th><th scope="col">Team</th><th scope="col">{e(w.get("powers_healthy_label", "Healthy"))}</th><th scope="col">Injury &Delta;</th><th scope="col">Adjusted</th><th scope="col">Drivers</th></tr></thead><tbody>{pw}</tbody></table></div></section>
 """
     body = f"""
-<section class="hero hero-sm"><p class="kicker">Week {w['week']} &middot; {w['season']}</p><h1>Weekly <span class="g">Card</span></h1>
+{preface}<section class="hero hero-sm"><p class="kicker">Week {w['week']} &middot; {w['season']}</p><h1>Weekly <span class="g">Card</span></h1>
 <p class="muted">As of {e(w['as_of'])}.</p>{update}</section>
 <section class="summary-grid">
 <div class="panel"><h2>{tier_badge('Best Bet')} Best Bets</h2><ul class="picks big">{li(s['best_bets'])}</ul></div>
@@ -453,7 +546,8 @@ def build_record(rows, tidx):
     body = f"""
 <section class="hero hero-sm"><p class="kicker">Transparent &middot; graded at the posted line</p><h1>The <span class="g">Record</span></h1>
 <p class="muted">Every stored pick since Week {CFG['record_start']['week']} {CFG['record_start']['season']}. Wins and losses stay up. Flat 1 unit: win +1, loss &minus;1, push 0. This is the graded slice in the tracker, not a claim that every week is complete.</p></section>
-{record_box(rows, heading="Graded slice")}
+{record_box(rows, heading="Tracked weeks")}
+<section class="panel"><p class="note">{e(week_final_sentence(rows, 2026, 9))} NYJ @ KC and LV @ SF stayed passes with no pregame side.</p></section>
 {gap_html}
 <section class="panel"><h2>Graded picks</h2>{tbl(graded)}</section>
 <section class="panel"><h2>Pending</h2>{tbl(pending, show_score=False)}
@@ -802,32 +896,12 @@ def build_home(weeks, rows, tidx, eps, sh, featured, today):
     wt = tally(wk_rows)
     cash_html = result_lines(wk_rows)
     ep = episode_card(eps[0]) if eps else '<div class="empty">First episode coming soon. <a href="episodes.html">Podcast page &rarr;</a></div>'
-    short = newest_short(sh)
-    facade = yt_facade(short) if short else ""
-    short_title = (short or {}).get("title") or "Latest Short"
-    others = other_shorts_same_week(sh, short)
-    also_html = ""
-    if others:
-        links = " &middot; ".join(
-            f'<a href="{e(s.get("youtube_url") or "")}" target="_blank" rel="noopener">{e(s.get("title") or "Short")}</a>'
-            for s in others
-        )
-        also_html = f'<p class="note">Also this week: {links}.</p>'
     p5_html = pick5_note(w)
     if p5_html:
         p5_html += "\n"
     flags = s.get("flags") or []
     flags_html = f'<p class="note">Flags: {e(minus("; ".join(str(x) for x in flags)))}. Confirmed Friday/Saturday.</p>\n' if flags else ""
-    results_note = leader_home_note(sh, w["week"])
-    short_block = (
-        f'<section class="panel home-short"><h2>Latest Short</h2>{facade}'
-        f'<p class="muted">{e(short_title)}</p>'
-        f'{also_html}'
-        f'{results_note}'
-        f'<p><a href="shorts.html">All Shorts &rarr;</a></p></section>'
-        if facade else
-        '<section class="panel"><h2>Latest Short</h2><p class="muted">A new Short is on the way.</p><p><a href="shorts.html">Shorts &rarr;</a></p></section>'
-    )
+    short_block = home_short_section(sh, w["week"])
     body = f"""
 <section class="hero"><p class="kicker">with VECTOR &middot; your AI analyst</p>
 <h1>Week {w['week']}<br><span class="g">AI NFL Picks</span></h1>
@@ -842,13 +916,99 @@ def build_home(weeks, rows, tidx, eps, sh, featured, today):
 {record_box(rows)}
 <section class="panel"><h2>Latest episode</h2>{ep}</section>
 {short_block}
-<section class="panel how"><h2>How it works</h2><ol><li><b>v3</b> starts from the market, then adds 0.35 times the gap to healthy v2.</li><li><b>Injuries</b> apply after that blend. An open injury ledger is labeled, not refreshed in secret.</li><li><b>Our Spread</b> uses about 2 points of home field, and 0 at a neutral site.</li><li><b>The side</b> is separate from confidence and from the Best Bet label. There is no validated probability cutoff.</li></ol><a class="btn ghost" href="methodology.html">Methodology &rarr;</a></section>
+{HOW_IT_WORKS}
 </div>
 <div id="live-strip"></div>
 <script src="{e(asset('assets/live.js'))}" defer></script>"""
     page("index.html", None, body,
          desc=f"Week {w['week']} {w['season']} AI NFL picks from Vector: power ratings, our own spreads, and a graded record. Watch on YouTube. Entertainment only. 21+.",
          extra_head=home_json_ld())
+
+HOW_IT_WORKS = """<section class="panel how"><h2>How it works</h2><ol><li><b>v3</b> starts from the market, then adds 0.35 times the gap to healthy v2.</li><li><b>Injuries</b> apply after that blend. An open injury ledger is labeled, not refreshed in secret.</li><li><b>Our Spread</b> uses about 2 points of home field, and 0 at a neutral site.</li><li><b>The side</b> is separate from confidence and from the Best Bet label. There is no validated probability cutoff.</li></ol><a class="btn ghost" href="methodology.html">Methodology &rarr;</a></section>"""
+
+def home_short_section(sh, week_no):
+    short = newest_short(sh)
+    facade = yt_facade(short) if short else ""
+    short_title = (short or {}).get("title") or "Latest Short"
+    others = other_shorts_same_week(sh, short)
+    also_html = ""
+    if others:
+        links = " &middot; ".join(
+            f'<a href="{e(item.get("youtube_url") or "")}" target="_blank" rel="noopener">{e(item.get("title") or "Short")}</a>'
+            for item in others
+        )
+        also_html = f'<p class="note">Also this week: {links}.</p>'
+    results_note = leader_home_note(sh, week_no)
+    if not facade:
+        return '<section class="panel"><h2>Latest Short</h2><p class="muted">A new Short is on the way.</p><p><a href="shorts.html">Shorts &rarr;</a></p></section>'
+    return (
+        f'<section class="panel home-short"><h2>Latest Short</h2>{facade}'
+        f'<p class="muted">{e(short_title)}</p>'
+        f'{also_html}'
+        f'{results_note}'
+        f'<p><a href="shorts.html">All Shorts &rarr;</a></p></section>'
+    )
+
+def prior_week(weeks, current, season=2026):
+    prior = [w for w in weeks if (int(w["season"]), int(w["week"])) < (int(season), int(current))]
+    if not prior:
+        raise SystemExit(f"no published card before week {current}")
+    return prior[-1]
+
+def build_gap_home(current, today, weeks, rows, eps, sh, prev, rankings):
+    """Home page for a calendar week that has rankings and no card file yet."""
+    w = prev
+    s = w["summary"]
+    bb = "".join(f'<li>{e(minus(x))}</li>' for x in s["best_bets"])
+    wk_rows = [r for r in rows if r["Season"] == w["season"] and int(r["Week"]) == w["week"]]
+    wt = tally(wk_rows)
+    if wt["pending"]:
+        raise SystemExit(f"week {w['week']} still has a pending side, so it cannot be shown as final")
+    rec = wt["rec"][:-2] if wt["P"] == 0 else wt["rec"]
+    final_line = week_final_sentence(rows, w["season"], w["week"])
+    if not final_line:
+        raise SystemExit(f"week {w['week']} has no final sentence")
+    ep = episode_card(eps[0]) if eps else '<div class="empty">First episode coming soon. <a href="episodes.html">Podcast page &rarr;</a></div>'
+    note = f'<p class="note">{e(w["update_note"])}</p>' if w.get("update_note") else ""
+    body = f"""
+<section class="hero"><p class="kicker">with VECTOR &middot; your AI analyst</p>
+<h1>Week {int(current)}<br><span class="g">AI NFL Picks</span></h1>
+<p class="muted">{e(stamp_pt(today))}. Week {int(current)} power rankings are posted. The Week {int(current)} card is not.</p>
+<p class="btn-row"><a class="btn" href="{e(youtube_subscribe())}" target="_blank" rel="noopener">Watch &amp; Subscribe on YouTube</a></p></section>
+{week_status_html(rankings, "#rankings")}
+<div class="home-grid">
+<section class="panel week-card" id="week-{int(w['week'])}-final"><div class="wc-head"><h2>Week {w['week']} &middot; {w['season']}</h2><div class="wk-rec"><small>WEEK {w['week']} RECORD</small><b>{rec}</b></div></div>
+<p class="note">{e(final_line)} NYJ @ KC and LV @ SF stayed passes with no pregame side.</p>
+<p class="kicker">{len(s['best_bets'])} Best Bet{'' if len(s['best_bets']) == 1 else 's'}</p><ul class="picks big">{bb}</ul>{result_lines(wk_rows)}
+<p class="note">Leans: {e(minus(', '.join(s['leans'])))}.</p>
+{note}
+<div class="btn-row"><a class="btn" href="card.html">Week {w['week']} card &rarr;</a></div></section>
+{record_box(rows)}
+<section class="panel"><h2>Latest episode</h2>{ep}</section>
+{home_short_section(sh, w['week'])}
+{HOW_IT_WORKS}
+</div>
+{rankings_html(rankings)}
+"""
+    page("index.html", None, body,
+         desc=f"Week {int(current)} {today.year} power rankings from Vector. Week {w['week']} is final. The Week {int(current)} card is not posted. Entertainment only. 21+.",
+         extra_head=home_json_ld())
+
+def build_gap_live(current, rows, prev, rankings):
+    final_line = week_final_sentence(rows, prev["season"], prev["week"])
+    body = f"""
+<section class="hero hero-sm"><p class="kicker">Market vs Our Spread</p><h1>Live <span class="g">Board</span></h1>
+<p class="muted">Week {int(current)} has no card in the repo, so this board is not treating an older card as this week's lines.</p></section>
+{week_status_html(rankings)}
+<section class="panel"><h2>Week {int(prev['week'])} final</h2>
+<p>{e(final_line)}</p>
+<p class="note">NYJ @ KC and LV @ SF stayed passes with no pregame side.</p>
+<p class="btn-row"><a class="btn" href="card.html">Week {int(prev['week'])} card &rarr;</a><a class="btn ghost" href="index.html#rankings">Week {int(current)} rankings &rarr;</a></p>
+<div class="rg"><span class="age">21+</span> <span>Entertainment and opinion only. Not betting advice. Gambling problem? Call <a href="tel:18004262537"><b>1-800-GAMBLER</b></a>.</span></div>
+</section>
+"""
+    page("live.html", "Live Board", body,
+         desc=f"Week {int(current)} lines are not posted. Week {int(prev['week'])} is graded. Entertainment and opinion only. Not betting advice. 21+.")
 
 # NFL abbreviations used on the card -> Odds API full names. Display only;
 # a game with no parseable Our Spread is omitted so the page shows a dash.
@@ -2501,9 +2661,11 @@ def validate_week5():
         raise SystemExit("Week 4 card archive was overwritten")
     if 'href="card-2026-w04.html"' not in archive_ai:
         raise SystemExit("Week 4 AI Picks archive should link to the Week 4 card")
-    live = json.load(open(os.path.join(OUT, "live-spreads.json")))
-    if live.get("week") == 5:
-        raise SystemExit("live board is still Week 5")
+    live_path = os.path.join(OUT, "live-spreads.json")
+    if os.path.exists(live_path):
+        live = json.load(open(live_path))
+        if live.get("week") == 5:
+            raise SystemExit("live board is still Week 5")
     for needle in ("WAS \u22123.5", "Provisional", "BAL +3.5", "Hold", "DEN \u22121.5"):
         if needle not in card:
             raise SystemExit(f"Week 5 archive dropped {needle}")
@@ -2570,19 +2732,11 @@ def validate_week7():
 def norm_gid(game):
     return re.sub(r"\s*\([^)]*\)", "", game or "").replace(" ", "")
 
-def load_finals_index():
-    path = os.path.join(DATA, "verified-finals-2026-11-07.json")
+def apply_week9_snapshot(out, path):
+    label = os.path.basename(path)
     if not os.path.exists(path):
-        raise SystemExit("missing data/verified-finals-2026-11-07.json")
-    snap = json.load(open(path))
-    out = {}
-    for week, games in (snap.get("weeks") or {}).items():
-        for g in games:
-            out[(int(week), g["game"])] = g
-    newer_path = os.path.join(DATA, "verified-finals-2026-11-09.json")
-    if not os.path.exists(newer_path):
-        raise SystemExit("missing data/verified-finals-2026-11-09.json")
-    newer = json.load(open(newer_path))
+        raise SystemExit(f"missing data/{label}")
+    newer = json.load(open(path))
     games = newer.get("games") or {}
     pending = set(newer.get("pending") or [])
     week9 = [gid for (week, gid) in out if week == 9]
@@ -2590,11 +2744,11 @@ def load_finals_index():
         raise SystemExit("Week 9 is missing from the Nov 7 scoreboard")
     for gid in week9:
         if gid not in games:
-            raise SystemExit(f"Nov 9 snapshot is missing Week 9 game {gid}")
+            raise SystemExit(f"{label} is missing Week 9 game {gid}")
     for gid, g in games.items():
         key = (9, gid)
         if key not in out:
-            raise SystemExit(f"Nov 9 snapshot game {gid} is not on the Week 9 board")
+            raise SystemExit(f"{label} game {gid} is not on the Week 9 board")
         status = g.get("status")
         if gid in pending or status == "pending":
             if status == "final":
@@ -2619,6 +2773,22 @@ def load_finals_index():
         row["home_score"] = home_score
         row["detail"] = "Final/OT" if "OT" in str(g.get("final") or "") else "Final"
         out[key] = row
+    return out
+
+def load_finals_index():
+    path = os.path.join(DATA, "verified-finals-2026-11-07.json")
+    if not os.path.exists(path):
+        raise SystemExit("missing data/verified-finals-2026-11-07.json")
+    snap = json.load(open(path))
+    out = {}
+    for week, games in (snap.get("weeks") or {}).items():
+        for g in games:
+            out[(int(week), g["game"])] = g
+    apply_week9_snapshot(out, os.path.join(DATA, "verified-finals-2026-11-09.json"))
+    apply_week9_snapshot(out, os.path.join(DATA, "verified-finals-2026-11-10.json"))
+    buf = out.get((9, "BUF@MIN")) or {}
+    if buf.get("state") != "post" or buf.get("away_score") != 23 or buf.get("home_score") != 6:
+        raise SystemExit("BUF@MIN verified final is not BUF 23, MIN 6")
     return out
 
 def validate_sources(weeks, rows, shorts):
@@ -2691,6 +2861,15 @@ def validate_sources(weeks, rows, shorts):
             want = "W" if margin > 0 else ("L" if margin < 0 else "P")
             if want != res:
                 raise SystemExit(f"tracker {r['Game']} is {res}, arithmetic says {want}")
+    buf = next((r for r in rows if int(r["Week"]) == 9 and norm_gid(r["Game"]) == "BUF@MIN"), None)
+    if not buf or buf["_res"] != "L" or (buf.get("Final Score") or "") != "BUF 23, MIN 6":
+        raise SystemExit("tracker BUF@MIN is not the Tuesday final, BUF 23, MIN 6, loss")
+    if buf["Pick"] != "MIN" or str(buf["Line"]) != "+3.5" or buf["Tier"] != "Lean" or buf.get("Our Spread") != "MIN +0.9":
+        raise SystemExit("tracker BUF@MIN line, tier, or Our Spread changed")
+    for game in ("NYJ@KC", "LV@SF"):
+        passed = next(r for r in rows if int(r["Week"]) == 9 and norm_gid(r["Game"]) == game)
+        if not str(passed["Pick"]).startswith("No side") or passed["_res"] != "n/a":
+            raise SystemExit(f"{game} was given a retroactive side")
     blocked = set(PRIVATE_VIDEO_IDS) | set(shorts.get("never_embed") or [])
     seen = []
     for s in shorts.get("shorts") or []:
@@ -2878,10 +3057,10 @@ def validate_week9():
     if re.search(r"SEA\s*@\s*LV", early) or "res-win" in early or "res-loss" in early:
         raise SystemExit("Week 10 early look published a result or SEA@LV")
     buf = re.search(r'<tr><td class="game"><b>BUF @ MIN</b>.*?</tr>', ai, re.S)
-    if not buf or "Final:" in buf.group(0) or "res-win" in buf.group(0) or "res-loss" in buf.group(0):
-        raise SystemExit("BUF @ MIN must stay pending on the DraftKings AI board")
-    if "Monday night, pending" not in buf.group(0):
-        raise SystemExit("BUF @ MIN is missing the pending note")
+    if not buf or "Final: BUF 23, MIN 6" not in buf.group(0) or "res-loss" not in buf.group(0):
+        raise SystemExit("BUF @ MIN is not graded on the DraftKings AI board")
+    if "Monday night, pending" in buf.group(0):
+        raise SystemExit("BUF @ MIN is still marked pending on the DraftKings AI board")
     for label, needles in (
         ("CIN @ ATL", ("Final: CIN 34, ATL 17", "res-win")),
         ("CLE @ NO", ("Final: CLE 22, NO 23 (OT)",)),
@@ -2892,12 +3071,13 @@ def validate_week9():
         row = re.search(rf'<tr><td class="game"><b>{re.escape(label)}</b>.*?</tr>', ai, re.S)
         if not row or any(n not in row.group(0) for n in needles):
             raise SystemExit(f"Week 9 AI board is missing the {label} final")
-    for needle in ("49-36-2", "43-42-2", "48-37-2", "33-33-2",
+    for needle in ("49-37-2", "44-42-2", "48-38-2", "33-34-2",
                    "+10U", "+3U", "+9.5U", "+6.25U", "+7.5U",
-                   "20-10-0", "15-15-0", "17-13-1", "16-13-1", "6-3-1",
-                   "BUF @ MIN not final"):
+                   "20-10-0", "15-15-0", "17-13-1", "16-13-1", "6-3-1"):
         if needle not in ai:
             raise SystemExit(f"Week 9 season scoreboard is missing {needle}")
+    if "BUF @ MIN not final" in ai or "1 not final" in ai:
+        raise SystemExit("Week 9 season scoreboard still treats BUF @ MIN as not final")
     def card_row(label):
         m = re.search(rf'<td class="game"><b>{re.escape(label)}</b>.*?</tr>', card, re.S)
         if not m:
@@ -2913,12 +3093,108 @@ def validate_week9():
     if "TB +6.5" not in tb or "WIN" not in tb or "TB 24, CHI 27" not in tb:
         raise SystemExit("Thursday card TB +6.5 should be a win at its own line")
     buf_card = card_row("BUF @ MIN")
-    if "PENDING" not in buf_card or "res-win" in buf_card or "res-loss" in buf_card:
-        raise SystemExit("Thursday card BUF @ MIN must stay pending")
+    if "LOSS" not in buf_card or "BUF 23, MIN 6" not in buf_card or "MIN +3.5" not in buf_card:
+        raise SystemExit("Thursday card MIN +3.5 should be a loss, BUF 23, MIN 6")
+    if "PENDING" in buf_card:
+        raise SystemExit("Thursday card BUF @ MIN is still pending")
     cle = card_row("CLE @ NO")
     if "CLE 22, NO 23 (OT)" not in cle or "LOSS" not in cle:
         raise SystemExit("Thursday card NO -3 should be an overtime loss")
-    print("OK week 9: Thursday card, DraftKings AI board, Sunday grades, Vector Top 5, BUF @ MIN pending")
+    print("OK week 9: Thursday card, DraftKings AI board, Sunday grades, Vector Top 5, BUF @ MIN loss")
+
+def validate_week10():
+    """Tuesday of Week 10: rankings and status are up, the card is not, Week 9 is final."""
+    home = open(os.path.join(OUT, "index.html"), encoding="utf-8").read()
+    card = open(os.path.join(OUT, "card.html"), encoding="utf-8").read()
+    record = open(os.path.join(OUT, "record.html"), encoding="utf-8").read()
+    live = open(os.path.join(OUT, "live.html"), encoding="utf-8").read()
+    ai = open(os.path.join(OUT, "ai-picks.html"), encoding="utf-8").read()
+    archive = open(os.path.join(OUT, "ai-picks-2026-w09.html"), encoding="utf-8").read()
+    archive_card = open(os.path.join(OUT, "card-2026-w09.html"), encoding="utf-8").read()
+    shorts = open(os.path.join(OUT, "shorts.html"), encoding="utf-8").read()
+    for needle in (
+        "Week 10",
+        stamp_pt(today_pt()),
+        "Week 9 final 3-10",
+        "Best Bets 0-2",
+        "Leans 3-8",
+        "MIN +3.5 is a loss, BUF 23, MIN 6",
+        "WEEK 9 RECORD",
+        ">3-10<",
+        'id="rankings"',
+        'id="week-10-status"',
+        "Vector power rankings entering Week 10",
+        "Injury adjustments are provisional this week",
+        "the Week 10 Vector card publishes after the official contest lines are out",
+        "Byes: CHI, DEN, PHI, TB",
+        "11-9-0",
+        "13-20-0",
+        "29-35-1",
+        "4-NrBHuRlUE",
+        "q2OazIWZ5vE",
+        "about 2 points of home field",
+        "No Week 10 picks, edges, or line comparisons",
+        "Tracked weeks",
+        "Weeks 1 and 2 are not in this tracker",
+    ):
+        if needle not in home:
+            raise SystemExit(f"home is missing {needle}")
+    ranking = home.split('id="rankings"', 1)[-1].split("</section>", 1)[0]
+    if ranking.count('<td class="rank">') != 32:
+        raise SystemExit("home rankings are not 1 through 32")
+    for needle in (
+        "<b>JAX</b></td><td>5.9</td><td>1</td><td>0</td>",
+        '<b>HOU</b></td><td>4.3</td><td>8</td><td class="pos">+6</td>',
+        '<b>SEA</b></td><td>0.4</td><td>5</td><td class="neg">\u22126</td>',
+        '<b>ARI</b></td><td>\u22129.2</td><td>31</td><td class="neg">\u22121</td>',
+        "<b>DET</b></td><td>\u22120.1</td>",
+        "<b>PIT</b></td><td>\u22120.1</td>",
+    ):
+        if needle not in ranking:
+            raise SystemExit(f"rankings row missing {needle}")
+    banned_edges = ("DAL +4.5", "NYJ +8.5", "Week 10 early look", "MIN +3 at", "NO +1.5", "HOU \u22124.5")
+    for doc, name in ((home, "home"), (card, "card"), (live, "live"), (ai, "ai")):
+        for bad in banned_edges:
+            if bad in doc:
+                raise SystemExit(f"{name} publishes a Week 10 edge ({bad})")
+        if "upcoming" in doc.lower():
+            raise SystemExit(f"{name} still says upcoming")
+    for needle in (
+        "Week 9 final 3-10", "MIN +3.5", "LOSS", "BUF 23, MIN 6", "Thu card line",
+        "No side", 'id="week-10-status"', "BAL +10", "WAS +5.5",
+    ):
+        if needle not in card or needle not in archive_card and needle not in ("Week 9 final 3-10", 'id="week-10-status"'):
+            raise SystemExit(f"card is missing {needle}")
+    if "Week 9 final 3-10" not in card or "BUF 23, MIN 6" not in archive_card:
+        raise SystemExit("Week 9 card is missing the Monday night grade")
+    if 'id="week-10-status"' in archive_card:
+        raise SystemExit("Week 9 archive card picked up the Week 10 status banner")
+    for needle in (
+        "Week 9 final 3-10", "MIN +3.5 is a loss, BUF 23, MIN 6", "Tracked weeks",
+        "11-9-0", "13-20-0", "29-35-1", "Gaps, not a complete season",
+        "not a full-season total",
+    ):
+        if needle not in record:
+            raise SystemExit(f"record is missing {needle}")
+    for needle in ("Week 9 final 3-10", "BUF 23, MIN 6", "No Week 10 picks, edges, or line comparisons"):
+        if needle not in live:
+            raise SystemExit(f"live page is missing {needle}")
+    if "assets/live.js" in live:
+        raise SystemExit("live board is still loading a market card")
+    if "Final: BUF 23, MIN 6" not in archive or "Monday night, pending" in archive:
+        raise SystemExit("Week 9 AI archive did not grade BUF @ MIN")
+    if "DAL +4.5" not in archive or "Week 10 early look" not in archive:
+        raise SystemExit("Week 9 AI archive dropped the previously published early look")
+    for needle in ('id="week-9-results"', "11-11 with 3 pending", "BUF@MIN (Monday night) is Pending", "4-NrBHuRlUE", "q2OazIWZ5vE"):
+        if needle not in shorts:
+            raise SystemExit(f"shorts page is missing {needle}")
+    blob = home + card + ai + record + live + shorts + archive
+    if "cXnzFQPN7mE" in blob:
+        raise SystemExit("private video id was published")
+    method = open(os.path.join(OUT, "methodology.html"), encoding="utf-8").read()
+    if "about 2 points" not in method or "0.35" not in method:
+        raise SystemExit("methodology dropped the public v3 note")
+    print("OK week 10: rankings posted, no Week 10 card, Week 9 final 3-10")
 
 def main():
     global WEEKS, AI_WEEKS
@@ -2949,10 +3225,19 @@ def main():
     eps = load_episodes()
     sh = load("shorts.json")
     validate_sources(WEEKS, rows, sh)
+    rankings = load_rankings(current)
     featured = next((w for w in WEEKS if int(w["season"]) == 2026 and int(w["week"]) == current), None)
     for w in WEEKS:
         build_card(w, tidx, w["slug"] + ".html")
-    if featured is None:
+    if featured is None and rankings is not None:
+        prev = prior_week(WEEKS, current)
+        build_gap_home(current, today, WEEKS, rows, eps, sh, prev, rankings)
+        build_card(prev, tidx, "card.html", preface=week_status_html(rankings))
+        with open(os.path.join(OUT, "card.html")) as f:
+            doc = f.read()
+        doc = doc.replace("</main>", build_week_index(WEEKS) + "\n</main>")
+        open(os.path.join(OUT, "card.html"), "w").write(doc)
+    elif featured is None:
         pending_home(current, today, WEEKS)
         page("card.html", f"Week {current} card pending",
              f'<section class="hero hero-sm"><h1>Week {current} card pending</h1><p class="note">No card file is in the repo for this week. Archived cards are linked from the weeks that exist. This is not a made-up card.</p></section>' + build_week_index(WEEKS),
@@ -2972,13 +3257,16 @@ def main():
         build_ai_picks(ai_featured, AI_WEEKS, "ai-picks.html")
     else:
         links = "".join(f'<li><a href="{w["slug"]}.html">Week {w["week"]} &middot; {w["season"]}</a></li>' for w in reversed(AI_WEEKS))
+        status = week_status_html(rankings) if rankings else ""
         page("ai-picks.html", f"AI Picks Week {current} pending",
-             f'<section class="hero hero-sm"><h1>Week {current} AI picks pending</h1><p class="note">No AI board is in the repo for this week. Older boards stay archived. No sides were invented.</p><ul class="weeklist">{links}</ul></section>',
+             status + f'<section class="hero hero-sm"><h1>Week {current} AI picks pending</h1><p class="note">No AI board is in the repo for this week. Older boards stay archived. No sides were invented.</p><p class="note"><a href="game.html">Week 6 TNF writeup (SEA @ DEN)</a> stays on its own page.</p><ul class="weeklist">{links}</ul></section>',
              desc=f"Week {current} AI picks are not published yet.", active="ai-picks.html")
     build_game_page(load_game())
     build_episodes(eps)
     build_shorts(sh)
-    if featured is None:
+    if featured is None and rankings is not None:
+        build_gap_live(current, rows, prior_week(WEEKS, current), rankings)
+    elif featured is None:
         page("live.html", "Live Board",
              f'<section class="hero hero-sm"><h1>Live Board</h1><p class="note">Week {current} has no Our Spread card in the repo, so this board is not showing an older week as if it were current.</p></section>',
              desc="Live board is waiting on this week's card.", active="live.html")
@@ -2986,9 +3274,6 @@ def main():
         build_home(WEEKS, rows, tidx, eps, sh, featured, today)
         write_live_spreads(featured)
         build_live(featured)
-    if featured is None:
-        # Home was already written by pending_home. Still need the live strip script only when a card exists.
-        pass
     build_methodology()
     build_feed(eps, os.path.join(OUT, "feed.xml"))
     build_misc()
@@ -3004,6 +3289,8 @@ def main():
         validate_week7()
         if current == 9:
             validate_week9()
+        if current == 10:
+            validate_week10()
         validate_game()
         validate_analytics()
         validate_seo()

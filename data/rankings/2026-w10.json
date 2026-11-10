@@ -1,0 +1,233 @@
+{
+  "season": 2026,
+  "week": 10,
+  "label": "Vector power rankings entering Week 10 (2026), points vs. an average team; movement vs. Week 9 Tuesday",
+  "note": "Injury adjustments are provisional this week (team-level, carried forward with Monday/Tuesday news); a full player-level injury reconciliation is still pending.",
+  "status": "Week 10 Westgate card not posted yet; the Week 10 Vector card publishes after the official contest lines are out. Byes: CHI, DEN, PHI, TB. NE vs DET in Munich.",
+  "rows": [
+    {
+      "rank": 1,
+      "team": "JAX",
+      "rating": 5.9,
+      "last_week_rank": 1,
+      "move": 0
+    },
+    {
+      "rank": 2,
+      "team": "HOU",
+      "rating": 4.3,
+      "last_week_rank": 8,
+      "move": 6
+    },
+    {
+      "rank": 3,
+      "team": "KC",
+      "rating": 4.0,
+      "last_week_rank": 2,
+      "move": -1
+    },
+    {
+      "rank": 4,
+      "team": "BUF",
+      "rating": 3.7,
+      "last_week_rank": 3,
+      "move": -1
+    },
+    {
+      "rank": 5,
+      "team": "CHI",
+      "rating": 3.4,
+      "last_week_rank": 4,
+      "move": -1
+    },
+    {
+      "rank": 6,
+      "team": "SF",
+      "rating": 2.9,
+      "last_week_rank": 6,
+      "move": 0
+    },
+    {
+      "rank": 7,
+      "team": "LAR",
+      "rating": 2.3,
+      "last_week_rank": 9,
+      "move": 2
+    },
+    {
+      "rank": 8,
+      "team": "DEN",
+      "rating": 1.9,
+      "last_week_rank": 10,
+      "move": 2
+    },
+    {
+      "rank": 9,
+      "team": "CIN",
+      "rating": 1.4,
+      "last_week_rank": 7,
+      "move": -2
+    },
+    {
+      "rank": 10,
+      "team": "DAL",
+      "rating": 0.8,
+      "last_week_rank": 11,
+      "move": 1
+    },
+    {
+      "rank": 11,
+      "team": "SEA",
+      "rating": 0.4,
+      "last_week_rank": 5,
+      "move": -6
+    },
+    {
+      "rank": 12,
+      "team": "DET",
+      "rating": -0.1,
+      "last_week_rank": 12,
+      "move": 0
+    },
+    {
+      "rank": 13,
+      "team": "PIT",
+      "rating": -0.1,
+      "last_week_rank": 14,
+      "move": 1
+    },
+    {
+      "rank": 14,
+      "team": "TB",
+      "rating": -0.5,
+      "last_week_rank": 16,
+      "move": 2
+    },
+    {
+      "rank": 15,
+      "team": "MIN",
+      "rating": -1.5,
+      "last_week_rank": 13,
+      "move": -2
+    },
+    {
+      "rank": 16,
+      "team": "NE",
+      "rating": -1.6,
+      "last_week_rank": 15,
+      "move": -1
+    },
+    {
+      "rank": 17,
+      "team": "ATL",
+      "rating": -1.7,
+      "last_week_rank": 19,
+      "move": 2
+    },
+    {
+      "rank": 18,
+      "team": "CAR",
+      "rating": -2.1,
+      "last_week_rank": 17,
+      "move": -1
+    },
+    {
+      "rank": 19,
+      "team": "WAS",
+      "rating": -2.3,
+      "last_week_rank": 18,
+      "move": -1
+    },
+    {
+      "rank": 20,
+      "team": "NO",
+      "rating": -2.5,
+      "last_week_rank": 22,
+      "move": 2
+    },
+    {
+      "rank": 21,
+      "team": "GB",
+      "rating": -3.0,
+      "last_week_rank": 21,
+      "move": 0
+    },
+    {
+      "rank": 22,
+      "team": "LAC",
+      "rating": -3.8,
+      "last_week_rank": 23,
+      "move": 1
+    },
+    {
+      "rank": 23,
+      "team": "BAL",
+      "rating": -3.8,
+      "last_week_rank": 20,
+      "move": -3
+    },
+    {
+      "rank": 24,
+      "team": "LV",
+      "rating": -3.9,
+      "last_week_rank": 25,
+      "move": 1
+    },
+    {
+      "rank": 25,
+      "team": "IND",
+      "rating": -4.0,
+      "last_week_rank": 26,
+      "move": 1
+    },
+    {
+      "rank": 26,
+      "team": "NYJ",
+      "rating": -4.3,
+      "last_week_rank": 27,
+      "move": 1
+    },
+    {
+      "rank": 27,
+      "team": "NYG",
+      "rating": -4.5,
+      "last_week_rank": 29,
+      "move": 2
+    },
+    {
+      "rank": 28,
+      "team": "CLE",
+      "rating": -5.2,
+      "last_week_rank": 24,
+      "move": -4
+    },
+    {
+      "rank": 29,
+      "team": "PHI",
+      "rating": -6.6,
+      "last_week_rank": 28,
+      "move": -1
+    },
+    {
+      "rank": 30,
+      "team": "MIA",
+      "rating": -7.7,
+      "last_week_rank": 30,
+      "move": 0
+    },
+    {
+      "rank": 31,
+      "team": "TEN",
+      "rating": -8.4,
+      "last_week_rank": 32,
+      "move": 1
+    },
+    {
+      "rank": 32,
+      "team": "ARI",
+      "rating": -9.2,
+      "last_week_rank": 31,
+      "move": -1
+    }
+  ]
+}

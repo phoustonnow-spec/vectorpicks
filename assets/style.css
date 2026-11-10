@@ -65,6 +65,7 @@ td{padding:.5rem;border-bottom:1px solid var(--line);vertical-align:top}
 td.gap{font-family:Anton;font-size:1.1rem;color:var(--green)}
 td.pick{font-weight:800}
 .neg{color:#fca5a5}.pos{color:#86efac}
+.rank-table td,.rank-table th{white-space:nowrap}
 td.rank{color:var(--grey)}
 /* mobile: card/record tables become stacked cards */
 @media (max-width:759px){

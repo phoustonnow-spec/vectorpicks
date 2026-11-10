@@ -20,12 +20,12 @@ jobs:
       - name: Build and validate
         env:
           TZ: America/Los_Angeles
-          VECTORPICKS_TODAY: "2026-11-07"
+          VECTORPICKS_TODAY: "2026-11-10"
         run: python3 build.py --validate
       - name: Recovery guards
         env:
           TZ: America/Los_Angeles
-          VECTORPICKS_TODAY: "2026-11-07"
+          VECTORPICKS_TODAY: "2026-11-10"
         run: python3 tests/test_recovery.py
       - name: API and live-board tests
         run: |
