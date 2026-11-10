@@ -1,14 +1,16 @@
 {
-  "as_of": "2026-11-09",
+  "as_of": "2026-11-10",
   "items": [
     "Week 3 scores that were still pending on the old site are now graded at the original lines. ESPN finals checked Nov 7, 2026 match the tracker.",
     "Week 4 public card only published three Best Bets and called the other games passes, with no Our Spread. The box tracker has extra Card and Lean rows that contradict that published card. Those extra rows are not in this record.",
     "Week 5 stays the published card, including Provisional, Hold, and DEN -1.5. A later tracker export relabeled two tiers and changed DEN @ LAC Our Spread to LAC +1.0. That export was not applied.",
     "Week 6 and Week 7 cards are the audited tracker. Week 7 tracker lines are not the DraftKings AI board.",
     "Week 8 Saturday public Short changed PIT -3.5 from Lean to Best Bet and SEA -3 from Lean to Pass before those kickoffs. The graded rows stay the Thursday card and are not rewritten.",
-    "Week 9 is the Thursday Nov 5 card, graded at those lines from the Nov 9 ESPN snapshot. JAX @ BAL is a graded loss. Sunday games are graded. BUF @ MIN is still pending. NYJ @ KC and LV @ SF stay historical passes. No Saturday rerun was applied. The DraftKings AI board and the Westgate Vector Top 5 are separate pages of record.",
+    "Week 9 is the Thursday Nov 5 card, graded at those lines. Week 9 final 3-10 (Best Bets 0-2, Leans 3-8). BUF @ MIN is BUF 23, MIN 6, so MIN +3.5 is a loss. NYJ @ KC and LV @ SF stay historical passes with no pregame side and are not graded. No Saturday rerun was applied. The DraftKings AI board and the Westgate Vector Top 5 are separate pages of record.",
     "Contest-leader rows in the box tracker are not Vector picks and are omitted.",
     "The per-player injury ledger was not reconciled. No model refresh is claimed.",
-    "Public Shorts cite season totals such as Best Bets 11-7 and full card 35-29-1 through Week 8. This record does not repeat those totals. It counts only the audited rows on this page."
+    "Public Shorts cite season totals such as Best Bets 11-7 and full card 35-29-1 through Week 8. This record does not repeat those totals. It counts only the audited rows on this page.",
+    "The record box is tracked weeks since Week 3, counting only the audited rows on this page. Weeks 1 and 2 are not in the tracker. This is not a full-season total. Best Bets through Week 9 are 11-9 on these rows. Leans and the full card do not pick up rows that contradict a published pass card, and they do not pick up contest-leader rows.",
+    "The Shorts page contest-leader grades remain the Sunday Nov 8 snapshot. BUF @ MIN is still pending on that snapshot. Those rows are not Vector picks and were not rewritten on Tuesday."
   ]
 }

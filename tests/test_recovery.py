@@ -15,6 +15,9 @@ def test_calendar():
     assert build.nfl_week(date(2026, 11, 7)) == 9
     assert build.nfl_week(date(2026, 11, 5)) == 9
     assert build.nfl_week(date(2026, 11, 9)) == 9
+    assert build.nfl_week(date(2026, 11, 10)) == 10
+    assert build.nfl_week(date(2026, 11, 11)) == 10
+    assert build.nfl_week(date(2026, 11, 12)) == 10
     assert build.nfl_week(date(2026, 11, 4)) == 9  # gap day belongs to the next week
     assert build.nfl_week(date(2026, 11, 2)) == 8
     assert build.nfl_week(date(2026, 10, 8)) == 5
@@ -48,8 +51,11 @@ def test_built_pages():
     home = open(os.path.join(root, "index.html"), encoding="utf-8").read()
     ai = open(os.path.join(root, "ai-picks.html"), encoding="utf-8").read()
     card = open(os.path.join(root, "card.html"), encoding="utf-8").read()
-    assert "Week 9" in home and "Saturday, Nov 7, 2026 PT" in home
+    assert "Week 10" in home and "Tuesday, Nov 10, 2026 PT" in home
+    assert "Week 9 final 3-10" in home and "MIN +3.5 is a loss, BUF 23, MIN 6" in home
+    assert 'id="rankings"' in home and "5.9" in home and "Injury adjustments are provisional this week" in home
     assert "BAL +10" in home and "LOSS" in home and "JAX 33, BAL 10" in home
+    assert "DAL +4.5" not in home and "NYJ +8.5" not in home and "Week 10 early look" not in home
     shorts = open(os.path.join(root, "shorts.html"), encoding="utf-8").read()
     assert "4-NrBHuRlUE" in home and 'data-yt="4-NrBHuRlUE"' in home
     assert "q2OazIWZ5vE" in home and "Week 9 Saturday Update" in home
@@ -71,17 +77,22 @@ def test_built_pages():
     for bad in ("kevin cole", "unexpected points", "walterfootball", "walter football", "dr bob", "dr. bob"):
         assert bad not in lowered
     assert "splash" not in lowered and "bman" not in lowered.split("webmanifest")[-1]
+    archive = open(os.path.join(root, "ai-picks-2026-w09.html"), encoding="utf-8").read()
     assert "4-NrBHuRlUE" in card and "q2OazIWZ5vE" in card and "Thu card line" in card
-    assert "cXnzFQPN7mE" not in home + ai + card + shorts
-    assert "DraftKings line" in ai and "Westgate line" not in ai.split("ai-grid", 1)[-1][:500]
-    assert 'id="vector-top5"' in ai and "Vector Top 5" in ai and "Westgate SuperContest" in ai
-    assert "ARI +12.5" in ai and ">2-3<" in ai
-    assert "Week 10 early look" in ai and "DAL +4.5" in ai and "Byes: CHI, DEN, PHI, TB" in ai
-    assert "SEA@LV" not in ai and "SEA @ LV" not in ai
-    assert "all 15 games are pending" not in ai.lower() and "no top 5" not in ai.lower()
-    assert "Monday night, pending" in ai and "BUF @ MIN not final" in ai
-    assert "Final: CIN 34, ATL 17" in ai and "Final: CLE 22, NO 23 (OT)" in ai
-    assert "49-36-2" in ai and "48-37-2" in ai and "33-33-2" in ai
+    assert "BUF 23, MIN 6" in card and "MIN +3.5" in card and "No side" in card
+    assert "DAL +4.5" not in card and "Week 10 early look" not in card
+    assert "cXnzFQPN7mE" not in home + ai + card + shorts + archive
+    assert "No sides were invented" in ai and "DAL +4.5" not in ai and "Week 10 early look" not in ai
+    assert "DraftKings line" in archive and "Westgate line" not in archive.split("ai-grid", 1)[-1][:500]
+    assert 'id="vector-top5"' in archive and "Vector Top 5" in archive and "Westgate SuperContest" in archive
+    assert "ARI +12.5" in archive and ">2-3<" in archive
+    assert "Week 10 early look" in archive and "DAL +4.5" in archive and "Byes: CHI, DEN, PHI, TB" in archive
+    assert "SEA@LV" not in archive and "SEA @ LV" not in archive
+    assert "all 15 games are pending" not in archive.lower() and "no top 5" not in archive.lower()
+    assert "Monday night, pending" not in archive and "BUF @ MIN not final" not in archive
+    assert "Final: BUF 23, MIN 6" in archive
+    assert "Final: CIN 34, ATL 17" in archive and "Final: CLE 22, NO 23 (OT)" in archive
+    assert "49-37-2" in archive and "48-38-2" in archive and "33-34-2" in archive
     assert "Thu card line" in card
     assert "This is not a publish" not in home
     text = open(os.path.join(build.ROOT, "build.py"), encoding="utf-8").read()

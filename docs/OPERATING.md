@@ -51,7 +51,16 @@ Keep the week's source files in the repo. A copy in Google Drive is a backup, no
 
 ## What failed this week
 
-Report it in the pull request. For Nov 7, 2026 the open gaps are:
+Report it in the pull request. For Nov 10, 2026 the Tuesday package graded BUF @ MIN (BUF 23, MIN 6, MIN +3.5 loss) and posted Week 10 power rankings. It did not include a Week 10 contest card, so no Week 10 picks were added. Open gaps:
+
+- No Week 10 Westgate card. The status line says the card publishes after the official contest lines are posted.
+- Injury adjustments on the Week 10 rankings are provisional. No player-level reconciliation was added.
+- The record box is the audited tracker since Week 3. It is not a full-season total. Best Bets match the Tuesday tally at 11-9. Leans and the full card stay on this page's rows only.
+- The Shorts contest-leader block is still the Sunday Nov 8 snapshot, with BUF @ MIN pending there. Those rows are not Vector picks.
+- No Saturday Week 9 model rerun. The Thursday card lines are unchanged.
+- No Week 9 Westgate sheet file in the repo. The Thursday card says the source file called those numbers Westgate. The AI board is DraftKings. The Week 9 AI archive still shows the previously published provisional early look. It is not repeated on the home page, card, record, or live board.
+
+For Nov 7, 2026 the open gaps were:
 
 - No Saturday Week 9 model rerun. The Thursday card is unchanged.
 - No Week 9 Westgate sheet file in the repo. The Thursday card says the source file called those numbers Westgate. The AI board is DraftKings.

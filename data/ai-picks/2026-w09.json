@@ -3,10 +3,10 @@
   "week": 9,
   "as_of": "Wed Nov 4, 2026",
   "intro": "Same prompt, four AIs, and us. Entertainment only. Graded at the DraftKings line each side was asked.",
-  "prompt_note": "Asked Wednesday Nov 4, 2026 (about 2 PM PT) on the DraftKings line, before the Westgate card was out. CIN @ ATL is in Madrid. Byes: PIT, TEN. AI top 5s on this board are graded at flat 1 unit on these DraftKings numbers. Vector's column is Leans against that DraftKings line, not a Best Bet. The Vector Top 5 section is a separate Westgate SuperContest card. BUF @ MIN is Monday night and is still pending. The other 14 games are final.",
+  "prompt_note": "Asked Wednesday Nov 4, 2026 (about 2 PM PT) on the DraftKings line, before the Westgate card was out. CIN @ ATL is in Madrid. Byes: PIT, TEN. AI top 5s on this board are graded at flat 1 unit on these DraftKings numbers. Vector's column is Leans against that DraftKings line, not a Best Bet. The Vector Top 5 section is a separate Westgate SuperContest card. BUF @ MIN is final: BUF 23, MIN 6. All 15 games are final.",
   "line_source": "DraftKings line, Wednesday Nov 4, 2026 (about 2 PM PT)",
   "line_label": "DraftKings line",
-  "score_source": "ESPN NFL scoreboard, snapshot data/verified-finals-2026-11-09.json. Fourteen Week 9 games are final. BUF @ MIN is Monday night and is not final. Lines on this board are unchanged from the Wednesday Nov 4 DraftKings numbers.",
+  "score_source": "Tuesday public package, snapshot data/verified-finals-2026-11-10.json. All 15 Week 9 games are final. BUF @ MIN is BUF 23, MIN 6. Lines on this board are unchanged from the Wednesday Nov 4 DraftKings numbers.",
   "games": [
     {
       "game": "JAX@BAL",
@@ -201,7 +201,12 @@
       "date": "2026-11-09",
       "westgate": "MIN +3.5",
       "kickoff_pt": "Mon night",
-      "status_note": "Monday night, pending"
+      "score": {
+        "away": 23,
+        "home": 6,
+        "status": "final"
+      },
+      "final": "BUF 23, MIN 6"
     }
   ],
   "ais": [
@@ -864,16 +869,20 @@
     "TB@CHI": {
       "CHI -6": "L",
       "TB +6": "W"
+    },
+    "BUF@MIN": {
+      "BUF -3.5": "W",
+      "MIN +3.5": "L"
     }
   },
   "grades": {
     "claude": {
       "sides": [
         9,
-        5,
+        6,
         0
       ],
-      "sides_pending": 1,
+      "sides_pending": 0,
       "best_bet_units": 1,
       "best_bets_pending": 0,
       "pick5": [
@@ -885,11 +894,11 @@
     },
     "gemini": {
       "sides": [
-        9,
+        10,
         5,
         0
       ],
-      "sides_pending": 1,
+      "sides_pending": 0,
       "best_bet_units": 3,
       "best_bets_pending": 0,
       "pick5": [
@@ -901,11 +910,11 @@
     },
     "grok": {
       "sides": [
-        11,
+        12,
         3,
         0
       ],
-      "sides_pending": 1,
+      "sides_pending": 0,
       "best_bet_units": 5,
       "best_bets_pending": 0,
       "pick5": [
@@ -918,10 +927,10 @@
     "chatgpt": {
       "sides": [
         12,
-        2,
+        3,
         0
       ],
-      "sides_pending": 1,
+      "sides_pending": 0,
       "best_bet_units": 5,
       "best_bets_pending": 0,
       "pick5": [
@@ -934,20 +943,18 @@
     "vector": {
       "sides": [
         3,
-        10,
+        11,
         0
       ],
-      "sides_pending": 1,
+      "sides_pending": 0,
       "best_bet_units": 0,
       "best_bets_pending": 0,
       "pick5": null
     }
   },
-  "ungraded_games": [
-    "BUF@MIN"
-  ],
-  "graded": false,
-  "grade_note": "Graded Nov 9, 2026 from the ESPN snapshot in data/verified-finals-2026-11-09.json. Every AI side stays on the Wednesday Nov 4 DraftKings line. This board is not the Westgate SuperContest card. JAX @ BAL is JAX 33, BAL 10. Sunday games are final, including CLE @ NO in overtime (CLE 22, NO 23). BUF @ MIN has not been played. TB @ CHI was left blank for Vector and was not filled in. Vector Top 5 is the published Saturday Westgate card, 2-3, graded at those Westgate numbers. ARI is +12.5 on that card and +8.5 on this DraftKings board. The Week 10 early look is provisional DraftKings only and is not a final card.",
+  "ungraded_games": [],
+  "graded": true,
+  "grade_note": "Graded Nov 10, 2026. BUF @ MIN is BUF 23, MIN 6. Every AI side stays on the Wednesday Nov 4 DraftKings line. This board is not the Westgate SuperContest card. JAX @ BAL is JAX 33, BAL 10. CLE @ NO finished in overtime, CLE 22, NO 23. TB @ CHI was left blank for Vector and was not filled in. Vector Top 5 is the published Saturday Westgate card, 2-3, graded at those Westgate numbers. ARI is +12.5 on that card and +8.5 on this DraftKings board. The Week 10 early look stays on this Week 9 archive only, as previously published. It is not a Week 10 card.",
   "coverage_gap": "The original Wednesday DraftKings response has a side on every game except TB @ CHI, which was left blank. That blank is not a full no-pass card and it was not filled in after the game was scheduled.",
   "vector_top5": {
     "kicker": "Westgate SuperContest lines · separate from the DraftKings AI board",

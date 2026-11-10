@@ -1,0 +1,97 @@
+{
+  "as_of": "2026-11-10 ~9:45 AM America/Los_Angeles",
+  "source": "Tuesday public package, 2026-11-10 ~9:45 AM PT. BUF @ MIN final is BUF 23, MIN 6. Every other Week 9 final is unchanged from data/verified-finals-2026-11-09.json.",
+  "pending": [],
+  "games": {
+    "JAX@BAL": {
+      "away": 33,
+      "home": 10,
+      "status": "final",
+      "final": "JAX 33, BAL 10"
+    },
+    "CIN@ATL": {
+      "away": 34,
+      "home": 17,
+      "status": "final",
+      "final": "CIN 34, ATL 17"
+    },
+    "DEN@CAR": {
+      "away": 26,
+      "home": 21,
+      "status": "final",
+      "final": "DEN 26, CAR 21"
+    },
+    "CLE@NO": {
+      "away": 22,
+      "home": 23,
+      "status": "final",
+      "final": "CLE 22, NO 23"
+    },
+    "DAL@IND": {
+      "away": 27,
+      "home": 23,
+      "status": "final",
+      "final": "DAL 27, IND 23"
+    },
+    "DET@MIA": {
+      "away": 19,
+      "home": 9,
+      "status": "final",
+      "final": "DET 19, MIA 9"
+    },
+    "NYJ@KC": {
+      "away": 12,
+      "home": 35,
+      "status": "final",
+      "final": "NYJ 12, KC 35"
+    },
+    "LAR@WAS": {
+      "away": 20,
+      "home": 13,
+      "status": "final",
+      "final": "LAR 20, WAS 13"
+    },
+    "NYG@PHI": {
+      "away": 19,
+      "home": 11,
+      "status": "final",
+      "final": "NYG 19, PHI 11"
+    },
+    "HOU@LAC": {
+      "away": 44,
+      "home": 22,
+      "status": "final",
+      "final": "HOU 44, LAC 22"
+    },
+    "LV@SF": {
+      "away": 17,
+      "home": 38,
+      "status": "final",
+      "final": "LV 17, SF 38"
+    },
+    "ARI@SEA": {
+      "away": 3,
+      "home": 17,
+      "status": "final",
+      "final": "ARI 3, SEA 17"
+    },
+    "GB@NE": {
+      "away": 45,
+      "home": 27,
+      "status": "final",
+      "final": "GB 45, NE 27"
+    },
+    "TB@CHI": {
+      "away": 24,
+      "home": 27,
+      "status": "final",
+      "final": "TB 24, CHI 27"
+    },
+    "BUF@MIN": {
+      "away": 23,
+      "home": 6,
+      "status": "final",
+      "final": "BUF 23, MIN 6"
+    }
+  }
+}
