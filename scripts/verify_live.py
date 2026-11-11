@@ -16,7 +16,7 @@ RECORD_URL = "https://www.vectorpicks.com/record.html"
 AI_URL = "https://www.vectorpicks.com/ai-picks.html"
 HOME_MARKERS = (
     "Week 10",
-    "Tuesday, Nov 10, 2026 PT",
+    "Wednesday, Nov 11, 2026 PT",
     "Week 9 final 3-10",
     "MIN +3.5 is a loss, BUF 23, MIN 6",
     "WEEK 9 RECORD",
@@ -90,10 +90,52 @@ RECORD_MARKERS = (
     "Gaps, not a complete season",
 )
 AI_MARKERS = (
-    "Week 10 AI picks pending",
-    "No sides were invented",
-    "No Week 10 picks, edges, or line comparisons",
-    "ai-picks-2026-w09.html",
+    "Week 10",
+    "PROVISIONAL",
+    "DraftKings line",
+    "Not a Westgate card.",
+    "PROVISIONAL BOARD",
+    "Byes: CHI, DEN, PHI, TB",
+    "Munich",
+    "Leans (provisional)",
+    "Provisional top 5 (not Best Bets)",
+    "JAX \u221210.5",
+    "BUF \u22128.5",
+    "NYG \u22122.5",
+    "KC \u22123.5",
+    "LV +6.5",
+    "CLE +4.5",
+    "ARI +9.5",
+    "NYJ +8.5",
+    "GB \u22123",
+    "SF \u22124.5",
+    "PIT +3.5",
+    "IND \u22123.5",
+    "HOU \u22124.5",
+    "DAL +4.5",
+    "MIN +3",
+    "LAC +4.5",
+    "WAS +2.5",
+)
+W10_URL = "https://www.vectorpicks.com/ai-picks-2026-w10.html"
+W9_URL = "https://www.vectorpicks.com/ai-picks-2026-w09.html"
+AI_MARKERS = AI_MARKERS + ("ai-picks-2026-w09.html", "ai-picks-2026-w10.html")
+W10_MARKERS = (
+    "Week 10",
+    "PROVISIONAL",
+    "DraftKings line",
+    "Not a Westgate card.",
+    "Provisional top 5 (not Best Bets)",
+    "JAX \u221210.5",
+    "DAL +4.5",
+    "LV +6.5",
+)
+W9_MARKERS = (
+    "Week 9",
+    "DraftKings line",
+    "Final: BUF 23, MIN 6",
+    "Week 10 early look",
+    "DAL +4.5",
 )
 FORBIDDEN = (
     "cXnzFQPN7mE",
@@ -125,10 +167,12 @@ def fetch(url):
 def check(name, status, body, markers):
     missing = [m for m in markers if m not in body]
     present = [m for m in FORBIDDEN if m.lower() in body.lower()]
-    if name in ("homepage", "card", "record", "ai-picks"):
+    if name in ("homepage", "card", "record"):
         for edge in ("DAL +4.5", "NYJ +8.5", "Week 10 early look"):
             if edge in body:
                 present.append(edge)
+    if name == "ai-picks" and "Week 10 early look" in body:
+        present.append("Week 10 early look")
     order_bad = name == "shorts" and body.find("4-NrBHuRlUE") > body.find("q2OazIWZ5vE")
     if status != 200 or missing or present or order_bad:
         print(f"Live {name} does not match this build.")
@@ -141,7 +185,7 @@ def check(name, status, body, markers):
         if order_bad:
             print("Week 9 leaders short is not before the Saturday short")
         return False
-    print(f"Live {name} contains the Week 9 markers.")
+    print(f"Live {name} contains the expected markers.")
     return True
 
 
@@ -153,6 +197,8 @@ def main():
         ("card", CARD_URL, CARD_MARKERS),
         ("record", RECORD_URL, RECORD_MARKERS),
         ("ai-picks", AI_URL, AI_MARKERS),
+        ("ai-picks-w10", W10_URL, W10_MARKERS),
+        ("ai-picks-w09", W9_URL, W9_MARKERS),
     ):
         status, body = fetch(url)
         ok = check(name, status, body, markers) and ok

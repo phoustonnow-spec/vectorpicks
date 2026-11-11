@@ -1553,9 +1553,23 @@ def fmt_units(u):
     return (f"{u:g}U")
 
 BANNED_PUBLIC = re.compile(
-    r"dr\.?\s*bob|walterfootball|walter football|\bwalt\b|sharp football|numbers game|cynthia|frelund|unexpected points|kevin cole",
+    r"dr\.?\s*bob|walterfootball|walter football|\bwalt\b|sharp football|numbers game|cynthia|frelund|unexpected points|kevin cole|sportsline",
     re.I,
 )
+
+def public_name_violation(text):
+    """Paid-source name that must not ship, or None.
+
+    The player Walter Nolen is not a source and stays in the Week 8 archive.
+    """
+    hit = BANNED_PUBLIC.search(text or "")
+    if hit:
+        return hit.group(0)
+    scrubbed = re.sub(r"walter nolen", "", text or "", flags=re.I)
+    word = re.search(r"\bwalter\b", scrubbed, re.I)
+    if word:
+        return word.group(0)
+    return None
 PICK_RE = re.compile(r"^([A-Z]{2,3})\s+([+-])(\d+(?:\.\d+)?)$")
 FINAL_RE = re.compile(r"^([A-Z]{2,3})\s+(\d+),\s*([A-Z]{2,3})\s+(\d+)(?:\s*\(OT\))?$")
 ATS_BADGE = {"W": ("win", "WIN"), "L": ("loss", "LOSS"), "P": ("push", "PUSH")}
@@ -1860,6 +1874,23 @@ def ats_badge(res):
     cls, label = ATS_BADGE[res]
     return f' <span class="res res-{cls}">{label}</span>'
 
+def predicted_score_text(raw):
+    """Predicted score only when the side published a real one.
+
+    Missing, blank, numeric, and the literal undefined are not scores.
+    The grid does not print those, so a week without scores cannot show
+    "undefined" or an empty score field.
+    """
+    if not isinstance(raw, dict):
+        return ""
+    score = raw.get("score")
+    if not isinstance(score, str):
+        return ""
+    text = score.strip()
+    if not text or text.lower() == "undefined":
+        return ""
+    return text
+
 def ai_cell(pick, units=None, tag=None, res=None):
     if not pick:
         return '<span class="muted">&mdash;</span>'
@@ -2065,6 +2096,9 @@ def build_ai_picks(w, ai_weeks, fname):
                 extra += ' <span class="late-note">submitted after kickoff</span>'
             if isinstance(raw, dict) and raw.get("confidence"):
                 extra += f' <span class="sub">{e(raw["confidence"])}</span>'
+            # No predicted-score cell. predicted_score_text() is empty when the
+            # side has no score, and older weeks already omit the score, so it
+            # stays omitted. Never print "undefined" or a blank score.
             if isinstance(raw, dict) and raw.get("note"):
                 extra += f' <span class="late-note">{e(raw["note"])}</span>'
             if isinstance(raw, dict) and raw.get("reason"):
@@ -2112,6 +2146,19 @@ def build_ai_picks(w, ai_weeks, fname):
             if isinstance(raw, dict) and raw.get("needs_confirmation") and as_pick(raw) == pick:
                 return True
         return False
+    # Older boards keep the headings they already shipped. A provisional week
+    # with no predicted score says Best Bets and Top 5.
+    if w.get("provisional"):
+        bet_heading = "Best Bets"
+        pick_heading = "Top 5"
+    else:
+        bet_heading = "Best bets"
+        pick_heading = "Pick 5"
+    raw_p5_label = vec.get("pick5_label") if isinstance(vec, dict) else None
+    if isinstance(raw_p5_label, str) and raw_p5_label.strip():
+        p5_heading = e(raw_p5_label.strip())
+    else:
+        p5_heading = pick_heading
     cards = ""
     for a in ais:
         if a.get("pending") and not (a.get("best_bets") or []) and not (a.get("pick5") or []):
@@ -2129,7 +2176,7 @@ def build_ai_picks(w, ai_weeks, fname):
         stamp = e(a["timing"]) if a.get("timing") else f'Received {e(a.get("received", ""))}'
         tb = f'<p class="note">Tiebreaker: {e(a["tiebreaker"])}</p>' if a.get("tiebreaker") else ""
         card_note = f'<p class="note">{e(a["card_note"])}</p>' if a.get("card_note") else ""
-        cards += f'<div class="panel"><h2>{e(a["name"])}</h2><p class="sub">{stamp}</p><h3>Best bets</h3><ul class="picks big">{bb}</ul><h3>Pick 5</h3><ol class="picks">{p5}</ol>{tb}{card_note}</div>'
+        cards += f'<div class="panel"><h2>{e(a["name"])}</h2><p class="sub">{stamp}</p><h3>{bet_heading}</h3><ul class="picks big">{bb}</ul><h3>{pick_heading}</h3><ol class="picks">{p5}</ol>{tb}{card_note}</div>'
     if vec:
         bb = "".join(pick_li(pk, res=(res.get(gid) or {}).get(pk), units=bet_units.get(gid), sub=(games.get(gid) or {}).get("label")) for gid, pk in best.items())
         ln = "".join(pick_li(pk, res=(res.get(gid) or {}).get(pk), sub=(games.get(gid) or {}).get("label")) for gid, pk in leans.items())
@@ -2138,12 +2185,12 @@ def build_ai_picks(w, ai_weeks, fname):
         if p5_list:
             p5 = "".join(pick_li(p, res=(res.get(vector_pick_game(vec, best, leans, p)) or {}).get(p)) for p in p5_list)
             p5_tb = f'<p class="note">Tiebreaker: {e(vec["tiebreaker"])}</p>' if vec.get("tiebreaker") else ""
-            p5_html = f'<h3>Pick 5</h3><ol class="picks">{p5}</ol>{p5_tb}'
+            p5_html = f'<h3>{p5_heading}</h3><ol class="picks">{p5}</ol>{p5_tb}'
             foot = '<p class="note">Our model, not a chatbot entry.</p>'
         else:
             p5_html = ""
             foot = '<p class="note">Our model, not a chatbot entry. No pick 5.</p>'
-        cards += f'<div class="panel vec-card"><h2>Vector</h2><p class="sub">{e(vec.get("name") or "Super Agent Vector")} &middot; ours</p><h3>Best bets</h3><ul class="picks big">{bb}</ul>{leans_html}{p5_html}{foot}</div>'
+        cards += f'<div class="panel vec-card"><h2>Vector</h2><p class="sub">{e(vec.get("name") or "Super Agent Vector")} &middot; ours</p><h3>{bet_heading}</h3><ul class="picks big">{bb}</ul>{leans_html}{p5_html}{foot}</div>'
     cons = "".join(f"<li>{e(minus(c))}</li>" for c in w.get("consensus", []))
     def vec_li(d, with_units=False):
         out = ""
@@ -2179,13 +2226,22 @@ def build_ai_picks(w, ai_weeks, fname):
                 mark = (res.get(gid) or {}).get(p) if gid else None
                 items += pick_li(p, res=mark, sub=(games.get(gid) or {}).get("label") if gid else None)
             p5_tb = f'<p class="note">Tiebreaker: {e(vec["tiebreaker"])}</p>' if vec.get("tiebreaker") else ""
-            blocks += f'<div><h3>Pick 5</h3><ol class="picks">{items}</ol>{p5_tb}</div>'
+            blocks += f'<div><h3>{p5_heading}</h3><ol class="picks">{items}</ol>{p5_tb}</div>'
         blocks += vector_flag_block(vec, games, shown, res)
         vec_html = f"""<section class="panel vec-block" id="vector"><p class="kicker">Not an AI chatbot entry &middot; our own model</p><h2><span class="g">{e(vec.get('name') or 'Super Agent Vector')}</span></h2>
 <p class="note">{vec_blurb}</p>
 <div class="summary-grid vec-grid">{blocks}</div></section>"""
     names = " vs ".join(e(a["name"]) for a in ais)
     who = e(vec.get("name") or "Super Agent Vector")
+    if w.get("provisional"):
+        note_html = (
+            f'<div class="callout provisional-board" id="provisional-board">'
+            f'<p><span class="tier tier-provisional">PROVISIONAL</span> '
+            f'<b>{e(w.get("line_label") or "DraftKings line")}</b> board. Not a Westgate card.</p>'
+            f'<p>{e(w.get("prompt_note") or "")}</p></div>'
+        )
+    else:
+        note_html = f'<p class="note">{e(w.get("prompt_note", ""))}</p>'
     if full_card and len(shown) < len(w["games"]):
         grid_note = f"Each side is graded at the line that entrant listed. Vector is {who}, ours, with a side where we played and a dash where we passed. Yellow means the side covered. Pushes are not highlighted. Final scores are from ESPN, and games that are not final are not graded."
     elif full_card:
@@ -2198,7 +2254,7 @@ def build_ai_picks(w, ai_weeks, fname):
     top5_html = vector_top5_section(w)
     body = f"""
 <section class="hero hero-sm"><p class="kicker">Week {w['week']} &middot; {w['season']} &middot; AI vs AI</p><h1>AI <span class="g">Picks</span></h1>
-<p class="muted">{e(w['intro'])}</p><p class="note">{e(w.get('prompt_note', ''))}</p>
+<p class="muted">{e(w['intro'])}</p>{note_html}
 {f'<p class="note">{e(w["grade_note"])}</p>' if w.get("grade_note") else ''}
 {f'<p class="note">{e(w["coverage_gap"])}</p>' if w.get("coverage_gap") else ''}</section>
 {top5_html}{cons_block}<section class="panel"><h2>Game by game: {names}, plus Vector</h2>
@@ -2215,10 +2271,12 @@ def build_ai_picks(w, ai_weeks, fname):
         body += f'<section class="panel"><h2>All AI pick weeks</h2><ul class="weeklist">{items}</ul></section>\n'
     needs_reasons = any(isinstance(raw, dict) and raw.get("reason") for a in ais for raw in (a.get("sides") or {}).values())
     extra_head = AI_REASON_STYLE if needs_reasons else ""
+    if w.get("provisional"):
+        extra_head += PROVISIONAL_STYLE
     if fname == "ai-picks.html":
         body += '<p class="note"><a href="game.html">Week 6 TNF writeup (SEA @ DEN)</a> stays on its own page. It is not this week\'s board.</p>\n'
-    if BANNED_PUBLIC.search(body) or any(BANNED_PUBLIC.search(a.get("name") or "") or BANNED_PUBLIC.search(a.get("id") or "") for a in ais):
-        raise SystemExit(f"{fname}: refused to publish Dr. Bob or WalterFootball / Walt picks")
+    if public_name_violation(body) or any(public_name_violation(a.get("name") or "") or public_name_violation(a.get("id") or "") for a in ais):
+        raise SystemExit(f"{fname}: refused to publish a paid-source handicapper name")
     archived = fname != "ai-picks.html"
     title = f"AI Picks Week {w['week']} {w['season']}" + (" archive" if archived else "")
     if ais and all(a.get("pending") and not (a.get("sides") or {}) for a in ais):
@@ -2232,6 +2290,12 @@ def build_ai_picks(w, ai_weeks, fname):
 # ---------------------------------------------------------------- current game (overwritten each week)
 AI_REASON_STYLE = """<style>
 .ai-grid td .why{display:block;color:var(--grey);font-size:.78rem;font-weight:600;line-height:1.35;margin-top:.2rem}
+</style>
+"""
+
+PROVISIONAL_STYLE = """<style>
+.callout.provisional-board{border:2px solid #38bdf8;background:#08243f;padding:1rem 1.1rem;margin:1rem 0}
+.callout.provisional-board p{margin:.35rem 0}
 </style>
 """
 
@@ -2426,7 +2490,7 @@ def validate_week5():
         raise SystemExit("NE -3.5 must stay the side and leave the Best Bet tier")
     if "Conditional (LAC OL injuries)" in card:
         raise SystemExit("weekly card still lists the LAC conditional flag")
-    for needle in ("ai-picks-2026-w09.html", "ai-picks-2026-w08.html", "ai-picks-2026-w07.html", "ai-picks-2026-w05.html", "ai-picks-2026-w04.html", "ai-picks-2026-w03.html"):
+    for needle in ("ai-picks-2026-w10.html", "ai-picks-2026-w09.html", "ai-picks-2026-w08.html", "ai-picks-2026-w07.html", "ai-picks-2026-w05.html", "ai-picks-2026-w04.html", "ai-picks-2026-w03.html"):
         if needle not in ai_page:
             raise SystemExit(f"AI Picks page missing link {needle}")
     for needle in ("submitted after kickoff", "Final: TB 24, DAL 16", "Running Week 5 records",
@@ -2775,6 +2839,35 @@ def apply_week9_snapshot(out, path):
         out[key] = row
     return out
 
+def apply_unplayed_week(out, path, week):
+    """Add a week that was not on the Nov 7 board when every game is still pregame.
+
+    A final score does not belong in this file. Grading a later week is a new snapshot.
+    """
+    label = os.path.basename(path)
+    if not os.path.exists(path):
+        raise SystemExit(f"missing data/{label}")
+    snap = json.load(open(path))
+    games = (snap.get("weeks") or {}).get(str(int(week))) or []
+    if not games:
+        raise SystemExit(f"{label} has no week {week} games")
+    for g in games:
+        gid = g.get("game")
+        if g.get("state") != "pre":
+            raise SystemExit(f"{label} {gid} is {g.get('state')}, not a pregame snapshot")
+        try:
+            away_score = int(g.get("away_score") or 0)
+            home_score = int(g.get("home_score") or 0)
+        except (TypeError, ValueError):
+            raise SystemExit(f"{label} {gid} score is not a number")
+        if away_score or home_score:
+            raise SystemExit(f"{label} {gid} has a score before it is final")
+        key = (int(week), gid)
+        if key in out:
+            raise SystemExit(f"{label} {gid} is already on the verified board")
+        out[key] = g
+    return out
+
 def load_finals_index():
     path = os.path.join(DATA, "verified-finals-2026-11-07.json")
     if not os.path.exists(path):
@@ -2786,6 +2879,7 @@ def load_finals_index():
             out[(int(week), g["game"])] = g
     apply_week9_snapshot(out, os.path.join(DATA, "verified-finals-2026-11-09.json"))
     apply_week9_snapshot(out, os.path.join(DATA, "verified-finals-2026-11-10.json"))
+    apply_unplayed_week(out, os.path.join(DATA, "verified-finals-2026-11-11.json"), 10)
     buf = out.get((9, "BUF@MIN")) or {}
     if buf.get("state") != "post" or buf.get("away_score") != 23 or buf.get("home_score") != 6:
         raise SystemExit("BUF@MIN verified final is not BUF 23, MIN 6")
@@ -2919,6 +3013,9 @@ def scan_built_pages():
             for vid in blocked:
                 if vid in text:
                     raise SystemExit(f"{name} contains blocked video {vid}")
+            hit = public_name_violation(text)
+            if hit:
+                raise SystemExit(f"{name} names a source that stays off the site: {hit}")
     home = open(os.path.join(OUT, "index.html"), encoding="utf-8").read()
     week = nfl_week(today_pt())
     if f"Week {week}" not in home:
@@ -3103,7 +3200,7 @@ def validate_week9():
     print("OK week 9: Thursday card, DraftKings AI board, Sunday grades, Vector Top 5, BUF @ MIN loss")
 
 def validate_week10():
-    """Tuesday of Week 10: rankings and status are up, the card is not, Week 9 is final."""
+    """Week 10 rankings stay up, the Vector card is not posted, and the AI board is the provisional DraftKings card."""
     home = open(os.path.join(OUT, "index.html"), encoding="utf-8").read()
     card = open(os.path.join(OUT, "card.html"), encoding="utf-8").read()
     record = open(os.path.join(OUT, "record.html"), encoding="utf-8").read()
@@ -3153,12 +3250,14 @@ def validate_week10():
         if needle not in ranking:
             raise SystemExit(f"rankings row missing {needle}")
     banned_edges = ("DAL +4.5", "NYJ +8.5", "Week 10 early look", "MIN +3 at", "NO +1.5", "HOU \u22124.5")
-    for doc, name in ((home, "home"), (card, "card"), (live, "live"), (ai, "ai")):
+    for doc, name in ((home, "home"), (card, "card"), (live, "live")):
         for bad in banned_edges:
             if bad in doc:
                 raise SystemExit(f"{name} publishes a Week 10 edge ({bad})")
         if "upcoming" in doc.lower():
             raise SystemExit(f"{name} still says upcoming")
+    if "upcoming" in ai.lower():
+        raise SystemExit("ai still says upcoming")
     for needle in (
         "Week 9 final 3-10", "MIN +3.5", "LOSS", "BUF 23, MIN 6", "Thu card line",
         "No side", 'id="week-10-status"', "BAL +10", "WAS +5.5",
@@ -3183,8 +3282,86 @@ def validate_week10():
         raise SystemExit("live board is still loading a market card")
     if "Final: BUF 23, MIN 6" not in archive or "Monday night, pending" in archive:
         raise SystemExit("Week 9 AI archive did not grade BUF @ MIN")
+    if "Week 9" not in archive:
+        raise SystemExit("Week 9 AI archive does not contain Week 9")
     if "DAL +4.5" not in archive or "Week 10 early look" not in archive:
         raise SystemExit("Week 9 AI archive dropped the previously published early look")
+    w10 = open(os.path.join(OUT, "ai-picks-2026-w10.html"), encoding="utf-8").read()
+    sitemap = open(os.path.join(OUT, "sitemap.xml"), encoding="utf-8").read()
+    for slug in ("ai-picks-2026-w10.html", "ai-picks-2026-w09.html", "ai-picks-2026-w08.html",
+                 "ai-picks-2026-w07.html", "ai-picks-2026-w05.html", "ai-picks-2026-w04.html",
+                 "ai-picks-2026-w03.html"):
+        if slug not in ai:
+            raise SystemExit(f"AI Picks page missing archive link {slug}")
+        if f"https://www.vectorpicks.com/{slug}" not in sitemap:
+            raise SystemExit(f"sitemap is missing {slug}")
+    def ordered_under(block, heading):
+        ol = re.search(rf'<h3>{re.escape(heading)}</h3><ol class="picks">(.*?)</ol>', block, re.S)
+        if not ol:
+            return None
+        items = []
+        for raw in re.findall(r'<li[^>]*>(.*?)</li>', ol.group(1), re.S):
+            text = re.sub(r'\s+', ' ', re.sub(r'<[^>]+>', ' ', raw)).strip()
+            items.append(text)
+        return items
+    def expect_ranked(doc, panel_name, picks, label):
+        block = re.search(rf'<div class="panel[^"]*"><h2>{re.escape(panel_name)}</h2>.*?</div>', doc, re.S)
+        if not block:
+            raise SystemExit(f"{label} is missing the {panel_name} card")
+        html_block = block.group(0)
+        bets = re.search(r'<h3>Best Bets</h3><ul class="picks big">(.*?)</ul>', html_block, re.S)
+        bet_items = re.findall(r'<li[^>]*>', bets.group(1) if bets else "")
+        if panel_name != "Vector" and len(bet_items) != 3:
+            raise SystemExit(f"{label} {panel_name} Best Bets has {len(bet_items)} items, expected 3")
+        if panel_name == "Vector" and bet_items:
+            raise SystemExit(f"{label} Vector published a Best Bet before the Westgate card")
+        heading = "Provisional top 5 (not Best Bets)" if panel_name == "Vector" else "Top 5"
+        got = ordered_under(html_block, heading)
+        if not got or len(got) != len(picks):
+            raise SystemExit(f"{label} {panel_name} top 5 missing: {got}")
+        for pick, text in zip(picks, got):
+            shown = minus(pick)
+            if not text.startswith(shown) or text[len(shown):len(shown) + 1].isdigit():
+                raise SystemExit(f"{label} {panel_name} top 5 expected {shown}, got {text}")
+    top5s = {
+        "ChatGPT": ["JAX -10.5", "BUF -8.5", "NYG -2.5", "KC -3.5", "LV +6.5"],
+        "Claude": ["NYG -2.5", "CLE +4.5", "ARI +9.5", "LV +6.5", "NYJ +8.5"],
+        "Gemini": ["GB -3", "CLE +4.5", "SF -4.5", "KC -3.5", "PIT +3.5"],
+        "Grok": ["IND -3.5", "JAX -10.5", "BUF -8.5", "HOU -4.5", "SF -4.5"],
+        "Vector": ["DAL +4.5", "MIN +3", "LAC +4.5", "WAS +2.5", "LV +6.5"],
+    }
+    for doc, label in ((ai, "ai-picks"), (w10, "week 10 archive")):
+        if "Week 10" not in doc:
+            raise SystemExit(f"{label} is not Week 10")
+        if 'id="provisional-board"' not in doc or "PROVISIONAL" not in doc or "Not a Westgate card." not in doc:
+            raise SystemExit(f"{label} is missing the provisional DraftKings banner")
+        if "DraftKings line" not in doc or "PROVISIONAL BOARD" not in doc:
+            raise SystemExit(f"{label} is missing the DraftKings line label or prompt note")
+        if "Byes: CHI, DEN, PHI, TB" not in doc or "Munich" not in doc:
+            raise SystemExit(f"{label} is missing the Week 10 byes or the Munich site")
+        if "Leans (provisional)" not in doc or doc.count("Provisional top 5 (not Best Bets)") < 2:
+            raise SystemExit(f"{label} is missing Vector's provisional leans or top 5 label")
+        if "undefined" in doc.lower():
+            raise SystemExit(f"{label} printed an undefined score")
+        grid = re.search(r'<table class="rec-table ai-grid">.*?</table>', doc, re.S)
+        if not grid or "DraftKings line" not in grid.group(0) or "Westgate line" in grid.group(0):
+            raise SystemExit(f"{label} grid is not labeled DraftKings line")
+        if 'data-l="Score"' in grid.group(0) or ">undefined<" in grid.group(0).lower():
+            raise SystemExit(f"{label} grid has a score column")
+        game_rows = re.findall(r'<tr><td class="game">.*?</tr>', grid.group(0), re.S)
+        if len(game_rows) != 14:
+            raise SystemExit(f"{label} has {len(game_rows)} games, expected 14 pending")
+        for row in game_rows:
+            if "Final:" in row:
+                raise SystemExit(f"{label} graded a Week 10 game that is not final")
+            cell = re.search(r'<td data-l="Vector"[^>]*>(.*?)</td>', row, re.S)
+            if not cell or "&mdash;" in cell.group(1) or "<b>" not in cell.group(1):
+                raise SystemExit(f"{label} is missing Vector's side on a game")
+        for name, picks in top5s.items():
+            expect_ranked(doc, name, picks, label)
+        hit = public_name_violation(doc)
+        if hit:
+            raise SystemExit(f"{label} names a source that stays off the site: {hit}")
     for needle in ('id="week-9-results"', "11-11 with 3 pending", "BUF@MIN (Monday night) is Pending", "4-NrBHuRlUE", "q2OazIWZ5vE"):
         if needle not in shorts:
             raise SystemExit(f"shorts page is missing {needle}")
@@ -3194,7 +3371,7 @@ def validate_week10():
     method = open(os.path.join(OUT, "methodology.html"), encoding="utf-8").read()
     if "about 2 points" not in method or "0.35" not in method:
         raise SystemExit("methodology dropped the public v3 note")
-    print("OK week 10: rankings posted, no Week 10 card, Week 9 final 3-10")
+    print("OK week 10: provisional DraftKings AI board, 14 pending games, Week 9 archive kept, no Week 10 Vector card")
 
 def main():
     global WEEKS, AI_WEEKS

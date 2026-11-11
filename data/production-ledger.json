@@ -115,6 +115,29 @@
         "Contest-leader rows stay the Sunday snapshot and are not on the Vector record",
         "The record is the audited tracker since Week 3, not a full-season total"
       ]
+    },
+    {
+      "week": 10,
+      "season": 2026,
+      "published_at_pt": "2026-11-11",
+      "dedup_key": "2026-w10-provisional-draftkings-ai",
+      "source": "Wednesday Nov 11, 2026 AI board. Lines are the DraftKings numbers fetched about 1:30 PM PT. ESPN scoreboard the same day shows all 14 games scheduled, none final. No Westgate SuperContest card was posted.",
+      "included": [
+        "Week 10 provisional DraftKings AI board for Claude, Gemini, Grok, and ChatGPT",
+        "Each AI: a side, confidence, and reason on all 14 games, three Best Bets, and a ranked top 5",
+        "Vector leans on all 14 games and a provisional top 5, with no Best Bets"
+      ],
+      "public_video_ids": [],
+      "never_embed": [
+        "cXnzFQPN7mE"
+      ],
+      "gaps": [
+        "No Week 10 Westgate card, so Vector has no Best Bets and the top 5 is provisional",
+        "The board is DraftKings, not Westgate",
+        "All 14 games are pending",
+        "Vector injury adjustments are still provisional",
+        "Contest-leader rows stay the Sunday snapshot and are not on the Vector record"
+      ]
     }
   ]
 }
