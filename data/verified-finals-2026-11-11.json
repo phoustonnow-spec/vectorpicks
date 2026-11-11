@@ -1,0 +1,150 @@
+{
+  "captured": "2026-11-11",
+  "timezone": "source times are ESPN competition timestamps; card dates stay the US game date",
+  "source": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?week=10&seasontype=2&dates=2026",
+  "note": "Fetched Wed Nov 11, 2026. All 14 Week 10 games are scheduled and not final. ESPN abbreviates Washington as WSH; this file uses WAS, the abbreviation already on the site. No scores are stored.",
+  "weeks": {
+    "10": [
+      {
+        "game": "BUF@NYJ",
+        "away_abbr": "BUF",
+        "home_abbr": "NYJ",
+        "away_score": 0,
+        "home_score": 0,
+        "state": "pre",
+        "detail": "11/15 - 1:00 PM EST",
+        "date_utc": "2026-11-15"
+      },
+      {
+        "game": "CAR@NO",
+        "away_abbr": "CAR",
+        "home_abbr": "NO",
+        "away_score": 0,
+        "home_score": 0,
+        "state": "pre",
+        "detail": "11/15 - 1:00 PM EST",
+        "date_utc": "2026-11-15"
+      },
+      {
+        "game": "HOU@CLE",
+        "away_abbr": "HOU",
+        "home_abbr": "CLE",
+        "away_score": 0,
+        "home_score": 0,
+        "state": "pre",
+        "detail": "11/15 - 1:00 PM EST",
+        "date_utc": "2026-11-15"
+      },
+      {
+        "game": "JAX@TEN",
+        "away_abbr": "JAX",
+        "home_abbr": "TEN",
+        "away_score": 0,
+        "home_score": 0,
+        "state": "pre",
+        "detail": "11/15 - 1:00 PM EST",
+        "date_utc": "2026-11-15"
+      },
+      {
+        "game": "KC@ATL",
+        "away_abbr": "KC",
+        "home_abbr": "ATL",
+        "away_score": 0,
+        "home_score": 0,
+        "state": "pre",
+        "detail": "11/15 - 1:00 PM EST",
+        "date_utc": "2026-11-15"
+      },
+      {
+        "game": "LAC@BAL",
+        "away_abbr": "LAC",
+        "home_abbr": "BAL",
+        "away_score": 0,
+        "home_score": 0,
+        "state": "pre",
+        "detail": "11/16 - 8:15 PM EST",
+        "date_utc": "2026-11-17"
+      },
+      {
+        "game": "LAR@ARI",
+        "away_abbr": "LAR",
+        "home_abbr": "ARI",
+        "away_score": 0,
+        "home_score": 0,
+        "state": "pre",
+        "detail": "11/15 - 4:05 PM EST",
+        "date_utc": "2026-11-15"
+      },
+      {
+        "game": "MIA@IND",
+        "away_abbr": "MIA",
+        "home_abbr": "IND",
+        "away_score": 0,
+        "home_score": 0,
+        "state": "pre",
+        "detail": "11/15 - 1:00 PM EST",
+        "date_utc": "2026-11-15"
+      },
+      {
+        "game": "MIN@GB",
+        "away_abbr": "MIN",
+        "home_abbr": "GB",
+        "away_score": 0,
+        "home_score": 0,
+        "state": "pre",
+        "detail": "11/15 - 1:00 PM EST",
+        "date_utc": "2026-11-15"
+      },
+      {
+        "game": "NE@DET",
+        "away_abbr": "NE",
+        "home_abbr": "DET",
+        "away_score": 0,
+        "home_score": 0,
+        "state": "pre",
+        "detail": "11/15 - 9:30 AM EST",
+        "date_utc": "2026-11-15"
+      },
+      {
+        "game": "PIT@CIN",
+        "away_abbr": "PIT",
+        "home_abbr": "CIN",
+        "away_score": 0,
+        "home_score": 0,
+        "state": "pre",
+        "detail": "11/15 - 8:20 PM EST",
+        "date_utc": "2026-11-16"
+      },
+      {
+        "game": "SEA@LV",
+        "away_abbr": "SEA",
+        "home_abbr": "LV",
+        "away_score": 0,
+        "home_score": 0,
+        "state": "pre",
+        "detail": "11/15 - 4:05 PM EST",
+        "date_utc": "2026-11-15"
+      },
+      {
+        "game": "SF@DAL",
+        "away_abbr": "SF",
+        "home_abbr": "DAL",
+        "away_score": 0,
+        "home_score": 0,
+        "state": "pre",
+        "detail": "11/15 - 4:25 PM EST",
+        "date_utc": "2026-11-15"
+      },
+      {
+        "game": "WAS@NYG",
+        "away_abbr": "WAS",
+        "home_abbr": "NYG",
+        "away_score": 0,
+        "home_score": 0,
+        "state": "pre",
+        "detail": "11/12 - 8:15 PM EST",
+        "date_utc": "2026-11-13"
+      }
+    ]
+  }
+}

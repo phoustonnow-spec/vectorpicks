@@ -36,6 +36,10 @@ def test_tnf_grade():
 
 def test_names_and_private_video():
     assert build.BANNED_PUBLIC.search("Walter Nolen is out") is None
+    assert build.public_name_violation("Walter Nolen is out") is None
+    assert build.public_name_violation("WalterFootball")
+    assert build.public_name_violation("See Walter for the card")
+    assert build.public_name_violation("SportsLine")
     assert build.BANNED_PUBLIC.search("walter football")
     assert build.BANNED_PUBLIC.search("Kevin Cole")
     try:
@@ -82,7 +86,10 @@ def test_built_pages():
     assert "BUF 23, MIN 6" in card and "MIN +3.5" in card and "No side" in card
     assert "DAL +4.5" not in card and "Week 10 early look" not in card
     assert "cXnzFQPN7mE" not in home + ai + card + shorts + archive
-    assert "No sides were invented" in ai and "DAL +4.5" not in ai and "Week 10 early look" not in ai
+    assert "No sides were invented" not in ai and "Week 10 early look" not in ai
+    assert "PROVISIONAL" in ai and "DraftKings line" in ai and "Not a Westgate card." in ai
+    assert "Provisional top 5 (not Best Bets)" in ai and "DAL +4.5" in ai
+    assert "ai-picks-2026-w10.html" in ai and "Week 9" in archive
     assert "DraftKings line" in archive and "Westgate line" not in archive.split("ai-grid", 1)[-1][:500]
     assert 'id="vector-top5"' in archive and "Vector Top 5" in archive and "Westgate SuperContest" in archive
     assert "ARI +12.5" in archive and ">2-3<" in archive
