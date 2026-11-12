@@ -55,17 +55,22 @@ def test_built_pages():
     home = open(os.path.join(root, "index.html"), encoding="utf-8").read()
     ai = open(os.path.join(root, "ai-picks.html"), encoding="utf-8").read()
     card = open(os.path.join(root, "card.html"), encoding="utf-8").read()
-    assert "Week 10" in home and "Tuesday, Nov 10, 2026 PT" in home
+    archive_card = open(os.path.join(root, "card-2026-w09.html"), encoding="utf-8").read()
+    assert "Week 10" in home and build.stamp_pt(build.today_pt()) in home
     assert "Week 9 final 3-10" in home and "MIN +3.5 is a loss, BUF 23, MIN 6" in home
+    assert "WAS +2.5" in home and "DAL +4.5" in home and "LAC +4.5" in home
+    assert "Lines: Westgate SuperContest Week 10" in home
+    assert "1cY3MSjjkzE" in home and 'data-yt="1cY3MSjjkzE"' in home
     assert 'id="rankings"' in home and "5.9" in home and "Injury adjustments are provisional this week" in home
-    assert "BAL +10" in home and "LOSS" in home and "JAX 33, BAL 10" in home
-    assert "DAL +4.5" not in home and "NYJ +8.5" not in home and "Week 10 early look" not in home
+    assert "NYJ +8.5" not in home and "Week 10 early look" not in home
+    assert "No Week 10 picks" not in home
     shorts = open(os.path.join(root, "shorts.html"), encoding="utf-8").read()
-    assert "4-NrBHuRlUE" in home and 'data-yt="4-NrBHuRlUE"' in home
-    assert "q2OazIWZ5vE" in home and "Week 9 Saturday Update" in home
+    assert "1cY3MSjjkzE" in shorts and shorts.find("1cY3MSjjkzE") < shorts.find("4-NrBHuRlUE")
     assert "4-NrBHuRlUE" in shorts and shorts.find("4-NrBHuRlUE") < shorts.find("q2OazIWZ5vE")
+    assert "Week 9 Saturday Update" in shorts
     assert "81Pq1yT8hQQ" in shorts and "Week 4 Westgate SuperContest Top 5 Leaders" in shorts
     assert "LAMBDA LAMBDA LAMBDA-1 29-10-1" in shorts and "RIGGED NFL-1 29-10-1" in shorts
+    assert "LAMBDA LAMBDA LAMBDA-1 32-12-1" in shorts
     assert "Entertainment and opinion only. Not betting advice." in shorts
     assert 'id="week-9-results"' in shorts
     assert "Unofficial." in shorts and "Not Westgate official standings" in shorts
@@ -75,16 +80,18 @@ def test_built_pages():
     assert shorts.count('res-win">WIN') == 20
     assert shorts.count('res-loss">LOSS') == 27
     assert shorts.count('res-pend">Pending') == 8
-    assert "11-11 with 3 pending" in home and "9-16 with 5 pending" in home
-    assert "shorts.html#week-9-results" in home
+    assert "Official Westgate standings after Week 9" in home
     lowered = shorts.lower()
     for bad in ("kevin cole", "unexpected points", "walterfootball", "walter football", "dr bob", "dr. bob"):
         assert bad not in lowered
     assert "splash" not in lowered and "bman" not in lowered.split("webmanifest")[-1]
     archive = open(os.path.join(root, "ai-picks-2026-w09.html"), encoding="utf-8").read()
-    assert "4-NrBHuRlUE" in card and "q2OazIWZ5vE" in card and "Thu card line" in card
-    assert "BUF 23, MIN 6" in card and "MIN +3.5" in card and "No side" in card
-    assert "DAL +4.5" not in card and "Week 10 early look" not in card
+    assert "4-NrBHuRlUE" in archive_card and "q2OazIWZ5vE" in archive_card and "Thu card line" in archive_card
+    assert "BUF 23, MIN 6" in archive_card and "MIN +3.5" in archive_card and "No side" in archive_card
+    assert "WAS +2.5" not in archive_card and "1cY3MSjjkzE" not in archive_card
+    assert "WAS +2.5" in card and "DAL +4.5" in card and "LAC +4.5" in card
+    assert "Week 10 early look" not in card and "Thu card line" not in card
+    assert "1cY3MSjjkzE" in card
     assert "cXnzFQPN7mE" not in home + ai + card + shorts + archive
     assert "No sides were invented" not in ai and "Week 10 early look" not in ai
     assert "PROVISIONAL" in ai and "DraftKings line" in ai and "Not a Westgate card." in ai
@@ -100,7 +107,7 @@ def test_built_pages():
     assert "Final: BUF 23, MIN 6" in archive
     assert "Final: CIN 34, ATL 17" in archive and "Final: CLE 22, NO 23 (OT)" in archive
     assert "49-37-2" in archive and "48-38-2" in archive and "33-34-2" in archive
-    assert "Thu card line" in card
+    assert "Thu card line" in archive_card
     assert "This is not a publish" not in home
     text = open(os.path.join(build.ROOT, "build.py"), encoding="utf-8").read()
     assert "This is not a publish." in text

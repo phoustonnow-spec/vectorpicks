@@ -1,0 +1,261 @@
+{
+  "season": 2026,
+  "week": 10,
+  "as_of": "Thu Nov 12, 2026, about 8:45 AM PT",
+  "pass_policy": "full",
+  "flags_confirmed": false,
+  "line_column": "Westgate",
+  "line_source": "Westgate SuperContest Week 10",
+  "market_source": "no separate market table on this Thursday card (blank, not invented)",
+  "hfa_note": "Home field is about 2 points, and 0 at a neutral site (Munich). The injury layer on these numbers is still being reconciled.",
+  "update_note": "Thursday Nov 12, 2026 card. Vector numbers are provisional: the injury layer is still being reconciled, so this is not a fresh full rerun. Every game has a side. Byes: CHI, DEN, PHI, TB. NE at DET is in Munich.",
+  "tnf": {
+    "game": "WAS @ NYG",
+    "kickoff_pt": "Thu Nov 12, 5:15 PM PT",
+    "westgate": "NYG -2.5",
+    "pick": "WAS +2.5",
+    "our_spread": "WAS +0.3",
+    "gap": 2.2,
+    "tier": "Lean"
+  },
+  "short": {
+    "title": "Week 10 NFL AI Picks: WAS +2.5 TNF, DAL & LAC Best Bets | Week 9 Recap",
+    "youtube_url": "https://www.youtube.com/shorts/1cY3MSjjkzE"
+  },
+  "prior_recap": {
+    "week": 9,
+    "text": "Week 9 final 3-10 (Best Bets 0-2, Leans 3-8). MIN +3.5 is a loss, BUF 23, MIN 6. NYJ @ KC and LV @ SF stayed passes with no pregame side."
+  },
+  "westgate_leaders": {
+    "status": "official Westgate Week 9 standings",
+    "supercontest": [
+      ["LAMBDA LAMBDA LAMBDA-1", "32-12-1", "Wk9 3-2"],
+      ["MATTLEGEND27-1", "32-13-0", "Wk9 3-2"],
+      ["RIGGED NFL-1", "31-13-1", "Wk9 2-3"],
+      ["RJ551155-3", "31-14-0", "Wk9 3-2"]
+    ],
+    "gold": [
+      ["THREAD CLOD FOOL-1", "30-15-0", "Wk9 2-3"],
+      ["JJ & JF-1", "29-16-0", "Wk9 1-4"],
+      ["JERRYDABEST-1", "28-16-1", "Wk9 2-3"],
+      ["RJ551155-1", "28-17-0", "Wk9 3-2"]
+    ],
+    "crowd_top5": {"sc": "1-4", "gold": "1-4"}
+  },
+  "summary": {
+    "best_bets": [
+      "DAL +4.5 vs SF",
+      "LAC +4.5 at BAL"
+    ],
+    "leans": [
+      "WAS +2.5 at NYG",
+      "MIN +3.5 at GB",
+      "JAX -10.5 at TEN",
+      "LV +6.5 vs SEA",
+      "HOU -4.5 at CLE",
+      "IND -3.5 vs MIA",
+      "NE +3 at DET"
+    ],
+    "card": [
+      "KC -3.5 at ATL",
+      "NYJ +7.5 vs BUF",
+      "CAR +2.5 at NO",
+      "LAR -9.5 at ARI",
+      "PIT +3.5 at CIN"
+    ],
+    "flags": [
+      "WAS @ NYG: WAS C Lucas Patrick and TE Colson Yankoff out",
+      "MIN @ GB: QB not officially named (Cousins expected); not a Best Bet until confirmed"
+    ],
+    "passes": []
+  },
+  "games": [
+    {
+      "game": "WAS@NYG",
+      "label": "WAS @ NYG",
+      "day": "Thu",
+      "date": "2026-11-12",
+      "westgate": "NYG -2.5",
+      "market": "",
+      "our": "WAS +0.3",
+      "gap": 2.2,
+      "tier": "Lean",
+      "pick": "WAS +2.5",
+      "note": "TNF, kickoff Thu Nov 12, 5:15 PM PT. WAS C Lucas Patrick and TE Colson Yankoff out (Allegretti starts at C). Good down to +1.5."
+    },
+    {
+      "game": "NE@DET",
+      "label": "NE @ DET (Munich)",
+      "day": "Sun",
+      "date": "2026-11-15",
+      "westgate": "DET -3",
+      "market": "",
+      "our": "NE +1.3",
+      "gap": 1.7,
+      "tier": "Lean",
+      "pick": "NE +3",
+      "note": "Munich, neutral site. NE RB Henderson and C Brown out."
+    },
+    {
+      "game": "BUF@NYJ",
+      "label": "BUF @ NYJ",
+      "day": "Sun",
+      "date": "2026-11-15",
+      "westgate": "BUF -7.5",
+      "market": "",
+      "our": "NYJ +6.4",
+      "gap": 1.1,
+      "tier": "Card",
+      "pick": "NYJ +7.5",
+      "note": ""
+    },
+    {
+      "game": "JAX@TEN",
+      "label": "JAX @ TEN",
+      "day": "Sun",
+      "date": "2026-11-15",
+      "westgate": "JAX -10.5",
+      "market": "",
+      "our": "JAX -12.7",
+      "gap": 2.2,
+      "tier": "Lean",
+      "pick": "JAX -10.5",
+      "note": "Big spread."
+    },
+    {
+      "game": "MIA@IND",
+      "label": "MIA @ IND",
+      "day": "Sun",
+      "date": "2026-11-15",
+      "westgate": "IND -3.5",
+      "market": "",
+      "our": "IND -5.4",
+      "gap": 1.9,
+      "tier": "Lean",
+      "pick": "IND -3.5",
+      "note": ""
+    },
+    {
+      "game": "KC@ATL",
+      "label": "KC @ ATL",
+      "day": "Sun",
+      "date": "2026-11-15",
+      "westgate": "KC -3.5",
+      "market": "",
+      "our": "KC -4.7",
+      "gap": 1.2,
+      "tier": "Card",
+      "pick": "KC -3.5",
+      "note": ""
+    },
+    {
+      "game": "HOU@CLE",
+      "label": "HOU @ CLE",
+      "day": "Sun",
+      "date": "2026-11-15",
+      "westgate": "HOU -4.5",
+      "market": "",
+      "our": "HOU -6.6",
+      "gap": 2.1,
+      "tier": "Lean",
+      "pick": "HOU -4.5",
+      "note": "Both offensive lines thin; Thursday participation pending."
+    },
+    {
+      "game": "CAR@NO",
+      "label": "CAR @ NO",
+      "day": "Sun",
+      "date": "2026-11-15",
+      "westgate": "NO -2.5",
+      "market": "",
+      "our": "NO -1.4",
+      "gap": 1.1,
+      "tier": "Card",
+      "pick": "CAR +2.5",
+      "note": ""
+    },
+    {
+      "game": "MIN@GB",
+      "label": "MIN @ GB",
+      "day": "Sun",
+      "date": "2026-11-15",
+      "westgate": "GB -3.5",
+      "market": "",
+      "our": "MIN -0.5",
+      "gap": 4.0,
+      "tier": "Lean",
+      "pick": "MIN +3.5",
+      "note": "QB not officially named (Cousins expected after trade; Murray hamstring DNP). Not a Best Bet until confirmed."
+    },
+    {
+      "game": "SEA@LV",
+      "label": "SEA @ LV",
+      "day": "Sun",
+      "date": "2026-11-15",
+      "westgate": "SEA -6.5",
+      "market": "",
+      "our": "LV +4.3",
+      "gap": 2.2,
+      "tier": "Lean",
+      "pick": "LV +6.5",
+      "note": "Darnold out; Lock (oblique) expected."
+    },
+    {
+      "game": "LAR@ARI",
+      "label": "LAR @ ARI",
+      "day": "Sun",
+      "date": "2026-11-15",
+      "westgate": "LAR -9.5",
+      "market": "",
+      "our": "LAR -9.8",
+      "gap": 0.3,
+      "tier": "Card",
+      "pick": "LAR -9.5",
+      "note": "Coin flip. ARI rookie QB Beck."
+    },
+    {
+      "game": "SF@DAL",
+      "label": "SF @ DAL",
+      "day": "Sun",
+      "date": "2026-11-15",
+      "westgate": "SF -4.5",
+      "market": "",
+      "our": "DAL +0.9",
+      "gap": 3.6,
+      "tier": "Best Bet",
+      "pick": "DAL +4.5",
+      "note": "DK toggling +3.5/+4.5."
+    },
+    {
+      "game": "PIT@CIN",
+      "label": "PIT @ CIN",
+      "day": "Sun",
+      "date": "2026-11-15",
+      "westgate": "CIN -3.5",
+      "market": "",
+      "our": "CIN -3.4",
+      "gap": 0.1,
+      "tier": "Card",
+      "pick": "PIT +3.5",
+      "note": "Sunday night. Coin flip."
+    },
+    {
+      "game": "LAC@BAL",
+      "label": "LAC @ BAL",
+      "day": "Mon",
+      "date": "2026-11-16",
+      "westgate": "BAL -4.5",
+      "market": "",
+      "our": "LAC +2.2",
+      "gap": 2.3,
+      "tier": "Best Bet",
+      "pick": "LAC +4.5",
+      "note": "Monday night. Herbert expected to play; Brissett is the Baltimore starter."
+    }
+  ],
+  "missing": [
+    "Injury layer still being reconciled. Not a fresh full rerun.",
+    "Contest standings are not Vector picks and are not on the record.",
+    "The Wednesday AI board stays the DraftKings provisional card, separate from this Westgate card."
+  ]
+}

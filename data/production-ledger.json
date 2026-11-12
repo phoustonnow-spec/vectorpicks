@@ -138,6 +138,33 @@
         "Vector injury adjustments are still provisional",
         "Contest-leader rows stay the Sunday snapshot and are not on the Vector record"
       ]
+    },
+    {
+      "week": 10,
+      "season": 2026,
+      "published_at_pt": "2026-11-12",
+      "dedup_key": "2026-w10-thursday-westgate",
+      "source": "Thursday Nov 12, 2026 Vector card at the official Westgate SuperContest Week 10 sheet posted Wed Nov 11. Vector numbers are provisional; the injury layer is still being reconciled. Public Short https://www.youtube.com/shorts/1cY3MSjjkzE on Vector Picks.",
+      "included": [
+        "Week 10 Thursday Vector card, Westgate SuperContest Week 10 lines, a side on all 14 games",
+        "Best Bets DAL +4.5 and LAC +4.5; TNF Lean WAS +2.5 at NYG, kickoff Thu Nov 12, 5:15 PM PT",
+        "Week 10 tracker rows pending, not graded",
+        "Week 9 recap kept at 3-10, Best Bets 0-2, Leans 3-8, BUF 23 MIN 6",
+        "Official Westgate SuperContest and Gold leaders after Week 9, not Vector picks",
+        "Week 10 Thursday YouTube Short"
+      ],
+      "public_video_ids": [
+        "1cY3MSjjkzE"
+      ],
+      "never_embed": [
+        "cXnzFQPN7mE"
+      ],
+      "gaps": [
+        "Injury layer still being reconciled; not a fresh full rerun",
+        "Shorts contest-leader block stays the Sunday Nov 8 unofficial snapshot",
+        "Tracked-weeks record is this page's audited rows only",
+        "Wednesday AI board stays the provisional DraftKings card"
+      ]
     }
   ]
 }

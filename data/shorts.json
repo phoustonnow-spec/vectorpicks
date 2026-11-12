@@ -1,5 +1,5 @@
 {
-  "_comment": "Public YouTube Shorts only. never_embed ids are refused by the build even if a URL is added later. Weeks 3, 4, and 8 are archive. Week 9 shorts are current. Dates order the home page. 2026-11-07 and 2026-11-08 are the Pacific mornings those Shorts were posted. leader_results is the unofficial Week 9 contest grade shown on the Shorts page. It is not a Vector record.",
+  "_comment": "Public YouTube Shorts only. never_embed ids are refused by the build even if a URL is added later. Weeks 3, 4, and 8 are archive. Week 9 shorts stay listed. The Week 10 Thursday Short is the latest. Dates order the home page. 2026-11-12 is that Short. leader_results is the unofficial Week 9 contest grade shown on the Shorts page. It is not a Vector record.",
   "never_embed": ["cXnzFQPN7mE"],
   "placeholder_slots": 0,
   "leader_results": {
@@ -151,6 +151,14 @@
     ]
   },
   "shorts": [
+    {
+      "title": "Week 10 NFL AI Picks: WAS +2.5 TNF, DAL & LAC Best Bets | Week 9 Recap",
+      "date": "2026-11-12",
+      "week": 10,
+      "role": "current",
+      "youtube_url": "https://www.youtube.com/shorts/1cY3MSjjkzE",
+      "note": "Posted Thu Nov 12, 2026. Week 10 Thursday card at Westgate SuperContest Week 10 lines. TNF Lean: WAS +2.5 at NYG, kickoff Thu Nov 12, 5:15 PM PT. Best Bets: DAL +4.5 and LAC +4.5. Vector numbers are provisional; the injury layer is still being reconciled. Week 9 final 3-10 (Best Bets 0-2, Leans 3-8). Entertainment and opinion only. Not betting advice."
+    },
     {
       "title": "Week 9 Westgate SuperContest Top 5 Leaders | Two Tied at 29-10-1 #Shorts",
       "date": "2026-11-08",
