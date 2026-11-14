@@ -165,6 +165,34 @@
         "Tracked-weeks record is this page's audited rows only",
         "Wednesday AI board stays the provisional DraftKings card"
       ]
+    },
+    {
+      "week": 10,
+      "season": 2026,
+      "published_at_pt": "2026-11-14",
+      "dedup_key": "2026-w10-saturday-update",
+      "source": "Saturday Nov 14, 2026 Vector update at the Westgate SuperContest Week 10 sheet. TNF final is ESPN, WAS 24, NYG 21. Public Short https://www.youtube.com/shorts/fvn8h67Mze0 on Vector Picks. The Thursday Short stays listed.",
+      "included": [
+        "Week 10 Saturday update, separate from the Thursday card",
+        "TNF WAS +2.5 graded WIN at the Thursday line, final WAS 24, NYG 21",
+        "No side changes. MIN +3.5 Lean to Best Bet. HOU -4.5 Lean to Card",
+        "Saturday Best Bets DAL +4.5, MIN +3.5, and LAC +4.5",
+        "Week 10 Saturday YouTube Short",
+        "Thursday YouTube Short kept"
+      ],
+      "public_video_ids": [
+        "fvn8h67Mze0"
+      ],
+      "never_embed": [
+        "cXnzFQPN7mE"
+      ],
+      "gaps": [
+        "Injury layer still being reconciled; Saturday numbers are manual adjustments, not a fresh full rerun",
+        "Saturday card is not folded into the graded rows",
+        "Stated Weeks 3-10 tracker is Best Bets 11-9, Leans 19-23, Card tier 9-7-1, full card 39-39-1. This page's audited box after the TNF win is Best Bets 11-9-0, Leans 14-20-0, Card tier 4-5-1, full card 30-35-1. The box was not rewritten.",
+        "Shorts contest-leader block stays the Sunday Nov 8 unofficial snapshot",
+        "Wednesday AI board stays DraftKings. TNF is graded there at that line. Sides were not changed."
+      ]
     }
   ]
 }

@@ -18,6 +18,246 @@
     "gap": 2.2,
     "tier": "Lean"
   },
+  "saturday_update": {
+    "as_of": "Sat Nov 14, 2026 ~9:35 AM PT",
+    "title": "Week 10 Saturday update (Nov 14, 2026)",
+    "source": "Westgate SuperContest Week 10 sheet (fixed contest lines, posted Wed Nov 11, 2026). Public YouTube Short https://www.youtube.com/shorts/fvn8h67Mze0",
+    "folded_into_grades": false,
+    "line_of_record": "Westgate SuperContest Week 10 sheet (fixed contest lines, posted Wed Nov 11, 2026)",
+    "model_note": "Vector numbers are provisional: Tuesday model build plus manual injury adjustments through Saturday morning. Injury layer still being reconciled; not a fresh full rerun.",
+    "disclaimer": "Entertainment only. Not betting advice. AI-generated voice and opinions.",
+    "tnf_result": {
+      "game": "WAS @ NYG",
+      "final": "WAS 24, NYG 21",
+      "thursday_pick": "WAS +2.5",
+      "westgate": "NYG -2.5",
+      "tier": "Lean",
+      "result": "WIN",
+      "source": "ESPN final"
+    },
+    "best_bets": [
+      "DAL +4.5 vs SF",
+      "MIN +3.5 at GB",
+      "LAC +4.5 at BAL"
+    ],
+    "card_columns": [
+      "game",
+      "westgate_line",
+      "our_spread",
+      "pick",
+      "gap",
+      "tier",
+      "thursday_pick",
+      "thursday_tier",
+      "thursday_gap"
+    ],
+    "card": [
+      [
+        "NE@DET (Munich)",
+        "DET -3",
+        "NE +0.7",
+        "NE +3",
+        2.3,
+        "Lean",
+        "NE +3",
+        "Lean",
+        1.7
+      ],
+      [
+        "BUF@NYJ",
+        "BUF -7.5",
+        "NYJ +6.8",
+        "NYJ +7.5",
+        0.7,
+        "Card",
+        "NYJ +7.5",
+        "Card",
+        1.1
+      ],
+      [
+        "JAX@TEN",
+        "JAX -10.5",
+        "JAX -12.8",
+        "JAX -10.5",
+        2.3,
+        "Lean",
+        "JAX -10.5",
+        "Lean",
+        2.2
+      ],
+      [
+        "MIA@IND",
+        "IND -3.5",
+        "IND -5.5",
+        "IND -3.5",
+        2.0,
+        "Lean",
+        "IND -3.5",
+        "Lean",
+        1.9
+      ],
+      [
+        "KC@ATL",
+        "KC -3.5",
+        "KC -4.4",
+        "KC -3.5",
+        0.9,
+        "Card",
+        "KC -3.5",
+        "Card",
+        1.2
+      ],
+      [
+        "HOU@CLE",
+        "HOU -4.5",
+        "HOU -4.9",
+        "HOU -4.5",
+        0.4,
+        "Card",
+        "HOU -4.5",
+        "Lean",
+        2.1
+      ],
+      [
+        "CAR@NO",
+        "NO -2.5",
+        "NO -1.2",
+        "CAR +2.5",
+        1.3,
+        "Card",
+        "CAR +2.5",
+        "Card",
+        1.1
+      ],
+      [
+        "MIN@GB",
+        "GB -3.5",
+        "MIN +0.4",
+        "MIN +3.5",
+        3.1,
+        "Best Bet",
+        "MIN +3.5",
+        "Lean",
+        4.0
+      ],
+      [
+        "SEA@LV",
+        "SEA -6.5",
+        "LV +4.0",
+        "LV +6.5",
+        2.5,
+        "Lean",
+        "LV +6.5",
+        "Lean",
+        2.2
+      ],
+      [
+        "LAR@ARI",
+        "LAR -9.5",
+        "LAR -9.9",
+        "LAR -9.5",
+        0.4,
+        "Card",
+        "LAR -9.5",
+        "Card",
+        0.3
+      ],
+      [
+        "SF@DAL",
+        "SF -4.5",
+        "DAL +1.0",
+        "DAL +4.5",
+        3.5,
+        "Best Bet",
+        "DAL +4.5",
+        "Best Bet",
+        3.6
+      ],
+      [
+        "PIT@CIN",
+        "CIN -3.5",
+        "CIN -3.5",
+        "PIT +3.5",
+        0.0,
+        "Card",
+        "PIT +3.5",
+        "Card",
+        0.1
+      ],
+      [
+        "LAC@BAL",
+        "BAL -4.5",
+        "LAC +2.2",
+        "LAC +4.5",
+        2.3,
+        "Best Bet",
+        "LAC +4.5",
+        "Best Bet",
+        2.3
+      ]
+    ],
+    "changes": {
+      "side_changes": [],
+      "tier_changes": [
+        {
+          "game": "MIN@GB",
+          "from": "Lean",
+          "to": "Best Bet",
+          "reason": "Kirk Cousins confirmed as the Vikings starter (the Thursday condition); Vikings also without TE Hockenson, WR Jennings and QB Murray."
+        },
+        {
+          "game": "HOU@CLE",
+          "from": "Lean",
+          "to": "Card",
+          "reason": "Texans listed DE Danielle Hunter, WR Marvin Harrison Jr. and LB Azeez Al-Shaair out; our gap shrank to 0.4."
+        }
+      ],
+      "note": "No pick changed sides. Thursday card is preserved unchanged above."
+    },
+    "flags": {
+      "KC@ATL": "RB Kenneth Walker III ruled out Saturday morning (ESPN); not fully reflected in our number, so this pick is thin.",
+      "SEA@LV": "Raiders start rookie QB Fernando Mendoza; not a Best Bet.",
+      "MIN@GB": "Kirk Cousins starts for Minnesota (reacquired this week).",
+      "LAC@BAL": "Monday game; final injury designations not yet posted.",
+      "PIT@CIN": "Coin flip; no measurable gap."
+    },
+    "key_injuries_official": [
+      "KC RB Kenneth Walker III out",
+      "MIN TE T.J. Hockenson, WR Jauan Jennings, QB Kyler Murray out",
+      "HOU DE Danielle Hunter, WR Marvin Harrison Jr. out",
+      "SEA QB Sam Darnold, T Charles Cross, G Quenton Nelson out",
+      "SF WR Mike Evans out",
+      "DAL TE Jake Ferguson out",
+      "NE WR A.J. Brown questionable (upgraded from out)"
+    ],
+    "season_tracker": {
+      "best_bets": "11-9",
+      "leans": "19-23",
+      "card_tier": "9-7-1",
+      "full_card": "39-39-1",
+      "note": "Weeks 3-10 through Thursday's game only; not a full-season total. Graded at the Westgate line."
+    },
+    "week_to_date": {
+      "graded": "1 of 14",
+      "full_card": "1-0",
+      "leans": "1-0",
+      "best_bets": "0-0"
+    },
+    "week9_recap": {
+      "full_card": "3-10",
+      "best_bets": "0-2",
+      "leans": "3-8",
+      "mnf": "BUF 23, MIN 6 (MIN +3.5 lost)",
+      "passes_ungraded": [
+        "NYJ@KC",
+        "LV@SF"
+      ]
+    },
+    "video_url": "https://www.youtube.com/shorts/fvn8h67Mze0",
+    "video_title": "Week 10 Saturday Update: WAS Covered TNF, MIN Moves Up | Vector Picks",
+    "video_note": "Saturday Short URL added after publish",
+    "thursday_video_url": "https://www.youtube.com/shorts/1cY3MSjjkzE"
+  },
   "short": {
     "title": "Week 10 NFL AI Picks: WAS +2.5 TNF, DAL & LAC Best Bets | Week 9 Recap",
     "youtube_url": "https://www.youtube.com/shorts/1cY3MSjjkzE"

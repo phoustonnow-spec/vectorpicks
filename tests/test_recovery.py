@@ -60,12 +60,18 @@ def test_built_pages():
     assert "Week 9 final 3-10" in home and "MIN +3.5 is a loss, BUF 23, MIN 6" in home
     assert "WAS +2.5" in home and "DAL +4.5" in home and "LAC +4.5" in home
     assert "Lines: Westgate SuperContest Week 10" in home
-    assert "1cY3MSjjkzE" in home and 'data-yt="1cY3MSjjkzE"' in home
+    assert "fvn8h67Mze0" in home and 'data-yt="fvn8h67Mze0"' in home
+    assert "1cY3MSjjkzE" in home
+    assert "Week 10 Saturday update (Nov 14, 2026)" in home
+    assert "WAS 24, NYG 21" in home
+    assert "1 of 14 graded" in home
     assert 'id="rankings"' in home and "5.9" in home and "Injury adjustments are provisional this week" in home
     assert "NYJ +8.5" not in home and "Week 10 early look" not in home
     assert "No Week 10 picks" not in home
     shorts = open(os.path.join(root, "shorts.html"), encoding="utf-8").read()
+    assert "fvn8h67Mze0" in shorts and shorts.find("fvn8h67Mze0") < shorts.find("1cY3MSjjkzE")
     assert "1cY3MSjjkzE" in shorts and shorts.find("1cY3MSjjkzE") < shorts.find("4-NrBHuRlUE")
+    assert "Week 10 Saturday Update: WAS Covered TNF, MIN Moves Up | Vector Picks" in shorts
     assert "4-NrBHuRlUE" in shorts and shorts.find("4-NrBHuRlUE") < shorts.find("q2OazIWZ5vE")
     assert "Week 9 Saturday Update" in shorts
     assert "81Pq1yT8hQQ" in shorts and "Week 4 Westgate SuperContest Top 5 Leaders" in shorts
@@ -88,10 +94,12 @@ def test_built_pages():
     archive = open(os.path.join(root, "ai-picks-2026-w09.html"), encoding="utf-8").read()
     assert "4-NrBHuRlUE" in archive_card and "q2OazIWZ5vE" in archive_card and "Thu card line" in archive_card
     assert "BUF 23, MIN 6" in archive_card and "MIN +3.5" in archive_card and "No side" in archive_card
-    assert "WAS +2.5" not in archive_card and "1cY3MSjjkzE" not in archive_card
+    assert "WAS +2.5" not in archive_card and "1cY3MSjjkzE" not in archive_card and "fvn8h67Mze0" not in archive_card
     assert "WAS +2.5" in card and "DAL +4.5" in card and "LAC +4.5" in card
     assert "Week 10 early look" not in card and "Thu card line" not in card
-    assert "1cY3MSjjkzE" in card
+    assert "1cY3MSjjkzE" in card and "fvn8h67Mze0" in card
+    assert "Week 10 Saturday update (Nov 14, 2026)" in card
+    assert "WAS 24, NYG 21" in card
     assert "cXnzFQPN7mE" not in home + ai + card + shorts + archive
     assert "No sides were invented" not in ai and "Week 10 early look" not in ai
     assert "PROVISIONAL" in ai and "DraftKings line" in ai and "Not a Westgate card." in ai

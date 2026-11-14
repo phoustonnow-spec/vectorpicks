@@ -1,0 +1,20 @@
+{
+  "captured": "2026-11-14",
+  "timezone": "source times are ESPN competition timestamps; card dates stay the US game date",
+  "source": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?week=10&seasontype=2&dates=2026",
+  "note": "Fetched Sat Nov 14, 2026. WAS @ NYG is final, WAS 24, NYG 21. ESPN abbreviates Washington as WSH; this file uses WAS, the abbreviation already on the site. The other Week 10 games were still pregame and are not given scores here.",
+  "weeks": {
+    "10": [
+      {
+        "game": "WAS@NYG",
+        "away_abbr": "WAS",
+        "home_abbr": "NYG",
+        "away_score": 24,
+        "home_score": 21,
+        "state": "post",
+        "detail": "Final",
+        "final": "WAS 24, NYG 21"
+      }
+    ]
+  }
+}

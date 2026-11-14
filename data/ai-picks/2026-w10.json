@@ -4,10 +4,11 @@
   "as_of": "Wed Nov 11, 2026",
   "provisional": true,
   "intro": "Same prompt, four AIs, and us. Entertainment only. Graded at the DraftKings line each side was asked.",
-  "prompt_note": "PROVISIONAL BOARD: asked Wednesday Nov 11, 2026 (prompt sent about 1:55 to 2:25 PM PT) on the DraftKings line fetched at 1:30 PM PT, before the Westgate SuperContest card was out. This is not a Westgate run. NE vs DET is in Munich (neutral). Byes: CHI, DEN, PHI, TB. Each AI got the identical prompt and picked all 14 games with a 1-10 confidence, three Best Bets and a ranked top 5. Grok's first attempt returned an error and was rerun in a new chat at 2:29 PM PT. Grok's chosen side runs against its own stated number in most games; its picks are shown exactly as given. Vector's sides are leans from a provisional model update (injury layer not fully re-reconciled); its top 5 is provisional and it has no Best Bets until the Westgate card posts. All 14 games are pending.",
+  "prompt_note": "PROVISIONAL BOARD: asked Wednesday Nov 11, 2026 (prompt sent about 1:55 to 2:25 PM PT) on the DraftKings line fetched at 1:30 PM PT, before the Westgate SuperContest card was out. This is not a Westgate run. NE vs DET is in Munich (neutral). Byes: CHI, DEN, PHI, TB. Each AI got the identical prompt and picked all 14 games with a 1-10 confidence, three Best Bets and a ranked top 5. Grok's first attempt returned an error and was rerun in a new chat at 2:29 PM PT. Grok's chosen side runs against its own stated number in most games; its picks are shown exactly as given. Vector's sides are leans from a provisional model update (injury layer not fully re-reconciled); its top 5 is provisional and it has no Best Bets until the Westgate card posts. WAS @ NYG is final, WAS 24, NYG 21. The other 13 games are pending.",
   "line_source": "DraftKings line, Wednesday Nov 11, 2026 (fetched 1:30 PM PT)",
   "line_label": "DraftKings line",
-  "score_source": "ESPN NFL scoreboard (https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?week=10&seasontype=2&dates=2026). Only games with status final are stored. No Week 10 finals stored yet.",
+  "score_source": "ESPN NFL scoreboard (https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?week=10&seasontype=2&dates=2026), snapshot data/verified-finals-2026-11-14.json. WAS @ NYG is final, WAS 24, NYG 21. The other Week 10 games are not final.",
+  "grade_note": "Graded Sat Nov 14, 2026. WAS @ NYG is WAS 24, NYG 21. Every side stays on the Wednesday DraftKings line. This board is not the Westgate card. The other 13 games are pending.",
   "games": [
     {
       "game": "WAS@NYG",
@@ -15,7 +16,13 @@
       "day": "Thu",
       "date": "2026-11-12",
       "westgate": "NYG -2.5",
-      "kickoff_pt": "Thu night"
+      "kickoff_pt": "Thu night",
+      "score": {
+        "away": 24,
+        "home": 21,
+        "status": "final"
+      },
+      "final": "WAS 24, NYG 21"
     },
     {
       "game": "NE@DET",
@@ -610,31 +617,36 @@
     "CIN -3.5: Claude, Grok, and ChatGPT. Gemini took PIT +3.5. Vector leans PIT +3.5.",
     "BAL -4.5: Claude, Gemini, and Grok. ChatGPT took LAC +4.5. Vector leans LAC +4.5."
   ],
-  "results": {},
+  "results": {
+    "WAS@NYG": {
+      "NYG -2.5": "L",
+      "WAS +2.5": "W"
+    }
+  },
   "grades": {
     "claude": {
       "sides": [
         0,
-        0,
+        1,
         0
       ],
-      "sides_pending": 14,
-      "best_bet_units": 0,
-      "best_bets_pending": 3,
+      "sides_pending": 13,
+      "best_bet_units": -1,
+      "best_bets_pending": 2,
       "pick5": [
         0,
-        0,
+        1,
         0
       ],
-      "pick5_pending": 5
+      "pick5_pending": 4
     },
     "gemini": {
       "sides": [
         0,
-        0,
+        1,
         0
       ],
-      "sides_pending": 14,
+      "sides_pending": 13,
       "best_bet_units": 0,
       "best_bets_pending": 3,
       "pick5": [
@@ -647,10 +659,10 @@
     "grok": {
       "sides": [
         0,
-        0,
+        1,
         0
       ],
-      "sides_pending": 14,
+      "sides_pending": 13,
       "best_bet_units": 0,
       "best_bets_pending": 3,
       "pick5": [
@@ -663,38 +675,37 @@
     "chatgpt": {
       "sides": [
         0,
-        0,
+        1,
         0
       ],
-      "sides_pending": 14,
-      "best_bet_units": 0,
-      "best_bets_pending": 3,
+      "sides_pending": 13,
+      "best_bet_units": -1,
+      "best_bets_pending": 2,
       "pick5": [
         0,
-        0,
+        1,
         0
       ],
-      "pick5_pending": 5
+      "pick5_pending": 4
     },
     "vector": {
       "sides": [
-        0,
+        1,
         0,
         0
       ],
-      "sides_pending": 14,
+      "sides_pending": 13,
       "best_bet_units": 0,
       "best_bets_pending": 0,
       "pick5": [
-        0,
+        1,
         0,
         0
       ],
-      "pick5_pending": 5
+      "pick5_pending": 4
     }
   },
   "ungraded_games": [
-    "WAS@NYG",
     "NE@DET",
     "KC@ATL",
     "BUF@NYJ",
