@@ -55,7 +55,7 @@ Report it in the pull request. For Nov 14, 2026 the Saturday update is separate 
 
 - Vector's Week 10 numbers are still provisional: Tuesday model build plus manual injury adjustments through Saturday morning. Not a fresh full rerun.
 - The Saturday card is not folded into the graded rows. TNF is graded at the Thursday line.
-- The Saturday statement's Weeks 3-10 through TNF tracker is Best Bets 11-9, Leans 19-23, Card tier 9-7-1, full card 39-39-1. This page's Tracked weeks box, after the TNF win, is Best Bets 11-9-0, Leans 14-20-0, Card tier 4-5-1, full card 30-35-1. The box was not rewritten. Best Bets 11-9 match. Leans, the Card tier, and the full card do not.
+- The tracked-weeks record was regraded Nov 14, 2026 from final scores at the posted Westgate lines. Best Bets 11-9-0, Leans 14-20-0, Card tier 4-5-1, full card 30-35-1. A separate tally (Leans 19-23, Card 9-7-1, full card 39-39-1) counted 13 Week 4 passes that grade 9-4. That tally is not the record. See docs/record-audit-w03-w10.md.
 - The Shorts contest-leader block is still the Sunday Nov 8 snapshot. Those rows are not Vector picks.
 - The Wednesday AI board stays the DraftKings card. TNF is graded there at the DraftKings line, which is the same NYG -2.5. Sides were not changed.
 

@@ -334,12 +334,12 @@ def result_badge(r):
 
 def record_box(rows, heading="Tracked weeks"):
     cells = ""
-    for label, tier in (("Best Bets", "Best Bet"), ("Leans", "Lean"), ("Full card", None)):
+    for label, tier in (("Best Bets", "Best Bet"), ("Leans", "Lean"), ("Card tier", "Card"), ("Full card", None)):
         t = tally(rows, tier)
         u = f"{t['units']:+d}u" if t["units"] else "0u"
         cells += f'<div class="rec-cell"><div class="rec-label">{label}</div><div class="rec-num">{t["rec"]}</div><div class="rec-sub">{u} &middot; {t["pending"]} pending</div></div>'
     s = CFG["record_start"]
-    return f'<section class="panel record-box"><h2 class="kicker">{e(heading)}</h2><div class="rec-grid">{cells}</div><p class="note">W-L-P at each row\'s posted line, flat 1 unit. Tracked weeks since Week {s["week"]} {s["season"]}. Weeks 1 and 2 are not in this tracker. This is not a full-season total. Pending means the game has not been played. A final with no grade is a gap, not a result. <a href="record.html">Every pick &rarr;</a></p></section>'
+    return f'<section class="panel record-box"><h2 class="kicker">{e(heading)}</h2><div class="rec-grid tiers-4">{cells}</div><p class="note">W-L-P at each row\'s posted line, flat 1 unit. Tracked weeks since Week {s["week"]} {s["season"]}. Weeks 1 and 2 are not in this tracker. This is not a full-season total. The full card also counts Hold and Provisional. A pass is not a pick. Pending means the game has not been played. A final with no grade is a gap, not a result. <a href="record.html">Every pick &rarr;</a></p></section>'
 
 def load_rankings(current=None):
     """Latest power-rankings file. None when it is not the file for this calendar week."""
@@ -3555,9 +3555,6 @@ def validate_week10():
         "Kirk Cousins confirmed",
         "fvn8h67Mze0",
         'data-yt="fvn8h67Mze0"',
-        "19-23",
-        "39-39-1",
-        "9-7-1",
         "Entertainment only. Not betting advice. AI-generated voice and opinions.",
         'id="rankings"',
         'id="week-9-recap"',
@@ -3571,8 +3568,13 @@ def validate_week10():
         "Byes: CHI, DEN, PHI, TB",
         "11-9-0",
         "14-20-0",
+        "4-5-1",
         "30-35-1",
+        "Leans 14-20.",
+        "Card tier 4-5-1",
+        "Full card 30-35-1",
         "2 pending",
+        "5 pending",
         "6 pending",
         "13 pending",
         "<b>1-0</b>",
@@ -3582,6 +3584,9 @@ def validate_week10():
     ):
         if needle not in home:
             raise SystemExit(f"home is missing {needle}")
+    for stale_rec in ("Leans 19-23", "Card tier 9-7-1", "Full card 39-39-1", "was not rewritten to the Saturday statement"):
+        if stale_rec in home:
+            raise SystemExit(f"home still quotes the unaudited tracker ({stale_rec})")
     ranking = home.split('id="rankings"', 1)[-1].split("</section>", 1)[0]
     if ranking.count('<td class="rank">') != 32:
         raise SystemExit("home rankings are not 1 through 32")
@@ -3617,10 +3622,13 @@ def validate_week10():
         "Week 10 Saturday update (Nov 14, 2026)", "WAS 24, NYG 21",
         "Week 9 final 3-10", "Official Westgate standings after Week 9",
         "Kickoff Thu Nov 12, 5:15 PM PT", "NYG \u22122.5",
-        "MIN +0.4", "Kirk Cousins confirmed", "19-23", "39-39-1",
+        "MIN +0.4", "Kirk Cousins confirmed", "Leans 14-20.", "Card tier 4-5-1", "Full card 30-35-1",
     ):
         if needle not in card:
             raise SystemExit(f"weekly card is missing {needle}")
+    for stale_rec in ("Leans 19-23", "Card tier 9-7-1", "Full card 39-39-1", "was not rewritten to the Saturday statement"):
+        if stale_rec in card:
+            raise SystemExit(f"weekly card still quotes the unaudited tracker ({stale_rec})")
     for needle in (
         "Thu card line", "BAL +10", "WAS +5.5", "BUF 23, MIN 6", "No side", "LOSS",
     ):
@@ -3651,9 +3659,10 @@ def validate_week10():
         raise SystemExit("Saturday card is missing the MIN or HOU update")
     for needle in (
         "Week 9 final 3-10", "MIN +3.5 is a loss, BUF 23, MIN 6", "Tracked weeks",
-        "11-9-0", "14-20-0", "30-35-1", "Gaps, not a complete season",
+        "11-9-0", "14-20-0", "4-5-1", "30-35-1", "Gaps, not a complete season",
         "not a full-season total", "Official Westgate standings after Week 9",
-        "WAS +2.5", "WAS 24, NYG 21", "PENDING", "19-23", "39-39-1",
+        "WAS +2.5", "WAS 24, NYG 21", "PENDING", "Those 13 grade 9-4",
+        "The full card also counts Hold and Provisional",
     ):
         if needle not in record:
             raise SystemExit(f"record is missing {needle}")

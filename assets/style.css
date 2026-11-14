@@ -46,6 +46,7 @@ ul.picks.big li{font-family:Anton;font-weight:400;font-size:1.9rem;border:0;padd
 .cashed{background:var(--green);color:var(--navy);font-family:Anton;font-size:1.4rem;border-radius:12px;padding:.5rem .8rem;text-align:center;margin:.3rem 0 .6rem}
 .cashed span{display:block;font-family:Montserrat;font-weight:800;font-size:.8rem}
 .rec-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem}
+.rec-grid.tiers-4{grid-template-columns:repeat(2,1fr)}
 .rec-cell{background:var(--navy2);border-radius:12px;padding:.6rem .4rem;text-align:center}
 .rec-label{font-size:.7rem;font-weight:800;color:var(--grey);text-transform:uppercase;letter-spacing:.05em}
 .rec-num{font-family:Anton;font-size:2rem;line-height:1.1}
@@ -108,6 +109,8 @@ td.rank{color:var(--grey)}
 .rg{display:flex;gap:.7rem;align-items:center;background:var(--navy2);border-radius:12px;padding:.7rem .9rem;color:var(--white)}
 .age{font-family:Anton;font-size:1.3rem;border:2px solid var(--gold);color:var(--gold);border-radius:8px;padding:0 .4rem;flex:none}
 @media (min-width:760px){
+ .rec-grid.tiers-4{grid-template-columns:repeat(4,1fr)}
+ .home-grid .record-box{grid-column:1/-1}
  .nav-toggle{display:none}
  .site-nav{display:flex;flex-direction:row;width:auto;padding:0}
  .home-grid{grid-template-columns:1.25fr 1fr}

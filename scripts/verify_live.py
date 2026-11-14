@@ -57,9 +57,12 @@ HOME_MARKERS = (
     "Injury adjustments are provisional this week",
     "11-9-0",
     "14-20-0",
+    "4-5-1",
     "30-35-1",
-    "19-23",
-    "39-39-1",
+    "Leans 14-20.",
+    "Card tier 4-5-1",
+    "Full card 30-35-1",
+    "5 pending",
     "Byes: CHI, DEN, PHI, TB",
 )
 SHORTS_MARKERS = (
@@ -111,6 +114,9 @@ CARD_MARKERS = (
     "NYG −2.5",
     "Best Bet",
     "Lean",
+    "Leans 14-20.",
+    "Card tier 4-5-1",
+    "Full card 30-35-1",
 )
 RECORD_MARKERS = (
     "Week 9 final 3-10",
@@ -121,10 +127,12 @@ RECORD_MARKERS = (
     "not a full-season total",
     "11-9-0",
     "14-20-0",
+    "4-5-1",
     "30-35-1",
     "13 pending",
-    "19-23",
-    "39-39-1",
+    "5 pending",
+    "Those 13 grade 9-4",
+    "The full card also counts Hold and Provisional",
     "WAS +2.5",
     "WAS 24, NYG 21",
     "PENDING",
@@ -227,6 +235,10 @@ def check(name, status, body, markers):
     present = [m for m in FORBIDDEN if m.lower() in body.lower()]
     if name in ("homepage", "card", "record", "live"):
         for edge in STALE + ("NYJ +8.5", "Week 10 early look"):
+            if edge in body:
+                present.append(edge)
+    if name in ("homepage", "card"):
+        for edge in ("Leans 19-23", "Card tier 9-7-1", "Full card 39-39-1"):
             if edge in body:
                 present.append(edge)
     if name == "ai-picks" and "Week 10 early look" in body:
