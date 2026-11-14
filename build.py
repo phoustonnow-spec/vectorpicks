@@ -440,18 +440,194 @@ def week_record_label(wt):
         return "Pending"
     return wt["rec"][:-2] if wt["P"] == 0 else wt["rec"]
 
-def tnf_html(w):
+def tnf_row_for(w, tidx):
+    tnf = (w or {}).get("tnf") or {}
+    gid = re.sub(r"[^A-Z@]", "", (tnf.get("game") or "").upper())
+    if not gid or not tidx:
+        return None
+    return tidx.get((w["season"], int(w["week"]), gid))
+
+def tnf_html(w, row=None):
     tnf = (w or {}).get("tnf") or {}
     if not tnf.get("pick"):
         return ""
+    grade = ""
+    if row and row.get("_res") in ("W", "L", "P"):
+        grade = f'<p>Result {result_badge(row)} {e(row.get("Final Score") or "")}.</p>'
     return (
         f'<div class="callout" id="tnf"><p class="kicker">Thursday night</p>'
         f'<p><b>{e(minus(tnf.get("pick") or ""))}</b> {tier_badge(tnf.get("tier") or "")} '
         f'{e(tnf.get("game") or "")}. Kickoff {e(tnf.get("kickoff_pt") or "")}. '
         f'Westgate {e(minus(tnf.get("westgate") or ""))}.</p>'
         f'<p class="note">Our Spread {e(minus(tnf.get("our_spread") or ""))}. '
-        f'Gap {gap_text({"gap": tnf.get("gap")})}.</p></div>\n'
+        f'Gap {gap_text({"gap": tnf.get("gap")})}.</p>'
+        f'{grade}</div>\n'
     )
+
+def stated_record(text):
+    parts = str(text or "").split("-")
+    if len(parts) == 2 and all(p.isdigit() for p in parts):
+        return f"{parts[0]}-{parts[1]}-0"
+    return str(text or "")
+
+def tracker_mismatch_note(rows, saturday):
+    """Say when the audited box differs from the Saturday statement. Do not rewrite the box."""
+    stated = (saturday or {}).get("season_tracker") or {}
+    if not rows or not stated:
+        return ""
+    pairs = (
+        ("Best Bets", "Best Bet", stated.get("best_bets")),
+        ("Leans", "Lean", stated.get("leans")),
+        ("Card tier", "Card", stated.get("card_tier")),
+        ("Full card", None, stated.get("full_card")),
+    )
+    diffs = []
+    for label, tier, raw in pairs:
+        if not raw:
+            continue
+        site = tally(rows, tier)["rec"]
+        if site != stated_record(raw):
+            diffs.append(f"{label} {site} on this page, {raw} in that statement")
+    if not diffs:
+        return ""
+    return (
+        '<p class="note">The Tracked weeks box on this page counts audited rows only. '
+        "It was not rewritten to the Saturday statement. "
+        + e("; ".join(diffs))
+        + ".</p>\n"
+    )
+
+def saturday_legacy_html(saturday):
+    items = "".join(f"<li>{e(x)}</li>" for x in saturday.get("items") or [])
+    related_items = saturday.get("related") or []
+    related = "".join(f'<p class="note">{e(x)}</p>\n' for x in related_items)
+    folded = "These notes are not folded into the graded rows." if not saturday.get("folded_into_grades") else ""
+    extra = f"\n{related}" if related_items else ""
+    return f'''<section class="panel callout"><h2>Saturday update, separate from the original card</h2>
+<p class="note">As of {e(saturday.get("as_of",""))}. Source: {e(saturday.get("source",""))}. {e(folded)}</p>
+<ul class="picks">{items}</ul>{extra}</section>'''
+
+def saturday_card_rows(saturday):
+    body = ""
+    for raw in saturday.get("card") or []:
+        if len(raw) < 9:
+            raise SystemExit("Saturday card row is short")
+        game, westgate, our, pick, gap, tier, thu_pick, thu_tier, thu_gap = raw[:9]
+        cls = TIER_CLASS.get(tier, "card")
+        mark = " changed" if (thu_tier != tier or thu_pick != pick) else ""
+        body += (
+            f'<tr class="t-{cls}{mark}">'
+            f'<td class="game" data-l="Game"><b>{e(minus(game))}</b></td>'
+            f'<td data-l="Westgate">{e(minus(westgate))}</td>'
+            f'<td data-l="Our Spread"><b>{e(minus(our))}</b></td>'
+            f'<td data-l="Saturday pick" class="pick">{e(minus(pick))}</td>'
+            f'<td data-l="Gap" class="gap">{float(gap):.1f}</td>'
+            f'<td data-l="Tier">{tier_badge(tier)}</td>'
+            f'<td data-l="Thursday pick">{e(minus(thu_pick))}</td>'
+            f'<td data-l="Thursday tier">{tier_badge(thu_tier)}</td>'
+            f'<td data-l="Thursday gap" class="gap">{float(thu_gap):.1f}</td>'
+            f"</tr>"
+        )
+    return body
+
+def saturday_section_html(w, rows=None):
+    saturday = w.get("saturday_update") or {}
+    if not saturday:
+        return ""
+    if not saturday.get("card"):
+        return saturday_legacy_html(saturday)
+    week = int(w["week"])
+    title = saturday.get("title") or f"Week {week} Saturday update"
+    folded = "These notes are not folded into the graded rows." if not saturday.get("folded_into_grades") else ""
+    tnf = saturday.get("tnf_result") or {}
+    tnf_bit = ""
+    if tnf:
+        res_cls = {"WIN": "win", "LOSS": "loss", "PUSH": "push"}.get(tnf.get("result"), "pend")
+        vid = yt_id(saturday.get("video_url") or "")
+        if saturday.get("video_url"):
+            assert_public_video(vid, f"week {week} Saturday update")
+        tnf_bit = (
+            f'<p><b>TNF {e(minus(tnf.get("thursday_pick") or ""))}</b> '
+            f'{tier_badge(tnf.get("tier") or "")} {e(tnf.get("game") or "")}: '
+            f'<span class="res res-{res_cls}">{e(tnf.get("result") or "")}</span>. '
+            f'Final {e(tnf.get("final") or "")}. Westgate {e(minus(tnf.get("westgate") or ""))}. '
+            f'Source: {e(tnf.get("source") or "")}.</p>\n'
+        )
+    changes = saturday.get("changes") or {}
+    change_items = ""
+    for ch in changes.get("tier_changes") or []:
+        change_items += (
+            f'<li>{e(ch.get("game") or "")}: {e(ch.get("from") or "")} to {e(ch.get("to") or "")}. '
+            f'{e(ch.get("reason") or "")}</li>'
+        )
+    if changes.get("note"):
+        change_items += f'<li>{e(changes["note"])}</li>'
+    bets = "".join(f"<li>{e(minus(x))}</li>" for x in saturday.get("best_bets") or [])
+    flags = saturday.get("flags") or {}
+    if isinstance(flags, dict):
+        flag_html = "".join(f"<li>{e(k)}: {e(v)}</li>" for k, v in flags.items())
+    else:
+        flag_html = "".join(f"<li>{e(x)}</li>" for x in flags)
+    injuries = "".join(f"<li>{e(x)}</li>" for x in saturday.get("key_injuries_official") or [])
+    tracker = saturday.get("season_tracker") or {}
+    wtd = saturday.get("week_to_date") or {}
+    recap = saturday.get("week9_recap") or {}
+    passes = ", ".join(recap.get("passes_ungraded") or [])
+    video = saturday.get("video_url") or ""
+    thu_video = saturday.get("thursday_video_url") or ""
+    video_html = ""
+    if video:
+        video_html += (
+            f'<p class="note">Saturday Short: <a href="{e(video)}" target="_blank" rel="noopener">'
+            f'{e(saturday.get("video_title") or video)}</a>.</p>\n'
+        )
+    if thu_video:
+        video_html += (
+            f'<p class="note">Thursday Short: <a href="{e(thu_video)}" target="_blank" rel="noopener">'
+            f'{e(thu_video)}</a>.</p>\n'
+        )
+    rec_html = ""
+    if tracker:
+        rec_html += (
+            "<p>Stated tracker, Weeks 3-10 through TNF: "
+            f'Best Bets {e(tracker.get("best_bets") or "")}. '
+            f'Leans {e(tracker.get("leans") or "")}. '
+            f'Card tier {e(tracker.get("card_tier") or "")}. '
+            f'Full card {e(tracker.get("full_card") or "")}. '
+            f'{e(tracker.get("note") or "")}</p>\n'
+        )
+    if wtd:
+        rec_html += (
+            f'<p>Week {week} to date: {e(wtd.get("graded") or "")} graded. '
+            f'Full card {e(wtd.get("full_card") or "")}. '
+            f'Leans {e(wtd.get("leans") or "")}. '
+            f'Best Bets {e(wtd.get("best_bets") or "")}.</p>\n'
+        )
+    if recap:
+        rec_html += (
+            f'<p>Week 9 recap: full card {e(recap.get("full_card") or "")}, '
+            f'Best Bets {e(recap.get("best_bets") or "")}, '
+            f'Leans {e(recap.get("leans") or "")}. '
+            f'{e(recap.get("mnf") or "")}. '
+            f'Passes left ungraded: {e(passes)}.</p>\n'
+        )
+    head = (
+        '<th scope="col">Game</th><th scope="col">Westgate</th><th scope="col">Our Spread</th>'
+        '<th scope="col">Saturday pick</th><th scope="col">Gap</th><th scope="col">Tier</th>'
+        '<th scope="col">Thursday pick</th><th scope="col">Thursday tier</th><th scope="col">Thursday gap</th>'
+    )
+    return f'''<section class="panel callout saturday-update" id="week-{week}-saturday"><h2>{e(title)}</h2>
+<p class="note">As of {e(saturday.get("as_of",""))}. Line of record: {e(saturday.get("line_of_record",""))}. {e(folded)} The Thursday card is preserved unchanged.</p>
+<p class="note">{e(saturday.get("model_note",""))}</p>
+{tnf_bit}<h3>Best Bets</h3><ul class="picks big">{bets}</ul>
+<h3>Changes from Thursday</h3><ul class="picks">{change_items}</ul>
+<h3>Saturday card</h3>
+<p class="note">Separate from the Thursday card. Thursday pick, tier, and gap stay in the last three columns.</p>
+<div class="table-wrap"><table class="card-table"><thead><tr>{head}</tr></thead><tbody>{saturday_card_rows(saturday)}</tbody></table></div>
+<h3>Flags</h3><ul class="picks">{flag_html}</ul>
+<h3>Key injuries, official</h3><ul class="picks">{injuries}</ul>
+{rec_html}{tracker_mismatch_note(rows, saturday)}{video_html}<p class="note">{e(saturday.get("disclaimer",""))}</p>
+</section>'''
 
 def leaders_text(w):
     block = (w or {}).get("westgate_leaders") or {}
@@ -543,17 +719,7 @@ def build_card(w, tidx, fname, preface=""):
             f"<b>{e(line_col)}</b> = contest line of record (graded here). <b>Market</b> = {e(w['market_source'])}. "
             f"<b>Gap</b> = points between the {e(line_col)} line and Our Spread, toward the card side. {e(w['hfa_note'])}"
         )
-    saturday = w.get("saturday_update") or {}
-    saturday_html = ""
-    if saturday:
-        items = "".join(f"<li>{e(x)}</li>" for x in saturday.get("items") or [])
-        related_items = saturday.get("related") or []
-        related = "".join(f'<p class="note">{e(x)}</p>\n' for x in related_items)
-        folded = "These notes are not folded into the graded rows." if not saturday.get("folded_into_grades") else ""
-        extra = f"\n{related}" if related_items else ""
-        saturday_html = f'''<section class="panel callout"><h2>Saturday update, separate from the original card</h2>
-<p class="note">As of {e(saturday.get("as_of",""))}. Source: {e(saturday.get("source",""))}. {e(folded)}</p>
-<ul class="picks">{items}</ul>{extra}</section>'''
+    saturday_html = saturday_section_html(w, rows=list(tidx.values()))
     powers_html = ""
     if w.get("powers"):
         powers_html = f"""<section class="panel" id="powers"><h2>{e(w.get("powers_title", "Power ratings: healthy &rarr; injury-adjusted"))}</h2>
@@ -563,7 +729,7 @@ def build_card(w, tidx, fname, preface=""):
     body = f"""
 {preface}<section class="hero hero-sm"><p class="kicker">Week {w['week']} &middot; {w['season']}</p><h1>Weekly <span class="g">Card</span></h1>
 <p class="muted">As of {e(w['as_of'])}.</p>{update}{short_html}</section>
-{tnf_html(w)}<section class="summary-grid">
+{tnf_html(w, tnf_row_for(w, tidx))}<section class="summary-grid">
 <div class="panel"><h2>{tier_badge('Best Bet')} Best Bets</h2><ul class="picks big">{li(s['best_bets'])}</ul></div>
 <div class="panel"><h2>{tier_badge('Lean')} Leans</h2><ul class="picks">{li(s['leans'])}</ul></div>
 {flags_html}{passes_html}
@@ -978,8 +1144,11 @@ def build_home(weeks, rows, tidx, eps, sh, featured, today, rankings=None):
     rest = s.get("card") or []
     rest_html = f'<p class="note">Rest of card: {e(minus(", ".join(str(x) for x in rest)))}.</p>\n' if rest else ""
     pending_html = ""
-    if wt["pending"] and wt["W"] + wt["L"] + wt["P"] == 0:
+    graded_n = wt["W"] + wt["L"] + wt["P"]
+    if wt["pending"] and graded_n == 0:
         pending_html = f'<p class="note">{wt["pending"]} games pending. Not graded.</p>\n'
+    elif wt["pending"]:
+        pending_html = f'<p class="note">{graded_n} of {graded_n + wt["pending"]} graded. {wt["pending"]} games pending.</p>\n'
     line_html = f'<p class="note">Lines: {e(w["line_source"])}</p>\n' if w.get("line_source") else ""
     short_block = home_short_section(sh, w["week"])
     rank_html = rankings_html(rankings) if rankings else ""
@@ -990,10 +1159,11 @@ def build_home(weeks, rows, tidx, eps, sh, featured, today, rankings=None):
 <p class="btn-row"><a class="btn" href="{e(youtube_subscribe())}" target="_blank" rel="noopener">Watch &amp; Subscribe on YouTube</a></p></section>
 <div class="home-grid">
 <section class="panel week-card"><div class="wc-head"><h2>Week {w['week']} &middot; {w['season']}</h2><div class="wk-rec"><small>WEEK {w['week']} RECORD</small><b>{week_record_label(wt)}</b></div></div>
-{tnf_html(w)}{pending_html}<p class="kicker">{len(s['best_bets'])} Best Bet{'' if len(s['best_bets']) == 1 else 's'}</p><ul class="picks big">{bb}</ul>{cash_html}
+{tnf_html(w, tnf_row_for(w, tidx))}{pending_html}<p class="kicker">{len(s['best_bets'])} Best Bet{'' if len(s['best_bets']) == 1 else 's'}</p><ul class="picks big">{bb}</ul>{cash_html}
 <p class="note">Leans: {e(minus(', '.join(s['leans'])))}.</p>
 {rest_html}{flags_html}{p5_html}{line_html}{f'<p class="note">{e(w["update_note"])}</p>' if w.get("update_note") else ""}
 <div class="btn-row"><a class="btn" href="card.html">Full card &rarr;</a><a class="btn ghost" href="live.html">Live Board &rarr;</a></div></section>
+{saturday_section_html(w, rows)}
 {record_box(rows)}
 {prior_recap_html(w)}
 <section class="panel"><h2>Latest episode</h2>{ep}</section>
@@ -1192,6 +1362,21 @@ def write_live_spreads(week):
         json.dump(live_spreads_payload(week), f, indent=2)
         f.write("\n")
 
+def saturday_live_note(w):
+    saturday = (w or {}).get("saturday_update") or {}
+    tnf = saturday.get("tnf_result") or {}
+    wtd = saturday.get("week_to_date") or {}
+    if not tnf or not wtd:
+        return ""
+    return (
+        f'<p class="note">Week {int(w["week"])} to date: {e(wtd.get("graded") or "")} graded. '
+        f'Full card {e(wtd.get("full_card") or "")}. Leans {e(wtd.get("leans") or "")}. '
+        f'Best Bets {e(wtd.get("best_bets") or "")}. '
+        f'TNF {e(minus(tnf.get("thursday_pick") or ""))} is a {e(tnf.get("result") or "")}, '
+        f'final {e(tnf.get("final") or "")}. '
+        f'The Saturday card is separate and is not the line of record on this board.</p>\n'
+    )
+
 def build_live(week):
     body = f"""
 <section class="hero hero-sm"><p class="kicker">Market vs Our Spread</p><h1>Live <span class="g">Board</span></h1>
@@ -1199,6 +1384,7 @@ def build_live(week):
 <section class="panel">
 <p id="live-updated" class="note" hidden></p>
 <div id="live-board" class="table-wrap" aria-live="polite"><p class="muted">Loading lines…</p></div>
+{saturday_live_note(week)}
 <p class="note">Our Spread is the Week {int(week['week'])} {int(week['season'])} card ({e(week.get('line_column') or 'posted line')}), restated on the same home-team side as the market number. <b>Gap</b> = Market &minus; Our Spread. A dash means that game has no Our Spread on the card. A pick badge is the published side on this card (Best Bet, Lean, Card, Provisional, Conditional, or Hold). Scores are requested for NFL week {int(week['week'])} of {int(week['season'])}, not whatever week a cached scoreboard happens to return.</p>
 <p class="note">Scores via ESPN; unofficial, may lag.</p>
 <div class="rg"><span class="age">21+</span> <span>Entertainment and opinion only. Not betting advice. Gambling problem? Call <a href="tel:18004262537"><b>1-800-GAMBLER</b></a>.</span></div>
@@ -2951,6 +3137,42 @@ def apply_unplayed_week(out, path, week):
         out[key] = g
     return out
 
+def apply_final_games(out, path, week):
+    """Upgrade games a later snapshot marks final. Unlisted games stay as they were."""
+    label = os.path.basename(path)
+    if not os.path.exists(path):
+        raise SystemExit(f"missing data/{label}")
+    snap = json.load(open(path))
+    games = (snap.get("weeks") or {}).get(str(int(week))) or []
+    if not games:
+        raise SystemExit(f"{label} has no week {week} games")
+    seen = set()
+    for g in games:
+        gid = g.get("game")
+        if not gid or gid in seen:
+            raise SystemExit(f"{label} lists {gid!r} twice or blank")
+        seen.add(gid)
+        key = (int(week), gid)
+        if key not in out:
+            raise SystemExit(f"{label} {gid} is not on the verified board")
+        state = g.get("state")
+        if state == "pre":
+            continue
+        if state != "post":
+            raise SystemExit(f"{label} {gid} state {state!r} is not post or pre")
+        try:
+            away_score = int(g["away_score"])
+            home_score = int(g["home_score"])
+        except (KeyError, TypeError, ValueError):
+            raise SystemExit(f"{label} {gid} final is missing a score")
+        row = dict(out[key])
+        row["state"] = "post"
+        row["away_score"] = away_score
+        row["home_score"] = home_score
+        row["detail"] = g.get("detail") or "Final"
+        out[key] = row
+    return out
+
 def load_finals_index():
     path = os.path.join(DATA, "verified-finals-2026-11-07.json")
     if not os.path.exists(path):
@@ -2963,9 +3185,16 @@ def load_finals_index():
     apply_week9_snapshot(out, os.path.join(DATA, "verified-finals-2026-11-09.json"))
     apply_week9_snapshot(out, os.path.join(DATA, "verified-finals-2026-11-10.json"))
     apply_unplayed_week(out, os.path.join(DATA, "verified-finals-2026-11-11.json"), 10)
+    apply_final_games(out, os.path.join(DATA, "verified-finals-2026-11-14.json"), 10)
     buf = out.get((9, "BUF@MIN")) or {}
     if buf.get("state") != "post" or buf.get("away_score") != 23 or buf.get("home_score") != 6:
         raise SystemExit("BUF@MIN verified final is not BUF 23, MIN 6")
+    was = out.get((10, "WAS@NYG")) or {}
+    if was.get("state") != "post" or was.get("away_score") != 24 or was.get("home_score") != 21:
+        raise SystemExit("WAS@NYG verified final is not WAS 24, NYG 21")
+    for key, row in out.items():
+        if key[0] == 10 and key[1] != "WAS@NYG" and row.get("state") != "pre":
+            raise SystemExit(f"week 10 {key[1]} was marked final without a Saturday snapshot")
     return out
 
 def validate_sources(weeks, rows, shorts):
@@ -3043,6 +3272,18 @@ def validate_sources(weeks, rows, shorts):
         raise SystemExit("tracker BUF@MIN is not the Tuesday final, BUF 23, MIN 6, loss")
     if buf["Pick"] != "MIN" or str(buf["Line"]) != "+3.5" or buf["Tier"] != "Lean" or buf.get("Our Spread") != "MIN +0.9":
         raise SystemExit("tracker BUF@MIN line, tier, or Our Spread changed")
+    week10_rows = [r for r in rows if int(r["Week"]) == 10]
+    if week10_rows:
+        was_row = next((r for r in week10_rows if norm_gid(r["Game"]) == "WAS@NYG"), None)
+        if not was_row or was_row["_res"] != "W" or (was_row.get("Final Score") or "") != "WAS 24, NYG 21":
+            raise SystemExit("tracker WAS@NYG is not WAS 24, NYG 21, win")
+        if was_row["Pick"] != "WAS" or str(was_row["Line"]) != "+2.5" or was_row["Tier"] != "Lean" or was_row.get("Our Spread") != "WAS +0.3":
+            raise SystemExit("tracker WAS@NYG Thursday line changed")
+        if str(was_row.get("Units") or "") not in ("1", "+1"):
+            raise SystemExit("tracker WAS@NYG units are not +1")
+        for r in week10_rows:
+            if norm_gid(r["Game"]) != "WAS@NYG" and r["_res"] != "pending":
+                raise SystemExit(f"week 10 {r['Game']} was graded before it was final")
     for game in ("NYJ@KC", "LV@SF"):
         passed = next(r for r in rows if int(r["Week"]) == 9 and norm_gid(r["Game"]) == game)
         if not str(passed["Pick"]).startswith("No side") or passed["_res"] != "n/a":
@@ -3306,7 +3547,18 @@ def validate_week10():
         "LAC +4.5 at BAL",
         "Lines: Westgate SuperContest Week 10",
         "injury layer is still being reconciled",
-        "14 games pending",
+        "1 of 14 graded",
+        "13 games pending",
+        'id="week-10-saturday"',
+        "Week 10 Saturday update (Nov 14, 2026)",
+        "WAS 24, NYG 21",
+        "Kirk Cousins confirmed",
+        "fvn8h67Mze0",
+        'data-yt="fvn8h67Mze0"',
+        "19-23",
+        "39-39-1",
+        "9-7-1",
+        "Entertainment only. Not betting advice. AI-generated voice and opinions.",
         'id="rankings"',
         'id="week-9-recap"',
         'id="westgate-leaders"',
@@ -3314,16 +3566,16 @@ def validate_week10():
         "LAMBDA LAMBDA LAMBDA-1 32-12-1",
         "THREAD CLOD FOOL-1 30-15-0",
         "1cY3MSjjkzE",
-        'data-yt="1cY3MSjjkzE"',
         "Vector power rankings entering Week 10",
         "Injury adjustments are provisional this week",
         "Byes: CHI, DEN, PHI, TB",
         "11-9-0",
-        "13-20-0",
-        "29-35-1",
+        "14-20-0",
+        "30-35-1",
         "2 pending",
-        "7 pending",
-        "14 pending",
+        "6 pending",
+        "13 pending",
+        "<b>1-0</b>",
         "about 2 points of home field",
         "Tracked weeks",
         "Weeks 1 and 2 are not in this tracker",
@@ -3361,9 +3613,11 @@ def validate_week10():
         raise SystemExit("ai still says upcoming")
     for needle in (
         "WAS +2.5", "DAL +4.5", "LAC +4.5", "Lines: Westgate SuperContest Week 10",
-        "injury layer is still being reconciled", "1cY3MSjjkzE", "PENDING",
+        "injury layer is still being reconciled", "1cY3MSjjkzE", "fvn8h67Mze0", "PENDING",
+        "Week 10 Saturday update (Nov 14, 2026)", "WAS 24, NYG 21",
         "Week 9 final 3-10", "Official Westgate standings after Week 9",
         "Kickoff Thu Nov 12, 5:15 PM PT", "NYG \u22122.5",
+        "MIN +0.4", "Kirk Cousins confirmed", "19-23", "39-39-1",
     ):
         if needle not in card:
             raise SystemExit(f"weekly card is missing {needle}")
@@ -3372,30 +3626,39 @@ def validate_week10():
     ):
         if needle not in archive_card:
             raise SystemExit(f"Week 9 archive card is missing {needle}")
-    if "1cY3MSjjkzE" in archive_card or "Westgate SuperContest Week 10" in archive_card or "WAS +2.5" in archive_card:
+    if "1cY3MSjjkzE" in archive_card or "fvn8h67Mze0" in archive_card or "Westgate SuperContest Week 10" in archive_card or "WAS +2.5" in archive_card:
         raise SystemExit("Week 9 archive card picked up the Week 10 card")
     if "Week 9 final 3-10" not in card or "BUF 23, MIN 6" not in archive_card:
         raise SystemExit("Week 9 card is missing the Monday night grade")
     was = re.search(r'<td class="game"><b>WAS @ NYG</b>.*?</tr>', card, re.S)
     dal = re.search(r'<td class="game"><b>SF @ DAL</b>.*?</tr>', card, re.S)
     lac = re.search(r'<td class="game"><b>LAC @ BAL</b>.*?</tr>', card, re.S)
-    if not was or "WAS +2.5" not in was.group(0) or "PENDING" not in was.group(0) or "WIN" in was.group(0) or "LOSS" in was.group(0):
-        raise SystemExit("TNF WAS +2.5 is not pending on the Week 10 card")
+    if not was or "WAS +2.5" not in was.group(0) or "WIN" not in was.group(0) or "WAS 24, NYG 21" not in was.group(0) or "PENDING" in was.group(0):
+        raise SystemExit("TNF WAS +2.5 is not a win on the Week 10 card")
+    if "WAS +0.3" not in was.group(0):
+        raise SystemExit("Thursday Our Spread WAS +0.3 was rewritten")
     if not dal or "DAL +4.5" not in dal.group(0) or "Best Bet" not in dal.group(0) or "PENDING" not in dal.group(0):
         raise SystemExit("DAL +4.5 is not a pending Best Bet")
     if not lac or "LAC +4.5" not in lac.group(0) or "Best Bet" not in lac.group(0) or "PENDING" not in lac.group(0):
         raise SystemExit("LAC +4.5 is not a pending Best Bet")
-    if card.count("PENDING") < 14:
-        raise SystemExit("Week 10 card does not leave every game pending")
+    if card.count("PENDING") != 13:
+        raise SystemExit(f"Week 10 card PENDING count is {card.count('PENDING')}, expected 13")
+    thu_table = card.split("Full card: Market vs Our Spread", 1)[-1]
+    sat = card.split('id="week-10-saturday"', 1)[-1].split("Full card: Market vs Our Spread", 1)[0]
+    if "MIN \u22120.5" not in thu_table or "HOU \u22126.6" not in thu_table:
+        raise SystemExit("Thursday MIN or HOU number was rewritten")
+    if "MIN +0.4" not in sat or "HOU \u22124.9" not in sat or "Best Bet" not in sat:
+        raise SystemExit("Saturday card is missing the MIN or HOU update")
     for needle in (
         "Week 9 final 3-10", "MIN +3.5 is a loss, BUF 23, MIN 6", "Tracked weeks",
-        "11-9-0", "13-20-0", "29-35-1", "Gaps, not a complete season",
+        "11-9-0", "14-20-0", "30-35-1", "Gaps, not a complete season",
         "not a full-season total", "Official Westgate standings after Week 9",
-        "WAS +2.5", "PENDING",
+        "WAS +2.5", "WAS 24, NYG 21", "PENDING", "19-23", "39-39-1",
     ):
         if needle not in record:
             raise SystemExit(f"record is missing {needle}")
-    for needle in ("Live Board", "assets/live.js", "Week 10", "Scores via ESPN; unofficial, may lag."):
+    for needle in ("Live Board", "assets/live.js", "Week 10", "Scores via ESPN; unofficial, may lag.",
+                   "1 of 14", "WAS 24, NYG 21", "WAS +2.5"):
         if needle not in live:
             raise SystemExit(f"live page is missing {needle}")
     spreads = json.load(open(os.path.join(OUT, "live-spreads.json")))
@@ -3476,9 +3739,12 @@ def validate_week10():
             raise SystemExit(f"{label} grid has a score column")
         game_rows = re.findall(r'<tr><td class="game">.*?</tr>', grid.group(0), re.S)
         if len(game_rows) != 14:
-            raise SystemExit(f"{label} has {len(game_rows)} games, expected 14 pending")
+            raise SystemExit(f"{label} has {len(game_rows)} games, expected 14")
         for row in game_rows:
-            if "Final:" in row:
+            if "WAS @ NYG" in row:
+                if "Final: WAS 24, NYG 21" not in row or row.count('res-loss">LOSS') != 4 or 'res-win">WIN' not in row:
+                    raise SystemExit(f"{label} did not grade WAS @ NYG at the DraftKings line")
+            elif "Final:" in row or "res-win" in row or "res-loss" in row:
                 raise SystemExit(f"{label} graded a Week 10 game that is not final")
             cell = re.search(r'<td data-l="Vector"[^>]*>(.*?)</td>', row, re.S)
             if not cell or "&mdash;" in cell.group(1) or "<b>" not in cell.group(1):
@@ -3490,28 +3756,44 @@ def validate_week10():
             raise SystemExit(f"{label} names a source that stays off the site: {hit}")
     for needle in (
         'id="week-9-results"', "11-11 with 3 pending", "BUF@MIN (Monday night) is Pending",
-        "4-NrBHuRlUE", "q2OazIWZ5vE", "1cY3MSjjkzE",
+        "4-NrBHuRlUE", "q2OazIWZ5vE", "1cY3MSjjkzE", "fvn8h67Mze0",
+        "Week 10 Saturday Update: WAS Covered TNF, MIN Moves Up | Vector Picks",
         "Official Westgate standings after Week 9",
         "Sunday Nov 8, 2026 unofficial snapshot",
         "LAMBDA LAMBDA LAMBDA-1 32-12-1",
     ):
         if needle not in shorts:
             raise SystemExit(f"shorts page is missing {needle}")
-    if shorts.find("1cY3MSjjkzE") > shorts.find("4-NrBHuRlUE") or shorts.find("4-NrBHuRlUE") > shorts.find("q2OazIWZ5vE"):
-        raise SystemExit("Week 10 Short is not ahead of the Week 9 Shorts")
+    if shorts.find("fvn8h67Mze0") > shorts.find("1cY3MSjjkzE") or shorts.find("1cY3MSjjkzE") > shorts.find("4-NrBHuRlUE") or shorts.find("4-NrBHuRlUE") > shorts.find("q2OazIWZ5vE"):
+        raise SystemExit("Week 10 Saturday Short is not ahead of the Thursday and Week 9 Shorts")
     week = json.load(open(os.path.join(DATA, "weeks", "2026-w10.json")))
-    listed = next(s for s in json.load(open(os.path.join(DATA, "shorts.json")))["shorts"] if s.get("week") == 10)
-    if week["short"]["youtube_url"] != listed["youtube_url"] or "1cY3MSjjkzE" not in listed["youtube_url"]:
+    short_rows = json.load(open(os.path.join(DATA, "shorts.json")))["shorts"]
+    listed = next(s for s in short_rows if s.get("youtube_url") == week["short"]["youtube_url"])
+    if "1cY3MSjjkzE" not in listed["youtube_url"]:
         raise SystemExit("Week 10 card Short does not match shorts.json")
     if listed["title"] != week["short"]["title"]:
         raise SystemExit("Week 10 Short title does not match the card")
+    saturday_short = next(s for s in short_rows if "fvn8h67Mze0" in (s.get("youtube_url") or ""))
+    if saturday_short.get("title") != "Week 10 Saturday Update: WAS Covered TNF, MIN Moves Up | Vector Picks":
+        raise SystemExit("Week 10 Saturday Short title does not match")
+    if saturday_short.get("date") < listed.get("date"):
+        raise SystemExit("Week 10 Saturday Short is not dated after the Thursday Short")
+    thu_game = next(g for g in week["games"] if g["game"] == "WAS@NYG")
+    if thu_game["pick"] != "WAS +2.5" or thu_game["our"] != "WAS +0.3" or thu_game["tier"] != "Lean" or thu_game["gap"] != 2.2:
+        raise SystemExit("Thursday WAS row was rewritten")
+    thu_min = next(g for g in week["games"] if g["game"] == "MIN@GB")
+    thu_hou = next(g for g in week["games"] if g["game"] == "HOU@CLE")
+    if thu_min["tier"] != "Lean" or thu_min["our"] != "MIN -0.5" or thu_min["pick"] != "MIN +3.5":
+        raise SystemExit("Thursday MIN row was rewritten")
+    if thu_hou["tier"] != "Lean" or thu_hou["our"] != "HOU -6.6" or thu_hou["pick"] != "HOU -4.5":
+        raise SystemExit("Thursday HOU row was rewritten")
     blob = home + card + ai + record + live + shorts + archive
     if "cXnzFQPN7mE" in blob:
         raise SystemExit("private video id was published")
     method = open(os.path.join(OUT, "methodology.html"), encoding="utf-8").read()
     if "about 2 points" not in method or "0.35" not in method:
         raise SystemExit("methodology dropped the public v3 note")
-    print("OK week 10: Westgate card, TNF WAS +2.5, Best Bets DAL +4.5 and LAC +4.5, DraftKings AI board unchanged")
+    print("OK week 10: Saturday update separate, TNF WAS +2.5 win, Thursday card unchanged, DraftKings lines unchanged")
 
 def main():
     global WEEKS, AI_WEEKS

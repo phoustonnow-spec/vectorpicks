@@ -51,7 +51,15 @@ Keep the week's source files in the repo. A copy in Google Drive is a backup, no
 
 ## What failed this week
 
-Report it in the pull request. For Nov 12, 2026 the Thursday card is the Westgate SuperContest Week 10 sheet. All 14 games have a side and are pending. Best Bets are DAL +4.5 and LAC +4.5. The TNF lean is WAS +2.5 at NYG, kickoff Thu Nov 12, 5:15 PM PT. The public Short is https://www.youtube.com/shorts/1cY3MSjjkzE. Open gaps:
+Report it in the pull request. For Nov 14, 2026 the Saturday update is separate from the Thursday Westgate card. TNF WAS +2.5 is a win, final WAS 24, NYG 21 (ESPN). No side changed. MIN +3.5 moved from Lean to Best Bet. HOU -4.5 moved from Lean to Card. Saturday Best Bets are DAL +4.5, MIN +3.5, and LAC +4.5. The public Saturday Short is https://www.youtube.com/shorts/fvn8h67Mze0. The Thursday Short https://www.youtube.com/shorts/1cY3MSjjkzE stays listed. Open gaps:
+
+- Vector's Week 10 numbers are still provisional: Tuesday model build plus manual injury adjustments through Saturday morning. Not a fresh full rerun.
+- The Saturday card is not folded into the graded rows. TNF is graded at the Thursday line.
+- The Saturday statement's Weeks 3-10 through TNF tracker is Best Bets 11-9, Leans 19-23, Card tier 9-7-1, full card 39-39-1. This page's Tracked weeks box, after the TNF win, is Best Bets 11-9-0, Leans 14-20-0, Card tier 4-5-1, full card 30-35-1. The box was not rewritten. Best Bets 11-9 match. Leans, the Card tier, and the full card do not.
+- The Shorts contest-leader block is still the Sunday Nov 8 snapshot. Those rows are not Vector picks.
+- The Wednesday AI board stays the DraftKings card. TNF is graded there at the DraftKings line, which is the same NYG -2.5. Sides were not changed.
+
+For Nov 12, 2026 the Thursday card is the Westgate SuperContest Week 10 sheet. All 14 games have a side and are pending. Best Bets are DAL +4.5 and LAC +4.5. The TNF lean is WAS +2.5 at NYG, kickoff Thu Nov 12, 5:15 PM PT. The public Short is https://www.youtube.com/shorts/1cY3MSjjkzE. Open gaps:
 
 - Vector's Week 10 numbers are provisional. The injury layer is still being reconciled. This is not a fresh full rerun.
 - The record box is the audited tracker since Week 3. It is not a full-season total. Week 10 rows are pending and do not change the W-L. Best Bets stay 11-9. Leans and the full card stay on this page's rows only.

@@ -1,5 +1,5 @@
 {
-  "_comment": "Public YouTube Shorts only. never_embed ids are refused by the build even if a URL is added later. Weeks 3, 4, and 8 are archive. Week 9 shorts stay listed. The Week 10 Thursday Short is the latest. Dates order the home page. 2026-11-12 is that Short. leader_results is the unofficial Week 9 contest grade shown on the Shorts page. It is not a Vector record.",
+  "_comment": "Public YouTube Shorts only. never_embed ids are refused by the build even if a URL is added later. Weeks 3, 4, and 8 are archive. Week 9 shorts stay listed. The Week 10 Saturday Short is the latest. The Thursday Short stays listed. Dates order the home page. 2026-11-14 is the Saturday Short. leader_results is the unofficial Week 9 contest grade shown on the Shorts page. It is not a Vector record.",
   "never_embed": ["cXnzFQPN7mE"],
   "placeholder_slots": 0,
   "leader_results": {
@@ -151,6 +151,14 @@
     ]
   },
   "shorts": [
+    {
+      "title": "Week 10 Saturday Update: WAS Covered TNF, MIN Moves Up | Vector Picks",
+      "date": "2026-11-14",
+      "week": 10,
+      "role": "current",
+      "youtube_url": "https://www.youtube.com/shorts/fvn8h67Mze0",
+      "note": "Posted Sat Nov 14, 2026. TNF WAS +2.5 WIN, final WAS 24, NYG 21. No side changed. MIN +3.5 moved from Lean to Best Bet. HOU -4.5 moved from Lean to Card. Best Bets: DAL +4.5, MIN +3.5, LAC +4.5. Vector numbers are provisional. Entertainment only. Not betting advice. AI-generated voice and opinions."
+    },
     {
       "title": "Week 10 NFL AI Picks: WAS +2.5 TNF, DAL & LAC Best Bets | Week 9 Recap",
       "date": "2026-11-12",

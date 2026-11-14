@@ -14,18 +14,34 @@ HOME_URL = "https://www.vectorpicks.com/"
 SHORTS_URL = "https://www.vectorpicks.com/shorts.html"
 CARD_URL = "https://www.vectorpicks.com/card.html"
 RECORD_URL = "https://www.vectorpicks.com/record.html"
+LIVE_URL = "https://www.vectorpicks.com/live.html"
 AI_URL = "https://www.vectorpicks.com/ai-picks.html"
 W9_CARD_URL = "https://www.vectorpicks.com/card-2026-w09.html"
+LIVE_MARKERS = (
+    "Live Board",
+    "Week 10",
+    "Scores via ESPN; unofficial, may lag.",
+    "1 of 14",
+    "WAS +2.5",
+    "WAS 24, NYG 21",
+    "Entertainment and opinion only",
+)
 HOME_MARKERS = (
     "Week 10",
-    "Thursday, Nov 12, 2026 PT",
+    "Saturday, Nov 14, 2026 PT",
     "WAS +2.5",
     "Kickoff Thu Nov 12, 5:15 PM PT",
     "DAL +4.5 vs SF",
     "LAC +4.5 at BAL",
     "Lines: Westgate SuperContest Week 10",
     "injury layer is still being reconciled",
-    "14 games pending",
+    "1 of 14 graded",
+    "13 games pending",
+    "Week 10 Saturday update (Nov 14, 2026)",
+    "WAS 24, NYG 21",
+    "Kirk Cousins confirmed",
+    "fvn8h67Mze0",
+    'data-yt="fvn8h67Mze0"',
     "Week 9 final 3-10",
     "Best Bets 0-2",
     "Leans 3-8",
@@ -34,17 +50,21 @@ HOME_MARKERS = (
     "LAMBDA LAMBDA LAMBDA-1 32-12-1",
     "THREAD CLOD FOOL-1 30-15-0",
     "1cY3MSjjkzE",
-    'data-yt="1cY3MSjjkzE"',
     'id="tnf"',
+    'id="week-10-saturday"',
     'id="rankings"',
     "Vector power rankings entering Week 10",
     "Injury adjustments are provisional this week",
     "11-9-0",
-    "13-20-0",
-    "29-35-1",
+    "14-20-0",
+    "30-35-1",
+    "19-23",
+    "39-39-1",
     "Byes: CHI, DEN, PHI, TB",
 )
 SHORTS_MARKERS = (
+    "fvn8h67Mze0",
+    "Week 10 Saturday Update: WAS Covered TNF, MIN Moves Up | Vector Picks",
     "1cY3MSjjkzE",
     "Week 10 NFL AI Picks: WAS +2.5 TNF, DAL",
     "4-NrBHuRlUE",
@@ -81,6 +101,9 @@ CARD_MARKERS = (
     "Kickoff Thu Nov 12, 5:15 PM PT",
     "injury layer is still being reconciled",
     "1cY3MSjjkzE",
+    "fvn8h67Mze0",
+    "Week 10 Saturday update (Nov 14, 2026)",
+    "WAS 24, NYG 21",
     "Week 10 NFL AI Picks",
     "PENDING",
     "Week 9 final 3-10",
@@ -97,10 +120,13 @@ RECORD_MARKERS = (
     "Tracked weeks",
     "not a full-season total",
     "11-9-0",
-    "13-20-0",
-    "29-35-1",
-    "14 pending",
+    "14-20-0",
+    "30-35-1",
+    "13 pending",
+    "19-23",
+    "39-39-1",
     "WAS +2.5",
+    "WAS 24, NYG 21",
     "PENDING",
     "Official Westgate standings after Week 9",
     "Gaps, not a complete season",
@@ -181,7 +207,7 @@ STALE = (
 
 
 def fetch(url):
-    bust = url + ("&" if "?" in url else "?") + "cb=20261112w10thursday"
+    bust = url + ("&" if "?" in url else "?") + "cb=20261114w10saturday"
     request = urllib.request.Request(bust, headers={
         "Cache-Control": "no-cache",
         "Pragma": "no-cache",
@@ -199,7 +225,7 @@ def fetch(url):
 def check(name, status, body, markers):
     missing = [m for m in markers if m not in body]
     present = [m for m in FORBIDDEN if m.lower() in body.lower()]
-    if name in ("homepage", "card", "record"):
+    if name in ("homepage", "card", "record", "live"):
         for edge in STALE + ("NYJ +8.5", "Week 10 early look"):
             if edge in body:
                 present.append(edge)
@@ -208,7 +234,9 @@ def check(name, status, body, markers):
     if name == "week9-card" and ("WAS +2.5" in body or "1cY3MSjjkzE" in body or "Westgate SuperContest Week 10" in body):
         present.append("week 10 card leaked into the week 9 archive")
     order_bad = name == "shorts" and (
-        body.find("1cY3MSjjkzE") > body.find("4-NrBHuRlUE") or body.find("4-NrBHuRlUE") > body.find("q2OazIWZ5vE")
+        body.find("fvn8h67Mze0") > body.find("1cY3MSjjkzE")
+        or body.find("1cY3MSjjkzE") > body.find("4-NrBHuRlUE")
+        or body.find("4-NrBHuRlUE") > body.find("q2OazIWZ5vE")
     )
     if status != 200 or missing or present or order_bad:
         print(f"Live {name} does not match this build.")
@@ -219,7 +247,7 @@ def check(name, status, body, markers):
         if present:
             print("forbidden: " + ", ".join(present))
         if order_bad:
-            print("Week 10 Short is not before the Week 9 Shorts")
+            print("Week 10 Saturday Short is not before the Thursday and Week 9 Shorts")
         return False
     print(f"Live {name} contains the expected markers.")
     return True
@@ -230,6 +258,7 @@ def main():
     for name, url, markers in (
         ("homepage", HOME_URL, HOME_MARKERS),
         ("shorts", SHORTS_URL, SHORTS_MARKERS),
+        ("live", LIVE_URL, LIVE_MARKERS),
         ("card", CARD_URL, CARD_MARKERS),
         ("record", RECORD_URL, RECORD_MARKERS),
         ("ai-picks", AI_URL, AI_MARKERS),
