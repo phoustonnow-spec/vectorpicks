@@ -193,6 +193,27 @@
         "Shorts contest-leader block stays the Sunday Nov 8 unofficial snapshot",
         "Wednesday AI board stays DraftKings. TNF is graded there at that line. Sides were not changed."
       ]
+    },
+    {
+      "week": 10,
+      "season": 2026,
+      "published_at_pt": "2026-11-14",
+      "dedup_key": "2026-w10-record-audit",
+      "source": "Regrade of every published Westgate card pick, Weeks 3-10 through TNF, against the verified finals. Pushes stay pushes. No pick, Thursday row, or Saturday side was changed.",
+      "included": [
+        "Tracked weeks box shows Best Bets, Leans, Card tier, and the full card",
+        "Saturday stated tracker set to the audited record: Best Bets 11-9, Leans 14-20, Card tier 4-5-1, full card 30-35-1",
+        "Per-week audit table in docs/record-audit-w03-w10.md"
+      ],
+      "public_video_ids": [],
+      "never_embed": [
+        "cXnzFQPN7mE"
+      ],
+      "gaps": [
+        "The 39-39-1 tally counted 13 Week 4 model sides the published card called passes. Those 13 grade 9-4 and stay off this record.",
+        "Week 8 Saturday tier changes stay off the graded rows. Week 10 Saturday tier changes are not folded into pending rows.",
+        "Injury layer is still not a fresh rerun"
+      ]
     }
   ]
 }
