@@ -586,6 +586,17 @@ def saturday_section_html(w, rows=None):
             f'<p class="note">Thursday Short: <a href="{e(thu_video)}" target="_blank" rel="noopener">'
             f'{e(thu_video)}</a>.</p>\n'
         )
+    leaders_video = saturday.get("leaders_video_url") or ""
+    if leaders_video:
+        leaders_vid = yt_id(leaders_video)
+        if leaders_vid:
+            assert_public_video(leaders_vid, f"week {week} leaders short")
+        video_html += (
+            f'<p class="note">SuperContest Leaders Short: <a href="{e(leaders_video)}" target="_blank" rel="noopener">'
+            f'{e(saturday.get("leaders_video_title") or leaders_video)}</a>.</p>\n'
+        )
+    if saturday.get("leaders_video_note"):
+        video_html += f'<p class="note">{e(saturday["leaders_video_note"])}</p>\n'
     rec_html = ""
     if tracker:
         rec_html += (
@@ -3554,7 +3565,12 @@ def validate_week10():
         "WAS 24, NYG 21",
         "Kirk Cousins confirmed",
         "fvn8h67Mze0",
-        'data-yt="fvn8h67Mze0"',
+        "8cZ7qpdWyvU",
+        'data-yt="8cZ7qpdWyvU"',
+        "Week 10 Westgate SuperContest Top 5 Leaders",
+        "NEOPOLITAN-1 30-14-1",
+        "Leaders agree (2+ of 5)",
+        "Entertainment only, not betting advice",
         "Entertainment only. Not betting advice. AI-generated voice and opinions.",
         'id="rankings"',
         'id="week-9-recap"',
@@ -3618,7 +3634,9 @@ def validate_week10():
         raise SystemExit("ai still says upcoming")
     for needle in (
         "WAS +2.5", "DAL +4.5", "LAC +4.5", "Lines: Westgate SuperContest Week 10",
-        "injury layer is still being reconciled", "1cY3MSjjkzE", "fvn8h67Mze0", "PENDING",
+        "injury layer is still being reconciled", "1cY3MSjjkzE", "fvn8h67Mze0", "8cZ7qpdWyvU", "PENDING",
+        "Week 10 Westgate SuperContest Top 5 Leaders", "NEOPOLITAN-1 30-14-1",
+        "Leaders agree (2+ of 5)", "Entertainment only, not betting advice",
         "Week 10 Saturday update (Nov 14, 2026)", "WAS 24, NYG 21",
         "Week 9 final 3-10", "Official Westgate standings after Week 9",
         "Kickoff Thu Nov 12, 5:15 PM PT", "NYG \u22122.5",
@@ -3634,7 +3652,7 @@ def validate_week10():
     ):
         if needle not in archive_card:
             raise SystemExit(f"Week 9 archive card is missing {needle}")
-    if "1cY3MSjjkzE" in archive_card or "fvn8h67Mze0" in archive_card or "Westgate SuperContest Week 10" in archive_card or "WAS +2.5" in archive_card:
+    if "1cY3MSjjkzE" in archive_card or "fvn8h67Mze0" in archive_card or "8cZ7qpdWyvU" in archive_card or "Westgate SuperContest Week 10" in archive_card or "WAS +2.5" in archive_card:
         raise SystemExit("Week 9 archive card picked up the Week 10 card")
     if "Week 9 final 3-10" not in card or "BUF 23, MIN 6" not in archive_card:
         raise SystemExit("Week 9 card is missing the Monday night grade")
@@ -3765,7 +3783,11 @@ def validate_week10():
             raise SystemExit(f"{label} names a source that stays off the site: {hit}")
     for needle in (
         'id="week-9-results"', "11-11 with 3 pending", "BUF@MIN (Monday night) is Pending",
-        "4-NrBHuRlUE", "q2OazIWZ5vE", "1cY3MSjjkzE", "fvn8h67Mze0",
+        "4-NrBHuRlUE", "q2OazIWZ5vE", "1cY3MSjjkzE", "fvn8h67Mze0", "8cZ7qpdWyvU",
+        "Week 10 Westgate SuperContest Top 5 Leaders",
+        "NEOPOLITAN-1 30-14-1",
+        "Leaders agree (2+ of 5)",
+        "Entertainment only, not betting advice",
         "Week 10 Saturday Update: WAS Covered TNF, MIN Moves Up | Vector Picks",
         "Official Westgate standings after Week 9",
         "Sunday Nov 8, 2026 unofficial snapshot",
@@ -3773,8 +3795,13 @@ def validate_week10():
     ):
         if needle not in shorts:
             raise SystemExit(f"shorts page is missing {needle}")
-    if shorts.find("fvn8h67Mze0") > shorts.find("1cY3MSjjkzE") or shorts.find("1cY3MSjjkzE") > shorts.find("4-NrBHuRlUE") or shorts.find("4-NrBHuRlUE") > shorts.find("q2OazIWZ5vE"):
-        raise SystemExit("Week 10 Saturday Short is not ahead of the Thursday and Week 9 Shorts")
+    if (
+        shorts.find("8cZ7qpdWyvU") > shorts.find("fvn8h67Mze0")
+        or shorts.find("fvn8h67Mze0") > shorts.find("1cY3MSjjkzE")
+        or shorts.find("1cY3MSjjkzE") > shorts.find("4-NrBHuRlUE")
+        or shorts.find("4-NrBHuRlUE") > shorts.find("q2OazIWZ5vE")
+    ):
+        raise SystemExit("Week 10 leaders Short is not ahead of the Saturday, Thursday, and Week 9 Shorts")
     week = json.load(open(os.path.join(DATA, "weeks", "2026-w10.json")))
     short_rows = json.load(open(os.path.join(DATA, "shorts.json")))["shorts"]
     listed = next(s for s in short_rows if s.get("youtube_url") == week["short"]["youtube_url"])
@@ -3787,6 +3814,17 @@ def validate_week10():
         raise SystemExit("Week 10 Saturday Short title does not match")
     if saturday_short.get("date") < listed.get("date"):
         raise SystemExit("Week 10 Saturday Short is not dated after the Thursday Short")
+    leaders_short = next(s for s in short_rows if "8cZ7qpdWyvU" in (s.get("youtube_url") or ""))
+    if leaders_short.get("title") != "Week 10 Westgate SuperContest Top 5 Leaders | Panthers & Steelers 3 of 5":
+        raise SystemExit("Week 10 leaders Short title does not match")
+    if leaders_short.get("date") < saturday_short.get("date"):
+        raise SystemExit("Week 10 leaders Short is not dated after the Saturday Short")
+    if week["saturday_update"].get("leaders_video_url") != leaders_short.get("youtube_url"):
+        raise SystemExit("Week 10 card is missing the leaders Short link")
+    if "NEOPOLITAN-1 30-14-1" not in (leaders_short.get("note") or ""):
+        raise SystemExit("Week 10 leaders Short note is missing the supplied records")
+    if "Entertainment only, not betting advice" not in (leaders_short.get("note") or ""):
+        raise SystemExit("Week 10 leaders Short note is missing the entertainment line")
     thu_game = next(g for g in week["games"] if g["game"] == "WAS@NYG")
     if thu_game["pick"] != "WAS +2.5" or thu_game["our"] != "WAS +0.3" or thu_game["tier"] != "Lean" or thu_game["gap"] != 2.2:
         raise SystemExit("Thursday WAS row was rewritten")
