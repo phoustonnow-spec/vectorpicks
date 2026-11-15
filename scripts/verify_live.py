@@ -28,7 +28,7 @@ LIVE_MARKERS = (
 )
 HOME_MARKERS = (
     "Week 10",
-    "Saturday, Nov 14, 2026 PT",
+    "Sunday, Nov 15, 2026 PT",
     "WAS +2.5",
     "Kickoff Thu Nov 12, 5:15 PM PT",
     "DAL +4.5 vs SF",
@@ -41,7 +41,12 @@ HOME_MARKERS = (
     "WAS 24, NYG 21",
     "Kirk Cousins confirmed",
     "fvn8h67Mze0",
-    'data-yt="fvn8h67Mze0"',
+    "8cZ7qpdWyvU",
+    'data-yt="8cZ7qpdWyvU"',
+    "Week 10 Westgate SuperContest Top 5 Leaders",
+    "NEOPOLITAN-1 30-14-1",
+    "Leaders agree (2+ of 5)",
+    "Entertainment only, not betting advice",
     "Week 9 final 3-10",
     "Best Bets 0-2",
     "Leans 3-8",
@@ -66,6 +71,11 @@ HOME_MARKERS = (
     "Byes: CHI, DEN, PHI, TB",
 )
 SHORTS_MARKERS = (
+    "8cZ7qpdWyvU",
+    "Week 10 Westgate SuperContest Top 5 Leaders",
+    "NEOPOLITAN-1 30-14-1",
+    "Leaders agree (2+ of 5)",
+    "Entertainment only, not betting advice",
     "fvn8h67Mze0",
     "Week 10 Saturday Update: WAS Covered TNF, MIN Moves Up | Vector Picks",
     "1cY3MSjjkzE",
@@ -105,6 +115,10 @@ CARD_MARKERS = (
     "injury layer is still being reconciled",
     "1cY3MSjjkzE",
     "fvn8h67Mze0",
+    "8cZ7qpdWyvU",
+    "Week 10 Westgate SuperContest Top 5 Leaders",
+    "NEOPOLITAN-1 30-14-1",
+    "Entertainment only, not betting advice",
     "Week 10 Saturday update (Nov 14, 2026)",
     "WAS 24, NYG 21",
     "Week 10 NFL AI Picks",
@@ -215,7 +229,7 @@ STALE = (
 
 
 def fetch(url):
-    bust = url + ("&" if "?" in url else "?") + "cb=20261114w10saturday"
+    bust = url + ("&" if "?" in url else "?") + "cb=20261115w10leaders"
     request = urllib.request.Request(bust, headers={
         "Cache-Control": "no-cache",
         "Pragma": "no-cache",
@@ -243,10 +257,11 @@ def check(name, status, body, markers):
                 present.append(edge)
     if name == "ai-picks" and "Week 10 early look" in body:
         present.append("Week 10 early look")
-    if name == "week9-card" and ("WAS +2.5" in body or "1cY3MSjjkzE" in body or "Westgate SuperContest Week 10" in body):
+    if name == "week9-card" and ("WAS +2.5" in body or "1cY3MSjjkzE" in body or "fvn8h67Mze0" in body or "8cZ7qpdWyvU" in body or "Westgate SuperContest Week 10" in body):
         present.append("week 10 card leaked into the week 9 archive")
     order_bad = name == "shorts" and (
-        body.find("fvn8h67Mze0") > body.find("1cY3MSjjkzE")
+        body.find("8cZ7qpdWyvU") > body.find("fvn8h67Mze0")
+        or body.find("fvn8h67Mze0") > body.find("1cY3MSjjkzE")
         or body.find("1cY3MSjjkzE") > body.find("4-NrBHuRlUE")
         or body.find("4-NrBHuRlUE") > body.find("q2OazIWZ5vE")
     )
@@ -259,7 +274,7 @@ def check(name, status, body, markers):
         if present:
             print("forbidden: " + ", ".join(present))
         if order_bad:
-            print("Week 10 Saturday Short is not before the Thursday and Week 9 Shorts")
+            print("Week 10 leaders Short is not before the Saturday, Thursday, and Week 9 Shorts")
         return False
     print(f"Live {name} contains the expected markers.")
     return True

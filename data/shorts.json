@@ -1,5 +1,5 @@
 {
-  "_comment": "Public YouTube Shorts only. never_embed ids are refused by the build even if a URL is added later. Weeks 3, 4, and 8 are archive. Week 9 shorts stay listed. The Week 10 Saturday Short is the latest. The Thursday Short stays listed. Dates order the home page. 2026-11-14 is the Saturday Short. leader_results is the unofficial Week 9 contest grade shown on the Shorts page. It is not a Vector record.",
+  "_comment": "Public YouTube Shorts only. never_embed ids are refused by the build even if a URL is added later. Weeks 3, 4, and 8 are archive. Week 9 shorts stay listed. The Week 10 Sunday leaders Short is the latest. The Saturday Short and the Thursday Short stay listed. Dates order the home page. 2026-11-15 is the leaders Short. 2026-11-14 is the Saturday Short. leader_results is the unofficial Week 9 contest grade shown on the Shorts page. It is not a Vector record.",
   "never_embed": ["cXnzFQPN7mE"],
   "placeholder_slots": 0,
   "leader_results": {
@@ -151,6 +151,14 @@
     ]
   },
   "shorts": [
+    {
+      "title": "Week 10 Westgate SuperContest Top 5 Leaders | Panthers & Steelers 3 of 5",
+      "date": "2026-11-15",
+      "week": 10,
+      "role": "current",
+      "youtube_url": "https://www.youtube.com/shorts/8cZ7qpdWyvU",
+      "note": "Posted Sun Nov 15, 2026. Top 5 SuperContest entries after Week 9 and their Week 10 picks at the Westgate fixed lines: #1 LAMBDA LAMBDA LAMBDA-1 32-12-1: CLE +4.5, CAR +2.5, LAR -9.5, SF -4.5, PIT +3.5. #2 MATTLEGEND27-1 32-13: DET -3, IND -3.5, CLE +4.5, PIT +3.5, BAL -4.5. #3 RIGGED NFL-1 31-13-1: NYJ +7.5, CAR +2.5, LV +6.5, DAL +4.5, CIN -3.5. #4 RJ551155-3 31-14: NE +3, BUF -7.5, ATL +3.5, CAR +2.5, PIT +3.5. #5 NEOPOLITAN-1 30-14-1: TEN +10.5, HOU -4.5, MIN +3.5, SEA -6.5, DAL +4.5. Leaders agree (2+ of 5): CAR +2.5 (3), PIT +3.5 (3), CLE +4.5 (2), DAL +4.5 (2). Vector Saturday card agrees on CAR +2.5 (Card), PIT +3.5 (Card), and DAL +4.5 (Best Bet), and fades CLE +4.5 (Vector has HOU -4.5). Contest-leader rows are not Vector picks. Entertainment only, not betting advice."
+    },
     {
       "title": "Week 10 Saturday Update: WAS Covered TNF, MIN Moves Up | Vector Picks",
       "date": "2026-11-14",

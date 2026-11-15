@@ -51,7 +51,15 @@ Keep the week's source files in the repo. A copy in Google Drive is a backup, no
 
 ## What failed this week
 
-Report it in the pull request. For Nov 14, 2026 the Saturday update is separate from the Thursday Westgate card. TNF WAS +2.5 is a win, final WAS 24, NYG 21 (ESPN). No side changed. MIN +3.5 moved from Lean to Best Bet. HOU -4.5 moved from Lean to Card. Saturday Best Bets are DAL +4.5, MIN +3.5, and LAC +4.5. The public Saturday Short is https://www.youtube.com/shorts/fvn8h67Mze0. The Thursday Short https://www.youtube.com/shorts/1cY3MSjjkzE stays listed. Open gaps:
+Report it in the pull request. For Nov 15, 2026 the public Short is https://www.youtube.com/shorts/8cZ7qpdWyvU (Week 10 Westgate SuperContest Top 5 Leaders | Panthers & Steelers 3 of 5). It lists the supplied top 5 Week 10 picks at the Westgate fixed lines, using standings through Week 9. It is not a line change and it is not folded into the graded rows. The Saturday Short https://www.youtube.com/shorts/fvn8h67Mze0 and the Thursday Short https://www.youtube.com/shorts/1cY3MSjjkzE stay listed. Leaders agree on CAR +2.5 (3), PIT +3.5 (3), CLE +4.5 (2), and DAL +4.5 (2). The Saturday card agrees on CAR +2.5, PIT +3.5, and DAL +4.5, and fades CLE +4.5 (Vector has HOU -4.5). Contest-leader rows are not Vector picks. Entertainment only, not betting advice. Open gaps:
+
+- No Week 10 results were graded from this Short. Sunday games had not been played.
+- The Shorts contest-leader block is still the Sunday Nov 8 snapshot. Those rows are not Vector picks.
+- The Saturday card is not folded into the graded rows. TNF stays graded at the Thursday line.
+- Vector's Week 10 numbers are still provisional. Not a fresh full rerun.
+- The Wednesday AI board stays the DraftKings card.
+
+For Nov 14, 2026 the Saturday update is separate from the Thursday Westgate card. TNF WAS +2.5 is a win, final WAS 24, NYG 21 (ESPN). No side changed. MIN +3.5 moved from Lean to Best Bet. HOU -4.5 moved from Lean to Card. Saturday Best Bets are DAL +4.5, MIN +3.5, and LAC +4.5. The public Saturday Short is https://www.youtube.com/shorts/fvn8h67Mze0. The Thursday Short https://www.youtube.com/shorts/1cY3MSjjkzE stays listed. Open gaps:
 
 - Vector's Week 10 numbers are still provisional: Tuesday model build plus manual injury adjustments through Saturday morning. Not a fresh full rerun.
 - The Saturday card is not folded into the graded rows. TNF is graded at the Thursday line.

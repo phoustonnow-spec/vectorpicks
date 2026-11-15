@@ -214,6 +214,31 @@
         "Week 8 Saturday tier changes stay off the graded rows. Week 10 Saturday tier changes are not folded into pending rows.",
         "Injury layer is still not a fresh rerun"
       ]
+    },
+    {
+      "week": 10,
+      "season": 2026,
+      "published_at_pt": "2026-11-15",
+      "dedup_key": "2026-w10-leaders-short",
+      "source": "Public YouTube Short https://www.youtube.com/shorts/8cZ7qpdWyvU on Vector Picks. Leader records and Week 10 picks are the supplied Westgate fixed-line figures through Week 9. No Week 10 results were added. The Thursday and Saturday Shorts stay listed.",
+      "included": [
+        "Week 10 Westgate SuperContest Top 5 Leaders Short",
+        "Thursday YouTube Short kept",
+        "Saturday YouTube Short kept"
+      ],
+      "public_video_ids": [
+        "8cZ7qpdWyvU"
+      ],
+      "never_embed": [
+        "cXnzFQPN7mE"
+      ],
+      "gaps": [
+        "Contest-leader rows are not Vector picks and are not on the record",
+        "No Week 10 results were graded from this Short",
+        "Shorts contest-leader block stays the Sunday Nov 8 unofficial snapshot",
+        "Saturday card is not folded into the graded rows",
+        "Injury layer is still not a fresh rerun"
+      ]
     }
   ]
 }
