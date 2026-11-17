@@ -239,6 +239,32 @@
         "Saturday card is not folded into the graded rows",
         "Injury layer is still not a fresh rerun"
       ]
+    },
+    {
+      "week": 11,
+      "season": 2026,
+      "published_at_pt": "2026-11-17",
+      "dedup_key": "2026-w11-tuesday-rankings",
+      "source": "Tuesday public package generated 2026-11-17 ~9:30 AM PT. Week 10 ESPN finals, including Monday night LAC 23, BAL 20, are in data/verified-finals-2026-11-17.json. The Westgate SuperContest Week 11 sheet was not posted as of Tue Nov 17, 2026 8:56 AM PT.",
+      "included": [
+        "Week 10 Thursday card graded 14 of 14 at the Westgate lines. Full card 7-7, Best Bets 1-1, Leans 3-4, Card 3-2",
+        "Saturday tier changes left as a note. Graded rows stay the Thursday card",
+        "Tracked weeks through Week 10: Best Bets 12-10-0, Leans 16-24-0, Card tier 7-7-1, full card 36-42-1",
+        "Week 11 power rankings, 1 through 32, with the provisional injury note",
+        "Week 11 status: card pending, no picks and no lines"
+      ],
+      "public_video_ids": [],
+      "never_embed": [
+        "cXnzFQPN7mE"
+      ],
+      "gaps": [
+        "No Week 11 Westgate card, so no Week 11 picks, edges, or line comparisons were added",
+        "Injury adjustments are provisional; a full player-level reconciliation is still pending",
+        "Saturday Week 10 tier changes are not folded into the graded rows",
+        "Week 4's 13 unpublished model sides stay off the record",
+        "The Wednesday AI board stays DraftKings and is graded at those lines",
+        "Contest-leader rows stay the Sunday snapshot and are not on the Vector record"
+      ]
     }
   ]
 }

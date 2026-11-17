@@ -51,7 +51,17 @@ Keep the week's source files in the repo. A copy in Google Drive is a backup, no
 
 ## What failed this week
 
-Report it in the pull request. For Nov 15, 2026 the public Short is https://www.youtube.com/shorts/8cZ7qpdWyvU (Week 10 Westgate SuperContest Top 5 Leaders | Panthers & Steelers 3 of 5). It lists the supplied top 5 Week 10 picks at the Westgate fixed lines, using standings through Week 9. It is not a line change and it is not folded into the graded rows. The Saturday Short https://www.youtube.com/shorts/fvn8h67Mze0 and the Thursday Short https://www.youtube.com/shorts/1cY3MSjjkzE stay listed. Leaders agree on CAR +2.5 (3), PIT +3.5 (3), CLE +4.5 (2), and DAL +4.5 (2). The Saturday card agrees on CAR +2.5, PIT +3.5, and DAL +4.5, and fades CLE +4.5 (Vector has HOU -4.5). Contest-leader rows are not Vector picks. Entertainment only, not betting advice. Open gaps:
+Report it in the pull request. For Nov 17, 2026 the Tuesday package grades Week 10 complete and posts Week 11 power rankings. Week 10 is 14 of 14 at the Thursday Nov 12 Westgate lines: full card 7-7, Best Bets 1-1 (DAL +4.5 loss, LAC +4.5 win), Leans 3-4, Card 3-2. Monday night is LAC 23, BAL 20. Tracked weeks are Best Bets 12-10-0 (+2u), Leans 16-24-0 (−8u), Card tier 7-7-1 (0u), full card 36-42-1 (−6u). The Week 11 Westgate SuperContest sheet was not posted as of Tue Nov 17, 2026 8:56 AM PT, so there is no Week 11 card and no Week 11 line. Open gaps:
+
+- No Week 11 picks, edges, or lines. The card waits on that sheet.
+- Injury adjustments on the Week 11 rankings are provisional. Not a fresh full rerun.
+- Saturday Week 10 tier changes stay a note. Applied they would be Best Bets 2-1, Leans 2-3, Card 3-3. Graded rows stay the Thursday card. The full card is 7-7 either way.
+- Week 4's 13 unpublished model sides stay off the record.
+- The Wednesday Week 10 AI board stays DraftKings and is graded at those lines. It is not the Westgate card.
+- The Shorts contest-leader block is still the Sunday Nov 8 snapshot. Those rows are not Vector picks.
+- Entertainment only, not betting advice.
+
+For Nov 15, 2026 the public Short is https://www.youtube.com/shorts/8cZ7qpdWyvU (Week 10 Westgate SuperContest Top 5 Leaders | Panthers & Steelers 3 of 5). It lists the supplied top 5 Week 10 picks at the Westgate fixed lines, using standings through Week 9. It is not a line change and it is not folded into the graded rows. The Saturday Short https://www.youtube.com/shorts/fvn8h67Mze0 and the Thursday Short https://www.youtube.com/shorts/1cY3MSjjkzE stay listed. Leaders agree on CAR +2.5 (3), PIT +3.5 (3), CLE +4.5 (2), and DAL +4.5 (2). The Saturday card agrees on CAR +2.5, PIT +3.5, and DAL +4.5, and fades CLE +4.5 (Vector has HOU -4.5). Contest-leader rows are not Vector picks. Entertainment only, not betting advice. Open gaps:
 
 - No Week 10 results were graded from this Short. Sunday games had not been played.
 - The Shorts contest-leader block is still the Sunday Nov 8 snapshot. Those rows are not Vector picks.

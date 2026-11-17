@@ -18,6 +18,10 @@ def test_calendar():
     assert build.nfl_week(date(2026, 11, 10)) == 10
     assert build.nfl_week(date(2026, 11, 11)) == 10
     assert build.nfl_week(date(2026, 11, 12)) == 10
+    assert build.nfl_week(date(2026, 11, 16)) == 10
+    assert build.nfl_week(date(2026, 11, 17)) == 11
+    assert build.nfl_week(date(2026, 11, 18)) == 11
+    assert build.nfl_week(date(2026, 11, 19)) == 11
     assert build.nfl_week(date(2026, 11, 4)) == 9  # gap day belongs to the next week
     assert build.nfl_week(date(2026, 11, 2)) == 8
     assert build.nfl_week(date(2026, 10, 8)) == 5
@@ -56,21 +60,17 @@ def test_built_pages():
     ai = open(os.path.join(root, "ai-picks.html"), encoding="utf-8").read()
     card = open(os.path.join(root, "card.html"), encoding="utf-8").read()
     archive_card = open(os.path.join(root, "card-2026-w09.html"), encoding="utf-8").read()
-    assert "Week 10" in home and build.stamp_pt(build.today_pt()) in home
-    assert "Week 9 final 3-10" in home and "MIN +3.5 is a loss, BUF 23, MIN 6" in home
-    assert "WAS +2.5" in home and "DAL +4.5" in home and "LAC +4.5" in home
-    assert "Lines: Westgate SuperContest Week 10" in home
-    assert "fvn8h67Mze0" in home and "1cY3MSjjkzE" in home
-    assert "8cZ7qpdWyvU" in home and 'data-yt="8cZ7qpdWyvU"' in home
-    assert "Week 10 Westgate SuperContest Top 5 Leaders" in home
-    assert "NEOPOLITAN-1 30-14-1" in home and "Leaders agree (2+ of 5)" in home
-    assert "Entertainment only, not betting advice" in home
-    assert "Week 10 Saturday update (Nov 14, 2026)" in home
-    assert "WAS 24, NYG 21" in home
-    assert "1 of 14 graded" in home
-    assert 'id="rankings"' in home and "5.9" in home and "Injury adjustments are provisional this week" in home
+    assert build.nfl_week(build.today_pt()) == 11
+    assert "Week 11" in home and build.stamp_pt(build.today_pt()) in home
+    assert "Week 11 card pending" in home and "8:56 AM PT" in home
+    assert "No Week 11 picks, edges, or line comparisons" in home
+    assert "Week 10 final 7-7 (Best Bets 1-1, Leans 3-4, Card 3-2)." in home
+    assert "12-10-0" in home and "16-24-0" in home and "7-7-1" in home and "36-42-1" in home
+    assert "DAL +4.5" in home and "LAC +4.5" in home and "SF 46, DAL 40" in home and "LAC 23, BAL 20" in home
+    assert 'id="rankings"' in home and "5.2" in home and "Injury adjustments are provisional this week" in home
+    assert "1 of 14 graded" not in home and "13 games pending" not in home and "11-9-0" not in home
     assert "NYJ +8.5" not in home and "Week 10 early look" not in home
-    assert "No Week 10 picks" not in home
+    assert "Vector power rankings entering Week 10" not in home
     shorts = open(os.path.join(root, "shorts.html"), encoding="utf-8").read()
     assert "8cZ7qpdWyvU" in shorts and shorts.find("8cZ7qpdWyvU") < shorts.find("fvn8h67Mze0")
     assert "fvn8h67Mze0" in shorts and shorts.find("fvn8h67Mze0") < shorts.find("1cY3MSjjkzE")
@@ -92,26 +92,28 @@ def test_built_pages():
     assert shorts.count('res-win">WIN') == 20
     assert shorts.count('res-loss">LOSS') == 27
     assert shorts.count('res-pend">Pending') == 8
-    assert "Official Westgate standings after Week 9" in home
+    assert "Official Westgate standings after Week 9" in shorts
     lowered = shorts.lower()
     for bad in ("kevin cole", "unexpected points", "walterfootball", "walter football", "dr bob", "dr. bob"):
         assert bad not in lowered
     assert "splash" not in lowered and "bman" not in lowered.split("webmanifest")[-1]
     archive = open(os.path.join(root, "ai-picks-2026-w09.html"), encoding="utf-8").read()
+    w10 = open(os.path.join(root, "ai-picks-2026-w10.html"), encoding="utf-8").read()
     assert "4-NrBHuRlUE" in archive_card and "q2OazIWZ5vE" in archive_card and "Thu card line" in archive_card
     assert "BUF 23, MIN 6" in archive_card and "MIN +3.5" in archive_card and "No side" in archive_card
     assert "WAS +2.5" not in archive_card and "1cY3MSjjkzE" not in archive_card and "fvn8h67Mze0" not in archive_card and "8cZ7qpdWyvU" not in archive_card
+    assert "Week 11" not in archive_card
     assert "WAS +2.5" in card and "DAL +4.5" in card and "LAC +4.5" in card
+    assert "Week 10 final 7-7" in card and "PENDING" not in card.split("Full card: Market vs Our Spread", 1)[-1]
     assert "Week 10 early look" not in card and "Thu card line" not in card
     assert "1cY3MSjjkzE" in card and "fvn8h67Mze0" in card and "8cZ7qpdWyvU" in card
-    assert "Week 10 Westgate SuperContest Top 5 Leaders" in card
-    assert "NEOPOLITAN-1 30-14-1" in card and "Entertainment only, not betting advice" in card
     assert "Week 10 Saturday update (Nov 14, 2026)" in card
-    assert "WAS 24, NYG 21" in card
+    assert "WAS 24, NYG 21" in card and "WAS +0.3" in card
     assert "cXnzFQPN7mE" not in home + ai + card + shorts + archive
-    assert "No sides were invented" not in ai and "Week 10 early look" not in ai
-    assert "PROVISIONAL" in ai and "DraftKings line" in ai and "Not a Westgate card." in ai
-    assert "Provisional top 5 (not Best Bets)" in ai and "DAL +4.5" in ai
+    assert "No sides were invented" in ai and "Week 11 AI picks pending" in ai
+    assert "PROVISIONAL" in w10 and "DraftKings line" in w10 and "Not a Westgate card." in w10
+    assert "Final: LAC 23, BAL 20" in w10 and "Final: SF 46, DAL 40" in w10
+    assert w10.count("Final:") == 14
     assert "ai-picks-2026-w10.html" in ai and "Week 9" in archive
     assert "DraftKings line" in archive and "Westgate line" not in archive.split("ai-grid", 1)[-1][:500]
     assert 'id="vector-top5"' in archive and "Vector Top 5" in archive and "Westgate SuperContest" in archive
