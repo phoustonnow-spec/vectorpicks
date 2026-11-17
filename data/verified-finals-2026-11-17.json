@@ -1,0 +1,150 @@
+{
+  "captured": "2026-11-17",
+  "timezone": "source times are ESPN competition timestamps; card dates stay the US game date",
+  "source": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?week=10&seasontype=2&dates=2026",
+  "note": "Week 10 finals used for the Tuesday Nov 17, 2026 grade. All 14 games are final, including Monday night LAC 23, BAL 20. ESPN abbreviates Washington as WSH; this file uses WAS, the abbreviation already on the site. Scores are the supplied ESPN finals.",
+  "weeks": {
+    "10": [
+      {
+        "game": "BUF@NYJ",
+        "away_abbr": "BUF",
+        "home_abbr": "NYJ",
+        "away_score": 31,
+        "home_score": 12,
+        "state": "post",
+        "detail": "Final",
+        "final": "BUF 31, NYJ 12"
+      },
+      {
+        "game": "CAR@NO",
+        "away_abbr": "CAR",
+        "home_abbr": "NO",
+        "away_score": 20,
+        "home_score": 17,
+        "state": "post",
+        "detail": "Final",
+        "final": "CAR 20, NO 17"
+      },
+      {
+        "game": "HOU@CLE",
+        "away_abbr": "HOU",
+        "home_abbr": "CLE",
+        "away_score": 24,
+        "home_score": 27,
+        "state": "post",
+        "detail": "Final",
+        "final": "HOU 24, CLE 27"
+      },
+      {
+        "game": "JAX@TEN",
+        "away_abbr": "JAX",
+        "home_abbr": "TEN",
+        "away_score": 40,
+        "home_score": 23,
+        "state": "post",
+        "detail": "Final",
+        "final": "JAX 40, TEN 23"
+      },
+      {
+        "game": "KC@ATL",
+        "away_abbr": "KC",
+        "home_abbr": "ATL",
+        "away_score": 35,
+        "home_score": 13,
+        "state": "post",
+        "detail": "Final",
+        "final": "KC 35, ATL 13"
+      },
+      {
+        "game": "LAC@BAL",
+        "away_abbr": "LAC",
+        "home_abbr": "BAL",
+        "away_score": 23,
+        "home_score": 20,
+        "state": "post",
+        "detail": "Final",
+        "final": "LAC 23, BAL 20"
+      },
+      {
+        "game": "LAR@ARI",
+        "away_abbr": "LAR",
+        "home_abbr": "ARI",
+        "away_score": 34,
+        "home_score": 6,
+        "state": "post",
+        "detail": "Final",
+        "final": "LAR 34, ARI 6"
+      },
+      {
+        "game": "MIA@IND",
+        "away_abbr": "MIA",
+        "home_abbr": "IND",
+        "away_score": 22,
+        "home_score": 24,
+        "state": "post",
+        "detail": "Final",
+        "final": "MIA 22, IND 24"
+      },
+      {
+        "game": "MIN@GB",
+        "away_abbr": "MIN",
+        "home_abbr": "GB",
+        "away_score": 30,
+        "home_score": 10,
+        "state": "post",
+        "detail": "Final",
+        "final": "MIN 30, GB 10"
+      },
+      {
+        "game": "NE@DET",
+        "away_abbr": "NE",
+        "home_abbr": "DET",
+        "away_score": 10,
+        "home_score": 35,
+        "state": "post",
+        "detail": "Final",
+        "final": "NE 10, DET 35"
+      },
+      {
+        "game": "PIT@CIN",
+        "away_abbr": "PIT",
+        "home_abbr": "CIN",
+        "away_score": 18,
+        "home_score": 38,
+        "state": "post",
+        "detail": "Final",
+        "final": "PIT 18, CIN 38"
+      },
+      {
+        "game": "SEA@LV",
+        "away_abbr": "SEA",
+        "home_abbr": "LV",
+        "away_score": 21,
+        "home_score": 13,
+        "state": "post",
+        "detail": "Final",
+        "final": "SEA 21, LV 13"
+      },
+      {
+        "game": "SF@DAL",
+        "away_abbr": "SF",
+        "home_abbr": "DAL",
+        "away_score": 46,
+        "home_score": 40,
+        "state": "post",
+        "detail": "Final",
+        "final": "SF 46, DAL 40"
+      },
+      {
+        "game": "WAS@NYG",
+        "away_abbr": "WAS",
+        "home_abbr": "NYG",
+        "away_score": 24,
+        "home_score": 21,
+        "state": "post",
+        "detail": "Final",
+        "final": "WAS 24, NYG 21"
+      }
+    ]
+  }
+}

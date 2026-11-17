@@ -4,11 +4,11 @@
   "as_of": "Wed Nov 11, 2026",
   "provisional": true,
   "intro": "Same prompt, four AIs, and us. Entertainment only. Graded at the DraftKings line each side was asked.",
-  "prompt_note": "PROVISIONAL BOARD: asked Wednesday Nov 11, 2026 (prompt sent about 1:55 to 2:25 PM PT) on the DraftKings line fetched at 1:30 PM PT, before the Westgate SuperContest card was out. This is not a Westgate run. NE vs DET is in Munich (neutral). Byes: CHI, DEN, PHI, TB. Each AI got the identical prompt and picked all 14 games with a 1-10 confidence, three Best Bets and a ranked top 5. Grok's first attempt returned an error and was rerun in a new chat at 2:29 PM PT. Grok's chosen side runs against its own stated number in most games; its picks are shown exactly as given. Vector's sides are leans from a provisional model update (injury layer not fully re-reconciled); its top 5 is provisional and it has no Best Bets until the Westgate card posts. WAS @ NYG is final, WAS 24, NYG 21. The other 13 games are pending.",
+  "prompt_note": "PROVISIONAL BOARD: asked Wednesday Nov 11, 2026 (prompt sent about 1:55 to 2:25 PM PT) on the DraftKings line fetched at 1:30 PM PT, before the Westgate SuperContest card was out. This is not a Westgate run. NE vs DET is in Munich (neutral). Byes: CHI, DEN, PHI, TB. Each AI got the identical prompt and picked all 14 games with a 1-10 confidence, three Best Bets and a ranked top 5. Grok's first attempt returned an error and was rerun in a new chat at 2:29 PM PT. Grok's chosen side runs against its own stated number in most games; its picks are shown exactly as given. Vector's sides are leans from a provisional model update (injury layer not fully re-reconciled); its top 5 is provisional and it has no Best Bets until the Westgate card posts. All 14 games are final, including Monday night LAC 23, BAL 20. Every side stays on the Wednesday DraftKings line. This board is not the Westgate card.",
   "line_source": "DraftKings line, Wednesday Nov 11, 2026 (fetched 1:30 PM PT)",
   "line_label": "DraftKings line",
-  "score_source": "ESPN NFL scoreboard (https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?week=10&seasontype=2&dates=2026), snapshot data/verified-finals-2026-11-14.json. WAS @ NYG is final, WAS 24, NYG 21. The other Week 10 games are not final.",
-  "grade_note": "Graded Sat Nov 14, 2026. WAS @ NYG is WAS 24, NYG 21. Every side stays on the Wednesday DraftKings line. This board is not the Westgate card. The other 13 games are pending.",
+  "score_source": "ESPN NFL scoreboard (https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?week=10&seasontype=2&dates=2026), snapshot data/verified-finals-2026-11-17.json. All 14 Week 10 games are final, including Monday night LAC 23, BAL 20.",
+  "grade_note": "Graded Tue Nov 17, 2026. All 14 games are final, including Monday night LAC 23, BAL 20. Every side stays on the Wednesday DraftKings line. This board is not the Westgate card.",
   "games": [
     {
       "game": "WAS@NYG",
@@ -30,77 +30,143 @@
       "day": "Sun",
       "date": "2026-11-15",
       "westgate": "DET -2.5",
-      "kickoff_pt": "Munich, 6:30 AM PT"
+      "kickoff_pt": "Munich, 6:30 AM PT",
+      "score": {
+        "away": 10,
+        "home": 35,
+        "status": "final"
+      },
+      "final": "NE 10, DET 35"
     },
     {
       "game": "KC@ATL",
       "label": "KC @ ATL",
       "day": "Sun",
       "date": "2026-11-15",
-      "westgate": "KC -3.5"
+      "westgate": "KC -3.5",
+      "score": {
+        "away": 35,
+        "home": 13,
+        "status": "final"
+      },
+      "final": "KC 35, ATL 13"
     },
     {
       "game": "BUF@NYJ",
       "label": "BUF @ NYJ",
       "day": "Sun",
       "date": "2026-11-15",
-      "westgate": "BUF -8.5"
+      "westgate": "BUF -8.5",
+      "score": {
+        "away": 31,
+        "home": 12,
+        "status": "final"
+      },
+      "final": "BUF 31, NYJ 12"
     },
     {
       "game": "CAR@NO",
       "label": "CAR @ NO",
       "day": "Sun",
       "date": "2026-11-15",
-      "westgate": "NO -2.5"
+      "westgate": "NO -2.5",
+      "score": {
+        "away": 20,
+        "home": 17,
+        "status": "final"
+      },
+      "final": "CAR 20, NO 17"
     },
     {
       "game": "HOU@CLE",
       "label": "HOU @ CLE",
       "day": "Sun",
       "date": "2026-11-15",
-      "westgate": "HOU -4.5"
+      "westgate": "HOU -4.5",
+      "score": {
+        "away": 24,
+        "home": 27,
+        "status": "final"
+      },
+      "final": "HOU 24, CLE 27"
     },
     {
       "game": "MIN@GB",
       "label": "MIN @ GB",
       "day": "Sun",
       "date": "2026-11-15",
-      "westgate": "GB -3"
+      "westgate": "GB -3",
+      "score": {
+        "away": 30,
+        "home": 10,
+        "status": "final"
+      },
+      "final": "MIN 30, GB 10"
     },
     {
       "game": "MIA@IND",
       "label": "MIA @ IND",
       "day": "Sun",
       "date": "2026-11-15",
-      "westgate": "IND -3.5"
+      "westgate": "IND -3.5",
+      "score": {
+        "away": 22,
+        "home": 24,
+        "status": "final"
+      },
+      "final": "MIA 22, IND 24"
     },
     {
       "game": "JAX@TEN",
       "label": "JAX @ TEN",
       "day": "Sun",
       "date": "2026-11-15",
-      "westgate": "JAX -10.5"
+      "westgate": "JAX -10.5",
+      "score": {
+        "away": 40,
+        "home": 23,
+        "status": "final"
+      },
+      "final": "JAX 40, TEN 23"
     },
     {
       "game": "LAR@ARI",
       "label": "LAR @ ARI",
       "day": "Sun",
       "date": "2026-11-15",
-      "westgate": "LAR -9.5"
+      "westgate": "LAR -9.5",
+      "score": {
+        "away": 34,
+        "home": 6,
+        "status": "final"
+      },
+      "final": "LAR 34, ARI 6"
     },
     {
       "game": "SEA@LV",
       "label": "SEA @ LV",
       "day": "Sun",
       "date": "2026-11-15",
-      "westgate": "SEA -6.5"
+      "westgate": "SEA -6.5",
+      "score": {
+        "away": 21,
+        "home": 13,
+        "status": "final"
+      },
+      "final": "SEA 21, LV 13"
     },
     {
       "game": "SF@DAL",
       "label": "SF @ DAL",
       "day": "Sun",
       "date": "2026-11-15",
-      "westgate": "SF -4.5"
+      "westgate": "SF -4.5",
+      "score": {
+        "away": 46,
+        "home": 40,
+        "status": "final"
+      },
+      "final": "SF 46, DAL 40"
     },
     {
       "game": "PIT@CIN",
@@ -108,7 +174,13 @@
       "day": "Sun",
       "date": "2026-11-15",
       "westgate": "CIN -3.5",
-      "kickoff_pt": "Sun night"
+      "kickoff_pt": "Sun night",
+      "score": {
+        "away": 18,
+        "home": 38,
+        "status": "final"
+      },
+      "final": "PIT 18, CIN 38"
     },
     {
       "game": "LAC@BAL",
@@ -116,7 +188,13 @@
       "day": "Mon",
       "date": "2026-11-16",
       "westgate": "BAL -4.5",
-      "kickoff_pt": "Mon night"
+      "kickoff_pt": "Mon night",
+      "score": {
+        "away": 23,
+        "home": 20,
+        "status": "final"
+      },
+      "final": "LAC 23, BAL 20"
     }
   ],
   "ais": [
@@ -621,104 +699,142 @@
     "WAS@NYG": {
       "NYG -2.5": "L",
       "WAS +2.5": "W"
+    },
+    "NE@DET": {
+      "DET -2.5": "W",
+      "NE +2.5": "L"
+    },
+    "KC@ATL": {
+      "ATL +3.5": "L",
+      "KC -3.5": "W"
+    },
+    "BUF@NYJ": {
+      "BUF -8.5": "W",
+      "NYJ +8.5": "L"
+    },
+    "CAR@NO": {
+      "CAR +2.5": "W",
+      "NO -2.5": "L"
+    },
+    "HOU@CLE": {
+      "CLE +4.5": "W",
+      "HOU -4.5": "L"
+    },
+    "MIN@GB": {
+      "GB -3": "L",
+      "MIN +3": "W"
+    },
+    "MIA@IND": {
+      "IND -3.5": "L",
+      "MIA +3.5": "W"
+    },
+    "JAX@TEN": {
+      "JAX -10.5": "W",
+      "TEN +10.5": "L"
+    },
+    "LAR@ARI": {
+      "ARI +9.5": "L",
+      "LAR -9.5": "W"
+    },
+    "SEA@LV": {
+      "LV +6.5": "L",
+      "SEA -6.5": "W"
+    },
+    "SF@DAL": {
+      "DAL +4.5": "L",
+      "SF -4.5": "W"
+    },
+    "PIT@CIN": {
+      "CIN -3.5": "W",
+      "PIT +3.5": "L"
+    },
+    "LAC@BAL": {
+      "BAL -4.5": "L",
+      "LAC +4.5": "W"
     }
   },
   "grades": {
     "claude": {
       "sides": [
-        0,
-        1,
+        5,
+        9,
         0
       ],
-      "sides_pending": 13,
+      "sides_pending": 0,
       "best_bet_units": -1,
-      "best_bets_pending": 2,
-      "pick5": [
-        0,
-        1,
-        0
-      ],
-      "pick5_pending": 4
-    },
-    "gemini": {
-      "sides": [
-        0,
-        1,
-        0
-      ],
-      "sides_pending": 13,
-      "best_bet_units": 0,
-      "best_bets_pending": 3,
-      "pick5": [
-        0,
-        0,
-        0
-      ],
-      "pick5_pending": 5
-    },
-    "grok": {
-      "sides": [
-        0,
-        1,
-        0
-      ],
-      "sides_pending": 13,
-      "best_bet_units": 0,
-      "best_bets_pending": 3,
-      "pick5": [
-        0,
-        0,
-        0
-      ],
-      "pick5_pending": 5
-    },
-    "chatgpt": {
-      "sides": [
-        0,
-        1,
-        0
-      ],
-      "sides_pending": 13,
-      "best_bet_units": -1,
-      "best_bets_pending": 2,
-      "pick5": [
-        0,
-        1,
-        0
-      ],
-      "pick5_pending": 4
-    },
-    "vector": {
-      "sides": [
-        1,
-        0,
-        0
-      ],
-      "sides_pending": 13,
-      "best_bet_units": 0,
       "best_bets_pending": 0,
       "pick5": [
         1,
-        0,
+        4,
         0
       ],
-      "pick5_pending": 4
+      "pick5_pending": 0
+    },
+    "gemini": {
+      "sides": [
+        6,
+        8,
+        0
+      ],
+      "sides_pending": 0,
+      "best_bet_units": 1,
+      "best_bets_pending": 0,
+      "pick5": [
+        3,
+        2,
+        0
+      ],
+      "pick5_pending": 0
+    },
+    "grok": {
+      "sides": [
+        8,
+        6,
+        0
+      ],
+      "sides_pending": 0,
+      "best_bet_units": 1,
+      "best_bets_pending": 0,
+      "pick5": [
+        3,
+        2,
+        0
+      ],
+      "pick5_pending": 0
+    },
+    "chatgpt": {
+      "sides": [
+        9,
+        5,
+        0
+      ],
+      "sides_pending": 0,
+      "best_bet_units": 1,
+      "best_bets_pending": 0,
+      "pick5": [
+        3,
+        2,
+        0
+      ],
+      "pick5_pending": 0
+    },
+    "vector": {
+      "sides": [
+        7,
+        7,
+        0
+      ],
+      "sides_pending": 0,
+      "best_bet_units": 0,
+      "best_bets_pending": 0,
+      "pick5": [
+        3,
+        2,
+        0
+      ],
+      "pick5_pending": 0
     }
   },
-  "ungraded_games": [
-    "NE@DET",
-    "KC@ATL",
-    "BUF@NYJ",
-    "CAR@NO",
-    "HOU@CLE",
-    "MIN@GB",
-    "MIA@IND",
-    "JAX@TEN",
-    "LAR@ARI",
-    "SEA@LV",
-    "SF@DAL",
-    "PIT@CIN",
-    "LAC@BAL"
-  ],
-  "graded": false
+  "ungraded_games": [],
+  "graded": true
 }

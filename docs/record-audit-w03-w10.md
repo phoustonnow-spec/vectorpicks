@@ -1,6 +1,6 @@
-# Record audit, Weeks 3–10 through TNF
+# Record audit, Weeks 3–10
 
-Graded Nov 14, 2026 from the published Westgate cards in `data/weeks/` and `data/ats-tracker.csv`, against `data/verified-finals-2026-11-07.json` plus the later Week 9 and Week 10 snapshots. Each side is the published pick at that row's Westgate line. A pass is not a pick. A push stays a push. Week 10 is through TNF only (WAS 24, NYG 21; WAS +2.5 won). The other 13 Week 10 games are pending.
+Graded Nov 17, 2026 from the published Westgate cards in `data/weeks/` and `data/ats-tracker.csv`, against `data/verified-finals-2026-11-07.json` plus the later Week 9 and Week 10 snapshots, including `data/verified-finals-2026-11-17.json`. Each side is the published pick at that row's Westgate line. A pass is not a pick. A push stays a push. Week 10 is complete: 14 of 14, including Monday night LAC 23, BAL 20. The Nov 14 audit stopped at TNF (WAS +2.5 win, 13 pending). Those 13 are graded here. The Thursday Nov 12 card is the card of record. Saturday tier changes are not folded in.
 
 Every stored grade matched the score arithmetic. No published game is missing, and no game is counted twice.
 
@@ -13,16 +13,24 @@ Every stored grade matched the score arithmetic. No published game is missing, a
 | 7 | 1-2-0 | 4-3-0 | — | — | 5-5-0 | 0 |
 | 8 | 1-1-0 | 2-6-0 | — | — | 3-7-0 | 0 |
 | 9 | 0-2-0 | 3-8-0 | — | — | 3-10-0 | 0 |
-| 10 | 0-0-0 | 1-0-0 | 0-0-0 | — | 1-0-0 | 13 |
-| Total | 11-9-0 | 14-20-0 | 4-5-1 | 1-1-0 | 30-35-1 | 13 |
+| 10 | 1-1-0 | 3-4-0 | 3-2-0 | — | 7-7-0 | 0 |
+| Total | 12-10-0 | 16-24-0 | 7-7-1 | 1-1-0 | 36-42-1 | 0 |
 
-Units are wins minus losses. Best Bets +2, Leans −6, Card tier −1, full card −5. Week 10 pending: Best Bets 2, Leans 6, Card 5.
+Units are wins minus losses. Best Bets +2, Leans −8, Card tier 0, full card −6. Week 10 Best Bets are DAL +4.5 (loss, SF 46, DAL 40) and LAC +4.5 (win, LAC 23, BAL 20).
 
 The one push is Week 5 CIN −7 (CIN 31, MIA 24). The full card is Best Bets plus Leans plus Card plus the Week 5 Hold (BAL +3.5, win) and Provisional (WAS −3.5, loss).
 
+## Week 10 addendum
+
+The Nov 14 table had Week 10 at 1-0-0 through TNF only, and the tracked total at Best Bets 11-9-0, Leans 14-20-0, Card 4-5-1, full card 30-35-1, with 13 pending. The other 13 finals are the ESPN scores in `data/verified-finals-2026-11-17.json`. Adding them to the Thursday rows is Best Bets 1-1, Leans 3-4, Card 3-2, full card 7-7. The tracked box moves by that amount and nothing else.
+
+Week 10's Saturday update moved MIN +3.5 from Lean to Best Bet and HOU −4.5 from Lean to Card before those kickoffs. MIN won 30-10. HOU lost 24-27. Applying that would make Best Bets 2-1, Leans 2-3, and Card 3-3. The full card is 7-7 either way. The graded rows stay the Thursday card, the same rule as Week 8.
+
 ## Why 19-23, 9-7-1, and 39-39-1 are not this record
 
-Best Bets match at 11-9-0. The other tally's full card is 9 wins and 4 losses higher (39-39-1 versus 30-35-1).
+This section is the Nov 14 discrepancy, before the other 13 Week 10 games were graded. It is unchanged. Completing Week 10 does not add the 13 Week 4 passes.
+
+Best Bets matched at 11-9-0. The other tally's full card was 9 wins and 4 losses higher (39-39-1 versus 30-35-1).
 
 Week 4's published card is three Best Bets only (NYG +1.5 win, PHI +3 loss, CAR +3.5 win). It calls every other game a pass. The model still had a side on those 13 games. Graded at the Westgate line they are 9-4:
 
@@ -50,5 +58,5 @@ Leans and the Card tier are higher by 10 wins and 5 losses together (19-23 and 9
 
 - No week from 3 through 10 is missing. Weeks 1 and 2 are outside this tracker on purpose.
 - No game is graded twice. Each published side matches the week file and the tracker once.
-- Week 8's Saturday short moved PIT −3.5 from Lean to Best Bet and SEA −3 from Lean to Pass before those kickoffs. Applying that would make Best Bets 12-9-0. Both tallies are 11-9, so neither one applied it. The graded rows stay the Thursday card.
-- Week 10 Saturday moves (MIN Lean to Best Bet, HOU Lean to Card) are on games that have not been played. They do not change this record. TNF stays the Thursday Lean, WAS +2.5, win.
+- Week 8's Saturday short moved PIT −3.5 from Lean to Best Bet and SEA −3 from Lean to Pass before those kickoffs. Applying that would make Best Bets 12-9-0 on the Nov 14 through-TNF tally. Both tallies were 11-9, so neither one applied it. The graded rows stay the Thursday card.
+- Week 10 Saturday moves are graded in the addendum above. They are not folded into the rows. TNF stays the Thursday Lean, WAS +2.5, win.

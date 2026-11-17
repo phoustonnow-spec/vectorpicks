@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 """Check the live site after a merge. A local build is not a publish.
 
-Exit 0 only when https://www.vectorpicks.com serves the Week 10 Westgate card.
-Exit 1 when production is still the pre-card placeholder or is missing a marker.
+Exit 0 only when https://www.vectorpicks.com serves the Week 11 rankings,
+the graded Week 10 card, and the tracked-weeks record.
+Exit 1 when production is still the Week 10 pending card or is missing a marker.
 
   python3 scripts/verify_live.py
 """
@@ -19,56 +20,46 @@ AI_URL = "https://www.vectorpicks.com/ai-picks.html"
 W9_CARD_URL = "https://www.vectorpicks.com/card-2026-w09.html"
 LIVE_MARKERS = (
     "Live Board",
-    "Week 10",
-    "Scores via ESPN; unofficial, may lag.",
-    "1 of 14",
-    "WAS +2.5",
-    "WAS 24, NYG 21",
+    "Week 11",
+    "Week 11 has no card in the repo",
+    "Week 10 final 7-7 (Best Bets 1-1, Leans 3-4, Card 3-2).",
+    "Week 11 card pending",
+    "No Week 11 picks, edges, or line comparisons",
     "Entertainment and opinion only",
 )
 HOME_MARKERS = (
-    "Week 10",
-    "Sunday, Nov 15, 2026 PT",
-    "WAS +2.5",
-    "Kickoff Thu Nov 12, 5:15 PM PT",
+    "Week 11",
+    "Tuesday, Nov 17, 2026 PT",
+    "Week 11 power rankings are posted. The Week 11 card is not.",
+    'id="week-11-status"',
+    "Week 11 card pending: the Westgate SuperContest Week 11 sheet was not posted as of Tue Nov 17, 2026 8:56 AM PT.",
+    "No Week 11 picks, edges, or line comparisons are published here.",
+    "Week 10 final 7-7 (Best Bets 1-1, Leans 3-4, Card 3-2).",
+    "Graded rows stay the Thursday card.",
     "DAL +4.5 vs SF",
     "LAC +4.5 at BAL",
-    "Lines: Westgate SuperContest Week 10",
-    "injury layer is still being reconciled",
-    "1 of 14 graded",
-    "13 games pending",
-    "Week 10 Saturday update (Nov 14, 2026)",
+    "SF 46, DAL 40",
+    "LAC 23, BAL 20",
     "WAS 24, NYG 21",
-    "Kirk Cousins confirmed",
-    "fvn8h67Mze0",
+    'id="rankings"',
+    "Vector power rankings entering Week 11",
+    "Injury adjustments are provisional this week",
+    "<b>JAX</b></td><td>5.2</td>",
+    "<b>ARI</b></td><td>−10.5</td>",
+    "12-10-0",
+    "16-24-0",
+    "7-7-1",
+    "36-42-1",
+    "+2u",
+    "-8u",
+    "-6u",
+    "Tracked weeks",
+    "0 pending",
     "8cZ7qpdWyvU",
     'data-yt="8cZ7qpdWyvU"',
-    "Week 10 Westgate SuperContest Top 5 Leaders",
-    "NEOPOLITAN-1 30-14-1",
-    "Leaders agree (2+ of 5)",
-    "Entertainment only, not betting advice",
-    "Week 9 final 3-10",
-    "Best Bets 0-2",
-    "Leans 3-8",
-    "MIN +3.5 is a loss, BUF 23, MIN 6",
-    "Official Westgate standings after Week 9",
-    "LAMBDA LAMBDA LAMBDA-1 32-12-1",
-    "THREAD CLOD FOOL-1 30-15-0",
+    "fvn8h67Mze0",
     "1cY3MSjjkzE",
-    'id="tnf"',
-    'id="week-10-saturday"',
-    'id="rankings"',
-    "Vector power rankings entering Week 10",
-    "Injury adjustments are provisional this week",
-    "11-9-0",
-    "14-20-0",
-    "4-5-1",
-    "30-35-1",
-    "Leans 14-20.",
-    "Card tier 4-5-1",
-    "Full card 30-35-1",
-    "5 pending",
-    "Byes: CHI, DEN, PHI, TB",
+    "Entertainment and opinion only. Not betting advice.",
 )
 SHORTS_MARKERS = (
     "8cZ7qpdWyvU",
@@ -107,89 +98,75 @@ SHORTS_MARKERS = (
     "BUF@MIN (Monday night) is Pending",
 )
 CARD_MARKERS = (
+    "Week 11 card pending",
+    "No Week 11 picks, edges, or line comparisons",
+    "Week 10 final 7-7 (Best Bets 1-1, Leans 3-4, Card 3-2).",
     "WAS +2.5",
+    "WAS +0.3",
     "DAL +4.5",
     "LAC +4.5",
+    "SF 46, DAL 40",
+    "LAC 23, BAL 20",
     "Lines: Westgate SuperContest Week 10",
     "Kickoff Thu Nov 12, 5:15 PM PT",
-    "injury layer is still being reconciled",
     "1cY3MSjjkzE",
     "fvn8h67Mze0",
     "8cZ7qpdWyvU",
-    "Week 10 Westgate SuperContest Top 5 Leaders",
-    "NEOPOLITAN-1 30-14-1",
-    "Entertainment only, not betting advice",
     "Week 10 Saturday update (Nov 14, 2026)",
     "WAS 24, NYG 21",
-    "Week 10 NFL AI Picks",
-    "PENDING",
+    "WIN",
+    "LOSS",
     "Week 9 final 3-10",
     "Official Westgate standings after Week 9",
     "NYG −2.5",
     "Best Bet",
     "Lean",
-    "Leans 14-20.",
-    "Card tier 4-5-1",
-    "Full card 30-35-1",
+    "Stated tracker, Weeks 3-10 through TNF",
+    "Entertainment only, not betting advice",
 )
 RECORD_MARKERS = (
+    "Week 10 final 7-7 (Best Bets 1-1, Leans 3-4, Card 3-2).",
     "Week 9 final 3-10",
     "Best Bets 0-2",
     "Leans 3-8",
     "MIN +3.5 is a loss, BUF 23, MIN 6",
     "Tracked weeks",
     "not a full-season total",
-    "11-9-0",
-    "14-20-0",
-    "4-5-1",
-    "30-35-1",
-    "13 pending",
-    "5 pending",
+    "12-10-0",
+    "16-24-0",
+    "7-7-1",
+    "36-42-1",
+    "+2u",
+    "-8u",
+    "-6u",
     "Those 13 grade 9-4",
     "The full card also counts Hold and Provisional",
     "WAS +2.5",
     "WAS 24, NYG 21",
-    "PENDING",
+    "LAC 23, BAL 20",
+    "None yet.",
     "Official Westgate standings after Week 9",
     "Gaps, not a complete season",
+    "Saturday tier changes are not folded in.",
 )
 AI_MARKERS = (
-    "Week 10",
-    "PROVISIONAL",
-    "DraftKings line",
-    "Not a Westgate card.",
-    "PROVISIONAL BOARD",
-    "Byes: CHI, DEN, PHI, TB",
-    "Munich",
-    "Leans (provisional)",
-    "Provisional top 5 (not Best Bets)",
-    "JAX −10.5",
-    "BUF −8.5",
-    "NYG −2.5",
-    "KC −3.5",
-    "LV +6.5",
-    "CLE +4.5",
-    "ARI +9.5",
-    "NYJ +8.5",
-    "GB −3",
-    "SF −4.5",
-    "PIT +3.5",
-    "IND −3.5",
-    "HOU −4.5",
-    "DAL +4.5",
-    "MIN +3",
-    "LAC +4.5",
-    "WAS +2.5",
+    "Week 11 AI picks pending",
+    "No sides were invented.",
+    "No Week 11 picks, edges, or line comparisons",
+    "game.html",
+    "ai-picks-2026-w09.html",
+    "ai-picks-2026-w10.html",
 )
 W10_URL = "https://www.vectorpicks.com/ai-picks-2026-w10.html"
 W9_URL = "https://www.vectorpicks.com/ai-picks-2026-w09.html"
-AI_MARKERS = AI_MARKERS + ("ai-picks-2026-w09.html", "ai-picks-2026-w10.html")
 W10_MARKERS = (
     "Week 10",
     "PROVISIONAL",
     "DraftKings line",
     "Not a Westgate card.",
-    "Provisional top 5 (not Best Bets)",
+    "Final: WAS 24, NYG 21",
+    "Final: LAC 23, BAL 20",
+    "Final: SF 46, DAL 40",
     "JAX −10.5",
     "DAL +4.5",
     "LV +6.5",
@@ -225,11 +202,15 @@ STALE = (
     "the Week 10 Vector card publishes after the official contest lines are out",
     "No Week 10 picks, edges, or line comparisons",
     "Week 10 Westgate card not posted yet",
+    "Vector power rankings entering Week 10",
+    "13 games pending",
+    "1 of 14 graded",
+    "11-9-0",
 )
 
 
 def fetch(url):
-    bust = url + ("&" if "?" in url else "?") + "cb=20261115w10leaders"
+    bust = url + ("&" if "?" in url else "?") + "cb=20261117w11"
     request = urllib.request.Request(bust, headers={
         "Cache-Control": "no-cache",
         "Pragma": "no-cache",
@@ -247,8 +228,18 @@ def fetch(url):
 def check(name, status, body, markers):
     missing = [m for m in markers if m not in body]
     present = [m for m in FORBIDDEN if m.lower() in body.lower()]
-    if name in ("homepage", "card", "record", "live"):
+    if name in ("homepage", "live"):
         for edge in STALE + ("NYJ +8.5", "Week 10 early look"):
+            if edge in body:
+                present.append(edge)
+    if name in ("card", "record"):
+        for edge in (
+            "the Week 10 Vector card publishes after the official contest lines are out",
+            "No Week 10 picks, edges, or line comparisons",
+            "Week 10 early look",
+            "NYJ +8.5",
+            "13 Week 10 rows are pending",
+        ):
             if edge in body:
                 present.append(edge)
     if name in ("homepage", "card"):
