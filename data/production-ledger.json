@@ -265,6 +265,29 @@
         "The Wednesday AI board stays DraftKings and is graded at those lines",
         "Contest-leader rows stay the Sunday snapshot and are not on the Vector record"
       ]
+    },
+    {
+      "week": 11,
+      "season": 2026,
+      "published_at_pt": "2026-11-18",
+      "dedup_key": "2026-w11-provisional-draftkings-ai",
+      "source": "Wednesday Nov 18, 2026 AI board. Lines are the DraftKings numbers fetched at 1:16 PM PT. ESPN scoreboard the same day shows all 13 games scheduled, none final. No Westgate SuperContest card was posted.",
+      "included": [
+        "Week 11 provisional DraftKings AI board for Claude, Gemini, Grok, and ChatGPT",
+        "Each AI: a side, confidence, and reason on all 13 games, three Best Bets, and a ranked top 5",
+        "Vector leans on all 13 games and a provisional top 5, with no Best Bets"
+      ],
+      "public_video_ids": [],
+      "never_embed": [
+        "cXnzFQPN7mE"
+      ],
+      "gaps": [
+        "No Week 11 Westgate card, so Vector has no Best Bets and the top 5 is provisional",
+        "The board is DraftKings, not Westgate",
+        "All 13 games are pending",
+        "Vector injury adjustments are still provisional",
+        "Contest-leader rows stay the Sunday snapshot and are not on the Vector record"
+      ]
     }
   ]
 }

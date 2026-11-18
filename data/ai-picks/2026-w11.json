@@ -1,0 +1,682 @@
+{
+  "season": 2026,
+  "week": 11,
+  "as_of": "Wed Nov 18, 2026",
+  "provisional": true,
+  "intro": "Same prompt, four AIs, and us. Entertainment only. Graded at the DraftKings line each side was asked.",
+  "prompt_note": "PROVISIONAL BOARD: asked Wednesday Nov 18, 2026 (prompt sent about 2:25 to 2:30 PM PT) on the DraftKings line fetched at 1:16 PM PT, before the Westgate SuperContest card was out. This is not a Westgate run. MIN vs SF is in Mexico City (neutral). Byes: ATL, CLE, GB, LAR, NE, SEA. Each AI got the identical prompt and picked all 13 games with a 1-10 confidence, three Best Bets and a ranked top 5. Gemini's first attempt returned an error and was rerun in a new chat; its rerun said it had no live data, set every game to the DraftKings number and called all 13 games coin flips, so its sides are mechanical tiebreaks, shown exactly as given. Grok took the favorite in all 13 games, sometimes against its own stated number; its picks are shown exactly as given. Vector's sides are leans from a provisional model update (injury layer not fully re-reconciled); its top 5 is provisional and it has no Best Bets until the Westgate card posts. Vector's MIA and PHI sides are model leans only, kept so every game has a side, and are excluded from its top 5. All 13 games are pending.",
+  "line_source": "DraftKings line, Wednesday Nov 18, 2026 (fetched 1:16 PM PT)",
+  "line_label": "DraftKings line",
+  "score_source": "ESPN NFL scoreboard (https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?week=11&seasontype=2&dates=2026). Only games with status final are stored. No Week 11 finals stored yet.",
+  "games": [
+    {
+      "game": "IND@HOU",
+      "label": "IND @ HOU",
+      "day": "Thu",
+      "date": "2026-11-19",
+      "westgate": "HOU -12.5",
+      "kickoff_pt": "Thu night"
+    },
+    {
+      "game": "ARI@KC",
+      "label": "ARI @ KC",
+      "day": "Sun",
+      "date": "2026-11-22",
+      "westgate": "KC -15.5"
+    },
+    {
+      "game": "BAL@CAR",
+      "label": "BAL @ CAR",
+      "day": "Sun",
+      "date": "2026-11-22",
+      "westgate": "CAR -2.5"
+    },
+    {
+      "game": "MIA@BUF",
+      "label": "MIA @ BUF",
+      "day": "Sun",
+      "date": "2026-11-22",
+      "westgate": "BUF -16.5"
+    },
+    {
+      "game": "NO@CHI",
+      "label": "NO @ CHI",
+      "day": "Sun",
+      "date": "2026-11-22",
+      "westgate": "CHI -11.5"
+    },
+    {
+      "game": "TEN@DAL",
+      "label": "TEN @ DAL",
+      "day": "Sun",
+      "date": "2026-11-22",
+      "westgate": "DAL -8.5"
+    },
+    {
+      "game": "TB@DET",
+      "label": "TB @ DET",
+      "day": "Sun",
+      "date": "2026-11-22",
+      "westgate": "DET -7"
+    },
+    {
+      "game": "PIT@PHI",
+      "label": "PIT @ PHI",
+      "day": "Sun",
+      "date": "2026-11-22",
+      "westgate": "PIT -4.5"
+    },
+    {
+      "game": "NYJ@LAC",
+      "label": "NYJ @ LAC",
+      "day": "Sun",
+      "date": "2026-11-22",
+      "westgate": "LAC -3"
+    },
+    {
+      "game": "LV@DEN",
+      "label": "LV @ DEN",
+      "day": "Sun",
+      "date": "2026-11-22",
+      "westgate": "DEN -10"
+    },
+    {
+      "game": "JAX@NYG",
+      "label": "JAX @ NYG",
+      "day": "Sun",
+      "date": "2026-11-22",
+      "westgate": "JAX -6"
+    },
+    {
+      "game": "MIN@SF",
+      "label": "MIN @ SF",
+      "day": "Sun",
+      "date": "2026-11-22",
+      "westgate": "SF -3",
+      "kickoff_pt": "Mexico City (neutral), Sun night"
+    },
+    {
+      "game": "CIN@WAS",
+      "label": "CIN @ WAS",
+      "day": "Mon",
+      "date": "2026-11-23",
+      "westgate": "CIN -6.5",
+      "kickoff_pt": "Mon night"
+    }
+  ],
+  "ais": [
+    {
+      "id": "claude",
+      "name": "Claude",
+      "received": "Wed Nov 18, 2026, 2:50 PM PT",
+      "sides": {
+        "IND@HOU": {
+          "pick": "IND +12.5",
+          "confidence": "5/10",
+          "reason": "Colts are gutted, but Houston is 0-4 at home and sits Hunter and Harrison. 12.5 asks a lot."
+        },
+        "ARI@KC": {
+          "pick": "ARI +15.5",
+          "confidence": "1/10",
+          "reason": "Coin flip. My number matches the line. Tiebreak: the Chiefs' schedule puts them in Buffalo on Thanksgiving, four days later."
+        },
+        "BAL@CAR": {
+          "pick": "CAR -2.5",
+          "confidence": "3/10",
+          "reason": "Five straight Baltimore losses, Brissett at quarterback, six days after a Monday night game."
+        },
+        "MIA@BUF": {
+          "pick": "MIA +16.5",
+          "confidence": "2/10",
+          "reason": "Too many points for my number, and Buffalo has that Thursday game. Flips at face-value results."
+        },
+        "NO@CHI": {
+          "pick": "NO +11.5",
+          "confidence": "1/10",
+          "reason": "Coin flip. Two-tenths of a point."
+        },
+        "TEN@DAL": {
+          "pick": "TEN +8.5",
+          "confidence": "1/10",
+          "reason": "46 points allowed by Dallas last week; Bland's high ankle sprain thins its secondary. Tennessee gave up 40. Low trust."
+        },
+        "TB@DET": {
+          "pick": "TB +7",
+          "confidence": "2/10",
+          "reason": "Detroit's defense is down Hutchinson and Jack Campbell. Number assumes Daniels. If Mayfield plays, 7 is generous."
+        },
+        "PIT@PHI": {
+          "pick": "PIT -4.5",
+          "confidence": "4/10",
+          "reason": "Philadelphia: seven straight losses, 1-4 at home, and a second career start for Milton."
+        },
+        "NYJ@LAC": {
+          "pick": "NYJ +3",
+          "confidence": "3/10",
+          "reason": "Chargers: 1-8, 0-4 at home, minus-95 in points, the worst per-game margin in the league. Off the card if Smith sits."
+        },
+        "LV@DEN": {
+          "pick": "LV +10",
+          "confidence": "1/10",
+          "reason": "Denver is 7-2 on a plus-12 point differential, so it wins close. A rookie's second start keeps this near a flip."
+        },
+        "JAX@NYG": {
+          "pick": "JAX -6",
+          "confidence": "2/10",
+          "reason": "My top-rated team against the softest schedule in the league. Jacksonville's lineup adds Bates and Davis."
+        },
+        "MIN@SF": {
+          "pick": "MIN +3",
+          "confidence": "3/10",
+          "reason": "Neutral field. Minnesota has allowed 126 points in nine games against the eighth-toughest schedule. San Francisco's ranks 26th."
+        },
+        "CIN@WAS": {
+          "pick": "CIN -6.5",
+          "confidence": "1/10",
+          "reason": "Coin flip. Two-tenths of a point toward the favorite."
+        }
+      },
+      "best_bets": [
+        {
+          "pick": "IND +12.5",
+          "game": "IND@HOU"
+        },
+        {
+          "pick": "PIT -4.5",
+          "game": "PIT@PHI"
+        },
+        {
+          "pick": "NYJ +3",
+          "game": "NYJ@LAC"
+        }
+      ],
+      "pick5": [
+        "IND +12.5",
+        "PIT -4.5",
+        "NYJ +3",
+        "CAR -2.5",
+        "MIN +3"
+      ],
+      "tiebreaker": 49
+    },
+    {
+      "id": "gemini",
+      "name": "Gemini",
+      "received": "Wed Nov 18, 2026, 2:31 PM PT",
+      "sides": {
+        "IND@HOU": {
+          "pick": "IND +12.5",
+          "confidence": "1/10",
+          "reason": "Zero verified edge; tiebreaker takes double-digit points on a short week."
+        },
+        "ARI@KC": {
+          "pick": "ARI +15.5",
+          "confidence": "1/10",
+          "reason": "Zero verified edge; tiebreaker takes more than two touchdowns of cushion."
+        },
+        "BAL@CAR": {
+          "pick": "CAR -2.5",
+          "confidence": "1/10",
+          "reason": "Zero verified edge; tiebreaker lays under a field goal with the home favorite."
+        },
+        "MIA@BUF": {
+          "pick": "MIA +16.5",
+          "confidence": "1/10",
+          "reason": "Zero verified edge; tiebreaker grabs the largest underdog number on the board."
+        },
+        "NO@CHI": {
+          "pick": "NO +11.5",
+          "confidence": "1/10",
+          "reason": "Zero verified edge; tiebreaker takes double-digit points in a coin-flip projection."
+        },
+        "TEN@DAL": {
+          "pick": "DAL -8.5",
+          "confidence": "1/10",
+          "reason": "Zero verified edge; tiebreaker sides with the higher market-rated home favorite."
+        },
+        "TB@DET": {
+          "pick": "DET -7",
+          "confidence": "1/10",
+          "reason": "Zero verified edge; tiebreaker lays a flat touchdown with the superior home rating."
+        },
+        "PIT@PHI": {
+          "pick": "PIT -4.5",
+          "confidence": "1/10",
+          "reason": "Zero verified edge; tiebreaker backs the stronger market-implied road favorite."
+        },
+        "NYJ@LAC": {
+          "pick": "LAC -3",
+          "confidence": "1/10",
+          "reason": "Zero verified edge; tiebreaker lays a field goal at home with the higher-rated team."
+        },
+        "LV@DEN": {
+          "pick": "LV +10",
+          "confidence": "1/10",
+          "reason": "Zero verified edge; tiebreaker takes the full 10 points in a division matchup."
+        },
+        "JAX@NYG": {
+          "pick": "JAX -6",
+          "confidence": "1/10",
+          "reason": "Zero verified edge; tiebreaker backs the superior market-rated road favorite under a TD."
+        },
+        "MIN@SF": {
+          "pick": "SF -3",
+          "confidence": "1/10",
+          "reason": "Zero verified edge; tiebreaker lays a field goal on a neutral field with the higher rating."
+        },
+        "CIN@WAS": {
+          "pick": "CIN -6.5",
+          "confidence": "1/10",
+          "reason": "Zero verified edge; tiebreaker lays less than a touchdown with the stronger road rating."
+        }
+      },
+      "best_bets": [
+        {
+          "pick": "MIA +16.5",
+          "game": "MIA@BUF"
+        },
+        {
+          "pick": "ARI +15.5",
+          "game": "ARI@KC"
+        },
+        {
+          "pick": "CAR -2.5",
+          "game": "BAL@CAR"
+        }
+      ],
+      "pick5": [
+        "MIA +16.5",
+        "ARI +15.5",
+        "IND +12.5",
+        "NO +11.5",
+        "CAR -2.5"
+      ],
+      "tiebreaker": 44
+    },
+    {
+      "id": "grok",
+      "name": "Grok",
+      "received": "Wed Nov 18, 2026, 2:29 PM PT",
+      "sides": {
+        "IND@HOU": {
+          "pick": "HOU -12.5",
+          "confidence": "6/10",
+          "reason": "HOU better on ranking/PD; IND OL injuries push it, but market already heavy—small lean home."
+        },
+        "ARI@KC": {
+          "pick": "KC -15.5",
+          "confidence": "7/10",
+          "reason": "KC clearly superior; ARI weak PD and schedule; market a bit high but still the side."
+        },
+        "BAL@CAR": {
+          "pick": "CAR -2.5",
+          "confidence": "5/10",
+          "reason": "BAL without Lamar big hit; CAR home and healthier. Coin-flip-ish on true talent."
+        },
+        "MIA@BUF": {
+          "pick": "BUF -16.5",
+          "confidence": "7/10",
+          "reason": "Bills dominant; Dolphins bottom-tier. Market high but still the play."
+        },
+        "NO@CHI": {
+          "pick": "CHI -11.5",
+          "confidence": "6/10",
+          "reason": "CHI stronger; NO average. Small market lean."
+        },
+        "TEN@DAL": {
+          "pick": "DAL -8.5",
+          "confidence": "5/10",
+          "reason": "DAL better; Titans weak. Close after blend."
+        },
+        "TB@DET": {
+          "pick": "DET -7",
+          "confidence": "8/10",
+          "reason": "DET stronger + Mayfield likely out (Daniels). Clear lean even after 35% move."
+        },
+        "PIT@PHI": {
+          "pick": "PIT -4.5",
+          "confidence": "6/10",
+          "reason": "PIT better; PHI backup QB. Market already favors PIT."
+        },
+        "NYJ@LAC": {
+          "pick": "LAC -3",
+          "confidence": "4/10",
+          "reason": "Close; Geno limited minor hit. Near coin-flip."
+        },
+        "LV@DEN": {
+          "pick": "DEN -10",
+          "confidence": "6/10",
+          "reason": "DEN winning and home; Raiders average. Market lean."
+        },
+        "JAX@NYG": {
+          "pick": "JAX -6",
+          "confidence": "5/10",
+          "reason": "JAX elite PD; NYG okay but road. Small edge."
+        },
+        "MIN@SF": {
+          "pick": "SF -3",
+          "confidence": "6/10",
+          "reason": "SF top-tier; MIN solid but ranking gap + no HFA. Slight lean SF."
+        },
+        "CIN@WAS": {
+          "pick": "CIN -6.5",
+          "confidence": "5/10",
+          "reason": "CIN hot; WAS average. Close after blend."
+        }
+      },
+      "best_bets": [
+        {
+          "pick": "DET -7",
+          "game": "TB@DET"
+        },
+        {
+          "pick": "BUF -16.5",
+          "game": "MIA@BUF"
+        },
+        {
+          "pick": "KC -15.5",
+          "game": "ARI@KC"
+        }
+      ],
+      "pick5": [
+        "DET -7",
+        "BUF -16.5",
+        "KC -15.5",
+        "HOU -12.5",
+        "PIT -4.5"
+      ],
+      "tiebreaker": 49
+    },
+    {
+      "id": "chatgpt",
+      "name": "ChatGPT",
+      "received": "Wed Nov 18, 2026, 2:30 PM PT",
+      "sides": {
+        "IND@HOU": {
+          "pick": "IND +12.5",
+          "confidence": "6/10",
+          "reason": "Houston is stronger, but its own losses and Indianapolis' large cushion make 12.5 a little too high."
+        },
+        "ARI@KC": {
+          "pick": "ARI +15.5",
+          "confidence": "6/10",
+          "reason": "KC remains much better, but the Chiefs' offensive-line availability concerns make this a big number to lay."
+        },
+        "BAL@CAR": {
+          "pick": "CAR -2.5",
+          "confidence": "5/10",
+          "reason": "The model lands exactly on the market; forced lean to the home side. Coin flip."
+        },
+        "MIA@BUF": {
+          "pick": "BUF -16.5",
+          "confidence": "5/10",
+          "reason": "Buffalo's rating supports the big spread, but the injury list trims the edge."
+        },
+        "NO@CHI": {
+          "pick": "CHI -11.5",
+          "confidence": "6/10",
+          "reason": "Chicago rates much better, and New Orleans' multiple offensive-line problems are important here."
+        },
+        "TEN@DAL": {
+          "pick": "TEN +8.5",
+          "confidence": "5/10",
+          "reason": "The market is a shade high relative to my number; only a very small dog lean."
+        },
+        "TB@DET": {
+          "pick": "DET -7",
+          "confidence": "5/10",
+          "reason": "The model matches the spread. Hutchinson's absence is a major offset to Detroit's power rating. Coin flip."
+        },
+        "PIT@PHI": {
+          "pick": "PIT -4.5",
+          "confidence": "5/10",
+          "reason": "Pittsburgh grades better, but the projected edge is only about a third of a point after the McCormick deduction."
+        },
+        "NYJ@LAC": {
+          "pick": "LAC -3",
+          "confidence": "5/10",
+          "reason": "Slight Chargers lean; Geno Smith's ankle creates some uncertainty, but not enough for a strong position."
+        },
+        "LV@DEN": {
+          "pick": "DEN -10",
+          "confidence": "6/10",
+          "reason": "Denver is substantially higher on the power board, and my number is a little beyond the market."
+        },
+        "JAX@NYG": {
+          "pick": "NYG +6",
+          "confidence": "5/10",
+          "reason": "The market and model are virtually identical; forced lean to the points. Coin flip."
+        },
+        "MIN@SF": {
+          "pick": "MIN +3",
+          "confidence": "5/10",
+          "reason": "Neutral site removes home field; my blended number makes this just short of a field goal."
+        },
+        "CIN@WAS": {
+          "pick": "WAS +6.5",
+          "confidence": "5/10",
+          "reason": "The number is essentially the market number. Forced lean to the points. Coin flip."
+        }
+      },
+      "best_bets": [
+        {
+          "pick": "IND +12.5",
+          "game": "IND@HOU"
+        },
+        {
+          "pick": "ARI +15.5",
+          "game": "ARI@KC"
+        },
+        {
+          "pick": "CHI -11.5",
+          "game": "NO@CHI"
+        }
+      ],
+      "pick5": [
+        "IND +12.5",
+        "ARI +15.5",
+        "CHI -11.5",
+        "DEN -10",
+        "MIN +3"
+      ],
+      "tiebreaker": 47
+    }
+  ],
+  "vector": {
+    "name": "Super Agent Vector",
+    "received": "Wed Nov 18, 2026, 1:16 PM PT board",
+    "sides": {
+      "IND@HOU": "IND +12.5",
+      "ARI@KC": "ARI +15.5",
+      "BAL@CAR": "CAR -2.5",
+      "MIA@BUF": "MIA +16.5",
+      "NO@CHI": "NO +11.5",
+      "TEN@DAL": "DAL -8.5",
+      "TB@DET": "TB +7",
+      "PIT@PHI": "PHI +4.5",
+      "NYJ@LAC": "NYJ +3",
+      "LV@DEN": "LV +10",
+      "JAX@NYG": "JAX -6",
+      "MIN@SF": "SF -3",
+      "CIN@WAS": "WAS +6.5"
+    },
+    "best_bets": [],
+    "leans": [
+      {
+        "pick": "IND +12.5",
+        "game": "IND@HOU"
+      },
+      {
+        "pick": "ARI +15.5",
+        "game": "ARI@KC"
+      },
+      {
+        "pick": "CAR -2.5",
+        "game": "BAL@CAR"
+      },
+      {
+        "pick": "MIA +16.5",
+        "game": "MIA@BUF"
+      },
+      {
+        "pick": "NO +11.5",
+        "game": "NO@CHI"
+      },
+      {
+        "pick": "DAL -8.5",
+        "game": "TEN@DAL"
+      },
+      {
+        "pick": "TB +7",
+        "game": "TB@DET"
+      },
+      {
+        "pick": "PHI +4.5",
+        "game": "PIT@PHI"
+      },
+      {
+        "pick": "NYJ +3",
+        "game": "NYJ@LAC"
+      },
+      {
+        "pick": "LV +10",
+        "game": "LV@DEN"
+      },
+      {
+        "pick": "JAX -6",
+        "game": "JAX@NYG"
+      },
+      {
+        "pick": "SF -3",
+        "game": "MIN@SF"
+      },
+      {
+        "pick": "WAS +6.5",
+        "game": "CIN@WAS"
+      }
+    ],
+    "lean_label": "Leans (provisional)",
+    "pick5": [
+      "WAS +6.5",
+      "NO +11.5",
+      "TB +7",
+      "SF -3",
+      "IND +12.5"
+    ],
+    "pick5_label": "Provisional top 5 (not Best Bets)"
+  },
+  "consensus": [
+    "IND +12.5: Claude, Gemini, and ChatGPT. Grok took HOU -12.5. Vector leans IND +12.5.",
+    "ARI +15.5: Claude, Gemini, and ChatGPT. Grok took KC -15.5. Vector leans ARI +15.5.",
+    "CAR -2.5: all four AIs. Vector leans CAR -2.5.",
+    "Split: MIA +16.5 (Claude and Gemini) against BUF -16.5 (Grok and ChatGPT). Vector leans MIA +16.5.",
+    "Split: NO +11.5 (Claude and Gemini) against CHI -11.5 (Grok and ChatGPT). Vector leans NO +11.5.",
+    "Split: TEN +8.5 (Claude and ChatGPT) against DAL -8.5 (Gemini and Grok). Vector leans DAL -8.5.",
+    "DET -7: Gemini, Grok, and ChatGPT. Claude took TB +7. Vector leans TB +7.",
+    "PIT -4.5: all four AIs. Vector leans PHI +4.5.",
+    "LAC -3: Gemini, Grok, and ChatGPT. Claude took NYJ +3. Vector leans NYJ +3.",
+    "Split: LV +10 (Claude and Gemini) against DEN -10 (Grok and ChatGPT). Vector leans LV +10.",
+    "JAX -6: Claude, Gemini, and Grok. ChatGPT took NYG +6. Vector leans JAX -6.",
+    "Split: MIN +3 (Claude and ChatGPT) against SF -3 (Gemini and Grok). Vector leans SF -3.",
+    "CIN -6.5: Claude, Gemini, and Grok. ChatGPT took WAS +6.5. Vector leans WAS +6.5."
+  ],
+  "results": {},
+  "grades": {
+    "claude": {
+      "sides": [
+        0,
+        0,
+        0
+      ],
+      "sides_pending": 13,
+      "best_bet_units": 0,
+      "best_bets_pending": 3,
+      "pick5": [
+        0,
+        0,
+        0
+      ],
+      "pick5_pending": 5
+    },
+    "gemini": {
+      "sides": [
+        0,
+        0,
+        0
+      ],
+      "sides_pending": 13,
+      "best_bet_units": 0,
+      "best_bets_pending": 3,
+      "pick5": [
+        0,
+        0,
+        0
+      ],
+      "pick5_pending": 5
+    },
+    "grok": {
+      "sides": [
+        0,
+        0,
+        0
+      ],
+      "sides_pending": 13,
+      "best_bet_units": 0,
+      "best_bets_pending": 3,
+      "pick5": [
+        0,
+        0,
+        0
+      ],
+      "pick5_pending": 5
+    },
+    "chatgpt": {
+      "sides": [
+        0,
+        0,
+        0
+      ],
+      "sides_pending": 13,
+      "best_bet_units": 0,
+      "best_bets_pending": 3,
+      "pick5": [
+        0,
+        0,
+        0
+      ],
+      "pick5_pending": 5
+    },
+    "vector": {
+      "sides": [
+        0,
+        0,
+        0
+      ],
+      "sides_pending": 13,
+      "best_bet_units": 0,
+      "best_bets_pending": 0,
+      "pick5": [
+        0,
+        0,
+        0
+      ],
+      "pick5_pending": 5
+    }
+  },
+  "ungraded_games": [
+    "IND@HOU",
+    "ARI@KC",
+    "BAL@CAR",
+    "MIA@BUF",
+    "NO@CHI",
+    "TEN@DAL",
+    "TB@DET",
+    "PIT@PHI",
+    "NYJ@LAC",
+    "LV@DEN",
+    "JAX@NYG",
+    "MIN@SF",
+    "CIN@WAS"
+  ],
+  "graded": false
+}

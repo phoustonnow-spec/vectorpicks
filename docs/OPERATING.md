@@ -51,7 +51,18 @@ Keep the week's source files in the repo. A copy in Google Drive is a backup, no
 
 ## What failed this week
 
-Report it in the pull request. For Nov 17, 2026 the Tuesday package grades Week 10 complete and posts Week 11 power rankings. Week 10 is 14 of 14 at the Thursday Nov 12 Westgate lines: full card 7-7, Best Bets 1-1 (DAL +4.5 loss, LAC +4.5 win), Leans 3-4, Card 3-2. Monday night is LAC 23, BAL 20. Tracked weeks are Best Bets 12-10-0 (+2u), Leans 16-24-0 (−8u), Card tier 7-7-1 (0u), full card 36-42-1 (−6u). The Week 11 Westgate SuperContest sheet was not posted as of Tue Nov 17, 2026 8:56 AM PT, so there is no Week 11 card and no Week 11 line. Open gaps:
+Report it in the pull request. For Nov 18, 2026 the Wednesday AI board is a provisional DraftKings card fetched at 1:16 PM PT. Claude, Gemini, Grok, and ChatGPT each have a side, a confidence, and a reason on all 13 games, three Best Bets, and a ranked top 5. Vector has a provisional lean on all 13 and a provisional top 5, and no Best Bets. All 13 games are pending. MIN vs SF is in Mexico City (neutral). Byes: ATL, CLE, GB, LAR, NE, SEA. ESPN that afternoon shows every game scheduled and none final. This board is not the Westgate card. The Week 11 Westgate SuperContest sheet is still not the card of record, so the weekly card, the record, and the live board still have no Week 11 lines. Open gaps:
+
+- No Week 11 Westgate card. The card, the record, and the live board wait on that sheet.
+- The Wednesday AI board stays labeled DraftKings. It is not graded, and it is not the Westgate card.
+- Injury adjustments on the Week 11 rankings and Vector leans are provisional. Not a fresh full rerun.
+- Saturday Week 10 tier changes stay a note. Graded rows stay the Thursday card.
+- Week 4's 13 unpublished model sides stay off the record.
+- The Week 10 AI board stays DraftKings and is graded at those lines.
+- The Shorts contest-leader block is still the Sunday Nov 8 snapshot. Those rows are not Vector picks.
+- Entertainment only, not betting advice.
+
+For Nov 17, 2026 the Tuesday package grades Week 10 complete and posts Week 11 power rankings. Week 10 is 14 of 14 at the Thursday Nov 12 Westgate lines: full card 7-7, Best Bets 1-1 (DAL +4.5 loss, LAC +4.5 win), Leans 3-4, Card 3-2. Monday night is LAC 23, BAL 20. Tracked weeks are Best Bets 12-10-0 (+2u), Leans 16-24-0 (−8u), Card tier 7-7-1 (0u), full card 36-42-1 (−6u). The Week 11 Westgate SuperContest sheet was not posted as of Tue Nov 17, 2026 8:56 AM PT, so there is no Week 11 card and no Week 11 line. Open gaps:
 
 - No Week 11 picks, edges, or lines. The card waits on that sheet.
 - Injury adjustments on the Week 11 rankings are provisional. Not a fresh full rerun.
