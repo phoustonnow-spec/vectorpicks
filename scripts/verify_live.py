@@ -2,8 +2,9 @@
 """Check the live site after a merge. A local build is not a publish.
 
 Exit 0 only when https://www.vectorpicks.com serves the Week 11 rankings,
-the graded Week 10 card, and the tracked-weeks record.
-Exit 1 when production is still the Week 10 pending card or is missing a marker.
+the graded Week 10 card, the tracked-weeks record, and the Week 11
+provisional DraftKings AI board.
+Exit 1 when production is still the Week 11 AI-picks pending notice or is missing a marker.
 
   python3 scripts/verify_live.py
 """
@@ -29,7 +30,7 @@ LIVE_MARKERS = (
 )
 HOME_MARKERS = (
     "Week 11",
-    "Tuesday, Nov 17, 2026 PT",
+    "Wednesday, Nov 18, 2026 PT",
     "Week 11 power rankings are posted. The Week 11 card is not.",
     'id="week-11-status"',
     "Week 11 card pending: the Westgate SuperContest Week 11 sheet was not posted as of Tue Nov 17, 2026 8:56 AM PT.",
@@ -150,12 +151,45 @@ RECORD_MARKERS = (
     "Saturday tier changes are not folded in.",
 )
 AI_MARKERS = (
-    "Week 11 AI picks pending",
-    "No sides were invented.",
-    "No Week 11 picks, edges, or line comparisons",
+    "Week 11",
+    "PROVISIONAL",
+    "DraftKings line",
+    "Not a Westgate card.",
+    "1:16 PM PT",
+    "All 13 games are pending.",
+    "IND +12.5",
+    "PIT \u22124.5",
+    "NYJ +3",
+    "CAR \u22122.5",
+    "MIN +3",
+    "Claude",
+    "Gemini",
+    "Grok",
+    "ChatGPT",
+    "Mexico City",
     "game.html",
-    "ai-picks-2026-w09.html",
+    "ai-picks-2026-w11.html",
     "ai-picks-2026-w10.html",
+    "ai-picks-2026-w09.html",
+)
+W11_URL = "https://www.vectorpicks.com/ai-picks-2026-w11.html"
+W11_MARKERS = (
+    "Week 11",
+    "archive",
+    "PROVISIONAL",
+    "DraftKings line",
+    "Not a Westgate card.",
+    "1:16 PM PT",
+    "All 13 games are pending.",
+    "IND +12.5",
+    "PIT \u22124.5",
+    "NYJ +3",
+    "CAR \u22122.5",
+    "MIN +3",
+    "Claude",
+    "Gemini",
+    "Grok",
+    "ChatGPT",
 )
 W10_URL = "https://www.vectorpicks.com/ai-picks-2026-w10.html"
 W9_URL = "https://www.vectorpicks.com/ai-picks-2026-w09.html"
@@ -210,7 +244,7 @@ STALE = (
 
 
 def fetch(url):
-    bust = url + ("&" if "?" in url else "?") + "cb=20261117w11"
+    bust = url + ("&" if "?" in url else "?") + "cb=20261118w11"
     request = urllib.request.Request(bust, headers={
         "Cache-Control": "no-cache",
         "Pragma": "no-cache",
@@ -246,8 +280,20 @@ def check(name, status, body, markers):
         for edge in ("Leans 19-23", "Card tier 9-7-1", "Full card 39-39-1"):
             if edge in body:
                 present.append(edge)
-    if name == "ai-picks" and "Week 10 early look" in body:
-        present.append("Week 10 early look")
+    if name in ("ai-picks", "ai-picks-w11"):
+        for edge in (
+            "Week 10 early look",
+            "Week 11 AI picks pending",
+            "No sides were invented.",
+            "AI picks are not published yet",
+        ):
+            if edge in body:
+                present.append(edge)
+        claude = body.split("<h2>Claude</h2>", 1)[-1].split("<h2>", 1)[0]
+        order = ["IND +12.5", "PIT \u22124.5", "NYJ +3", "CAR \u22122.5", "MIN +3"]
+        pos = [claude.find(p) for p in order]
+        if any(i < 0 for i in pos) or pos != sorted(pos):
+            present.append("Claude top 5 is not IND +12.5, PIT -4.5, NYJ +3, CAR -2.5, MIN +3")
     if name == "week9-card" and ("WAS +2.5" in body or "1cY3MSjjkzE" in body or "fvn8h67Mze0" in body or "8cZ7qpdWyvU" in body or "Westgate SuperContest Week 10" in body):
         present.append("week 10 card leaked into the week 9 archive")
     order_bad = name == "shorts" and (
@@ -280,6 +326,7 @@ def main():
         ("card", CARD_URL, CARD_MARKERS),
         ("record", RECORD_URL, RECORD_MARKERS),
         ("ai-picks", AI_URL, AI_MARKERS),
+        ("ai-picks-w11", W11_URL, W11_MARKERS),
         ("ai-picks-w10", W10_URL, W10_MARKERS),
         ("ai-picks-w09", W9_URL, W9_MARKERS),
         ("week9-card", W9_CARD_URL, W9_CARD_MARKERS),

@@ -109,12 +109,22 @@ def test_built_pages():
     assert "1cY3MSjjkzE" in card and "fvn8h67Mze0" in card and "8cZ7qpdWyvU" in card
     assert "Week 10 Saturday update (Nov 14, 2026)" in card
     assert "WAS 24, NYG 21" in card and "WAS +0.3" in card
-    assert "cXnzFQPN7mE" not in home + ai + card + shorts + archive
-    assert "No sides were invented" in ai and "Week 11 AI picks pending" in ai
+    w11 = open(os.path.join(root, "ai-picks-2026-w11.html"), encoding="utf-8").read()
+    assert "cXnzFQPN7mE" not in home + ai + card + shorts + archive + w11
+    assert "Week 11 AI picks pending" not in ai and "No sides were invented" not in ai
+    assert "AI picks are not published yet" not in ai
+    assert "<title>AI Picks Week 11 2026 |" in ai
+    assert "PROVISIONAL" in ai and "DraftKings line" in ai and "Not a Westgate card." in ai
+    assert "1:16 PM PT" in ai and "All 13 games are pending." in ai and "Mexico City" in ai
+    assert "IND +12.5" in ai and "PIT \u22124.5" in ai and "NYJ +3" in ai and "CAR \u22122.5" in ai and "MIN +3" in ai
+    assert "Claude" in ai and "Gemini" in ai and "Grok" in ai and "ChatGPT" in ai
+    assert "PROVISIONAL" in w11 and "DraftKings line" in w11 and "Not a Westgate card." in w11
+    assert "IND +12.5" in w11 and "Final:" not in w11
     assert "PROVISIONAL" in w10 and "DraftKings line" in w10 and "Not a Westgate card." in w10
     assert "Final: LAC 23, BAL 20" in w10 and "Final: SF 46, DAL 40" in w10
     assert w10.count("Final:") == 14
-    assert "ai-picks-2026-w10.html" in ai and "Week 9" in archive
+    assert "1:16 PM PT" not in w10 and "IND @ HOU" not in w10
+    assert "ai-picks-2026-w11.html" in ai and "ai-picks-2026-w10.html" in ai and "Week 9" in archive
     assert "DraftKings line" in archive and "Westgate line" not in archive.split("ai-grid", 1)[-1][:500]
     assert 'id="vector-top5"' in archive and "Vector Top 5" in archive and "Westgate SuperContest" in archive
     assert "ARI +12.5" in archive and ">2-3<" in archive
