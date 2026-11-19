@@ -51,12 +51,12 @@ Keep the week's source files in the repo. A copy in Google Drive is a backup, no
 
 ## What failed this week
 
-Report it in the pull request. For Nov 19, 2026 the Thursday card is the Westgate SuperContest Week 11 contest card posted Wed Nov 18. All 13 games have a side and are pending. The Best Bet is WAS +6.5. Leans are NO +11.5 and TB +7. TNF is IND +12.5 at HOU, tier Card, Our Spread IND +11.0, gap 1.5, kickoff Thu Nov 19, 5:15 PM PT. MIA +16.5 and PHI +4.5 stay on the full card as model side only, not a recommendation. Week 10 stays the Thursday Nov 12 card, final 7-7. Tracked weeks stay Best Bets 12-10-0, Leans 16-24-0, Card tier 7-7-1, full card 36-42-1, with the 13 Week 11 rows pending. No Thursday Short URL was provided, so the video link is empty. Open gaps:
+Report it in the pull request. For Nov 19, 2026 the Thursday card is the Westgate SuperContest Week 11 contest card posted Wed Nov 18. All 13 games have a side and are pending. The Best Bet is WAS +6.5. Leans are NO +11.5 and TB +7. TNF is IND +12.5 at HOU, tier Card, Our Spread IND +11.0, gap 1.5, kickoff Thu Nov 19, 5:15 PM PT. MIA +16.5 and PHI +4.5 stay on the full card as model side only, not a recommendation. Week 10 stays the Thursday Nov 12 card, final 7-7. Tracked weeks stay Best Bets 12-10-0, Leans 16-24-0, Card tier 7-7-1, full card 36-42-1, with the 13 Week 11 rows pending. The public Thursday Short is https://www.youtube.com/shorts/LqjTjbZOWb4. Open gaps:
 
 - Vector's Week 11 numbers are provisional. The injury layer is still being reconciled. This is not a fresh full rerun.
 - Tiers are confidence labels, not proven probabilities.
 - MIA +16.5 and PHI +4.5 are model side only, not a recommendation.
-- No Thursday Short. The video link stays off until a verified public URL exists.
+- The Thursday Short is public and is not a line change.
 - The Wednesday AI board stays its own labeled board. It is not this Westgate card, and it is not graded.
 - Injury adjustments on the Week 11 rankings stay provisional.
 - Saturday Week 10 tier changes stay a note. Graded rows stay the Thursday Nov 12 card.

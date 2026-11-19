@@ -74,13 +74,14 @@ HOME_MARKERS = (
     "10 pending",
     "13 pending",
     "Tracked weeks",
-    "8cZ7qpdWyvU",
-    'data-yt="8cZ7qpdWyvU"',
-    "fvn8h67Mze0",
-    "1cY3MSjjkzE",
+    "LqjTjbZOWb4",
+    'data-yt="LqjTjbZOWb4"',
+    "Week 11 NFL AI Picks: IND +12.5 TNF, WAS +6.5 Best Bet | Week 10 Recap",
     "Entertainment and opinion only. Not betting advice.",
 )
 SHORTS_MARKERS = (
+    "LqjTjbZOWb4",
+    "Week 11 NFL AI Picks: IND +12.5 TNF, WAS +6.5 Best Bet | Week 10 Recap",
     "8cZ7qpdWyvU",
     "Week 10 Westgate SuperContest Top 5 Leaders",
     "NEOPOLITAN-1 30-14-1",
@@ -141,6 +142,8 @@ CARD_MARKERS = (
     "Thursday picks, Saturday update.",
     "Entertainment only, not betting advice.",
     "Byes: ATL, CLE, GB, LAR, NE, SEA",
+    "https://www.youtube.com/shorts/LqjTjbZOWb4",
+    "Week 11 NFL AI Picks: IND +12.5 TNF, WAS +6.5 Best Bet | Week 10 Recap",
 )
 RECORD_MARKERS = (
     "Week 10 final 7-7 (Best Bets 1-1, Leans 3-4, Card 3-2).",
@@ -280,7 +283,7 @@ STALE = (
 
 
 def fetch(url):
-    bust = url + ("&" if "?" in url else "?") + "cb=20261119w11thu"
+    bust = url + ("&" if "?" in url else "?") + "cb=20261119w11short"
     request = urllib.request.Request(bust, headers={
         "Cache-Control": "no-cache",
         "Pragma": "no-cache",
@@ -309,8 +312,8 @@ def check(name, status, body, markers):
         rest = body.split("Rest of card:", 1)[1].split("</p>", 1)[0]
         if "MIA +16.5" in rest or "PHI +4.5" in rest:
             present.append("model-only sides are in the rest of the card")
-    if name == "card" and ("/shorts/" in body or body.split("Full card: Market vs Our Spread", 1)[-1].count("PENDING") != 13):
-        present.append("Week 11 card is not 13 pending rows without a Short")
+    if name == "card" and (body.count("https://www.youtube.com/shorts/LqjTjbZOWb4") != 1 or body.split("Full card: Market vs Our Spread", 1)[-1].count("PENDING") != 13):
+        present.append("Week 11 card Short is missing or the card is not 13 pending rows")
     if name == "live" and ("Week 11 has no card in the repo" in body or "Week 11 card pending" in body):
         present.append("live board is still the Week 11 gap page")
     if name in ("card", "record"):
@@ -343,10 +346,11 @@ def check(name, status, body, markers):
             present.append("Claude top 5 is not IND +12.5, PIT -4.5, NYJ +3, CAR -2.5, MIN +3")
     if name == "week9-card" and ("WAS +2.5" in body or "1cY3MSjjkzE" in body or "fvn8h67Mze0" in body or "8cZ7qpdWyvU" in body or "Westgate SuperContest Week 10" in body):
         present.append("week 10 card leaked into the week 9 archive")
-    if name == "week10-card" and ("Week 11" in body or "IND +12.5" in body or "WAS +6.5" in body):
+    if name == "week10-card" and ("Week 11" in body or "IND +12.5" in body or "WAS +6.5" in body or "LqjTjbZOWb4" in body):
         present.append("week 11 card leaked into the week 10 archive")
     order_bad = name == "shorts" and (
-        body.find("8cZ7qpdWyvU") > body.find("fvn8h67Mze0")
+        body.find("LqjTjbZOWb4") > body.find("8cZ7qpdWyvU")
+        or body.find("8cZ7qpdWyvU") > body.find("fvn8h67Mze0")
         or body.find("fvn8h67Mze0") > body.find("1cY3MSjjkzE")
         or body.find("1cY3MSjjkzE") > body.find("4-NrBHuRlUE")
         or body.find("4-NrBHuRlUE") > body.find("q2OazIWZ5vE")

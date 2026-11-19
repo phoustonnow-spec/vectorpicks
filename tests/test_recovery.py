@@ -77,6 +77,9 @@ def test_built_pages():
     assert "NYJ +8.5" not in home and "Week 10 early look" not in home
     assert "Vector power rankings entering Week 10" not in home
     shorts = open(os.path.join(root, "shorts.html"), encoding="utf-8").read()
+    assert "LqjTjbZOWb4" in home and 'data-yt="LqjTjbZOWb4"' in home
+    assert "Week 11 NFL AI Picks: IND +12.5 TNF, WAS +6.5 Best Bet | Week 10 Recap" in home
+    assert "LqjTjbZOWb4" in shorts and shorts.find("LqjTjbZOWb4") < shorts.find("8cZ7qpdWyvU")
     assert "8cZ7qpdWyvU" in shorts and shorts.find("8cZ7qpdWyvU") < shorts.find("fvn8h67Mze0")
     assert "fvn8h67Mze0" in shorts and shorts.find("fvn8h67Mze0") < shorts.find("1cY3MSjjkzE")
     assert "1cY3MSjjkzE" in shorts and shorts.find("1cY3MSjjkzE") < shorts.find("4-NrBHuRlUE")
@@ -116,11 +119,11 @@ def test_built_pages():
     assert "1cY3MSjjkzE" in w10_card and "fvn8h67Mze0" in w10_card and "8cZ7qpdWyvU" in w10_card
     assert "Week 10 Saturday update (Nov 14, 2026)" in w10_card
     assert "WAS 24, NYG 21" in w10_card and "WAS +0.3" in w10_card
-    assert "Week 11" not in w10_card and "IND +12.5" not in w10_card and "WAS +6.5" not in w10_card
+    assert "Week 11" not in w10_card and "IND +12.5" not in w10_card and "WAS +6.5" not in w10_card and "LqjTjbZOWb4" not in w10_card
     assert "IND +12.5" in card and "WAS +6.5" in card and "HOU \u221212.5" in card
     assert "Week 10 final 7-7" in card and card.split("Full card: Market vs Our Spread", 1)[-1].count("PENDING") == 13
     assert "Week 10 early look" not in card and "Thu card line" not in card
-    assert "/shorts/" not in card
+    assert card.count("https://www.youtube.com/shorts/LqjTjbZOWb4") == 1
     assert "Model side only, not a recommendation" in card
     w11 = open(os.path.join(root, "ai-picks-2026-w11.html"), encoding="utf-8").read()
     assert "cXnzFQPN7mE" not in home + ai + card + shorts + archive + w11
