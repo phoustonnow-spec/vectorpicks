@@ -62,13 +62,18 @@ def test_built_pages():
     archive_card = open(os.path.join(root, "card-2026-w09.html"), encoding="utf-8").read()
     assert build.nfl_week(build.today_pt()) == 11
     assert "Week 11" in home and build.stamp_pt(build.today_pt()) in home
-    assert "Week 11 card pending" in home and "8:56 AM PT" in home
-    assert "No Week 11 picks, edges, or line comparisons" in home
+    assert "IND +12.5" in home and "WAS +6.5 vs CIN (Mon)" in home
+    assert "NO +11.5 at CHI" in home and "TB +7 at DET (QB status pending)" in home
+    assert "Model side only, not a recommendation: MIA +16.5 at BUF, PHI +4.5 vs PIT." in home
+    assert "13 games pending. Not graded." in home
+    assert "Week 11 card pending" not in home and "No Week 11 picks, edges, or line comparisons" not in home
     assert "Week 10 final 7-7 (Best Bets 1-1, Leans 3-4, Card 3-2)." in home
     assert "12-10-0" in home and "16-24-0" in home and "7-7-1" in home and "36-42-1" in home
-    assert "DAL +4.5" in home and "LAC +4.5" in home and "SF 46, DAL 40" in home and "LAC 23, BAL 20" in home
+    assert "1 pending" in home and "2 pending" in home and "10 pending" in home and "13 pending" in home
+    assert "Official Westgate Week 10 standings" in home and "LAMBDA LAMBDA LAMBDA-1 36-13-1" in home
+    assert "DAL +4.5 vs SF" in home and "LAC +4.5" in home and "SF 46, DAL 40" in home and "LAC 23, BAL 20" in home
     assert 'id="rankings"' in home and "5.2" in home and "Injury adjustments are provisional this week" in home
-    assert "1 of 14 graded" not in home and "13 games pending" not in home and "11-9-0" not in home
+    assert "1 of 14 graded" not in home and "11-9-0" not in home
     assert "NYJ +8.5" not in home and "Week 10 early look" not in home
     assert "Vector power rankings entering Week 10" not in home
     shorts = open(os.path.join(root, "shorts.html"), encoding="utf-8").read()
@@ -92,7 +97,8 @@ def test_built_pages():
     assert shorts.count('res-win">WIN') == 20
     assert shorts.count('res-loss">LOSS') == 27
     assert shorts.count('res-pend">Pending') == 8
-    assert "Official Westgate standings after Week 9" in shorts
+    assert "Official Westgate Week 10 standings" in shorts and "LAMBDA LAMBDA LAMBDA-1 36-13-1" in shorts
+    assert "Sunday Nov 8, 2026 unofficial snapshot" in shorts
     lowered = shorts.lower()
     for bad in ("kevin cole", "unexpected points", "walterfootball", "walter football", "dr bob", "dr. bob"):
         assert bad not in lowered
@@ -103,12 +109,19 @@ def test_built_pages():
     assert "BUF 23, MIN 6" in archive_card and "MIN +3.5" in archive_card and "No side" in archive_card
     assert "WAS +2.5" not in archive_card and "1cY3MSjjkzE" not in archive_card and "fvn8h67Mze0" not in archive_card and "8cZ7qpdWyvU" not in archive_card
     assert "Week 11" not in archive_card
-    assert "WAS +2.5" in card and "DAL +4.5" in card and "LAC +4.5" in card
-    assert "Week 10 final 7-7" in card and "PENDING" not in card.split("Full card: Market vs Our Spread", 1)[-1]
+    w10_card = open(os.path.join(root, "card-2026-w10.html"), encoding="utf-8").read()
+    assert "WAS +2.5" in w10_card and "DAL +4.5" in w10_card and "LAC +4.5" in w10_card
+    assert "Week 10 final 7-7" in w10_card and "PENDING" not in w10_card.split("Full card: Market vs Our Spread", 1)[-1]
+    assert "Week 10 early look" not in w10_card and "Thu card line" not in w10_card
+    assert "1cY3MSjjkzE" in w10_card and "fvn8h67Mze0" in w10_card and "8cZ7qpdWyvU" in w10_card
+    assert "Week 10 Saturday update (Nov 14, 2026)" in w10_card
+    assert "WAS 24, NYG 21" in w10_card and "WAS +0.3" in w10_card
+    assert "Week 11" not in w10_card and "IND +12.5" not in w10_card and "WAS +6.5" not in w10_card
+    assert "IND +12.5" in card and "WAS +6.5" in card and "HOU \u221212.5" in card
+    assert "Week 10 final 7-7" in card and card.split("Full card: Market vs Our Spread", 1)[-1].count("PENDING") == 13
     assert "Week 10 early look" not in card and "Thu card line" not in card
-    assert "1cY3MSjjkzE" in card and "fvn8h67Mze0" in card and "8cZ7qpdWyvU" in card
-    assert "Week 10 Saturday update (Nov 14, 2026)" in card
-    assert "WAS 24, NYG 21" in card and "WAS +0.3" in card
+    assert "/shorts/" not in card
+    assert "Model side only, not a recommendation" in card
     w11 = open(os.path.join(root, "ai-picks-2026-w11.html"), encoding="utf-8").read()
     assert "cXnzFQPN7mE" not in home + ai + card + shorts + archive + w11
     assert "Week 11 AI picks pending" not in ai and "No sides were invented" not in ai

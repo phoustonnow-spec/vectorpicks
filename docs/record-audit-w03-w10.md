@@ -60,3 +60,7 @@ Leans and the Card tier are higher by 10 wins and 5 losses together (19-23 and 9
 - No game is graded twice. Each published side matches the week file and the tracker once.
 - Week 8's Saturday short moved PIT −3.5 from Lean to Best Bet and SEA −3 from Lean to Pass before those kickoffs. Applying that would make Best Bets 12-9-0 on the Nov 14 through-TNF tally. Both tallies were 11-9, so neither one applied it. The graded rows stay the Thursday card.
 - Week 10 Saturday moves are graded in the addendum above. They are not folded into the rows. TNF stays the Thursday Lean, WAS +2.5, win.
+
+## Week 11
+
+Week 11 is not in this audit. The Thursday Nov 19 card adds 13 pending rows at the Westgate SuperContest Week 11 lines. Those rows do not change the Weeks 3-10 totals above.

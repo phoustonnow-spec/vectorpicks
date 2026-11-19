@@ -288,6 +288,34 @@
         "Vector injury adjustments are still provisional",
         "Contest-leader rows stay the Sunday snapshot and are not on the Vector record"
       ]
+    },
+    {
+      "week": 11,
+      "season": 2026,
+      "published_at_pt": "2026-11-19",
+      "dedup_key": "2026-w11-thursday-westgate",
+      "source": "Thursday Nov 19, 2026 Vector card at the Westgate SuperContest Week 11 contest card posted Wed Nov 18. Vector numbers are provisional; the injury layer is still being reconciled. No public Short URL was provided.",
+      "included": [
+        "Week 11 Thursday Vector card, Westgate SuperContest Week 11 lines, a side on all 13 games",
+        "Best Bet WAS +6.5; Leans NO +11.5 and TB +7; TNF Card IND +12.5 at HOU, kickoff Thu Nov 19, 5:15 PM PT",
+        "MIA +16.5 and PHI +4.5 on the full card as model side only, not a recommendation",
+        "Week 11 tracker rows pending, not graded",
+        "Week 10 recap kept at 7-7, Best Bets 1-1, Leans 3-4, Card 3-2, Monday night LAC 23, BAL 20",
+        "Official Westgate SuperContest and Gold leaders after Week 10, not Vector picks",
+        "Empty video_url placeholder; no Thursday Short link rendered"
+      ],
+      "public_video_ids": [],
+      "never_embed": [
+        "cXnzFQPN7mE"
+      ],
+      "gaps": [
+        "Injury layer still being reconciled; not a fresh full rerun",
+        "No Thursday Short URL",
+        "MIA +16.5 and PHI +4.5 are model side only, not a recommendation",
+        "Shorts contest-leader block stays the Sunday Nov 8 unofficial snapshot",
+        "Wednesday AI board stays its own labeled board and is not this Westgate card",
+        "Tracked-weeks record is this page's audited rows only; Week 11 is pending"
+      ]
     }
   ]
 }
