@@ -1,0 +1,250 @@
+{
+  "season": 2026,
+  "week": 11,
+  "as_of": "Thu Nov 19, 2026 ~8:45 AM PT",
+  "pass_policy": "full",
+  "flags_confirmed": false,
+  "line_column": "Westgate",
+  "line_source": "Westgate SuperContest Week 11 contest card (posted Wed Nov 18, 2026)",
+  "market_source": "no separate market table on this Thursday card (blank, not invented)",
+  "hfa_note": "Home field is about 2 points, and 0 at a neutral site (Mexico City). The injury layer on these numbers is still being reconciled.",
+  "update_note": "Thursday Nov 19, 2026 card. Vector numbers are provisional: injury layer still being reconciled (not a fresh full rerun). Every game has a side; no passes. Tiers are confidence labels, not proven probabilities. Thursday picks, Saturday update. Byes: ATL, CLE, GB, LAR, NE, SEA. Entertainment only, not betting advice.",
+  "video_url": null,
+  "video_url_note": "Placeholder: add only a verified public YouTube Shorts URL; leave empty otherwise.",
+  "tnf": {
+    "game": "IND @ HOU",
+    "kickoff_pt": "Thu Nov 19, 5:15 PM PT",
+    "westgate": "HOU -12.5",
+    "pick": "IND +12.5",
+    "our_spread": "IND +11.0",
+    "gap": 1.5,
+    "tier": "Card",
+    "note": "Big spread; Houston's returning players not fully credited, so the true gap may be smaller."
+  },
+  "prior_recap": {
+    "week": 10,
+    "text": "Week 10 final 7-7 (Best Bets 1-1, Leans 3-4, Card 3-2). Monday night is LAC 23, BAL 20 (LAC +4.5 won). Best Bets were DAL +4.5 vs SF (loss, SF 46, DAL 40) and LAC +4.5 at BAL (win). TNF WAS +2.5 won, WAS 24, NYG 21. Thursday Nov 12 card of record, Westgate Week 10 lines, 14 of 14 graded. Graded rows stay the Thursday card."
+  },
+  "westgate_leaders": {
+    "status": "official Westgate Week 10 standings",
+    "supercontest": [
+      ["LAMBDA LAMBDA LAMBDA-1", "36-13-1", "Wk10 4-1"],
+      ["AMICI2-1", "33-16-1", "Wk10 5-0"]
+    ],
+    "gold": [
+      ["THREAD CLOD FOOL-1", "33-17-0", "Wk10 3-2"],
+      ["BIG LIB-1", "32-17-1", "Wk10 5-0"]
+    ],
+    "crowd_top5": {"sc": "3-2", "gold": "2-3"}
+  },
+  "summary": {
+    "best_bets": [
+      "WAS +6.5 vs CIN (Mon)"
+    ],
+    "leans": [
+      "NO +11.5 at CHI",
+      "TB +7 at DET (QB status pending)"
+    ],
+    "card": [
+      "IND +12.5 at HOU (TNF)",
+      "CAR -2.5 vs BAL",
+      "JAX -6 at NYG",
+      "ARI +16 at KC",
+      "DAL -8 vs TEN",
+      "NYJ +3.5 at LAC",
+      "LV +10 at DEN",
+      "SF -3 vs MIN (Mexico City)"
+    ],
+    "model_only": [
+      "MIA +16.5 at BUF",
+      "PHI +4.5 vs PIT"
+    ],
+    "flags": [
+      "TB @ DET: QB Baker Mayfield (foot) did not practice Wednesday. Not a Best Bet while a backup or rookie QB may start",
+      "Tiers are confidence labels, not proven probabilities"
+    ],
+    "passes": []
+  },
+  "games": [
+    {
+      "game": "IND@HOU",
+      "label": "IND @ HOU (TNF)",
+      "day": "Thu",
+      "date": "2026-11-19",
+      "westgate": "HOU -12.5",
+      "market": "",
+      "our": "HOU -11.0",
+      "gap": 1.5,
+      "tier": "Card",
+      "pick": "IND +12.5",
+      "note": "Big spread. HOU OUT: DE Danielle Hunter, WR Marvin Harrison Jr., RB Woody Marks, TE Brevin Jordan; RB David Montgomery cleared. IND OUT: LT Raimann, RT Travis, CB Ward, DT Tillery, TE Mallory; CB Gardner questionable. Houston's returning players are not fully credited in our numbers (provisional), so the true gap may be smaller."
+    },
+    {
+      "game": "BAL@CAR",
+      "label": "BAL @ CAR",
+      "day": "Sun",
+      "date": "2026-11-22",
+      "westgate": "CAR -2.5",
+      "market": "",
+      "our": "CAR -2.3",
+      "gap": -0.2,
+      "tier": "Card",
+      "pick": "CAR -2.5",
+      "note": "Coin flip; tiebreak rule takes the favorite at -2.5 or less."
+    },
+    {
+      "game": "TB@DET",
+      "label": "TB @ DET",
+      "day": "Sun",
+      "date": "2026-11-22",
+      "westgate": "DET -7",
+      "market": "",
+      "our": "DET -4.0",
+      "gap": 3.0,
+      "tier": "Lean",
+      "pick": "TB +7",
+      "note": "QB Baker Mayfield (foot) did not practice Wednesday; status pending. Not a Best Bet while a backup/rookie QB may start."
+    },
+    {
+      "game": "JAX@NYG",
+      "label": "JAX @ NYG",
+      "day": "Sun",
+      "date": "2026-11-22",
+      "westgate": "JAX -6",
+      "market": "",
+      "our": "JAX -6.7",
+      "gap": 0.7,
+      "tier": "Card",
+      "pick": "JAX -6",
+      "note": ""
+    },
+    {
+      "game": "NO@CHI",
+      "label": "NO @ CHI",
+      "day": "Sun",
+      "date": "2026-11-22",
+      "westgate": "CHI -11.5",
+      "market": "",
+      "our": "CHI -7.4",
+      "gap": 4.1,
+      "tier": "Lean",
+      "pick": "NO +11.5",
+      "note": "Big spread; NO offensive line injuries (Richards out; Fuaga, McCoy doubtful)."
+    },
+    {
+      "game": "ARI@KC",
+      "label": "ARI @ KC",
+      "day": "Sun",
+      "date": "2026-11-22",
+      "westgate": "KC -16",
+      "market": "",
+      "our": "KC -15.2",
+      "gap": 0.8,
+      "tier": "Card",
+      "pick": "ARI +16",
+      "note": "Big spread; ARI defense bottom-10."
+    },
+    {
+      "game": "TEN@DAL",
+      "label": "TEN @ DAL",
+      "day": "Sun",
+      "date": "2026-11-22",
+      "westgate": "DAL -8",
+      "market": "",
+      "our": "DAL -9.2",
+      "gap": 1.2,
+      "tier": "Card",
+      "pick": "DAL -8",
+      "note": "DAL TE Ferguson out (not separately charged; ~0.2 toward TEN)."
+    },
+    {
+      "game": "MIA@BUF",
+      "label": "MIA @ BUF",
+      "day": "Sun",
+      "date": "2026-11-22",
+      "westgate": "BUF -16.5",
+      "market": "",
+      "our": "BUF -14.6",
+      "gap": 1.9,
+      "tier": "Card",
+      "pick": "MIA +16.5",
+      "model_only": true,
+      "note": "Model side only, not a recommendation."
+    },
+    {
+      "game": "NYJ@LAC",
+      "label": "NYJ @ LAC",
+      "day": "Sun",
+      "date": "2026-11-22",
+      "westgate": "LAC -3.5",
+      "market": "",
+      "our": "LAC -3.0",
+      "gap": 0.5,
+      "tier": "Card",
+      "pick": "NYJ +3.5",
+      "note": "Coin flip; tiebreak rule takes the dog at +3.5 or more. NYJ defense bottom-10."
+    },
+    {
+      "game": "LV@DEN",
+      "label": "LV @ DEN",
+      "day": "Sun",
+      "date": "2026-11-22",
+      "westgate": "DEN -10",
+      "market": "",
+      "our": "DEN -7.9",
+      "gap": 2.1,
+      "tier": "Card",
+      "pick": "LV +10",
+      "note": "Downgraded: LV defense bottom-10 and rookie QB."
+    },
+    {
+      "game": "PIT@PHI",
+      "label": "PIT @ PHI",
+      "day": "Sun",
+      "date": "2026-11-22",
+      "westgate": "PIT -4.5",
+      "market": "",
+      "our": "PIT -3.8",
+      "gap": 0.7,
+      "tier": "Card",
+      "pick": "PHI +4.5",
+      "model_only": true,
+      "note": "Model side only, not a recommendation."
+    },
+    {
+      "game": "MIN@SF",
+      "label": "MIN @ SF (Mexico City, neutral)",
+      "day": "Sun",
+      "date": "2026-11-22",
+      "westgate": "SF -3",
+      "market": "",
+      "our": "SF -4.5",
+      "gap": 1.5,
+      "tier": "Card",
+      "pick": "SF -3",
+      "note": "SF practice status of RB McCaffrey, LT T. Williams, WR Evans pending (did not practice Wed)."
+    },
+    {
+      "game": "CIN@WAS",
+      "label": "CIN @ WAS (MNF)",
+      "day": "Mon",
+      "date": "2026-11-23",
+      "westgate": "CIN -6.5",
+      "market": "",
+      "our": "CIN -1.7",
+      "gap": 4.8,
+      "tier": "Best Bet",
+      "pick": "WAS +6.5",
+      "note": "Line moved from +3.5 open to +6.5 with no injury cause found; Daniels probable."
+    }
+  ],
+  "missing": [
+    "Injury layer still being reconciled. Not a fresh full rerun.",
+    "No Thursday Short is posted. The video link stays off until a verified public URL exists.",
+    "MIA +16.5 and PHI +4.5 are model side only, not a recommendation. They stay on the full card.",
+    "Contest standings are not Vector picks and are not on the record.",
+    "The Wednesday AI board stays its own labeled board and is not this Westgate card.",
+    "Week 11 games are pending. No finals are graded.",
+    "Saturday update is not posted yet. Schedule: Thursday picks, Saturday update."
+  ]
+}

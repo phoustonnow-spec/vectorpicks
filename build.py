@@ -18,7 +18,7 @@ The Live Board (live.html) reads /api/odds in the browser and joins it to
 public/live-spreads.json, written here from the latest week's card.
 """
 import csv, glob, hashlib, html, json, os, re, shutil, subprocess, sys
-from datetime import datetime, date
+from datetime import datetime, date, timezone
 from email.utils import format_datetime
 from xml.etree import ElementTree as ET
 from zoneinfo import ZoneInfo
@@ -463,6 +463,8 @@ def tnf_html(w, row=None):
     grade = ""
     if row and row.get("_res") in ("W", "L", "P"):
         grade = f'<p>Result {result_badge(row)} {e(row.get("Final Score") or "")}.</p>'
+    note = (tnf.get("note") or "").strip()
+    note_html = f'<p class="note">{e(note)}</p>' if note else ""
     return (
         f'<div class="callout" id="tnf"><p class="kicker">Thursday night</p>'
         f'<p><b>{e(minus(tnf.get("pick") or ""))}</b> {tier_badge(tnf.get("tier") or "")} '
@@ -470,7 +472,7 @@ def tnf_html(w, row=None):
         f'Westgate {e(minus(tnf.get("westgate") or ""))}.</p>'
         f'<p class="note">Our Spread {e(minus(tnf.get("our_spread") or ""))}. '
         f'Gap {gap_text({"gap": tnf.get("gap")})}.</p>'
-        f'{grade}</div>\n'
+        f'{note_html}{grade}</div>\n'
     )
 
 def stated_record(text):
@@ -663,9 +665,15 @@ def leaders_text(w):
         return ""
     def fmt(rows):
         return "; ".join(f"{row[0]} {row[1]} ({row[2]})" for row in rows)
-    crowd = block.get("crowd_top5") or {}
+    crowd = block.get("crowd_top5") or block.get("crowd_top5_w10") or {}
+    status = (block.get("status") or "").strip()
+    # Week 10's published sentence stays word for word. Later cards use their status.
+    if status.lower() == "official westgate week 9 standings" or not status:
+        lead = "Official Westgate standings after Week 9"
+    else:
+        lead = status[0].upper() + status[1:].rstrip(".")
     return (
-        "Official Westgate standings after Week 9: "
+        f"{lead}: "
         f"SuperContest {fmt(sc)}. "
         f"SuperContest Gold {fmt(gold)}. "
         f"The crowd top 5 went {crowd.get('sc', '')} in the SuperContest and {crowd.get('gold', '')} in Gold. "
@@ -691,7 +699,8 @@ def prior_recap_html(w):
 
 def card_short_html(w):
     short = (w or {}).get("short") or {}
-    url = short.get("youtube_url") or ""
+    # video_url is the Thursday Short slot. Empty or null renders nothing.
+    url = (w or {}).get("video_url") or short.get("youtube_url") or ""
     vid = yt_id(url)
     if not vid:
         return ""
@@ -708,14 +717,19 @@ def build_card(w, tidx, fname, preface=""):
         score = e(tr["Final Score"]) if tr and tr.get("Final Score") else ""
         our = g.get("our") or ""
         our_cell = f"<b>{e(minus(our))}</b>" if str(our).strip() else "\u2014"
-        rows += f"""<tr class="t-{TIER_CLASS.get(g['tier'],'card')}">
+        cls = TIER_CLASS.get(g['tier'], 'card')
+        pick_html = e(minus(g['pick']))
+        if g.get("model_only"):
+            cls += " model-only"
+            pick_html += '<span class="sub">Model side only, not a recommendation</span>'
+        rows += f"""<tr class="t-{cls}">
 <td class="game"><b>{e(g['label'])}</b><span class="sub">{e(g['day'])} {e(g['date'][5:].replace('-','/'))}</span></td>
 <td data-l="{e(line_col)}">{e(minus(g['westgate']))}</td>
 <td data-l="Market" class="muted">{e(minus(g.get('market') or ''))}</td>
 <td data-l="Our Spread">{our_cell}</td>
 <td data-l="Gap" class="gap">{gap_text(g)}</td>
 <td data-l="Tier">{tier_badge(g['tier'])}</td>
-<td data-l="Card side" class="pick">{e(minus(g['pick']))}</td>
+<td data-l="Card side" class="pick">{pick_html}</td>
 <td data-l="Result">{result_badge(tr)}{f'<span class="sub">{score}</span>' if score else ''}</td>
 <td class="note-cell" data-l="Why">{e(minus(g['note']))}</td>
 </tr>"""
@@ -732,6 +746,15 @@ def build_card(w, tidx, fname, preface=""):
     else:
         flags_html = ""
     passes_html = f'<div class="panel"><h2>{tier_badge("Pass")} Passes</h2><ul class="picks">{li(s["passes"])}</ul></div>' if s.get("passes") else ""
+    model_only = s.get("model_only") or []
+    model_html = ""
+    if model_only:
+        model_html = (
+            '<div class="panel"><h2>Not a recommendation</h2>'
+            '<p class="note">Model side only, not a recommendation: '
+            f'{e(minus(", ".join(str(x) for x in model_only)))}. '
+            'These stay on the full card so every game has a side. They are not Best Bets or Leans.</p></div>'
+        )
     update = f'<p class="note">{e(w["update_note"])}</p>' if w.get("update_note") else ""
     short_html = card_short_html(w)
     p5_html = pick5_note(w)
@@ -765,7 +788,7 @@ def build_card(w, tidx, fname, preface=""):
 {tnf_html(w, tnf_row_for(w, tidx))}{grade_html}<section class="summary-grid">
 <div class="panel"><h2>{tier_badge('Best Bet')} Best Bets</h2><ul class="picks big">{li(s['best_bets'])}</ul></div>
 <div class="panel"><h2>{tier_badge('Lean')} Leans</h2><ul class="picks">{li(s['leans'])}</ul></div>
-{flags_html}{passes_html}
+{flags_html}{passes_html}{model_html}
 </section>
 {saturday_html}{p5_html}<section class="panel"><h2>Full card: Market vs Our Spread</h2>
 <p class="note">{line_note}</p>
@@ -1177,6 +1200,14 @@ def build_home(weeks, rows, tidx, eps, sh, featured, today, rankings=None):
         flags_html = f'<p class="note">Flags: {e(minus("; ".join(str(x) for x in flags)))}.{tail}</p>\n'
     rest = s.get("card") or []
     rest_html = f'<p class="note">Rest of card: {e(minus(", ".join(str(x) for x in rest)))}.</p>\n' if rest else ""
+    model_only = s.get("model_only") or []
+    model_html = ""
+    if model_only:
+        model_html = (
+            '<p class="note">Model side only, not a recommendation: '
+            f'{e(minus(", ".join(str(x) for x in model_only)))}. '
+            'On the full card, not a Best Bet or a Lean.</p>\n'
+        )
     pending_html = ""
     graded_n = wt["W"] + wt["L"] + wt["P"]
     if wt["pending"] and graded_n == 0:
@@ -1195,7 +1226,7 @@ def build_home(weeks, rows, tidx, eps, sh, featured, today, rankings=None):
 <section class="panel week-card"><div class="wc-head"><h2>Week {w['week']} &middot; {w['season']}</h2><div class="wk-rec"><small>WEEK {w['week']} RECORD</small><b>{week_record_label(wt)}</b></div></div>
 {tnf_html(w, tnf_row_for(w, tidx))}{pending_html}<p class="kicker">{len(s['best_bets'])} Best Bet{'' if len(s['best_bets']) == 1 else 's'}</p><ul class="picks big">{bb}</ul>{cash_html}
 <p class="note">Leans: {e(minus(', '.join(s['leans'])))}.</p>
-{rest_html}{flags_html}{p5_html}{line_html}{f'<p class="note">{e(w["update_note"])}</p>' if w.get("update_note") else ""}
+{rest_html}{model_html}{flags_html}{p5_html}{line_html}{f'<p class="note">{e(w["update_note"])}</p>' if w.get("update_note") else ""}
 <div class="btn-row"><a class="btn" href="card.html">Full card &rarr;</a><a class="btn ghost" href="live.html">Live Board &rarr;</a></div></section>
 {saturday_section_html(w, rows)}
 {record_box(rows)}
@@ -1634,10 +1665,11 @@ ITUNES = "http://www.itunes.com/dtds/podcast-1.0.dtd"
 
 def build_feed(eps, out_path):
     def x(s): return html.escape(str(s), quote=False)
-    now = format_datetime(datetime.now().astimezone())
+    now = format_datetime(datetime.now(timezone.utc))
     items = ""
     for ep in eps:
-        dt = datetime.strptime(ep["date"], "%Y-%m-%d").replace(hour=6).astimezone()
+        # 06:00 UTC, so a Pacific build does not move an archived episode's pubDate.
+        dt = datetime.strptime(ep["date"], "%Y-%m-%d").replace(hour=6, tzinfo=timezone.utc)
         url = f"{BASE}/{ep['mp3'].lstrip('/')}"
         guid = ep.get("guid") or url
         items += f"""
@@ -3381,6 +3413,30 @@ def validate_sources(weeks, rows, shorts):
             raise SystemExit(f"tracked full card is {full_tracked['rec']}, expected 36-42-1")
         if full_tracked["units"] != -6 or tally(rows, "Best Bet")["units"] != 2 or tally(rows, "Lean")["units"] != -8 or tally(rows, "Card")["units"] != 0:
             raise SystemExit("tracked units do not match wins minus losses")
+    week11_rows = [r for r in rows if int(r["Week"]) == 11]
+    if week11_rows:
+        if len(week11_rows) != 13 or any(r["_res"] != "pending" or (r.get("Final Score") or "").strip() for r in week11_rows):
+            raise SystemExit("week 11 tracker rows must stay pending with no score")
+        def pend(tier):
+            return sum(1 for r in week11_rows if r["Tier"] == tier and r["_res"] == "pending")
+        if (pend("Best Bet"), pend("Lean"), pend("Card")) != (1, 2, 10):
+            raise SystemExit("week 11 pending tiers are not 1 Best Bet, 2 Leans, 10 Card")
+        if tally(rows)["pending"] != 13 or tally(rows, "Best Bet")["pending"] != 1 or tally(rows, "Lean")["pending"] != 2 or tally(rows, "Card")["pending"] != 10:
+            raise SystemExit("tracked pending is not the 13 Week 11 rows")
+        card_path = os.path.join(DATA, "weeks", "2026-w11.json")
+        if os.path.exists(card_path):
+            card = json.load(open(card_path))
+            by_game = {r["Game"]: r for r in week11_rows}
+            for g in card.get("games") or []:
+                row = by_game.get(g["game"])
+                if not row:
+                    raise SystemExit(f"week 11 tracker is missing {g['game']}")
+                if row["Pick"] != g["pick"].split()[0] or str(row["Line"]) != g["pick"].split()[1]:
+                    raise SystemExit(f"week 11 tracker pick for {g['game']} does not match the card")
+                if row["Tier"] != g["tier"] or row.get("Our Spread") != g["our"] or str(row["Gap"]) != f"{float(g['gap']):.1f}":
+                    raise SystemExit(f"week 11 tracker line for {g['game']} does not match the card")
+                if g["westgate"].split()[0] not in g["game"].split("@"):
+                    raise SystemExit(f"week 11 Westgate side is not in {g['game']}")
     for game in ("NYJ@KC", "LV@SF"):
         passed = next(r for r in rows if int(r["Week"]) == 9 and norm_gid(r["Game"]) == game)
         if not str(passed["Pick"]).startswith("No side") or passed["_res"] != "n/a":
@@ -3929,7 +3985,7 @@ def validate_week10():
     print("OK week 10: Saturday update separate, TNF WAS +2.5 win, Thursday card unchanged, DraftKings lines unchanged")
 
 def validate_week11():
-    """Week 11 rankings are current. The AI board is the provisional DraftKings card. No Week 11 Westgate card is invented."""
+    """Week 11 Thursday Westgate card is current. Rankings and the provisional DraftKings AI board stay."""
     home = open(os.path.join(OUT, "index.html"), encoding="utf-8").read()
     card = open(os.path.join(OUT, "card.html"), encoding="utf-8").read()
     record = open(os.path.join(OUT, "record.html"), encoding="utf-8").read()
@@ -3939,23 +3995,42 @@ def validate_week11():
     archive_card = open(os.path.join(OUT, "card-2026-w09.html"), encoding="utf-8").read()
     w10_card = open(os.path.join(OUT, "card-2026-w10.html"), encoding="utf-8").read()
     shorts = open(os.path.join(OUT, "shorts.html"), encoding="utf-8").read()
+    leaders = (
+        "Official Westgate Week 10 standings: "
+        "SuperContest LAMBDA LAMBDA LAMBDA-1 36-13-1 (Wk10 4-1); AMICI2-1 33-16-1 (Wk10 5-0). "
+        "SuperContest Gold THREAD CLOD FOOL-1 33-17-0 (Wk10 3-2); BIG LIB-1 32-17-1 (Wk10 5-0). "
+        "The crowd top 5 went 3-2 in the SuperContest and 2-3 in Gold. "
+        "These standings are not Vector picks."
+    )
     for needle in (
         "Week 11",
         stamp_pt(today_pt()),
-        "Week 11 power rankings are posted. The Week 11 card is not.",
-        'id="week-11-status"',
-        "Week 11 card pending: the Westgate SuperContest Week 11 sheet was not posted as of Tue Nov 17, 2026 8:56 AM PT.",
-        "No Week 11 picks, edges, or line comparisons are published here.",
+        "Thursday Nov 19, 2026 card",
+        'id="tnf"',
+        "IND +12.5",
+        "HOU \u221212.5",
+        "Our Spread IND +11.0",
+        "Gap 1.5",
+        "Thu Nov 19, 5:15 PM PT",
+        "WAS +6.5 vs CIN (Mon)",
+        "NO +11.5 at CHI",
+        "TB +7 at DET (QB status pending)",
+        "Model side only, not a recommendation: MIA +16.5 at BUF, PHI +4.5 vs PIT.",
+        "13 games pending. Not graded.",
         "Week 10 final 7-7 (Best Bets 1-1, Leans 3-4, Card 3-2).",
+        "LAC 23, BAL 20 (LAC +4.5 won)",
         "Graded rows stay the Thursday card.",
-        "DAL +4.5 vs SF",
-        "LAC +4.5 at BAL",
         "SF 46, DAL 40",
-        "LAC 23, BAL 20",
         "WAS 24, NYG 21",
+        leaders,
+        'id="week-10-recap"',
         'id="rankings"',
         "Vector power rankings entering Week 11",
         "Injury adjustments are provisional this week",
+        "not a fresh full rerun",
+        "Tiers are confidence labels, not proven probabilities.",
+        "Thursday picks, Saturday update.",
+        "Westgate SuperContest Week 11 contest card (posted Wed Nov 18, 2026)",
         "12-10-0",
         "16-24-0",
         "7-7-1",
@@ -3963,8 +4038,11 @@ def validate_week11():
         "+2u",
         "-8u",
         "-6u",
+        "1 pending",
+        "2 pending",
+        "10 pending",
+        "13 pending",
         "Tracked weeks",
-        "0 pending",
         "8cZ7qpdWyvU",
         "fvn8h67Mze0",
         "1cY3MSjjkzE",
@@ -3972,17 +4050,30 @@ def validate_week11():
     ):
         if needle not in home:
             raise SystemExit(f"home is missing {needle}")
+    bb = home.split('<ul class="picks big">', 1)[1].split("</ul>", 1)[0]
+    if bb.count("<li>") != 1 or "WAS +6.5 vs CIN (Mon)" not in bb or "MIA" in bb or "PHI" in bb:
+        raise SystemExit("home Best Bets are not WAS +6.5 alone")
+    leans = home.split("Leans:", 1)[1].split("</p>", 1)[0]
+    if "NO +11.5" not in leans or "TB +7" not in leans or "MIA" in leans or "PHI" in leans:
+        raise SystemExit("home Leans picked up a model-only side or dropped a Lean")
+    if "Rest of card:" not in home or "MIA +16.5" in home.split("Rest of card:", 1)[1].split("</p>", 1)[0] or "PHI +4.5" in home.split("Rest of card:", 1)[1].split("</p>", 1)[0]:
+        raise SystemExit("model-only sides are listed with the rest of the card")
+    week_card = home.split('class="panel week-card"', 1)[1].split("</section>", 1)[0]
+    if "/shorts/" in week_card or "youtube.com/shorts" in week_card:
+        raise SystemExit("home card rendered a Week 11 Short")
     for stale in (
         "1 of 14 graded",
-        "13 games pending",
         "11-9-0",
+        "Week 11 card pending",
+        "No Week 11 picks, edges, or line comparisons",
+        "Week 11 power rankings are posted. The Week 11 card is not.",
         "Vector power rankings entering Week 10",
         "No Week 10 picks, edges, or line comparisons",
         "the Week 10 Vector card publishes after the official contest lines are out",
         "upcoming",
     ):
         if stale in home.lower() if stale == "upcoming" else stale in home:
-            raise SystemExit(f"home still has a Week 10 pending marker ({stale})")
+            raise SystemExit(f"home still has a stale marker ({stale})")
     ranking = home.split('id="rankings"', 1)[-1].split("</section>", 1)[0]
     if ranking.count('<td class="rank">') != 32:
         raise SystemExit("home rankings are not 1 through 32")
@@ -3997,44 +4088,88 @@ def validate_week11():
         if needle not in ranking:
             raise SystemExit(f"rankings row missing {needle}")
     for needle in (
-        'id="week-11-status"',
-        "Week 11 card pending:",
-        "No Week 11 picks, edges, or line comparisons are published here.",
-        'id="week-10-final"',
+        "Thursday Nov 19, 2026 card",
+        "Thu Nov 19, 2026 ~8:45 AM PT",
+        'id="tnf"',
+        "IND +12.5",
+        "HOU \u221212.5",
+        "Our Spread IND +11.0",
+        "Gap 1.5",
+        "Thu Nov 19, 5:15 PM PT",
+        "returning players not fully credited",
+        "WAS +6.5 vs CIN (Mon)",
+        "NO +11.5 at CHI",
+        "TB +7 at DET (QB status pending)",
+        "Not a recommendation",
+        "Model side only, not a recommendation: MIA +16.5 at BUF, PHI +4.5 vs PIT.",
+        "Tiers are confidence labels, not proven probabilities.",
+        "not a fresh full rerun",
+        "Thursday picks, Saturday update.",
+        "Entertainment only, not betting advice.",
+        "Lines: Westgate SuperContest Week 11 contest card (posted Wed Nov 18, 2026)",
         "Week 10 final 7-7 (Best Bets 1-1, Leans 3-4, Card 3-2).",
+        "LAC 23, BAL 20 (LAC +4.5 won)",
         "Graded rows stay the Thursday card.",
-        "WAS +2.5",
-        "WAS +0.3",
-        "NYG \u22122.5",
-        "DAL +4.5",
-        "LAC +4.5",
-        "SF 46, DAL 40",
-        "LAC 23, BAL 20",
-        "Lines: Westgate SuperContest Week 10",
-        'id="week-10-saturday"',
-        "Week 10 Saturday update (Nov 14, 2026)",
-        "MIN +0.4",
-        "Kirk Cousins confirmed",
-        "Stated tracker, Weeks 3-10 through TNF",
-        "Best Bets 11-9.",
-        "1cY3MSjjkzE",
-        "fvn8h67Mze0",
-        "8cZ7qpdWyvU",
-        "Entertainment only, not betting advice",
-        "Week 9 final 3-10",
+        leaders,
+        'id="week-10-recap"',
+        "Byes: ATL, CLE, GB, LAR, NE, SEA",
     ):
         if needle not in card:
             raise SystemExit(f"weekly card is missing {needle}")
+    if "/shorts/" in card:
+        raise SystemExit("Week 11 card rendered a Short")
+    card_bb = card.split('<ul class="picks big">', 1)[1].split("</ul>", 1)[0]
+    if card_bb.count("<li>") != 1 or "WAS +6.5" not in card_bb or "MIA" in card_bb or "PHI" in card_bb:
+        raise SystemExit("card Best Bets are not WAS +6.5 alone")
+    card_leans = card.split('tier-lean">Lean</span> Leans</h2><ul class="picks">', 1)[1].split("</ul>", 1)[0]
+    if "NO +11.5" not in card_leans or "TB +7" not in card_leans or "MIA" in card_leans or "PHI" in card_leans:
+        raise SystemExit("card Leans picked up a model-only side or dropped a Lean")
     table = card.split("Full card: Market vs Our Spread", 1)[-1].split("</section>", 1)[0]
-    if table.count('res-win">WIN') != 7 or table.count('res-loss">LOSS') != 7 or "PENDING" in table:
-        raise SystemExit("Week 10 card table is not 7 wins and 7 losses")
-    thu = table.split("WAS @ NYG", 1)[-1].split("</tr>", 1)[0]
-    if "WAS +2.5" not in thu or "WIN" not in thu or "WAS +0.3" not in thu or "Lean" not in thu:
-        raise SystemExit("Thursday WAS row was rewritten")
+    if table.count("PENDING") != 13 or "WIN" in table or "LOSS" in table:
+        raise SystemExit("Week 11 card table is not 13 pending games")
+    for game, side, line, our, tier in (
+        ("IND @ HOU", "IND +12.5", "HOU \u221212.5", "HOU \u221211.0", "Card"),
+        ("BAL @ CAR", "CAR \u22122.5", "CAR \u22122.5", "CAR \u22122.3", "Card"),
+        ("TB @ DET", "TB +7", "DET \u22127", "DET \u22124.0", "Lean"),
+        ("JAX @ NYG", "JAX \u22126", "JAX \u22126", "JAX \u22126.7", "Card"),
+        ("NO @ CHI", "NO +11.5", "CHI \u221211.5", "CHI \u22127.4", "Lean"),
+        ("ARI @ KC", "ARI +16", "KC \u221216", "KC \u221215.2", "Card"),
+        ("TEN @ DAL", "DAL \u22128", "DAL \u22128", "DAL \u22129.2", "Card"),
+        ("MIA @ BUF", "MIA +16.5", "BUF \u221216.5", "BUF \u221214.6", "Card"),
+        ("NYJ @ LAC", "NYJ +3.5", "LAC \u22123.5", "LAC \u22123.0", "Card"),
+        ("LV @ DEN", "LV +10", "DEN \u221210", "DEN \u22127.9", "Card"),
+        ("PIT @ PHI", "PHI +4.5", "PIT \u22124.5", "PIT \u22123.8", "Card"),
+        ("MIN @ SF", "SF \u22123", "SF \u22123", "SF \u22124.5", "Card"),
+        ("CIN @ WAS", "WAS +6.5", "CIN \u22126.5", "CIN \u22121.7", "Best Bet"),
+    ):
+        row = table.split(game, 1)[-1].split("</tr>", 1)[0]
+        if game not in table or side not in row or line not in row or our not in row or tier not in row or "PENDING" not in row:
+            raise SystemExit(f"Week 11 card row {game} is missing its Westgate line, side, or pending result")
+    for model_game in ("MIA @ BUF", "PIT @ PHI"):
+        row = table.split(model_game, 1)[-1].split("</tr>", 1)[0]
+        if "Model side only, not a recommendation" not in row:
+            raise SystemExit(f"{model_game} is missing the model-side note")
     if "Week 10 final 7-7" not in w10_card or "WAS +0.3" not in w10_card or "PENDING" in w10_card.split("Full card: Market vs Our Spread", 1)[-1]:
         raise SystemExit("Week 10 archive card is not the graded Thursday card")
-    if "Week 11" in w10_card:
-        raise SystemExit("Week 10 archive card picked up the Week 11 status")
+    w10_table = w10_card.split("Full card: Market vs Our Spread", 1)[-1].split("</section>", 1)[0]
+    if w10_table.count('res-win">WIN') != 7 or w10_table.count('res-loss">LOSS') != 7:
+        raise SystemExit("Week 10 archive table is not 7 wins and 7 losses")
+    thu = w10_table.split("WAS @ NYG", 1)[-1].split("</tr>", 1)[0]
+    if "WAS +2.5" not in thu or "WIN" not in thu or "WAS +0.3" not in thu or "Lean" not in thu:
+        raise SystemExit("Thursday WAS row was rewritten")
+    for needle in (
+        "Week 10 Saturday update (Nov 14, 2026)",
+        "1cY3MSjjkzE",
+        "fvn8h67Mze0",
+        "8cZ7qpdWyvU",
+        "Official Westgate standings after Week 9",
+        "Lines: Westgate SuperContest Week 10",
+        "NYG \u22122.5",
+    ):
+        if needle not in w10_card:
+            raise SystemExit(f"Week 10 archive card is missing {needle}")
+    if "Week 11" in w10_card or "IND +12.5" in w10_card or "WAS +6.5" in w10_card:
+        raise SystemExit("Week 10 archive card picked up the Week 11 card")
     for needle in ("Thu card line", "BAL +10", "BUF 23, MIN 6", "No side"):
         if needle not in archive_card:
             raise SystemExit(f"Week 9 archive card is missing {needle}")
@@ -4054,24 +4189,43 @@ def validate_week11():
         "Gaps, not a complete season",
         "Those 13 grade 9-4",
         "The full card also counts Hold and Provisional",
-        "None yet.",
-        "Official Westgate standings after Week 9",
+        "IND +12.5",
+        "WAS +6.5",
+        "13 pending",
+        leaders,
         "not a full-season total",
     ):
         if needle not in record:
             raise SystemExit(f"record is missing {needle}")
-    if "13 Week 10 rows are pending" in record or "1 of 14 graded" in record:
-        raise SystemExit("record still says Week 10 is pending")
+    if "None yet." in record or "13 Week 10 rows are pending" in record or "1 of 14 graded" in record:
+        raise SystemExit("record still says Week 10 is pending or Week 11 has no rows")
+    pending_tbl = record.split("<h2>Pending</h2>", 1)[-1].split("</section>", 1)[0]
+    if pending_tbl.count("PENDING") != 13 or "IND +12.5" not in pending_tbl or "WAS +6.5" not in pending_tbl:
+        raise SystemExit("record pending table is not the 13 Week 11 rows")
     for needle in (
-        'id="week-11-status"',
-        "Week 11 has no card in the repo",
-        "Week 10 final 7-7 (Best Bets 1-1, Leans 3-4, Card 3-2).",
+        "Live Board",
+        "Our Spread is the Week 11 2026 card (Westgate)",
         "Entertainment and opinion only",
+        "assets/live.js",
     ):
         if needle not in live:
             raise SystemExit(f"live page is missing {needle}")
-    if "live-spreads.json" in os.listdir(OUT) or "Lines: Westgate SuperContest Week 10" in live:
-        raise SystemExit("live board is still serving the Week 10 card as this week")
+    if "Week 11 has no card in the repo" in live or "Week 11 card pending" in live or "Lines: Westgate SuperContest Week 10" in live:
+        raise SystemExit("live board is still the Week 11 gap page or the Week 10 card")
+    spreads = json.load(open(os.path.join(OUT, "live-spreads.json")))
+    if int(spreads.get("week") or 0) != 11 or len(spreads.get("games") or []) != 13:
+        raise SystemExit("live-spreads.json is not the Week 11 card")
+    by_abbr = {(g["away_abbr"], g["home_abbr"]): g for g in spreads["games"]}
+    ind = by_abbr[("IND", "HOU")]
+    if ind["our_label"] != "HOU -11.0" or ind["pick_label"] != "IND +12.5" or ind["tier"] != "Card":
+        raise SystemExit("live board TNF is not IND +12.5 at HOU -11.0")
+    was = by_abbr[("CIN", "WAS")]
+    if was["pick_label"] != "WAS +6.5" or was["tier"] != "Best Bet" or was["our_label"] != "CIN -1.7":
+        raise SystemExit("live board Best Bet is not WAS +6.5")
+    if by_abbr[("NO", "CHI")]["tier"] != "Lean" or by_abbr[("TB", "DET")]["tier"] != "Lean":
+        raise SystemExit("live board Leans are not NO and TB")
+    if by_abbr[("MIA", "BUF")]["tier"] != "Card" or by_abbr[("PIT", "PHI")]["tier"] != "Card":
+        raise SystemExit("live board model-only games are not Card")
     w11_ai = open(os.path.join(OUT, "ai-picks-2026-w11.html"), encoding="utf-8").read()
     sitemap = open(os.path.join(OUT, "sitemap.xml"), encoding="utf-8").read()
     for slug in ("ai-picks-2026-w11.html", "ai-picks-2026-w10.html", "ai-picks-2026-w09.html",
@@ -4180,7 +4334,8 @@ def validate_week11():
     for needle in (
         "8cZ7qpdWyvU", "fvn8h67Mze0", "1cY3MSjjkzE", "4-NrBHuRlUE", "q2OazIWZ5vE",
         "Week 10 Westgate SuperContest Top 5 Leaders",
-        "Official Westgate standings after Week 9",
+        leaders,
+        "Sunday Nov 8, 2026 unofficial snapshot",
         'id="week-9-results"',
         "Entertainment and opinion only. Not betting advice.",
     ):
@@ -4206,15 +4361,36 @@ def validate_week11():
     sat_hou = next(row for row in week["saturday_update"]["card"] if row[0] == "HOU@CLE")
     if sat_min[5] != "Best Bet" or sat_hou[5] != "Card":
         raise SystemExit("Saturday MIN or HOU tier note was rewritten")
-    if os.path.exists(os.path.join(DATA, "weeks", "2026-w11.json")):
-        raise SystemExit("a Week 11 card file was added before the Westgate sheet")
+    week_path = os.path.join(DATA, "weeks", "2026-w11.json")
+    if not os.path.exists(week_path):
+        raise SystemExit("Week 11 Westgate card file is missing")
+    week11 = json.load(open(week_path))
+    if week11.get("video_url") or (week11.get("short") or {}).get("youtube_url"):
+        raise SystemExit("Week 11 video_url must stay empty until a verified public URL is provided")
+    if week11.get("line_source") != "Westgate SuperContest Week 11 contest card (posted Wed Nov 18, 2026)":
+        raise SystemExit("Week 11 line of record is not the Westgate SuperContest card")
+    if week11.get("as_of") != "Thu Nov 19, 2026 ~8:45 AM PT":
+        raise SystemExit("Week 11 card stamp changed")
+    tnf = week11.get("tnf") or {}
+    if tnf.get("pick") != "IND +12.5" or tnf.get("westgate") != "HOU -12.5" or tnf.get("our_spread") != "IND +11.0" or tnf.get("gap") != 1.5 or tnf.get("tier") != "Card":
+        raise SystemExit("Week 11 TNF is not IND +12.5, Card, Our Spread IND +11.0")
+    if week11["summary"]["best_bets"] != ["WAS +6.5 vs CIN (Mon)"]:
+        raise SystemExit("Week 11 Best Bet is not WAS +6.5")
+    if week11["summary"]["leans"] != ["NO +11.5 at CHI", "TB +7 at DET (QB status pending)"]:
+        raise SystemExit("Week 11 Leans changed")
+    if week11["summary"].get("model_only") != ["MIA +16.5 at BUF", "PHI +4.5 vs PIT"]:
+        raise SystemExit("Week 11 model-only sides changed")
+    if len(week11.get("games") or []) != 13:
+        raise SystemExit("Week 11 card does not have 13 games")
     rankings = json.load(open(os.path.join(DATA, "rankings", "2026-w11.json")))
     if int(rankings.get("week") or 0) != 11 or rankings["rows"][0]["team"] != "JAX" or rankings["rows"][-1]["team"] != "ARI":
         raise SystemExit("Week 11 rankings file is not JAX through ARI")
+    if rankings["rows"][0]["rating"] != 5.2 or rankings["rows"][-1]["rating"] != -10.5:
+        raise SystemExit("Week 11 rankings ratings were rewritten")
     blob = home + card + ai + record + live + shorts + w10_ai
     if "cXnzFQPN7mE" in blob:
         raise SystemExit("private video id was published")
-    print("OK week 11: rankings posted, Week 10 graded 7-7, provisional DraftKings AI board, no Week 11 Westgate card")
+    print("OK week 11: Thursday Westgate card, IND +12.5, WAS +6.5, Week 10 final 7-7, AI board unchanged")
 
 def main():
     global WEEKS, AI_WEEKS
