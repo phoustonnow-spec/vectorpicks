@@ -9,8 +9,12 @@
   "market_source": "no separate market table on this Thursday card (blank, not invented)",
   "hfa_note": "Home field is about 2 points, and 0 at a neutral site (Mexico City). The injury layer on these numbers is still being reconciled.",
   "update_note": "Thursday Nov 19, 2026 card. Vector numbers are provisional: injury layer still being reconciled (not a fresh full rerun). Every game has a side; no passes. Tiers are confidence labels, not proven probabilities. Thursday picks, Saturday update. Byes: ATL, CLE, GB, LAR, NE, SEA. Entertainment only, not betting advice.",
-  "video_url": null,
-  "video_url_note": "Placeholder: add only a verified public YouTube Shorts URL; leave empty otherwise.",
+  "video_url": "https://www.youtube.com/shorts/LqjTjbZOWb4",
+  "video_url_note": "Verified public YouTube Short on @VectorPicks, published Thu Nov 19, 2026.",
+  "short": {
+    "title": "Week 11 NFL AI Picks: IND +12.5 TNF, WAS +6.5 Best Bet | Week 10 Recap",
+    "youtube_url": "https://www.youtube.com/shorts/LqjTjbZOWb4"
+  },
   "tnf": {
     "game": "IND @ HOU",
     "kickoff_pt": "Thu Nov 19, 5:15 PM PT",
@@ -240,7 +244,7 @@
   ],
   "missing": [
     "Injury layer still being reconciled. Not a fresh full rerun.",
-    "No Thursday Short is posted. The video link stays off until a verified public URL exists.",
+    "The Thursday Short is the public @VectorPicks link. It is not a line change.",
     "MIA +16.5 and PHI +4.5 are model side only, not a recommendation. They stay on the full card.",
     "Contest standings are not Vector picks and are not on the record.",
     "The Wednesday AI board stays its own labeled board and is not this Westgate card.",

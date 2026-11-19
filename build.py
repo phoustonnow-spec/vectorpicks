@@ -4043,9 +4043,9 @@ def validate_week11():
         "10 pending",
         "13 pending",
         "Tracked weeks",
-        "8cZ7qpdWyvU",
-        "fvn8h67Mze0",
-        "1cY3MSjjkzE",
+        "LqjTjbZOWb4",
+        'data-yt="LqjTjbZOWb4"',
+        "Week 11 NFL AI Picks: IND +12.5 TNF, WAS +6.5 Best Bet | Week 10 Recap",
         "Entertainment and opinion only. Not betting advice.",
     ):
         if needle not in home:
@@ -4113,11 +4113,13 @@ def validate_week11():
         leaders,
         'id="week-10-recap"',
         "Byes: ATL, CLE, GB, LAR, NE, SEA",
+        "https://www.youtube.com/shorts/LqjTjbZOWb4",
+        "Week 11 NFL AI Picks: IND +12.5 TNF, WAS +6.5 Best Bet | Week 10 Recap",
     ):
         if needle not in card:
             raise SystemExit(f"weekly card is missing {needle}")
-    if "/shorts/" in card:
-        raise SystemExit("Week 11 card rendered a Short")
+    if card.count("/shorts/") != 1 or "LqjTjbZOWb4" not in card:
+        raise SystemExit("Week 11 card Short link is missing or not the verified URL")
     card_bb = card.split('<ul class="picks big">', 1)[1].split("</ul>", 1)[0]
     if card_bb.count("<li>") != 1 or "WAS +6.5" not in card_bb or "MIA" in card_bb or "PHI" in card_bb:
         raise SystemExit("card Best Bets are not WAS +6.5 alone")
@@ -4332,7 +4334,8 @@ def validate_week11():
     if "Week 11" in w10_ai and "ai-picks-2026-w11.html" not in w10_ai:
         raise SystemExit("Week 10 AI archive picked up the Week 11 board")
     for needle in (
-        "8cZ7qpdWyvU", "fvn8h67Mze0", "1cY3MSjjkzE", "4-NrBHuRlUE", "q2OazIWZ5vE",
+        "LqjTjbZOWb4", "8cZ7qpdWyvU", "fvn8h67Mze0", "1cY3MSjjkzE", "4-NrBHuRlUE", "q2OazIWZ5vE",
+        "Week 11 NFL AI Picks: IND +12.5 TNF, WAS +6.5 Best Bet | Week 10 Recap",
         "Week 10 Westgate SuperContest Top 5 Leaders",
         leaders,
         "Sunday Nov 8, 2026 unofficial snapshot",
@@ -4342,7 +4345,8 @@ def validate_week11():
         if needle not in shorts:
             raise SystemExit(f"shorts page is missing {needle}")
     if (
-        shorts.find("8cZ7qpdWyvU") > shorts.find("fvn8h67Mze0")
+        shorts.find("LqjTjbZOWb4") > shorts.find("8cZ7qpdWyvU")
+        or shorts.find("8cZ7qpdWyvU") > shorts.find("fvn8h67Mze0")
         or shorts.find("fvn8h67Mze0") > shorts.find("1cY3MSjjkzE")
         or shorts.find("1cY3MSjjkzE") > shorts.find("4-NrBHuRlUE")
     ):
@@ -4365,8 +4369,15 @@ def validate_week11():
     if not os.path.exists(week_path):
         raise SystemExit("Week 11 Westgate card file is missing")
     week11 = json.load(open(week_path))
-    if week11.get("video_url") or (week11.get("short") or {}).get("youtube_url"):
-        raise SystemExit("Week 11 video_url must stay empty until a verified public URL is provided")
+    short_url = "https://www.youtube.com/shorts/LqjTjbZOWb4"
+    short_title = "Week 11 NFL AI Picks: IND +12.5 TNF, WAS +6.5 Best Bet | Week 10 Recap"
+    if week11.get("video_url") != short_url or (week11.get("short") or {}).get("youtube_url") != short_url:
+        raise SystemExit("Week 11 Thursday Short is not the verified public URL")
+    if (week11.get("short") or {}).get("title") != short_title:
+        raise SystemExit("Week 11 Thursday Short title does not match")
+    listed_short = next(s for s in json.load(open(os.path.join(DATA, "shorts.json")))["shorts"] if "LqjTjbZOWb4" in (s.get("youtube_url") or ""))
+    if listed_short.get("title") != short_title or listed_short.get("date") != "2026-11-19" or int(listed_short.get("week") or 0) != 11:
+        raise SystemExit("shorts.json Week 11 Thursday Short does not match the card")
     if week11.get("line_source") != "Westgate SuperContest Week 11 contest card (posted Wed Nov 18, 2026)":
         raise SystemExit("Week 11 line of record is not the Westgate SuperContest card")
     if week11.get("as_of") != "Thu Nov 19, 2026 ~8:45 AM PT":

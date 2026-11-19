@@ -316,6 +316,29 @@
         "Wednesday AI board stays its own labeled board and is not this Westgate card",
         "Tracked-weeks record is this page's audited rows only; Week 11 is pending"
       ]
+    },
+    {
+      "week": 11,
+      "season": 2026,
+      "published_at_pt": "2026-11-19",
+      "dedup_key": "2026-w11-thursday-short",
+      "source": "Public YouTube Short https://www.youtube.com/shorts/LqjTjbZOWb4 on Vector Picks, published Thu Nov 19, 2026. It is the Week 11 Thursday card. No line was changed.",
+      "included": [
+        "Week 11 Thursday YouTube Short",
+        "Thursday card video_url filled with that public URL",
+        "Home latest Short points at the same URL"
+      ],
+      "public_video_ids": [
+        "LqjTjbZOWb4"
+      ],
+      "never_embed": [
+        "cXnzFQPN7mE"
+      ],
+      "gaps": [
+        "The Short is not a line change and is not a grade",
+        "Week 11 games stay pending",
+        "Earlier Shorts stay listed"
+      ]
     }
   ]
 }
