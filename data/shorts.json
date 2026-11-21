@@ -1,5 +1,5 @@
 {
-  "_comment": "Public YouTube Shorts only. never_embed ids are refused by the build even if a URL is added later. Weeks 3, 4, and 8 are archive. Week 9 shorts stay listed. The Week 11 Thursday Short is the latest. The Week 10 leaders, Saturday, and Thursday Shorts stay listed. Dates order the home page. 2026-11-19 is the Week 11 Thursday Short. leader_results is the unofficial Week 9 contest grade shown on the Shorts page. It is not a Vector record.",
+  "_comment": "Public YouTube Shorts only. never_embed ids are refused by the build even if a URL is added later. Weeks 3, 4, and 8 are archive. Week 9 shorts stay listed. The Week 11 Saturday Short is the latest. The Week 11 Thursday Short stays listed. The Week 10 leaders, Saturday, and Thursday Shorts stay listed. Dates order the home page. 2026-11-21 is the Week 11 Saturday Short. 2026-11-19 is the Week 11 Thursday Short. leader_results is the unofficial Week 9 contest grade shown on the Shorts page. It is not a Vector record.",
   "never_embed": ["cXnzFQPN7mE"],
   "placeholder_slots": 0,
   "leader_results": {
@@ -151,6 +151,14 @@
     ]
   },
   "shorts": [
+    {
+      "title": "Week 11 Saturday Update: IND +12.5 Lost TNF, TB +7 Now a Best Bet | Vector Picks",
+      "date": "2026-11-21",
+      "week": 11,
+      "role": "current",
+      "youtube_url": "https://www.youtube.com/shorts/Qd7DWqq_jy8",
+      "note": "Posted Sat Nov 21, 2026. TNF IND +12.5 LOSS, final HOU 26, IND 3. BAL +2.5 replaces CAR -2.5 (Card, coin flip). TB +7 moved from Lean to Best Bet. Saturday Best Bets: TB +7 at DET and WAS +6.5 vs CIN (Monday). Lean: NO +11.5 at CHI. MIA +16.5 and PHI +4.5 are model side only, not a recommendation. Vector numbers are provisional: Friday model build plus Saturday injury-status adjustments, not a full rerun. The Thursday card is unchanged. Entertainment only. Not betting advice. AI-generated voice and opinions."
+    },
     {
       "title": "Week 11 NFL AI Picks: IND +12.5 TNF, WAS +6.5 Best Bet | Week 10 Recap",
       "date": "2026-11-19",

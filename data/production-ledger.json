@@ -339,6 +339,37 @@
         "Week 11 games stay pending",
         "Earlier Shorts stay listed"
       ]
+    },
+    {
+      "week": 11,
+      "season": 2026,
+      "published_at_pt": "2026-11-21",
+      "dedup_key": "2026-w11-saturday-update",
+      "source": "Saturday Nov 21, 2026 update at the Westgate SuperContest Week 11 contest lines. TNF final is the ESPN scoreboard: IND 3, HOU 26. Public YouTube Short https://www.youtube.com/shorts/Qd7DWqq_jy8. Vector numbers are a Friday model build plus Saturday injury-status adjustments, not a full rerun.",
+      "included": [
+        "Week 11 Saturday update, separate from the Thursday Nov 19 card",
+        "TNF IND +12.5 graded LOSS at HOU -12.5, final IND 3, HOU 26, Card tier",
+        "Saturday side change: BAL +2.5 replaces CAR -2.5, still Card",
+        "Saturday tier change: TB +7 moves from Lean to Best Bet",
+        "Saturday Best Bets TB +7 and WAS +6.5; Lean NO +11.5",
+        "MIA +16.5 and PHI +4.5 stay model side only, not a recommendation",
+        "Other Week 11 rows stay pending at the Thursday sides and tiers",
+        "Week 11 Saturday YouTube Short"
+      ],
+      "public_video_ids": [
+        "Qd7DWqq_jy8"
+      ],
+      "never_embed": [
+        "cXnzFQPN7mE"
+      ],
+      "gaps": [
+        "Saturday sides and tiers are not folded into the graded rows",
+        "The other 12 Week 11 games are pending",
+        "Vector numbers are provisional, not a fresh full rerun",
+        "MIA +16.5 and PHI +4.5 are model side only, not a recommendation",
+        "The Wednesday AI board stays its own labeled board and is not graded here",
+        "Earlier Shorts stay listed, including the Thursday Short LqjTjbZOWb4"
+      ]
     }
   ]
 }

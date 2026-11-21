@@ -51,7 +51,20 @@ Keep the week's source files in the repo. A copy in Google Drive is a backup, no
 
 ## What failed this week
 
-Report it in the pull request. For Nov 19, 2026 the Thursday card is the Westgate SuperContest Week 11 contest card posted Wed Nov 18. All 13 games have a side and are pending. The Best Bet is WAS +6.5. Leans are NO +11.5 and TB +7. TNF is IND +12.5 at HOU, tier Card, Our Spread IND +11.0, gap 1.5, kickoff Thu Nov 19, 5:15 PM PT. MIA +16.5 and PHI +4.5 stay on the full card as model side only, not a recommendation. Week 10 stays the Thursday Nov 12 card, final 7-7. Tracked weeks stay Best Bets 12-10-0, Leans 16-24-0, Card tier 7-7-1, full card 36-42-1, with the 13 Week 11 rows pending. The public Thursday Short is https://www.youtube.com/shorts/LqjTjbZOWb4. Open gaps:
+Report it in the pull request. For Nov 21, 2026 the Saturday update is separate from the Thursday Nov 19 Westgate card. TNF IND +12.5 lost, final HOU 26, IND 3 (ESPN), graded Card at HOU -12.5. No Thursday side, line, Our Spread, or tier was rewritten. Saturday, at the same Westgate lines: BAL +2.5 replaces CAR -2.5 (Card, coin flip) and TB +7 moves from Lean to Best Bet. Saturday Best Bets are TB +7 at DET and WAS +6.5 vs CIN (Monday). The Lean is NO +11.5 at CHI. MIA +16.5 and PHI +4.5 stay model side only, not a recommendation. The other 12 Week 11 rows stay pending. Tracked weeks, counted from the Thursday tiers after that one loss: Best Bets 12-10-0 (+2u), Leans 16-24-0 (-8u), Card tier 7-8-1 (-1u), full card 36-43-1 (-7u). Week 11 so far is 0-1 with 12 pending. The public Saturday Short is https://www.youtube.com/shorts/Qd7DWqq_jy8. The Thursday Short https://www.youtube.com/shorts/LqjTjbZOWb4 stays listed. Open gaps:
+
+- Vector's Week 11 numbers are provisional: Friday model build plus Saturday injury-status adjustments, player by player. This is not a fresh full rerun.
+- The Saturday card is not folded into the graded rows. TNF is graded at the Thursday line.
+- Tiers are confidence labels, not proven probabilities.
+- MIA +16.5 and PHI +4.5 are model side only, not a recommendation.
+- The Saturday Short is public and is not itself a line change.
+- The Wednesday AI board stays its own labeled board. It is not this Westgate card, and it is not graded from this update.
+- Saturday Week 10 tier changes stay a note. Graded rows stay the Thursday Nov 12 card.
+- Week 4's 13 unpublished model sides stay off the record.
+- The Shorts contest-leader block is still the Sunday Nov 8 snapshot. Official Westgate standings after Week 10 are a separate note. Those rows are not Vector picks.
+- Entertainment only, not betting advice.
+
+For Nov 19, 2026 the Thursday card is the Westgate SuperContest Week 11 contest card posted Wed Nov 18. All 13 games have a side and are pending. The Best Bet is WAS +6.5. Leans are NO +11.5 and TB +7. TNF is IND +12.5 at HOU, tier Card, Our Spread IND +11.0, gap 1.5, kickoff Thu Nov 19, 5:15 PM PT. MIA +16.5 and PHI +4.5 stay on the full card as model side only, not a recommendation. Week 10 stays the Thursday Nov 12 card, final 7-7. Tracked weeks stay Best Bets 12-10-0, Leans 16-24-0, Card tier 7-7-1, full card 36-42-1, with the 13 Week 11 rows pending. The public Thursday Short is https://www.youtube.com/shorts/LqjTjbZOWb4. Open gaps:
 
 - Vector's Week 11 numbers are provisional. The injury layer is still being reconciled. This is not a fresh full rerun.
 - Tiers are confidence labels, not proven probabilities.

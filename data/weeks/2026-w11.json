@@ -242,13 +242,124 @@
       "note": "Line moved from +3.5 open to +6.5 with no injury cause found; Daniels probable."
     }
   ],
+  "saturday_update": {
+    "as_of": "Sat Nov 21, 2026 ~9:40 AM PT",
+    "title": "Week 11 Saturday update (Nov 21, 2026)",
+    "source": "Westgate SuperContest Week 11 contest card (fixed contest lines, posted Wed Nov 18, 2026). Public YouTube Short https://www.youtube.com/shorts/Qd7DWqq_jy8",
+    "folded_into_grades": false,
+    "latest_on_card": true,
+    "line_of_record": "Westgate SuperContest Week 11 contest card (fixed contest lines, posted Wed Nov 18, 2026)",
+    "model_note": "Vector numbers are provisional: Friday model build plus Saturday injury-status adjustments, player by player. Not a fresh full rerun. Every game has a side; no passes. Tiers are confidence labels, not proven probabilities.",
+    "disclaimer": "Entertainment only. Not betting advice. AI-generated voice and opinions.",
+    "tnf_result": {
+      "game": "IND @ HOU",
+      "final": "HOU 26, IND 3",
+      "thursday_pick": "IND +12.5",
+      "westgate": "HOU -12.5",
+      "tier": "Card",
+      "result": "LOSS",
+      "source": "ESPN final"
+    },
+    "best_bets": [
+      "TB +7 at DET",
+      "WAS +6.5 vs CIN (Mon)"
+    ],
+    "leans": [
+      "NO +11.5 at CHI"
+    ],
+    "model_only_not_recommended": [
+      "MIA +16.5 at BUF",
+      "PHI +4.5 vs PIT"
+    ],
+    "card_columns": [
+      "game",
+      "westgate_line",
+      "our_spread",
+      "pick",
+      "gap",
+      "tier",
+      "thursday_pick",
+      "thursday_tier",
+      "thursday_gap",
+      "note"
+    ],
+    "card": [
+      ["BAL@CAR", "CAR -2.5", "CAR -2.0", "BAL +2.5", 0.5, "Card", "CAR -2.5", "Card", -0.2, "Coin flip. Ravens without DT Nnamdi Madubuike and CB Marlon Humphrey; Panthers without LB Bobby Okereke."],
+      ["TB@DET", "DET -7", "DET -2.8", "TB +7", 4.2, "Best Bet", "TB +7", "Lean", 3.0, "Baker Mayfield expected to play (questionable, foot/thumb). Bucs S Antoine Winfield Jr. out. Lions C Cade Mays out."],
+      ["JAX@NYG", "JAX -6", "JAX -6.6", "JAX -6", 0.6, "Card", "JAX -6", "Card", 0.7, "Thin edge."],
+      ["NO@CHI", "CHI -11.5", "CHI -8.8", "NO +11.5", 2.7, "Lean", "NO +11.5", "Lean", 4.1, "Big spread. Saints without T Taliese Fuaga, C Erik McCoy, T Asim Richards; Bears CB Kyler Gordon out."],
+      ["ARI@KC", "KC -16", "KC -12.5", "ARI +16", 3.5, "Card", "ARI +16", "Card", 0.8, "Veteran Josh Johnson expected to start for Arizona (not priced in our number). Chiefs without T Jaylon Moore, G Trey Smith, RB Kenneth Walker III. Card only."],
+      ["TEN@DAL", "DAL -8", "DAL -8.2", "DAL -8", 0.2, "Card", "DAL -8", "Card", 1.2, "Near coin flip."],
+      ["MIA@BUF", "BUF -16.5", "BUF -14.6", "MIA +16.5", 1.9, "Model only", "MIA +16.5", "Card", 1.9, "Model side only, not a recommendation."],
+      ["NYJ@LAC", "LAC -3.5", "LAC -3.3", "NYJ +3.5", 0.2, "Card", "NYJ +3.5", "Card", 0.5, "Coin flip. Geno Smith has no injury designation."],
+      ["LV@DEN", "DEN -10", "DEN -8.8", "LV +10", 1.2, "Card", "LV +10", "Card", 2.1, "Capped at Card: bottom-tier defense and rookie QB."],
+      ["PIT@PHI", "PIT -4.5", "PIT -3.8", "PHI +4.5", 0.7, "Model only", "PHI +4.5", "Card", 0.7, "Model side only, not a recommendation."],
+      ["MIN@SF (Mexico City, neutral)", "SF -3", "SF -5.5", "SF -3", 2.45, "Card", "SF -3", "Card", 1.5, "Neutral site. 49ers decide on WR Mike Evans Saturday. Just short of the margin we want to lay 3."],
+      ["CIN@WAS (MNF)", "CIN -6.5", "CIN -3.7", "WAS +6.5", 2.8, "Best Bet", "WAS +6.5", "Best Bet", 4.8, "Monday game; final injury designations not yet posted."]
+    ],
+    "changes": {
+      "side_changes": [
+        {
+          "game": "BAL@CAR",
+          "from": "CAR -2.5",
+          "to": "BAL +2.5",
+          "tier": "Card",
+          "reason": "Updated model build corrected how the Ravens' quarterback injury was priced; Saturday statuses (Madubuike and Hawkins out for Baltimore, Okereke out for Carolina) left Baltimore a half point better than the line. Coin flip."
+        }
+      ],
+      "tier_changes": [
+        {
+          "game": "TB@DET",
+          "from": "Lean",
+          "to": "Best Bet",
+          "reason": "Thursday condition cleared: Baker Mayfield is expected to start. Our number is Lions by 2.8 against a 7-point contest line."
+        }
+      ],
+      "note": "Thursday card preserved unchanged above. MIN@SF and NYJ@LAC keep their Thursday sides and tiers."
+    },
+    "flags": {
+      "ARI@KC": "Veteran Josh Johnson expected to start for Arizona; not priced in our number. Card only.",
+      "MIN@SF": "Mike Evans decision Saturday.",
+      "CIN@WAS": "Monday game; final injury designations not yet posted.",
+      "NYJ@LAC": "Coin flip; no measurable gap.",
+      "TEN@DAL": "Near coin flip."
+    },
+    "key_injuries_official": [
+      "TB QB Baker Mayfield questionable (expected to play); S Antoine Winfield Jr. out",
+      "BAL DT Nnamdi Madubuike, CB Marlon Humphrey out",
+      "KC T Jaylon Moore, G Trey Smith, RB Kenneth Walker III out",
+      "ARI QB Carson Beck questionable; Josh Johnson expected to start",
+      "CHI CB Kyler Gordon out",
+      "NYJ QB Geno Smith no designation",
+      "SF WR Mike Evans questionable (decision Saturday)",
+      "NO T Taliese Fuaga, C Erik McCoy, T Asim Richards out"
+    ],
+    "season_tracker": {
+      "best_bets": "12-10",
+      "leans": "16-24",
+      "card_tier": "7-8-1",
+      "full_card": "36-43-1",
+      "note": "Weeks 3-11 through Thursday's game only; passes excluded; includes Week 5 Hold 1-0 and Provisional 0-1. Graded at the Westgate line."
+    },
+    "week_to_date": {
+      "graded": "1 of 13",
+      "full_card": "0-1",
+      "card": "0-1",
+      "leans": "0-0",
+      "best_bets": "0-0"
+    },
+    "video_url": "https://www.youtube.com/shorts/Qd7DWqq_jy8",
+    "video_title": "Week 11 Saturday Update: IND +12.5 Lost TNF, TB +7 Now a Best Bet | Vector Picks",
+    "video_note": "Saturday Short URL added after publish",
+    "thursday_video_url": "https://www.youtube.com/shorts/LqjTjbZOWb4"
+  },
   "missing": [
-    "Injury layer still being reconciled. Not a fresh full rerun.",
-    "The Thursday Short is the public @VectorPicks link. It is not a line change.",
-    "MIA +16.5 and PHI +4.5 are model side only, not a recommendation. They stay on the full card.",
+    "Vector numbers are provisional: Friday model build plus Saturday injury-status adjustments, player by player. Not a fresh full rerun.",
+    "The Thursday Short and the Saturday Short are public @VectorPicks links. Neither one is a line change by itself.",
+    "MIA +16.5 and PHI +4.5 are model side only, not a recommendation. They stay on the full card and are not highlighted.",
     "Contest standings are not Vector picks and are not on the record.",
     "The Wednesday AI board stays its own labeled board and is not this Westgate card.",
-    "Week 11 games are pending. No finals are graded.",
-    "Saturday update is not posted yet. Schedule: Thursday picks, Saturday update."
+    "TNF IND +12.5 lost, final HOU 26, IND 3, graded at the Thursday Westgate line. The other 12 Week 11 games are pending.",
+    "Saturday update is separate from the Thursday card. BAL +2.5 replaces CAR -2.5 (Card, coin flip). TB +7 moves from Lean to Best Bet. Saturday Best Bets are TB +7 and WAS +6.5. The Lean is NO +11.5. Graded rows stay the Thursday card."
   ]
 }

@@ -63,4 +63,4 @@ Leans and the Card tier are higher by 10 wins and 5 losses together (19-23 and 9
 
 ## Week 11
 
-Week 11 is not in this audit. The Thursday Nov 19 card adds 13 pending rows at the Westgate SuperContest Week 11 lines. Those rows do not change the Weeks 3-10 totals above.
+Week 11 is not in the table above. That table stays the Weeks 3-10 audit. On Sat Nov 21, 2026 the Thursday card's TNF row was graded from the ESPN final: IND +12.5 lost, IND 3, HOU 26, Card tier. Adding that one loss to the tracked box makes Card tier 7-8-1 and the full card 36-43-1. Best Bets stay 12-10-0 and Leans stay 16-24-0. The other 12 Week 11 rows are pending. The Saturday side and tier notes are not in these rows.
