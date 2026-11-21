@@ -284,7 +284,7 @@
       "note"
     ],
     "card": [
-      ["BAL@CAR", "CAR -2.5", "CAR -2.0", "BAL +2.5", 0.5, "Card", "CAR -2.5", "Card", -0.2, "Coin flip. Ravens without DT Nnamdi Madubuike and CB Marlon Humphrey; Panthers without LB Bobby Okereke."],
+      ["BAL@CAR", "CAR -2.5", "CAR -2.0", "BAL +2.5", 0.5, "Card", "CAR -2.5", "Card", -0.2, "Coin flip. Ravens without DT Nnamdi Madubuike, S Hawkins, and CB Marlon Humphrey; Panthers without LB Bobby Okereke."],
       ["TB@DET", "DET -7", "DET -2.8", "TB +7", 4.2, "Best Bet", "TB +7", "Lean", 3.0, "Baker Mayfield expected to play (questionable, foot/thumb). Bucs S Antoine Winfield Jr. out. Lions C Cade Mays out."],
       ["JAX@NYG", "JAX -6", "JAX -6.6", "JAX -6", 0.6, "Card", "JAX -6", "Card", 0.7, "Thin edge."],
       ["NO@CHI", "CHI -11.5", "CHI -8.8", "NO +11.5", 2.7, "Lean", "NO +11.5", "Lean", 4.1, "Big spread. Saints without T Taliese Fuaga, C Erik McCoy, T Asim Richards; Bears CB Kyler Gordon out."],
@@ -326,7 +326,7 @@
     },
     "key_injuries_official": [
       "TB QB Baker Mayfield questionable (expected to play); S Antoine Winfield Jr. out",
-      "BAL DT Nnamdi Madubuike, CB Marlon Humphrey out",
+      "BAL DT Nnamdi Madubuike, S Hawkins, CB Marlon Humphrey out",
       "KC T Jaylon Moore, G Trey Smith, RB Kenneth Walker III out",
       "ARI QB Carson Beck questionable; Josh Johnson expected to start",
       "CHI CB Kyler Gordon out",
