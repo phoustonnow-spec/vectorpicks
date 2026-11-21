@@ -1,0 +1,20 @@
+{
+  "captured": "2026-11-21",
+  "timezone": "source times are ESPN competition timestamps; card dates stay the US game date",
+  "source": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?week=11&seasontype=2&dates=2026",
+  "note": "Fetched Sat Nov 21, 2026. IND @ HOU is final, IND 3, HOU 26. The other Week 11 games were still pregame and are not given scores here.",
+  "weeks": {
+    "11": [
+      {
+        "game": "IND@HOU",
+        "away_abbr": "IND",
+        "home_abbr": "HOU",
+        "away_score": 3,
+        "home_score": 26,
+        "state": "post",
+        "detail": "Final",
+        "final": "IND 3, HOU 26"
+      }
+    ]
+  }
+}

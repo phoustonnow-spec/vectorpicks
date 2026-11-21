@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """Check the live site after a merge. A local build is not a publish.
 
-Exit 0 only when https://www.vectorpicks.com serves the Week 11 Thursday
-Westgate card, the graded Week 10 recap, the tracked-weeks record with
-Week 11 pending, and the Week 11 provisional DraftKings AI board.
+Exit 0 only when https://www.vectorpicks.com serves the Week 11 Saturday
+update on top of the Thursday Westgate card, the TNF loss, the tracked-weeks
+record, and the Week 11 provisional DraftKings AI board.
 Exit 1 when production is still the Week 11 card-pending notice or is missing a marker.
 
   python3 scripts/verify_live.py
@@ -28,7 +28,7 @@ LIVE_MARKERS = (
 )
 HOME_MARKERS = (
     "Week 11",
-    "Thursday, Nov 19, 2026 PT",
+    "Saturday, Nov 21, 2026 PT",
     "Thursday Nov 19, 2026 card",
     'id="tnf"',
     "IND +12.5",
@@ -40,7 +40,13 @@ HOME_MARKERS = (
     "NO +11.5 at CHI",
     "TB +7 at DET (QB status pending)",
     "Model side only, not a recommendation: MIA +16.5 at BUF, PHI +4.5 vs PIT.",
-    "13 games pending. Not graded.",
+    "1 of 13 graded. 12 games pending.",
+    "Week 11 Saturday update (Nov 21, 2026)",
+    "HOU 26, IND 3",
+    "IND 3, HOU 26",
+    "BAL +2.5",
+    "TB +7 at DET",
+    "Friday model build plus Saturday injury-status adjustments",
     "Week 10 final 7-7 (Best Bets 1-1, Leans 3-4, Card 3-2).",
     "LAC 23, BAL 20 (LAC +4.5 won)",
     "Graded rows stay the Thursday card.",
@@ -64,22 +70,26 @@ HOME_MARKERS = (
     "<b>ARI</b></td><td>\u221210.5</td>",
     "12-10-0",
     "16-24-0",
-    "7-7-1",
-    "36-42-1",
+    "7-8-1",
+    "36-43-1",
     "+2u",
     "-8u",
-    "-6u",
+    "-7u",
     "1 pending",
     "2 pending",
-    "10 pending",
-    "13 pending",
+    "9 pending",
+    "12 pending",
     "Tracked weeks",
+    "Qd7DWqq_jy8",
+    'data-yt="Qd7DWqq_jy8"',
+    "Week 11 Saturday Update: IND +12.5 Lost TNF, TB +7 Now a Best Bet | Vector Picks",
     "LqjTjbZOWb4",
-    'data-yt="LqjTjbZOWb4"',
     "Week 11 NFL AI Picks: IND +12.5 TNF, WAS +6.5 Best Bet | Week 10 Recap",
     "Entertainment and opinion only. Not betting advice.",
 )
 SHORTS_MARKERS = (
+    "Qd7DWqq_jy8",
+    "Week 11 Saturday Update: IND +12.5 Lost TNF, TB +7 Now a Best Bet | Vector Picks",
     "LqjTjbZOWb4",
     "Week 11 NFL AI Picks: IND +12.5 TNF, WAS +6.5 Best Bet | Week 10 Recap",
     "8cZ7qpdWyvU",
@@ -144,6 +154,12 @@ CARD_MARKERS = (
     "Byes: ATL, CLE, GB, LAR, NE, SEA",
     "https://www.youtube.com/shorts/LqjTjbZOWb4",
     "Week 11 NFL AI Picks: IND +12.5 TNF, WAS +6.5 Best Bet | Week 10 Recap",
+    "https://www.youtube.com/shorts/Qd7DWqq_jy8",
+    "Week 11 Saturday Update: IND +12.5 Lost TNF, TB +7 Now a Best Bet | Vector Picks",
+    "Week 11 Saturday update (Nov 21, 2026)",
+    "HOU 26, IND 3",
+    "BAL +2.5",
+    "IND 3, HOU 26",
 )
 RECORD_MARKERS = (
     "Week 10 final 7-7 (Best Bets 1-1, Leans 3-4, Card 3-2).",
@@ -156,18 +172,22 @@ RECORD_MARKERS = (
     "12-10-0",
     "16-24-0",
     "7-7-1",
+    "7-8-1",
     "36-42-1",
+    "36-43-1",
     "+2u",
     "-8u",
     "-6u",
+    "-7u",
     "Those 13 grade 9-4",
     "The full card also counts Hold and Provisional",
     "WAS +2.5",
     "WAS 24, NYG 21",
     "LAC 23, BAL 20",
     "IND +12.5",
+    "IND 3, HOU 26",
     "WAS +6.5",
-    "13 pending",
+    "12 pending",
     "Official Westgate Week 10 standings",
     "LAMBDA LAMBDA LAMBDA-1 36-13-1",
     "Gaps, not a complete season",
@@ -283,7 +303,7 @@ STALE = (
 
 
 def fetch(url):
-    bust = url + ("&" if "?" in url else "?") + "cb=20261119w11short"
+    bust = url + ("&" if "?" in url else "?") + "cb=20261121w11sat"
     request = urllib.request.Request(bust, headers={
         "Cache-Control": "no-cache",
         "Pragma": "no-cache",
@@ -309,11 +329,23 @@ def check(name, status, body, markers):
         bb = body.split('<ul class="picks big">', 1)[1].split("</ul>", 1)[0]
         if "WAS +6.5 vs CIN (Mon)" not in bb or "MIA" in bb or "PHI" in bb:
             present.append("home Best Bets are not WAS +6.5 alone")
+        if "13 games pending. Not graded." in body or "7-7-1" in body or "36-42-1" in body:
+            present.append("home still shows the pre-TNF Week 11 record")
+        sat = body.split('id="week-11-saturday"', 1)[-1].split("</section>", 1)[0]
+        sat_bets = sat.split("<h3>Best Bets</h3>", 1)[-1].split("</ul>", 1)[0]
+        if "TB +7 at DET" not in sat_bets or "WAS +6.5 vs CIN (Mon)" not in sat_bets or "MIA" in sat_bets or "PHI" in sat_bets:
+            present.append("Saturday Best Bets are not TB +7 and WAS +6.5")
         rest = body.split("Rest of card:", 1)[1].split("</p>", 1)[0]
         if "MIA +16.5" in rest or "PHI +4.5" in rest:
             present.append("model-only sides are in the rest of the card")
-    if name == "card" and (body.count("https://www.youtube.com/shorts/LqjTjbZOWb4") != 1 or body.split("Full card: Market vs Our Spread", 1)[-1].count("PENDING") != 13):
-        present.append("Week 11 card Short is missing or the card is not 13 pending rows")
+    card_table = body.split("Full card: Market vs Our Spread", 1)[-1] if name == "card" else ""
+    if name == "card" and (
+        "https://www.youtube.com/shorts/Qd7DWqq_jy8" not in body
+        or "https://www.youtube.com/shorts/LqjTjbZOWb4" not in body
+        or card_table.count("PENDING") != 12
+        or "IND 3, HOU 26" not in card_table
+    ):
+        present.append("Week 11 card Short is missing or the card is not 12 pending rows plus the TNF loss")
     if name == "live" and ("Week 11 has no card in the repo" in body or "Week 11 card pending" in body):
         present.append("live board is still the Week 11 gap page")
     if name in ("card", "record"):
@@ -349,7 +381,8 @@ def check(name, status, body, markers):
     if name == "week10-card" and ("Week 11" in body or "IND +12.5" in body or "WAS +6.5" in body or "LqjTjbZOWb4" in body):
         present.append("week 11 card leaked into the week 10 archive")
     order_bad = name == "shorts" and (
-        body.find("LqjTjbZOWb4") > body.find("8cZ7qpdWyvU")
+        body.find("Qd7DWqq_jy8") > body.find("LqjTjbZOWb4")
+        or body.find("LqjTjbZOWb4") > body.find("8cZ7qpdWyvU")
         or body.find("8cZ7qpdWyvU") > body.find("fvn8h67Mze0")
         or body.find("fvn8h67Mze0") > body.find("1cY3MSjjkzE")
         or body.find("1cY3MSjjkzE") > body.find("4-NrBHuRlUE")

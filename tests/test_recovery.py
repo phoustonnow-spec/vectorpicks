@@ -65,11 +65,16 @@ def test_built_pages():
     assert "IND +12.5" in home and "WAS +6.5 vs CIN (Mon)" in home
     assert "NO +11.5 at CHI" in home and "TB +7 at DET (QB status pending)" in home
     assert "Model side only, not a recommendation: MIA +16.5 at BUF, PHI +4.5 vs PIT." in home
-    assert "13 games pending. Not graded." in home
+    assert "1 of 13 graded. 12 games pending." in home
+    assert "Week 11 Saturday update (Nov 21, 2026)" in home
+    assert "HOU 26, IND 3" in home and "IND 3, HOU 26" in home
+    assert "BAL +2.5" in home and "TB +7 at DET" in home
     assert "Week 11 card pending" not in home and "No Week 11 picks, edges, or line comparisons" not in home
     assert "Week 10 final 7-7 (Best Bets 1-1, Leans 3-4, Card 3-2)." in home
-    assert "12-10-0" in home and "16-24-0" in home and "7-7-1" in home and "36-42-1" in home
-    assert "1 pending" in home and "2 pending" in home and "10 pending" in home and "13 pending" in home
+    assert "12-10-0" in home and "16-24-0" in home and "7-8-1" in home and "36-43-1" in home
+    assert "7-7-1" not in home and "36-42-1" not in home
+    assert "1 pending" in home and "2 pending" in home and "9 pending" in home and "12 pending" in home
+    assert "10 pending" not in home and "13 pending" not in home
     assert "Official Westgate Week 10 standings" in home and "LAMBDA LAMBDA LAMBDA-1 36-13-1" in home
     assert "DAL +4.5 vs SF" in home and "LAC +4.5" in home and "SF 46, DAL 40" in home and "LAC 23, BAL 20" in home
     assert 'id="rankings"' in home and "5.2" in home and "Injury adjustments are provisional this week" in home
@@ -77,8 +82,11 @@ def test_built_pages():
     assert "NYJ +8.5" not in home and "Week 10 early look" not in home
     assert "Vector power rankings entering Week 10" not in home
     shorts = open(os.path.join(root, "shorts.html"), encoding="utf-8").read()
-    assert "LqjTjbZOWb4" in home and 'data-yt="LqjTjbZOWb4"' in home
+    assert "Qd7DWqq_jy8" in home and 'data-yt="Qd7DWqq_jy8"' in home
+    assert "Week 11 Saturday Update: IND +12.5 Lost TNF, TB +7 Now a Best Bet | Vector Picks" in home
+    assert "LqjTjbZOWb4" in home
     assert "Week 11 NFL AI Picks: IND +12.5 TNF, WAS +6.5 Best Bet | Week 10 Recap" in home
+    assert "Qd7DWqq_jy8" in shorts and shorts.find("Qd7DWqq_jy8") < shorts.find("LqjTjbZOWb4")
     assert "LqjTjbZOWb4" in shorts and shorts.find("LqjTjbZOWb4") < shorts.find("8cZ7qpdWyvU")
     assert "8cZ7qpdWyvU" in shorts and shorts.find("8cZ7qpdWyvU") < shorts.find("fvn8h67Mze0")
     assert "fvn8h67Mze0" in shorts and shorts.find("fvn8h67Mze0") < shorts.find("1cY3MSjjkzE")
@@ -121,9 +129,11 @@ def test_built_pages():
     assert "WAS 24, NYG 21" in w10_card and "WAS +0.3" in w10_card
     assert "Week 11" not in w10_card and "IND +12.5" not in w10_card and "WAS +6.5" not in w10_card and "LqjTjbZOWb4" not in w10_card
     assert "IND +12.5" in card and "WAS +6.5" in card and "HOU \u221212.5" in card
-    assert "Week 10 final 7-7" in card and card.split("Full card: Market vs Our Spread", 1)[-1].count("PENDING") == 13
+    assert "Week 10 final 7-7" in card and card.split("Full card: Market vs Our Spread", 1)[-1].count("PENDING") == 12
+    assert "IND 3, HOU 26" in card and "Week 11 Saturday update (Nov 21, 2026)" in card
     assert "Week 10 early look" not in card and "Thu card line" not in card
-    assert card.count("https://www.youtube.com/shorts/LqjTjbZOWb4") == 1
+    assert "https://www.youtube.com/shorts/Qd7DWqq_jy8" in card
+    assert "https://www.youtube.com/shorts/LqjTjbZOWb4" in card
     assert "Model side only, not a recommendation" in card
     w11 = open(os.path.join(root, "ai-picks-2026-w11.html"), encoding="utf-8").read()
     assert "cXnzFQPN7mE" not in home + ai + card + shorts + archive + w11
