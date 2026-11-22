@@ -4125,8 +4125,16 @@ def validate_week11():
         "9 pending",
         "12 pending",
         "Tracked weeks",
+        "aXnadwU-Z7U",
+        'data-yt="aXnadwU-Z7U"',
+        "Week 11 Westgate SuperContest Top 5 Leaders",
+        "MATTLEGEND27-1 34-16",
+        "RIGGED NFL-1 33-16-1",
+        "RJ551155-3 33-17",
+        "TB +7 (4 of 5)",
+        "Contest-leader rows are not Vector picks",
+        "Entertainment only, not betting advice",
         "Qd7DWqq_jy8",
-        'data-yt="Qd7DWqq_jy8"',
         "Week 11 Saturday Update: IND +12.5 Lost TNF, TB +7 Now a Best Bet | Vector Picks",
         "LqjTjbZOWb4",
         "Week 11 NFL AI Picks: IND +12.5 TNF, WAS +6.5 Best Bet | Week 10 Recap",
@@ -4134,6 +4142,8 @@ def validate_week11():
     ):
         if needle not in home:
             raise SystemExit(f"home is missing {needle}")
+    if 'data-yt="Qd7DWqq_jy8"' in home or 'data-yt="LqjTjbZOWb4"' in home:
+        raise SystemExit("home latest Short is not the Week 11 leaders Short")
     if "13 games pending. Not graded." in home or "7-7-1" in home or "36-42-1" in home or "10 pending" in home:
         raise SystemExit("home still shows the pre-TNF Week 11 record")
     bb = home.split('<ul class="picks big">', 1)[1].split("</ul>", 1)[0]
@@ -4211,6 +4221,14 @@ def validate_week11():
         "Byes: ATL, CLE, GB, LAR, NE, SEA",
         "https://www.youtube.com/shorts/LqjTjbZOWb4",
         "Week 11 NFL AI Picks: IND +12.5 TNF, WAS +6.5 Best Bet | Week 10 Recap",
+        "https://www.youtube.com/shorts/aXnadwU-Z7U",
+        "Week 11 Westgate SuperContest Top 5 Leaders",
+        "MATTLEGEND27-1 34-16",
+        "RIGGED NFL-1 33-16-1",
+        "RJ551155-3 33-17",
+        "TB +7 (4 of 5)",
+        "Contest-leader rows are not Vector picks",
+        "Entertainment only, not betting advice",
         "https://www.youtube.com/shorts/Qd7DWqq_jy8",
         "Week 11 Saturday Update: IND +12.5 Lost TNF, TB +7 Now a Best Bet | Vector Picks",
         "Week 11 Saturday update (Nov 21, 2026)",
@@ -4221,10 +4239,14 @@ def validate_week11():
     ):
         if needle not in card:
             raise SystemExit(f"weekly card is missing {needle}")
-    if "Qd7DWqq_jy8" not in card or "LqjTjbZOWb4" not in card:
-        raise SystemExit("Week 11 card is missing the Saturday or Thursday Short")
-    if card.split("<h1>", 1)[1].split('id="tnf"', 1)[0].count("Qd7DWqq_jy8") < 1:
+    if "Qd7DWqq_jy8" not in card or "LqjTjbZOWb4" not in card or "aXnadwU-Z7U" not in card:
+        raise SystemExit("Week 11 card is missing the Saturday, Thursday, or leaders Short")
+    hero = card.split("<h1>", 1)[1].split('id="tnf"', 1)[0]
+    if hero.count("Qd7DWqq_jy8") < 1 or "aXnadwU-Z7U" in hero:
         raise SystemExit("Week 11 card Latest Short is not the Saturday Short")
+    sat_block = card.split('id="week-11-saturday"', 1)[1].split("Full card: Market vs Our Spread", 1)[0]
+    if "aXnadwU-Z7U" not in sat_block or "MATTLEGEND27-1 34-16" not in sat_block or "Contest-leader rows are not Vector picks" not in sat_block or "TB +7 (4 of 5)" not in sat_block:
+        raise SystemExit("Week 11 card is missing the SuperContest leaders section")
     card_bb = card.split('<ul class="picks big">', 1)[1].split("</ul>", 1)[0]
     if card_bb.count("<li>") != 1 or "WAS +6.5" not in card_bb or "MIA" in card_bb or "PHI" in card_bb:
         raise SystemExit("card Best Bets are not WAS +6.5 alone")
@@ -4285,12 +4307,12 @@ def validate_week11():
     ):
         if needle not in w10_card:
             raise SystemExit(f"Week 10 archive card is missing {needle}")
-    if "Week 11" in w10_card or "IND +12.5" in w10_card or "WAS +6.5" in w10_card:
+    if "Week 11" in w10_card or "IND +12.5" in w10_card or "WAS +6.5" in w10_card or "aXnadwU-Z7U" in w10_card:
         raise SystemExit("Week 10 archive card picked up the Week 11 card")
     for needle in ("Thu card line", "BAL +10", "BUF 23, MIN 6", "No side"):
         if needle not in archive_card:
             raise SystemExit(f"Week 9 archive card is missing {needle}")
-    if "Week 11" in archive_card or "WAS +2.5" in archive_card or "1cY3MSjjkzE" in archive_card:
+    if "Week 11" in archive_card or "WAS +2.5" in archive_card or "1cY3MSjjkzE" in archive_card or "aXnadwU-Z7U" in archive_card:
         raise SystemExit("Week 9 archive card picked up a later card")
     for needle in (
         "Week 10 final 7-7 (Best Bets 1-1, Leans 3-4, Card 3-2).",
@@ -4459,7 +4481,12 @@ def validate_week11():
     if "Week 11" in w10_ai and "ai-picks-2026-w11.html" not in w10_ai:
         raise SystemExit("Week 10 AI archive picked up the Week 11 board")
     for needle in (
-        "Qd7DWqq_jy8", "LqjTjbZOWb4", "8cZ7qpdWyvU", "fvn8h67Mze0", "1cY3MSjjkzE", "4-NrBHuRlUE", "q2OazIWZ5vE",
+        "aXnadwU-Z7U", "Qd7DWqq_jy8", "LqjTjbZOWb4", "8cZ7qpdWyvU", "fvn8h67Mze0", "1cY3MSjjkzE", "4-NrBHuRlUE", "q2OazIWZ5vE",
+        "Week 11 Westgate SuperContest Top 5 Leaders",
+        "MATTLEGEND27-1 34-16",
+        "RJ551155-3 33-17",
+        "TB +7 (4 of 5)",
+        "Contest-leader rows are not Vector picks",
         "Week 11 Saturday Update: IND +12.5 Lost TNF, TB +7 Now a Best Bet | Vector Picks",
         "Week 11 NFL AI Picks: IND +12.5 TNF, WAS +6.5 Best Bet | Week 10 Recap",
         "Week 10 Westgate SuperContest Top 5 Leaders",
@@ -4471,13 +4498,14 @@ def validate_week11():
         if needle not in shorts:
             raise SystemExit(f"shorts page is missing {needle}")
     if (
-        shorts.find("Qd7DWqq_jy8") > shorts.find("LqjTjbZOWb4")
+        shorts.find("aXnadwU-Z7U") > shorts.find("Qd7DWqq_jy8")
+        or shorts.find("Qd7DWqq_jy8") > shorts.find("LqjTjbZOWb4")
         or shorts.find("LqjTjbZOWb4") > shorts.find("8cZ7qpdWyvU")
         or shorts.find("8cZ7qpdWyvU") > shorts.find("fvn8h67Mze0")
         or shorts.find("fvn8h67Mze0") > shorts.find("1cY3MSjjkzE")
         or shorts.find("1cY3MSjjkzE") > shorts.find("4-NrBHuRlUE")
     ):
-        raise SystemExit("Shorts order changed")
+        raise SystemExit("Week 11 leaders Short is not ahead of the Saturday, Thursday, and Week 10 Shorts")
     week = json.load(open(os.path.join(DATA, "weeks", "2026-w10.json")))
     thu_game = next(g for g in week["games"] if g["game"] == "WAS@NYG")
     if thu_game["pick"] != "WAS +2.5" or thu_game["our"] != "WAS +0.3" or thu_game["tier"] != "Lean" or thu_game["gap"] != 2.2:
@@ -4507,11 +4535,23 @@ def validate_week11():
         raise SystemExit("shorts.json Week 11 Thursday Short does not match the card")
     shorts_data = json.load(open(os.path.join(DATA, "shorts.json")))
     latest_short = (shorts_data.get("shorts") or [None])[0] or {}
-    if "Qd7DWqq_jy8" not in (latest_short.get("youtube_url") or "") or latest_short.get("date") != "2026-11-21" or int(latest_short.get("week") or 0) != 11:
-        raise SystemExit("shorts.json latest Short is not the Week 11 Saturday Short")
-    if latest_short.get("title") != "Week 11 Saturday Update: IND +12.5 Lost TNF, TB +7 Now a Best Bet | Vector Picks":
-        raise SystemExit("Saturday Short title does not match")
+    leaders_title = "Week 11 Westgate SuperContest Top 5 Leaders | Bucs +7 on 4 of 5 #Shorts"
+    if "aXnadwU-Z7U" not in (latest_short.get("youtube_url") or "") or latest_short.get("date") != "2026-11-22" or int(latest_short.get("week") or 0) != 11:
+        raise SystemExit("shorts.json latest Short is not the Week 11 leaders Short")
+    if latest_short.get("title") != leaders_title:
+        raise SystemExit("Week 11 leaders Short title does not match")
+    if "MATTLEGEND27-1 34-16" not in (latest_short.get("note") or "") or "RJ551155-3 33-17" not in (latest_short.get("note") or ""):
+        raise SystemExit("Week 11 leaders Short note is missing the supplied records")
+    if "Contest-leader rows are not Vector picks" not in (latest_short.get("note") or "") or "Entertainment only, not betting advice" not in (latest_short.get("note") or ""):
+        raise SystemExit("Week 11 leaders Short note is missing the entertainment line")
+    saturday_short = next(s for s in shorts_data["shorts"] if "Qd7DWqq_jy8" in (s.get("youtube_url") or ""))
+    if saturday_short.get("title") != "Week 11 Saturday Update: IND +12.5 Lost TNF, TB +7 Now a Best Bet | Vector Picks" or saturday_short.get("date") != "2026-11-21":
+        raise SystemExit("Week 11 Saturday Short was changed")
+    if latest_short.get("date") <= saturday_short.get("date"):
+        raise SystemExit("Week 11 leaders Short is not dated after the Saturday Short")
     saturday = week11.get("saturday_update") or {}
+    if saturday.get("leaders_video_url") != latest_short.get("youtube_url") or saturday.get("leaders_video_title") != leaders_title:
+        raise SystemExit("Week 11 card is missing the leaders Short link")
     if saturday.get("folded_into_grades") or not saturday.get("latest_on_card"):
         raise SystemExit("Saturday update must stay separate and be the card's latest Short")
     if saturday.get("title") != "Week 11 Saturday update (Nov 21, 2026)":
