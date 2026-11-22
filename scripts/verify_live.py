@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """Check the live site after a merge. A local build is not a publish.
 
-Exit 0 only when https://www.vectorpicks.com serves the Week 11 Saturday
-update on top of the Thursday Westgate card, the TNF loss, the tracked-weeks
-record, and the Week 11 provisional DraftKings AI board.
+Exit 0 only when https://www.vectorpicks.com serves the Week 11 Sunday
+leaders Short on top of the Saturday update, the Thursday Westgate card, the
+TNF loss, the tracked-weeks record, and the Week 11 provisional DraftKings AI board.
 Exit 1 when production is still the Week 11 card-pending notice or is missing a marker.
 
   python3 scripts/verify_live.py
@@ -28,7 +28,7 @@ LIVE_MARKERS = (
 )
 HOME_MARKERS = (
     "Week 11",
-    "Saturday, Nov 21, 2026 PT",
+    "Sunday, Nov 22, 2026 PT",
     "Thursday Nov 19, 2026 card",
     'id="tnf"',
     "IND +12.5",
@@ -80,14 +80,29 @@ HOME_MARKERS = (
     "9 pending",
     "12 pending",
     "Tracked weeks",
+    "aXnadwU-Z7U",
+    'data-yt="aXnadwU-Z7U"',
+    "Week 11 Westgate SuperContest Top 5 Leaders",
+    "MATTLEGEND27-1 34-16",
+    "RIGGED NFL-1 33-16-1",
+    "RJ551155-3 33-17",
+    "TB +7 (4 of 5)",
+    "Contest-leader rows are not Vector picks",
+    "Entertainment only, not betting advice",
     "Qd7DWqq_jy8",
-    'data-yt="Qd7DWqq_jy8"',
     "Week 11 Saturday Update: IND +12.5 Lost TNF, TB +7 Now a Best Bet | Vector Picks",
     "LqjTjbZOWb4",
     "Week 11 NFL AI Picks: IND +12.5 TNF, WAS +6.5 Best Bet | Week 10 Recap",
     "Entertainment and opinion only. Not betting advice.",
 )
 SHORTS_MARKERS = (
+    "aXnadwU-Z7U",
+    "Week 11 Westgate SuperContest Top 5 Leaders",
+    "MATTLEGEND27-1 34-16",
+    "RJ551155-3 33-17",
+    "TB +7 (4 of 5)",
+    "Contest-leader rows are not Vector picks",
+    "Entertainment only, not betting advice",
     "Qd7DWqq_jy8",
     "Week 11 Saturday Update: IND +12.5 Lost TNF, TB +7 Now a Best Bet | Vector Picks",
     "LqjTjbZOWb4",
@@ -154,6 +169,11 @@ CARD_MARKERS = (
     "Byes: ATL, CLE, GB, LAR, NE, SEA",
     "https://www.youtube.com/shorts/LqjTjbZOWb4",
     "Week 11 NFL AI Picks: IND +12.5 TNF, WAS +6.5 Best Bet | Week 10 Recap",
+    "https://www.youtube.com/shorts/aXnadwU-Z7U",
+    "Week 11 Westgate SuperContest Top 5 Leaders",
+    "MATTLEGEND27-1 34-16",
+    "Contest-leader rows are not Vector picks",
+    "TB +7 (4 of 5)",
     "https://www.youtube.com/shorts/Qd7DWqq_jy8",
     "Week 11 Saturday Update: IND +12.5 Lost TNF, TB +7 Now a Best Bet | Vector Picks",
     "Week 11 Saturday update (Nov 21, 2026)",
@@ -303,7 +323,7 @@ STALE = (
 
 
 def fetch(url):
-    bust = url + ("&" if "?" in url else "?") + "cb=20261121w11sat"
+    bust = url + ("&" if "?" in url else "?") + "cb=20261122w11leaders"
     request = urllib.request.Request(bust, headers={
         "Cache-Control": "no-cache",
         "Pragma": "no-cache",
@@ -342,10 +362,15 @@ def check(name, status, body, markers):
     if name == "card" and (
         "https://www.youtube.com/shorts/Qd7DWqq_jy8" not in body
         or "https://www.youtube.com/shorts/LqjTjbZOWb4" not in body
+        or "https://www.youtube.com/shorts/aXnadwU-Z7U" not in body
+        or "MATTLEGEND27-1 34-16" not in body
+        or "Contest-leader rows are not Vector picks" not in body
         or card_table.count("PENDING") != 12
         or "IND 3, HOU 26" not in card_table
     ):
         present.append("Week 11 card Short is missing or the card is not 12 pending rows plus the TNF loss")
+    if name == "homepage" and ('data-yt="aXnadwU-Z7U"' not in body or 'data-yt="Qd7DWqq_jy8"' in body):
+        present.append("home latest Short is not the Week 11 leaders Short")
     if name == "live" and ("Week 11 has no card in the repo" in body or "Week 11 card pending" in body):
         present.append("live board is still the Week 11 gap page")
     if name in ("card", "record"):
@@ -378,10 +403,11 @@ def check(name, status, body, markers):
             present.append("Claude top 5 is not IND +12.5, PIT -4.5, NYJ +3, CAR -2.5, MIN +3")
     if name == "week9-card" and ("WAS +2.5" in body or "1cY3MSjjkzE" in body or "fvn8h67Mze0" in body or "8cZ7qpdWyvU" in body or "Westgate SuperContest Week 10" in body):
         present.append("week 10 card leaked into the week 9 archive")
-    if name == "week10-card" and ("Week 11" in body or "IND +12.5" in body or "WAS +6.5" in body or "LqjTjbZOWb4" in body):
+    if name == "week10-card" and ("Week 11" in body or "IND +12.5" in body or "WAS +6.5" in body or "LqjTjbZOWb4" in body or "aXnadwU-Z7U" in body):
         present.append("week 11 card leaked into the week 10 archive")
     order_bad = name == "shorts" and (
-        body.find("Qd7DWqq_jy8") > body.find("LqjTjbZOWb4")
+        body.find("aXnadwU-Z7U") > body.find("Qd7DWqq_jy8")
+        or body.find("Qd7DWqq_jy8") > body.find("LqjTjbZOWb4")
         or body.find("LqjTjbZOWb4") > body.find("8cZ7qpdWyvU")
         or body.find("8cZ7qpdWyvU") > body.find("fvn8h67Mze0")
         or body.find("fvn8h67Mze0") > body.find("1cY3MSjjkzE")
@@ -397,7 +423,7 @@ def check(name, status, body, markers):
         if present:
             print("forbidden: " + ", ".join(present))
         if order_bad:
-            print("Week 10 leaders Short is not before the Saturday, Thursday, and Week 9 Shorts")
+            print("Week 11 leaders Short is not before the Saturday, Thursday, and Week 10 Shorts")
         return False
     print(f"Live {name} contains the expected markers.")
     return True

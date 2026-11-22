@@ -370,6 +370,32 @@
         "The Wednesday AI board stays its own labeled board and is not graded here",
         "Earlier Shorts stay listed, including the Thursday Short LqjTjbZOWb4"
       ]
+    },
+    {
+      "week": 11,
+      "season": 2026,
+      "published_at_pt": "2026-11-22",
+      "dedup_key": "2026-w11-leaders-short",
+      "source": "Public YouTube Short https://www.youtube.com/shorts/aXnadwU-Z7U on Vector Picks. Leader records and Week 11 picks are the supplied Westgate contest-line figures through Week 10. No Week 11 results were added. The Thursday and Saturday Shorts stay listed.",
+      "included": [
+        "Week 11 Westgate SuperContest Top 5 Leaders Short",
+        "Thursday YouTube Short kept",
+        "Saturday YouTube Short kept"
+      ],
+      "public_video_ids": [
+        "aXnadwU-Z7U"
+      ],
+      "never_embed": [
+        "cXnzFQPN7mE"
+      ],
+      "gaps": [
+        "Contest-leader rows are not Vector picks and are not on the record",
+        "No Week 11 results were graded from this Short",
+        "Shorts contest-leader block stays the Sunday Nov 8 unofficial snapshot",
+        "Saturday card is not folded into the graded rows",
+        "Vector numbers are provisional, not a fresh full rerun",
+        "MIA +16.5 is Vector's model side only, not a recommendation"
+      ]
     }
   ]
 }

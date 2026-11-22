@@ -1,5 +1,5 @@
 {
-  "_comment": "Public YouTube Shorts only. never_embed ids are refused by the build even if a URL is added later. Weeks 3, 4, and 8 are archive. Week 9 shorts stay listed. The Week 11 Saturday Short is the latest. The Week 11 Thursday Short stays listed. The Week 10 leaders, Saturday, and Thursday Shorts stay listed. Dates order the home page. 2026-11-21 is the Week 11 Saturday Short. 2026-11-19 is the Week 11 Thursday Short. leader_results is the unofficial Week 9 contest grade shown on the Shorts page. It is not a Vector record.",
+  "_comment": "Public YouTube Shorts only. never_embed ids are refused by the build even if a URL is added later. Weeks 3, 4, and 8 are archive. Week 9 shorts stay listed. The Week 11 leaders Short is the latest. The Week 11 Saturday Short and the Week 11 Thursday Short stay listed. The Week 10 leaders, Saturday, and Thursday Shorts stay listed. Dates order the home page. 2026-11-22 is the Week 11 leaders Short. 2026-11-21 is the Week 11 Saturday Short. 2026-11-19 is the Week 11 Thursday Short. leader_results is the unofficial Week 9 contest grade shown on the Shorts page. It is not a Vector record.",
   "never_embed": ["cXnzFQPN7mE"],
   "placeholder_slots": 0,
   "leader_results": {
@@ -151,6 +151,14 @@
     ]
   },
   "shorts": [
+    {
+      "title": "Week 11 Westgate SuperContest Top 5 Leaders | Bucs +7 on 4 of 5 #Shorts",
+      "date": "2026-11-22",
+      "week": 11,
+      "role": "current",
+      "youtube_url": "https://www.youtube.com/shorts/aXnadwU-Z7U",
+      "note": "Posted Sun Nov 22, 2026. Standings through Week 10. Fifth place was a 2-way tie at 33-17. RJ551155-3 is shown because that player's identical Gold entries are near the top of SuperContest Gold. Top 5 SuperContest entries and their Week 11 picks at the Westgate SuperContest Week 11 contest lines. These contest-leader rows are not Vector picks. #1 LAMBDA LAMBDA LAMBDA-1 36-13-1: TB +7, NYG +6, KC -16, MIA +16.5, WAS +6.5. #2 MATTLEGEND27-1 34-16: CHI -11.5, MIA +16.5, PIT -4.5, SF -3, WAS +6.5. #3T RIGGED NFL-1 33-16-1: TB +7, NYG +6, DEN -10, SF -3, WAS +6.5. #3T AMICI2-1 33-16-1: TB +7, CHI -11.5, MIA +16.5, NYJ +3.5, CIN -6.5. #5T RJ551155-3 33-17: CAR -2.5, TB +7, JAX -6, NO +11.5, TEN +8. Shared sides: TB +7 (4 of 5); MIA +16.5, WAS +6.5 (3 of 5); SF -3, NYG +6, CHI -11.5 (2 of 5). Vector's Saturday card agrees on TB +7 (Best Bet), WAS +6.5 (Best Bet), and SF -3 (Card), and fades NYG +6 (Vector JAX -6) and CHI -11.5 (Vector NO +11.5, Lean). MIA +16.5 is Vector's model side only, not a recommendation. Contest-leader rows are not Vector picks. Entertainment only, not betting advice."
+    },
     {
       "title": "Week 11 Saturday Update: IND +12.5 Lost TNF, TB +7 Now a Best Bet | Vector Picks",
       "date": "2026-11-21",

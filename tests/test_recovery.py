@@ -82,10 +82,16 @@ def test_built_pages():
     assert "NYJ +8.5" not in home and "Week 10 early look" not in home
     assert "Vector power rankings entering Week 10" not in home
     shorts = open(os.path.join(root, "shorts.html"), encoding="utf-8").read()
-    assert "Qd7DWqq_jy8" in home and 'data-yt="Qd7DWqq_jy8"' in home
+    assert "aXnadwU-Z7U" in home and 'data-yt="aXnadwU-Z7U"' in home
+    assert 'data-yt="Qd7DWqq_jy8"' not in home
+    assert "Week 11 Westgate SuperContest Top 5 Leaders" in home
+    assert "MATTLEGEND27-1 34-16" in home and "RJ551155-3 33-17" in home and "TB +7 (4 of 5)" in home
+    assert "Contest-leader rows are not Vector picks" in home and "Entertainment only, not betting advice" in home
+    assert "Qd7DWqq_jy8" in home
     assert "Week 11 Saturday Update: IND +12.5 Lost TNF, TB +7 Now a Best Bet | Vector Picks" in home
     assert "LqjTjbZOWb4" in home
     assert "Week 11 NFL AI Picks: IND +12.5 TNF, WAS +6.5 Best Bet | Week 10 Recap" in home
+    assert "aXnadwU-Z7U" in shorts and shorts.find("aXnadwU-Z7U") < shorts.find("Qd7DWqq_jy8")
     assert "Qd7DWqq_jy8" in shorts and shorts.find("Qd7DWqq_jy8") < shorts.find("LqjTjbZOWb4")
     assert "LqjTjbZOWb4" in shorts and shorts.find("LqjTjbZOWb4") < shorts.find("8cZ7qpdWyvU")
     assert "8cZ7qpdWyvU" in shorts and shorts.find("8cZ7qpdWyvU") < shorts.find("fvn8h67Mze0")
@@ -127,13 +133,17 @@ def test_built_pages():
     assert "1cY3MSjjkzE" in w10_card and "fvn8h67Mze0" in w10_card and "8cZ7qpdWyvU" in w10_card
     assert "Week 10 Saturday update (Nov 14, 2026)" in w10_card
     assert "WAS 24, NYG 21" in w10_card and "WAS +0.3" in w10_card
-    assert "Week 11" not in w10_card and "IND +12.5" not in w10_card and "WAS +6.5" not in w10_card and "LqjTjbZOWb4" not in w10_card
+    assert "Week 11" not in w10_card and "IND +12.5" not in w10_card and "WAS +6.5" not in w10_card and "LqjTjbZOWb4" not in w10_card and "aXnadwU-Z7U" not in w10_card
     assert "IND +12.5" in card and "WAS +6.5" in card and "HOU \u221212.5" in card
     assert "Week 10 final 7-7" in card and card.split("Full card: Market vs Our Spread", 1)[-1].count("PENDING") == 12
     assert "IND 3, HOU 26" in card and "Week 11 Saturday update (Nov 21, 2026)" in card
     assert "Week 10 early look" not in card and "Thu card line" not in card
     assert "https://www.youtube.com/shorts/Qd7DWqq_jy8" in card
     assert "https://www.youtube.com/shorts/LqjTjbZOWb4" in card
+    assert "https://www.youtube.com/shorts/aXnadwU-Z7U" in card
+    assert "MATTLEGEND27-1 34-16" in card and "Contest-leader rows are not Vector picks" in card
+    hero = card.split("<h1>", 1)[1].split('id="tnf"', 1)[0]
+    assert "Qd7DWqq_jy8" in hero and "aXnadwU-Z7U" not in hero
     assert "Model side only, not a recommendation" in card
     w11 = open(os.path.join(root, "ai-picks-2026-w11.html"), encoding="utf-8").read()
     assert "cXnzFQPN7mE" not in home + ai + card + shorts + archive + w11
