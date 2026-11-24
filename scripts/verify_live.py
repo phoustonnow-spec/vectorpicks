@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 """Check the live site after a merge. A local build is not a publish.
 
-Exit 0 only when https://www.vectorpicks.com serves the Week 11 Sunday
-leaders Short on top of the Saturday update, the Thursday Westgate card, the
-TNF loss, the tracked-weeks record, and the Week 11 provisional DraftKings AI board.
-Exit 1 when production is still the Week 11 card-pending notice or is missing a marker.
+Exit 0 only when https://www.vectorpicks.com serves the Week 12 rankings,
+the Week 12 card-pending status, the graded Week 11 Thursday card (6-7),
+and the tracked-weeks record through Week 11.
+Exit 1 when production is still the Week 11 pending card or is missing a marker.
 
   python3 scripts/verify_live.py
 """
@@ -22,13 +22,15 @@ W9_CARD_URL = "https://www.vectorpicks.com/card-2026-w09.html"
 W10_CARD_URL = "https://www.vectorpicks.com/card-2026-w10.html"
 LIVE_MARKERS = (
     "Live Board",
-    "Our Spread is the Week 11 2026 card (Westgate)",
+    "Week 12 has no card in the repo",
+    "Week 12 card pending: the Westgate SuperContest Week 12 sheet was not posted as of Tue Nov 24, 2026 8:52 AM PT.",
+    "No Week 12 picks, edges, or line comparisons",
+    "Week 11 final 6-7 (Best Bets 1-0, Leans 1-1, Card 4-6).",
     "Entertainment and opinion only",
-    "assets/live.js",
 )
 HOME_MARKERS = (
-    "Week 11",
-    "Sunday, Nov 22, 2026 PT",
+    "Week 12",
+    "Tuesday, Nov 24, 2026 PT",
     "Thursday Nov 19, 2026 card",
     'id="tnf"',
     "IND +12.5",
@@ -40,7 +42,10 @@ HOME_MARKERS = (
     "NO +11.5 at CHI",
     "TB +7 at DET (QB status pending)",
     "Model side only, not a recommendation: MIA +16.5 at BUF, PHI +4.5 vs PIT.",
-    "1 of 13 graded. 12 games pending.",
+    "Week 11 final 6-7 (Best Bets 1-0, Leans 1-1, Card 4-6).",
+    "CIN 20, WAS 22",
+    "Week 12 card pending: the Westgate SuperContest Week 12 sheet was not posted as of Tue Nov 24, 2026 8:52 AM PT.",
+    "No Week 12 picks, edges, or line comparisons",
     "Week 11 Saturday update (Nov 21, 2026)",
     "HOU 26, IND 3",
     "IND 3, HOU 26",
@@ -64,21 +69,19 @@ HOME_MARKERS = (
     "not a fresh full rerun",
     "Thursday picks, Saturday update.",
     'id="rankings"',
-    "Vector power rankings entering Week 11",
-    "Injury adjustments are provisional this week",
-    "<b>JAX</b></td><td>5.2</td>",
-    "<b>ARI</b></td><td>\u221210.5</td>",
-    "12-10-0",
-    "16-24-0",
-    "7-8-1",
-    "36-43-1",
-    "+2u",
+    "Vector power rankings entering Week 12",
+    "Injury adjustments are built player by player for all 32 teams but remain provisional until midweek practice reports",
+    "<b>BUF</b></td><td>5.2</td>",
+    "<b>ARI</b></td><td>\u22129.8</td>",
+    "13-10-0",
+    "17-25-0",
+    "11-13-1",
+    "42-49-1",
+    "+3u",
     "-8u",
+    "-2u",
     "-7u",
-    "1 pending",
-    "2 pending",
-    "9 pending",
-    "12 pending",
+    "0 pending",
     "Tracked weeks",
     "aXnadwU-Z7U",
     'data-yt="aXnadwU-Z7U"',
@@ -155,7 +158,12 @@ CARD_MARKERS = (
     "MIA +16.5",
     "PHI +4.5",
     "Model side only, not a recommendation",
-    "PENDING",
+    "Week 11 final 6-7 (Best Bets 1-0, Leans 1-1, Card 4-6).",
+    "CIN 20, WAS 22",
+    "BAL 33, CAR 35",
+    "MIN 10, SF 35",
+    "Week 12 card pending",
+    "No Week 12 picks, edges, or line comparisons",
     "Week 10 final 7-7 (Best Bets 1-1, Leans 3-4, Card 3-2).",
     "LAC 23, BAL 20 (LAC +4.5 won)",
     "Lines: Westgate SuperContest Week 11 contest card (posted Wed Nov 18, 2026)",
@@ -207,29 +215,26 @@ RECORD_MARKERS = (
     "IND +12.5",
     "IND 3, HOU 26",
     "WAS +6.5",
-    "12 pending",
+    "CIN 20, WAS 22",
+    "Week 11 final 6-7 (Best Bets 1-0, Leans 1-1, Card 4-6).",
+    "13-10-0",
+    "17-25-0",
+    "11-13-1",
+    "42-49-1",
+    "+3u",
+    "-2u",
+    "The other 12 Week 11 rows stay pending",
     "Official Westgate Week 10 standings",
     "LAMBDA LAMBDA LAMBDA-1 36-13-1",
     "Gaps, not a complete season",
     "Saturday tier changes are not folded in.",
 )
 AI_MARKERS = (
-    "Week 11",
-    "PROVISIONAL",
-    "DraftKings line",
-    "Not a Westgate card.",
-    "1:16 PM PT",
-    "All 13 games are pending.",
-    "IND +12.5",
-    "PIT \u22124.5",
-    "NYJ +3",
-    "CAR \u22122.5",
-    "MIN +3",
-    "Claude",
-    "Gemini",
-    "Grok",
-    "ChatGPT",
-    "Mexico City",
+    "Week 12 AI picks pending",
+    "No sides were invented.",
+    "AI picks are not published yet",
+    "Week 12 card pending",
+    "No Week 12 picks, edges, or line comparisons",
     "game.html",
     "ai-picks-2026-w11.html",
     "ai-picks-2026-w10.html",
@@ -323,7 +328,7 @@ STALE = (
 
 
 def fetch(url):
-    bust = url + ("&" if "?" in url else "?") + "cb=20261122w11leaders"
+    bust = url + ("&" if "?" in url else "?") + "cb=20261124w12"
     request = urllib.request.Request(bust, headers={
         "Cache-Control": "no-cache",
         "Pragma": "no-cache",
@@ -349,15 +354,14 @@ def check(name, status, body, markers):
         bb = body.split('<ul class="picks big">', 1)[1].split("</ul>", 1)[0]
         if "WAS +6.5 vs CIN (Mon)" not in bb or "MIA" in bb or "PHI" in bb:
             present.append("home Best Bets are not WAS +6.5 alone")
-        if "13 games pending. Not graded." in body or "7-7-1" in body or "36-42-1" in body:
-            present.append("home still shows the pre-TNF Week 11 record")
+        if "13 games pending. Not graded." in body or "1 of 13 graded. 12 games pending." in body or "7-7-1" in body or "36-42-1" in body or "12-10-0" in body:
+            present.append("home still shows a pending or pre-grade Week 11 record")
+        if "GB @ LAR" in body or "KC @ BUF" in body or "CHI @ DET" in body:
+            present.append("home shows a Week 12 pick")
         sat = body.split('id="week-11-saturday"', 1)[-1].split("</section>", 1)[0]
         sat_bets = sat.split("<h3>Best Bets</h3>", 1)[-1].split("</ul>", 1)[0]
         if "TB +7 at DET" not in sat_bets or "WAS +6.5 vs CIN (Mon)" not in sat_bets or "MIA" in sat_bets or "PHI" in sat_bets:
             present.append("Saturday Best Bets are not TB +7 and WAS +6.5")
-        rest = body.split("Rest of card:", 1)[1].split("</p>", 1)[0]
-        if "MIA +16.5" in rest or "PHI +4.5" in rest:
-            present.append("model-only sides are in the rest of the card")
     card_table = body.split("Full card: Market vs Our Spread", 1)[-1] if name == "card" else ""
     if name == "card" and (
         "https://www.youtube.com/shorts/Qd7DWqq_jy8" not in body
@@ -365,14 +369,17 @@ def check(name, status, body, markers):
         or "https://www.youtube.com/shorts/aXnadwU-Z7U" not in body
         or "MATTLEGEND27-1 34-16" not in body
         or "Contest-leader rows are not Vector picks" not in body
-        or card_table.count("PENDING") != 12
+        or card_table.count("PENDING") != 0
+        or card_table.count('res-win">WIN') != 6
+        or card_table.count('res-loss">LOSS') != 7
         or "IND 3, HOU 26" not in card_table
+        or "CIN 20, WAS 22" not in card_table
     ):
-        present.append("Week 11 card Short is missing or the card is not 12 pending rows plus the TNF loss")
+        present.append("Week 11 card Short is missing or the card is not graded 6-7")
     if name == "homepage" and ('data-yt="aXnadwU-Z7U"' not in body or 'data-yt="Qd7DWqq_jy8"' in body):
         present.append("home latest Short is not the Week 11 leaders Short")
-    if name == "live" and ("Week 11 has no card in the repo" in body or "Week 11 card pending" in body):
-        present.append("live board is still the Week 11 gap page")
+    if name == "live" and ("assets/live.js" in body or "Our Spread is the Week 11" in body or "Week 11 card pending" in body or "GB @ LAR" in body):
+        present.append("live board is still the Week 11 line board or shows a Week 12 pick")
     if name in ("card", "record"):
         for edge in (
             "the Week 10 Vector card publishes after the official contest lines are out",
@@ -387,7 +394,11 @@ def check(name, status, body, markers):
         for edge in ("Leans 19-23", "Card tier 9-7-1", "Full card 39-39-1"):
             if edge in body:
                 present.append(edge)
-    if name in ("ai-picks", "ai-picks-w11"):
+    if name == "ai-picks":
+        for edge in ("Week 10 early look", "Week 11 AI picks pending", "1:16 PM PT", "DraftKings line", "GB @ LAR", "KC @ BUF"):
+            if edge in body:
+                present.append(edge)
+    if name == "ai-picks-w11":
         for edge in (
             "Week 10 early look",
             "Week 11 AI picks pending",

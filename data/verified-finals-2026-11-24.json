@@ -1,0 +1,140 @@
+{
+  "captured": "2026-11-24",
+  "timezone": "source times are ESPN competition timestamps; card dates stay the US game date",
+  "source": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?week=11&seasontype=2&dates=2026",
+  "note": "Week 11 finals used for the Tuesday Nov 24, 2026 grade. All 13 games are final, including Monday night CIN 20, WAS 22. ESPN abbreviates Washington as WSH; this file uses WAS, the abbreviation already on the site. MIN @ SF was played in Mexico City (neutral). Scores are the supplied ESPN finals.",
+  "weeks": {
+    "11": [
+      {
+        "game": "ARI@KC",
+        "away_abbr": "ARI",
+        "home_abbr": "KC",
+        "away_score": 7,
+        "home_score": 34,
+        "state": "post",
+        "detail": "Final",
+        "final": "ARI 7, KC 34"
+      },
+      {
+        "game": "BAL@CAR",
+        "away_abbr": "BAL",
+        "home_abbr": "CAR",
+        "away_score": 33,
+        "home_score": 35,
+        "state": "post",
+        "detail": "Final",
+        "final": "BAL 33, CAR 35"
+      },
+      {
+        "game": "CIN@WAS",
+        "away_abbr": "CIN",
+        "home_abbr": "WAS",
+        "away_score": 20,
+        "home_score": 22,
+        "state": "post",
+        "detail": "Final",
+        "final": "CIN 20, WAS 22"
+      },
+      {
+        "game": "IND@HOU",
+        "away_abbr": "IND",
+        "home_abbr": "HOU",
+        "away_score": 3,
+        "home_score": 26,
+        "state": "post",
+        "detail": "Final",
+        "final": "IND 3, HOU 26"
+      },
+      {
+        "game": "JAX@NYG",
+        "away_abbr": "JAX",
+        "home_abbr": "NYG",
+        "away_score": 18,
+        "home_score": 23,
+        "state": "post",
+        "detail": "Final",
+        "final": "JAX 18, NYG 23"
+      },
+      {
+        "game": "LV@DEN",
+        "away_abbr": "LV",
+        "home_abbr": "DEN",
+        "away_score": 24,
+        "home_score": 38,
+        "state": "post",
+        "detail": "Final",
+        "final": "LV 24, DEN 38"
+      },
+      {
+        "game": "MIA@BUF",
+        "away_abbr": "MIA",
+        "home_abbr": "BUF",
+        "away_score": 9,
+        "home_score": 26,
+        "state": "post",
+        "detail": "Final",
+        "final": "MIA 9, BUF 26"
+      },
+      {
+        "game": "MIN@SF",
+        "away_abbr": "MIN",
+        "home_abbr": "SF",
+        "away_score": 10,
+        "home_score": 35,
+        "state": "post",
+        "detail": "Final",
+        "final": "MIN 10, SF 35"
+      },
+      {
+        "game": "NO@CHI",
+        "away_abbr": "NO",
+        "home_abbr": "CHI",
+        "away_score": 13,
+        "home_score": 21,
+        "state": "post",
+        "detail": "Final",
+        "final": "NO 13, CHI 21"
+      },
+      {
+        "game": "NYJ@LAC",
+        "away_abbr": "NYJ",
+        "home_abbr": "LAC",
+        "away_score": 27,
+        "home_score": 24,
+        "state": "post",
+        "detail": "Final",
+        "final": "NYJ 27, LAC 24"
+      },
+      {
+        "game": "PIT@PHI",
+        "away_abbr": "PIT",
+        "home_abbr": "PHI",
+        "away_score": 16,
+        "home_score": 19,
+        "state": "post",
+        "detail": "Final",
+        "final": "PIT 16, PHI 19"
+      },
+      {
+        "game": "TB@DET",
+        "away_abbr": "TB",
+        "home_abbr": "DET",
+        "away_score": 21,
+        "home_score": 31,
+        "state": "post",
+        "detail": "Final",
+        "final": "TB 21, DET 31"
+      },
+      {
+        "game": "TEN@DAL",
+        "away_abbr": "TEN",
+        "home_abbr": "DAL",
+        "away_score": 30,
+        "home_score": 51,
+        "state": "post",
+        "detail": "Final",
+        "final": "TEN 30, DAL 51"
+      }
+    ]
+  }
+}

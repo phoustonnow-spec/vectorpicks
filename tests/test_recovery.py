@@ -22,6 +22,10 @@ def test_calendar():
     assert build.nfl_week(date(2026, 11, 17)) == 11
     assert build.nfl_week(date(2026, 11, 18)) == 11
     assert build.nfl_week(date(2026, 11, 19)) == 11
+    assert build.nfl_week(date(2026, 11, 23)) == 11
+    assert build.nfl_week(date(2026, 11, 24)) == 12
+    assert build.nfl_week(date(2026, 11, 25)) == 12
+    assert build.nfl_week(date(2026, 11, 30)) == 12
     assert build.nfl_week(date(2026, 11, 4)) == 9  # gap day belongs to the next week
     assert build.nfl_week(date(2026, 11, 2)) == 8
     assert build.nfl_week(date(2026, 10, 8)) == 5
@@ -60,27 +64,36 @@ def test_built_pages():
     ai = open(os.path.join(root, "ai-picks.html"), encoding="utf-8").read()
     card = open(os.path.join(root, "card.html"), encoding="utf-8").read()
     archive_card = open(os.path.join(root, "card-2026-w09.html"), encoding="utf-8").read()
-    assert build.nfl_week(build.today_pt()) == 11
-    assert "Week 11" in home and build.stamp_pt(build.today_pt()) in home
+    assert build.nfl_week(build.today_pt()) == 12
+    assert "Week 12" in home and build.stamp_pt(build.today_pt()) in home
+    assert "Week 11 final 6-7 (Best Bets 1-0, Leans 1-1, Card 4-6)." in home
+    assert "CIN 20, WAS 22" in home
     assert "IND +12.5" in home and "WAS +6.5 vs CIN (Mon)" in home
     assert "NO +11.5 at CHI" in home and "TB +7 at DET (QB status pending)" in home
     assert "Model side only, not a recommendation: MIA +16.5 at BUF, PHI +4.5 vs PIT." in home
-    assert "1 of 13 graded. 12 games pending." in home
+    assert "1 of 13 graded. 12 games pending." not in home
+    assert "Week 12 card pending" in home and "Tue Nov 24, 2026 8:52 AM PT" in home
+    assert "No Week 12 picks, edges, or line comparisons" in home
+    assert "GB @ LAR" not in home and "KC @ BUF" not in home
     assert "Week 11 Saturday update (Nov 21, 2026)" in home
     assert "HOU 26, IND 3" in home and "IND 3, HOU 26" in home
     assert "BAL +2.5" in home and "TB +7 at DET" in home
     assert "Week 11 card pending" not in home and "No Week 11 picks, edges, or line comparisons" not in home
     assert "Week 10 final 7-7 (Best Bets 1-1, Leans 3-4, Card 3-2)." in home
-    assert "12-10-0" in home and "16-24-0" in home and "7-8-1" in home and "36-43-1" in home
-    assert "7-7-1" not in home and "36-42-1" not in home
-    assert "1 pending" in home and "2 pending" in home and "9 pending" in home and "12 pending" in home
-    assert "10 pending" not in home and "13 pending" not in home
+    assert "13-10-0" in home and "17-25-0" in home and "11-13-1" in home and "42-49-1" in home
+    assert "+3u" in home and "-2u" in home and "-8u" in home and "-7u" in home
+    assert "7-7-1" not in home and "36-42-1" not in home and "12-10-0" not in home
+    assert "0 pending" in home and "12 pending" not in home and "10 pending" not in home
     assert "Official Westgate Week 10 standings" in home and "LAMBDA LAMBDA LAMBDA-1 36-13-1" in home
     assert "DAL +4.5 vs SF" in home and "LAC +4.5" in home and "SF 46, DAL 40" in home and "LAC 23, BAL 20" in home
-    assert 'id="rankings"' in home and "5.2" in home and "Injury adjustments are provisional this week" in home
+    assert 'id="rankings"' in home and "<b>BUF</b>" in home and "5.2" in home
+    assert "Injury adjustments are built player by player" in home
+    assert "Injury adjustments are provisional this week" not in home
+    assert "Vector power rankings entering Week 12" in home
     assert "1 of 14 graded" not in home and "11-9-0" not in home
     assert "NYJ +8.5" not in home and "Week 10 early look" not in home
     assert "Vector power rankings entering Week 10" not in home
+    assert "Vector power rankings entering Week 11" not in home
     shorts = open(os.path.join(root, "shorts.html"), encoding="utf-8").read()
     assert "aXnadwU-Z7U" in home and 'data-yt="aXnadwU-Z7U"' in home
     assert 'data-yt="Qd7DWqq_jy8"' not in home
@@ -135,7 +148,11 @@ def test_built_pages():
     assert "WAS 24, NYG 21" in w10_card and "WAS +0.3" in w10_card
     assert "Week 11" not in w10_card and "IND +12.5" not in w10_card and "WAS +6.5" not in w10_card and "LqjTjbZOWb4" not in w10_card and "aXnadwU-Z7U" not in w10_card
     assert "IND +12.5" in card and "WAS +6.5" in card and "HOU \u221212.5" in card
-    assert "Week 10 final 7-7" in card and card.split("Full card: Market vs Our Spread", 1)[-1].count("PENDING") == 12
+    assert "Week 11 final 6-7" in card and "CIN 20, WAS 22" in card
+    assert "Week 12 card pending" in card and "No Week 12 picks, edges, or line comparisons" in card
+    card_table = card.split("Full card: Market vs Our Spread", 1)[-1]
+    assert card_table.count("PENDING") == 0
+    assert card_table.count('res-win">WIN') == 6 and card_table.count('res-loss">LOSS') == 7
     assert "IND 3, HOU 26" in card and "Week 11 Saturday update (Nov 21, 2026)" in card
     assert "Week 10 early look" not in card and "Thu card line" not in card
     assert "https://www.youtube.com/shorts/Qd7DWqq_jy8" in card
@@ -147,13 +164,12 @@ def test_built_pages():
     assert "Model side only, not a recommendation" in card
     w11 = open(os.path.join(root, "ai-picks-2026-w11.html"), encoding="utf-8").read()
     assert "cXnzFQPN7mE" not in home + ai + card + shorts + archive + w11
-    assert "Week 11 AI picks pending" not in ai and "No sides were invented" not in ai
-    assert "AI picks are not published yet" not in ai
-    assert "<title>AI Picks Week 11 2026 |" in ai
-    assert "PROVISIONAL" in ai and "DraftKings line" in ai and "Not a Westgate card." in ai
-    assert "1:16 PM PT" in ai and "All 13 games are pending." in ai and "Mexico City" in ai
-    assert "IND +12.5" in ai and "PIT \u22124.5" in ai and "NYJ +3" in ai and "CAR \u22122.5" in ai and "MIN +3" in ai
-    assert "Claude" in ai and "Gemini" in ai and "Grok" in ai and "ChatGPT" in ai
+    assert "Week 12 AI picks pending" in ai and "No sides were invented" in ai
+    assert "AI picks are not published yet" in ai
+    assert "<title>AI Picks Week 12 pending |" in ai
+    assert "Week 12 card pending" in ai and "No Week 12 picks, edges, or line comparisons" in ai
+    assert "1:16 PM PT" not in ai and "All 13 games are pending." not in ai and "DraftKings line" not in ai
+    assert "GB @ LAR" not in ai and "KC @ BUF" not in ai
     assert "PROVISIONAL" in w11 and "DraftKings line" in w11 and "Not a Westgate card." in w11
     assert "IND +12.5" in w11 and "Final:" not in w11
     assert "PROVISIONAL" in w10 and "DraftKings line" in w10 and "Not a Westgate card." in w10
