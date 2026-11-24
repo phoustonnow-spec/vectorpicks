@@ -396,6 +396,34 @@
         "Vector numbers are provisional, not a fresh full rerun",
         "MIA +16.5 is Vector's model side only, not a recommendation"
       ]
+    },
+    {
+      "week": 12,
+      "season": 2026,
+      "published_at_pt": "2026-11-24",
+      "dedup_key": "2026-w12-tuesday-rankings",
+      "source": "Tuesday public package generated 2026-11-24 ~9:30 AM PT. Week 11 is 13 of 13 at the Thursday Nov 19 Westgate SuperContest lines, including Monday night CIN 20, WAS 22. No Week 12 contest card was in the package.",
+      "included": [
+        "Week 11 Thursday Vector card graded at its original Westgate lines, 13 of 13",
+        "Week 11 full card 6-7, Best Bets 1-0, Leans 1-1, Card 4-6",
+        "Tracked weeks through Week 11: Best Bets 13-10-0, Leans 17-25-0, Card tier 11-13-1, full card 42-49-1",
+        "Week 12 power rankings, 1 through 32, with the provisional injury note",
+        "Week 12 status: the Westgate SuperContest Week 12 sheet was not posted as of Tue Nov 24, 2026 8:52 AM PT"
+      ],
+      "public_video_ids": [],
+      "never_embed": [
+        "cXnzFQPN7mE"
+      ],
+      "gaps": [
+        "No Week 12 Westgate card, so no Week 12 picks, edges, or line comparisons were added",
+        "Injury adjustments are provisional until midweek practice reports; not a fresh full rerun",
+        "Saturday Week 11 tier and side changes stay a note and are not folded into the graded rows",
+        "MIA +16.5 and PHI +4.5 stay model side only, not a recommendation",
+        "The Wednesday AI board stays DraftKings and is not graded from this package",
+        "Week 4's 13 unpublished model sides stay off the record",
+        "Contest-leader rows stay the Sunday snapshot and are not on the Vector record",
+        "The record is the audited tracker since Week 3, not a full-season total"
+      ]
     }
   ]
 }

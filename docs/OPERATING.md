@@ -51,7 +51,18 @@ Keep the week's source files in the repo. A copy in Google Drive is a backup, no
 
 ## What failed this week
 
-Report it in the pull request. For Nov 22, 2026 the public Short is https://www.youtube.com/shorts/aXnadwU-Z7U (Week 11 Westgate SuperContest Top 5 Leaders | Bucs +7 on 4 of 5). It lists the supplied top 5 Week 11 picks at the Westgate SuperContest Week 11 contest lines, using standings through Week 10. Fifth place was a 2-way tie at 33-17. RJ551155-3 is shown because that player's identical Gold entries are near the top of SuperContest Gold. It is not a line change and it is not folded into the graded rows. The Saturday Short https://www.youtube.com/shorts/Qd7DWqq_jy8 and the Thursday Short https://www.youtube.com/shorts/LqjTjbZOWb4 stay listed. Shared sides: TB +7 (4 of 5); MIA +16.5 and WAS +6.5 (3 of 5); SF -3, NYG +6, and CHI -11.5 (2 of 5). The Saturday card agrees on TB +7 (Best Bet), WAS +6.5 (Best Bet), and SF -3 (Card), and fades NYG +6 (Vector JAX -6) and CHI -11.5 (Vector NO +11.5, Lean). MIA +16.5 is Vector's model side only, not a recommendation. Contest-leader rows are not Vector picks. Entertainment only, not betting advice. Open gaps:
+Report it in the pull request. For Nov 24, 2026 the Tuesday package grades Week 11 complete and posts Week 12 power rankings. Week 11 is 13 of 13 at the Thursday Nov 19 Westgate SuperContest lines: full card 6-7, Best Bets 1-0 (WAS +6.5 win, CIN 20, WAS 22), Leans 1-1 (NO +11.5 win, TB +7 loss), Card 4-6. Monday night is CIN 20, WAS 22. MIN @ SF was in Mexico City (neutral) and is graded at SF -3. Tracked weeks are Best Bets 13-10-0 (+3u), Leans 17-25-0 (−8u), Card tier 11-13-1 (−2u), full card 42-49-1 (−7u), including the Week 5 Hold 1-0 and Provisional 0-1. The Week 12 Westgate SuperContest sheet was not posted as of Tue Nov 24, 2026 8:52 AM PT, so there is no Week 12 card and no Week 12 line. Open gaps:
+
+- No Week 12 picks, edges, or lines. The card waits on that sheet.
+- Injury adjustments on the Week 12 rankings are provisional until midweek practice reports. Not a fresh full rerun.
+- Saturday Week 11 tier and side changes stay a note. Applied they would be Best Bets 1-1, Leans 1-0, Card 5-5, full card 7-6. Graded rows stay the Thursday card. BAL +2.5 would have covered (BAL 33, CAR 35). TB +7 lost.
+- MIA +16.5 and PHI +4.5 stay model side only, not a recommendation. They are on the full card.
+- Week 4's 13 unpublished model sides stay off the record.
+- The Wednesday Week 11 AI board stays DraftKings and is not graded from this package. It is not the Westgate card.
+- The Shorts contest-leader block is still the Sunday Nov 8 snapshot. Those rows are not Vector picks.
+- Entertainment only, not betting advice.
+
+For Nov 22, 2026 the public Short is https://www.youtube.com/shorts/aXnadwU-Z7U (Week 11 Westgate SuperContest Top 5 Leaders | Bucs +7 on 4 of 5). It lists the supplied top 5 Week 11 picks at the Westgate SuperContest Week 11 contest lines, using standings through Week 10. Fifth place was a 2-way tie at 33-17. RJ551155-3 is shown because that player's identical Gold entries are near the top of SuperContest Gold. It is not a line change and it is not folded into the graded rows. The Saturday Short https://www.youtube.com/shorts/Qd7DWqq_jy8 and the Thursday Short https://www.youtube.com/shorts/LqjTjbZOWb4 stay listed. Shared sides: TB +7 (4 of 5); MIA +16.5 and WAS +6.5 (3 of 5); SF -3, NYG +6, and CHI -11.5 (2 of 5). The Saturday card agrees on TB +7 (Best Bet), WAS +6.5 (Best Bet), and SF -3 (Card), and fades NYG +6 (Vector JAX -6) and CHI -11.5 (Vector NO +11.5, Lean). MIA +16.5 is Vector's model side only, not a recommendation. Contest-leader rows are not Vector picks. Entertainment only, not betting advice. Open gaps:
 
 - No Week 11 results were graded from this Short. Sunday games had not been played.
 - The Shorts contest-leader block is still the Sunday Nov 8 snapshot. Those rows are not Vector picks.

@@ -61,6 +61,18 @@ Leans and the Card tier are higher by 10 wins and 5 losses together (19-23 and 9
 - Week 8's Saturday short moved PIT −3.5 from Lean to Best Bet and SEA −3 from Lean to Pass before those kickoffs. Applying that would make Best Bets 12-9-0 on the Nov 14 through-TNF tally. Both tallies were 11-9, so neither one applied it. The graded rows stay the Thursday card.
 - Week 10 Saturday moves are graded in the addendum above. They are not folded into the rows. TNF stays the Thursday Lean, WAS +2.5, win.
 
-## Week 11
+## Week 11 addendum
 
-Week 11 is not in the table above. That table stays the Weeks 3-10 audit. On Sat Nov 21, 2026 the Thursday card's TNF row was graded from the ESPN final: IND +12.5 lost, IND 3, HOU 26, Card tier. Adding that one loss to the tracked box makes Card tier 7-8-1 and the full card 36-43-1. Best Bets stay 12-10-0 and Leans stay 16-24-0. The other 12 Week 11 rows are pending. The Saturday side and tier notes are not in these rows.
+The Weeks 3-10 table above is unchanged. On Sat Nov 21, 2026 only TNF was graded: IND +12.5 lost, IND 3, HOU 26, Card tier, and the tracked box was Best Bets 12-10-0, Leans 16-24-0, Card tier 7-8-1, full card 36-43-1, with 12 pending. Those 12 are graded here.
+
+Graded Tue Nov 24, 2026 from the Thursday Nov 19 Westgate card in `data/weeks/2026-w11.json` and `data/ats-tracker.csv`, against `data/verified-finals-2026-11-24.json`. All 13 games are final, including Monday night CIN 20, WAS 22. The Thursday card is the card of record. Saturday tier and side notes are not folded in. Every stored grade matched the score arithmetic at that row's Westgate line.
+
+| Week | Best Bets | Leans | Card | Other | Full | Pending |
+|---|---|---|---|---|---|---|
+| 11 | 1-0-0 | 1-1-0 | 4-6-0 | — | 6-7-0 | 0 |
+
+Best Bet: WAS +6.5 win (CIN 20, WAS 22). Leans: NO +11.5 win (NO 13, CHI 21) and TB +7 loss (TB 21, DET 31). Card wins: DAL −8, NYJ +3.5, PHI +4.5, SF −3. Card losses: IND +12.5, CAR −2.5, JAX −6, ARI +16, MIA +16.5, LV +10. MIA +16.5 and PHI +4.5 stay model side only, not a recommendation, and they stay on the full card.
+
+Adding Week 11 to the Weeks 3–10 total is Best Bets 13-10-0 (+3u), Leans 17-25-0 (−8u), Card tier 11-13-1 (−2u), full card 42-49-1 (−7u). That full card includes the Week 5 Hold 1-0 and Provisional 0-1. Week 4's 13 unpublished model sides stay excluded. A pass is not a pick. Weeks 1 and 2 are not in this tracker. This is not a full-season total.
+
+Saturday update replaced CAR −2.5 with BAL +2.5 (Card). BAL lost 33-35, so BAL +2.5 would have covered. TB +7 moved from Lean to Best Bet and lost 21-31. Applied, Saturday tiers would read Best Bets 1-1, Leans 1-0, Card 5-5, full card 7-6. Graded rows stay the Thursday card, the same rule as Weeks 8 and 10.
