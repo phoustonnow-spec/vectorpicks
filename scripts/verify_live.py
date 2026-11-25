@@ -299,7 +299,7 @@ STALE = (
 
 
 def fetch(url):
-        bust = url + ("&" if "?" in url else "?") + "cb=20261125w12"
+    bust = url + ("&" if "?" in url else "?") + "cb=20261125w12"
     request = urllib.request.Request(bust, headers={
         "Cache-Control": "no-cache",
         "Pragma": "no-cache",
