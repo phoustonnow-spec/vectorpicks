@@ -1,0 +1,170 @@
+{
+  "captured": "2026-11-25",
+  "timezone": "source times are ESPN competition timestamps; card dates stay the US game date",
+  "source": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?week=12&seasontype=2&dates=2026",
+  "note": "Fetched Wed Nov 25, 2026. All 16 Week 12 games are scheduled and not final. ESPN abbreviates Washington as WSH; this file uses WAS, the abbreviation already on the site. No scores are stored.",
+  "weeks": {
+    "12": [
+      {
+        "game": "ATL@MIN",
+        "away_abbr": "ATL",
+        "home_abbr": "MIN",
+        "away_score": 0,
+        "home_score": 0,
+        "state": "pre",
+        "detail": "11/29 - 1:00 PM EST",
+        "date_utc": "2026-11-29"
+      },
+      {
+        "game": "BAL@HOU",
+        "away_abbr": "BAL",
+        "home_abbr": "HOU",
+        "away_score": 0,
+        "home_score": 0,
+        "state": "pre",
+        "detail": "11/29 - 1:00 PM EST",
+        "date_utc": "2026-11-29"
+      },
+      {
+        "game": "CAR@TB",
+        "away_abbr": "CAR",
+        "home_abbr": "TB",
+        "away_score": 0,
+        "home_score": 0,
+        "state": "pre",
+        "detail": "11/30 - 8:15 PM EST",
+        "date_utc": "2026-12-01"
+      },
+      {
+        "game": "CHI@DET",
+        "away_abbr": "CHI",
+        "home_abbr": "DET",
+        "away_score": 0,
+        "home_score": 0,
+        "state": "pre",
+        "detail": "11/26 - 1:00 PM EST",
+        "date_utc": "2026-11-26"
+      },
+      {
+        "game": "DEN@PIT",
+        "away_abbr": "DEN",
+        "home_abbr": "PIT",
+        "away_score": 0,
+        "home_score": 0,
+        "state": "pre",
+        "detail": "11/27 - 3:00 PM EST",
+        "date_utc": "2026-11-27"
+      },
+      {
+        "game": "GB@LAR",
+        "away_abbr": "GB",
+        "home_abbr": "LAR",
+        "away_score": 0,
+        "home_score": 0,
+        "state": "pre",
+        "detail": "11/25 - 8:00 PM EST",
+        "date_utc": "2026-11-26"
+      },
+      {
+        "game": "KC@BUF",
+        "away_abbr": "KC",
+        "home_abbr": "BUF",
+        "away_score": 0,
+        "home_score": 0,
+        "state": "pre",
+        "detail": "11/26 - 8:20 PM EST",
+        "date_utc": "2026-11-27"
+      },
+      {
+        "game": "LV@CLE",
+        "away_abbr": "LV",
+        "home_abbr": "CLE",
+        "away_score": 0,
+        "home_score": 0,
+        "state": "pre",
+        "detail": "11/29 - 8:20 PM EST",
+        "date_utc": "2026-11-30"
+      },
+      {
+        "game": "NE@LAC",
+        "away_abbr": "NE",
+        "home_abbr": "LAC",
+        "away_score": 0,
+        "home_score": 0,
+        "state": "pre",
+        "detail": "11/29 - 4:05 PM EST",
+        "date_utc": "2026-11-29"
+      },
+      {
+        "game": "NO@CIN",
+        "away_abbr": "NO",
+        "home_abbr": "CIN",
+        "away_score": 0,
+        "home_score": 0,
+        "state": "pre",
+        "detail": "11/29 - 1:00 PM EST",
+        "date_utc": "2026-11-29"
+      },
+      {
+        "game": "NYG@IND",
+        "away_abbr": "NYG",
+        "home_abbr": "IND",
+        "away_score": 0,
+        "home_score": 0,
+        "state": "pre",
+        "detail": "11/29 - 1:00 PM EST",
+        "date_utc": "2026-11-29"
+      },
+      {
+        "game": "NYJ@MIA",
+        "away_abbr": "NYJ",
+        "home_abbr": "MIA",
+        "away_score": 0,
+        "home_score": 0,
+        "state": "pre",
+        "detail": "11/29 - 1:00 PM EST",
+        "date_utc": "2026-11-29"
+      },
+      {
+        "game": "PHI@DAL",
+        "away_abbr": "PHI",
+        "home_abbr": "DAL",
+        "away_score": 0,
+        "home_score": 0,
+        "state": "pre",
+        "detail": "11/26 - 4:30 PM EST",
+        "date_utc": "2026-11-26"
+      },
+      {
+        "game": "SEA@SF",
+        "away_abbr": "SEA",
+        "home_abbr": "SF",
+        "away_score": 0,
+        "home_score": 0,
+        "state": "pre",
+        "detail": "11/29 - 4:25 PM EST",
+        "date_utc": "2026-11-29"
+      },
+      {
+        "game": "TEN@JAX",
+        "away_abbr": "TEN",
+        "home_abbr": "JAX",
+        "away_score": 0,
+        "home_score": 0,
+        "state": "pre",
+        "detail": "11/29 - 1:00 PM EST",
+        "date_utc": "2026-11-29"
+      },
+      {
+        "game": "WAS@ARI",
+        "away_abbr": "WAS",
+        "home_abbr": "ARI",
+        "away_score": 0,
+        "home_score": 0,
+        "state": "pre",
+        "detail": "11/29 - 4:25 PM EST",
+        "date_utc": "2026-11-29"
+      }
+    ]
+  }
+}

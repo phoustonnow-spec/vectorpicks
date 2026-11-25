@@ -51,7 +51,18 @@ Keep the week's source files in the repo. A copy in Google Drive is a backup, no
 
 ## What failed this week
 
-Report it in the pull request. For Nov 24, 2026 the Tuesday package grades Week 11 complete and posts Week 12 power rankings. Week 11 is 13 of 13 at the Thursday Nov 19 Westgate SuperContest lines: full card 6-7, Best Bets 1-0 (WAS +6.5 win, CIN 20, WAS 22), Leans 1-1 (NO +11.5 win, TB +7 loss), Card 4-6. Monday night is CIN 20, WAS 22. MIN @ SF was in Mexico City (neutral) and is graded at SF -3. Tracked weeks are Best Bets 13-10-0 (+3u), Leans 17-25-0 (−8u), Card tier 11-13-1 (−2u), full card 42-49-1 (−7u), including the Week 5 Hold 1-0 and Provisional 0-1. The Week 12 Westgate SuperContest sheet was not posted as of Tue Nov 24, 2026 8:52 AM PT, so there is no Week 12 card and no Week 12 line. Open gaps:
+Report it in the pull request. For Nov 25, 2026 the Wednesday card is 16 games, all pending. No Best Bets. Leans are LAR -2.5, ATL +7, and IND +7. PHI +8.5 and MIA +3.5 stay model side only, not a recommendation. Tonight's highlight is GB @ LAR, LAR -2.5, Lean, kickoff Wednesday Nov 25, 5:00 PM PT. Week 11 stays the Thursday card, final 6-7, Best Bets 1-0, Leans 1-1, Card 4-6, including Monday night CIN 20, WAS 22. Tracked weeks stay Best Bets 13-10-0 (+3u), Leans 17-25-0 (-8u), Card tier 11-13-1 (-2u), full card 42-49-1 (-7u). Week 12 counts only as pending: 0 Best Bets, 3 Leans, 13 Card. The Week 12 AI board is posted with earlier weeks kept. No Week 12 video link was supplied. Open gaps:
+
+- Injury layer is player by player but not a fresh fully reconciled rerun. LAC and SEA quarterback statuses are pending.
+- Tiers are confidence labels, not proven probabilities.
+- PHI +8.5 and MIA +3.5 are model side only, not a recommendation.
+- Wednesday picks, Saturday update.
+- Week 11 Saturday notes stay off the graded rows.
+- Week 4's 13 unpublished model sides stay off the record.
+- The Shorts contest-leader block is still the Sunday Nov 8 snapshot. Those rows are not Vector picks.
+- Entertainment only, not betting advice.
+
+For Nov 24, 2026 the Tuesday package grades Week 11 complete and posts Week 12 power rankings. Week 11 is 13 of 13 at the Thursday Nov 19 Westgate SuperContest lines: full card 6-7, Best Bets 1-0 (WAS +6.5 win, CIN 20, WAS 22), Leans 1-1 (NO +11.5 win, TB +7 loss), Card 4-6. Monday night is CIN 20, WAS 22. MIN @ SF was in Mexico City (neutral) and is graded at SF -3. Tracked weeks are Best Bets 13-10-0 (+3u), Leans 17-25-0 (−8u), Card tier 11-13-1 (−2u), full card 42-49-1 (−7u), including the Week 5 Hold 1-0 and Provisional 0-1. The Week 12 Westgate SuperContest sheet was not posted as of Tue Nov 24, 2026 8:52 AM PT, so there is no Week 12 card and no Week 12 line. Open gaps:
 
 - No Week 12 picks, edges, or lines. The card waits on that sheet.
 - Injury adjustments on the Week 12 rankings are provisional until midweek practice reports. Not a fresh full rerun.

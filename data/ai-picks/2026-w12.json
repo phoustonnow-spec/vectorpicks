@@ -1,0 +1,788 @@
+{
+  "season": 2026,
+  "week": 12,
+  "as_of": "Tue Nov 24, 2026",
+  "provisional": false,
+  "intro": "Same prompt, four AIs, and us. Entertainment only. Graded at the Westgate line each side was asked.",
+  "prompt_note": "Asked Tuesday Nov 24, 2026 (replies finished about 9:00 to 9:36 PM PT) on the official Westgate SuperContest Week 12 selection sheet (PDF created 1:31 PM PT). Thanksgiving week: GB at LAR is Wednesday night, a Thursday tripleheader, DEN at PIT on Friday, and CAR at TB on Monday night. No byes and no neutral-site games. Each AI got the identical prompt and picked all 16 games with a 1-10 confidence, three Best Bets and a ranked top 5. Claude's and Gemini's game tables were rebuilt by hand from flattened clipboard pastes, using the same cell values. Gemini first showed an A/B choice screen; the captured reply is the displayed Choice A (no selection was made). Grok's private write-up cites a blocked source name; that name is not in the public JSON. Vector's sides are leans from the Tuesday model update with Wednesday morning news applied (Pittsburgh benched its starting QB for Friday, so Vector moved from PIT +2.5 to DEN -2.5; injury layer not fully re-reconciled), re-graded at these Westgate numbers; its top 5 is provisional and it has no Best Bets on this board. Vector's MIA and PHI sides are model leans only, kept so every game has a side, and are excluded from its top 5. All 16 games are pending.",
+  "line_source": "Westgate SuperContest Week 12 selection sheet, Tuesday Nov 24, 2026 (PDF created 1:31 PM PT)",
+  "line_label": "Westgate line",
+  "score_source": "ESPN NFL scoreboard (https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?week=12&seasontype=2&dates=2026). Only games with status final are stored. No Week 12 finals stored yet.",
+  "games": [
+    {
+      "game": "GB@LAR",
+      "label": "GB @ LAR",
+      "day": "Wed",
+      "date": "2026-11-25",
+      "westgate": "LAR -2.5",
+      "kickoff_pt": "Wed night"
+    },
+    {
+      "game": "CHI@DET",
+      "label": "CHI @ DET",
+      "day": "Thu",
+      "date": "2026-11-26",
+      "westgate": "CHI -2.5",
+      "kickoff_pt": "Thu"
+    },
+    {
+      "game": "PHI@DAL",
+      "label": "PHI @ DAL",
+      "day": "Thu",
+      "date": "2026-11-26",
+      "westgate": "DAL -8.5",
+      "kickoff_pt": "Thu"
+    },
+    {
+      "game": "KC@BUF",
+      "label": "KC @ BUF",
+      "day": "Thu",
+      "date": "2026-11-26",
+      "westgate": "BUF -2.5",
+      "kickoff_pt": "Thu night"
+    },
+    {
+      "game": "DEN@PIT",
+      "label": "DEN @ PIT",
+      "day": "Fri",
+      "date": "2026-11-27",
+      "westgate": "DEN -2.5",
+      "kickoff_pt": "Fri"
+    },
+    {
+      "game": "ATL@MIN",
+      "label": "ATL @ MIN",
+      "day": "Sun",
+      "date": "2026-11-29",
+      "westgate": "MIN -7"
+    },
+    {
+      "game": "BAL@HOU",
+      "label": "BAL @ HOU",
+      "day": "Sun",
+      "date": "2026-11-29",
+      "westgate": "HOU -6.5"
+    },
+    {
+      "game": "NO@CIN",
+      "label": "NO @ CIN",
+      "day": "Sun",
+      "date": "2026-11-29",
+      "westgate": "CIN -10"
+    },
+    {
+      "game": "NYG@IND",
+      "label": "NYG @ IND",
+      "day": "Sun",
+      "date": "2026-11-29",
+      "westgate": "NYG -7"
+    },
+    {
+      "game": "TEN@JAX",
+      "label": "TEN @ JAX",
+      "day": "Sun",
+      "date": "2026-11-29",
+      "westgate": "JAX -14.5"
+    },
+    {
+      "game": "NYJ@MIA",
+      "label": "NYJ @ MIA",
+      "day": "Sun",
+      "date": "2026-11-29",
+      "westgate": "NYJ -3.5"
+    },
+    {
+      "game": "NE@LAC",
+      "label": "NE @ LAC",
+      "day": "Sun",
+      "date": "2026-11-29",
+      "westgate": "LAC -1.5"
+    },
+    {
+      "game": "WAS@ARI",
+      "label": "WAS @ ARI",
+      "day": "Sun",
+      "date": "2026-11-29",
+      "westgate": "WAS -7.5"
+    },
+    {
+      "game": "SEA@SF",
+      "label": "SEA @ SF",
+      "day": "Sun",
+      "date": "2026-11-29",
+      "westgate": "SF -3"
+    },
+    {
+      "game": "LV@CLE",
+      "label": "LV @ CLE",
+      "day": "Sun",
+      "date": "2026-11-29",
+      "westgate": "CLE -4.5",
+      "kickoff_pt": "Sun night"
+    },
+    {
+      "game": "CAR@TB",
+      "label": "CAR @ TB",
+      "day": "Mon",
+      "date": "2026-11-30",
+      "westgate": "TB -3",
+      "kickoff_pt": "Mon night"
+    }
+  ],
+  "ais": [
+    {
+      "id": "claude",
+      "name": "Claude",
+      "received": "Tue Nov 24, 2026, 9:36 PM PT",
+      "sides": {
+        "GB@LAR": {
+          "pick": "GB +2.5",
+          "confidence": "6/10",
+          "reason": "Rams are missing their top two receivers and two interior linemen, and Parsons debuts."
+        },
+        "CHI@DET": {
+          "pick": "DET +2.5",
+          "confidence": "2/10",
+          "reason": "Near coin flip. Results ratings are even (4.1 vs. 4.0), and home field offsets most of Detroit's injuries."
+        },
+        "PHI@DAL": {
+          "pick": "DAL -8.5",
+          "confidence": "3/10",
+          "reason": "Eagles are 1-4 without Hurts and lost the first meeting by 17."
+        },
+        "KC@BUF": {
+          "pick": "BUF -2.5",
+          "confidence": "4/10",
+          "reason": "Chiefs have played the league's softest schedule and are down both tackles."
+        },
+        "DEN@PIT": {
+          "pick": "PIT +2.5",
+          "confidence": "1/10",
+          "reason": "Coin flip. My number lands on the line. Word of the benching arrived after 11 p.m. ET Tuesday, so the line may predate it (unverified)."
+        },
+        "ATL@MIN": {
+          "pick": "ATL +7",
+          "confidence": "1/10",
+          "reason": "Coin flip. Taking the full touchdown."
+        },
+        "BAL@HOU": {
+          "pick": "HOU -6.5",
+          "confidence": "2/10",
+          "reason": "Ravens are 0-3 without Jackson, including a home loss to the 1-9 Chargers. Texans' pass-rusher status is unknown."
+        },
+        "NO@CIN": {
+          "pick": "CIN -10",
+          "confidence": "2/10",
+          "reason": "Small lean. Bengals are on a short week after Monday night."
+        },
+        "NYG@IND": {
+          "pick": "IND +7",
+          "confidence": "3/10",
+          "reason": "A touchdown is a lot for a road team rated below average. The model can't see the Colts' deadline sell-off or price Richardson's first start."
+        },
+        "TEN@JAX": {
+          "pick": "JAX -14.5",
+          "confidence": "2/10",
+          "reason": "Jaguars won by 17 in Nashville two weeks ago. Big number, small edge."
+        },
+        "NYJ@MIA": {
+          "pick": "MIA +3.5",
+          "confidence": "4/10",
+          "reason": "Miami's 1-9 came against the second-hardest schedule, and it won at the Jets in Week 7."
+        },
+        "NE@LAC": {
+          "pick": "NE +1.5",
+          "confidence": "2/10",
+          "reason": "Rides on Herbert. If he's cleared, my number goes to Chargers -1.7 and the pick flips."
+        },
+        "WAS@ARI": {
+          "pick": "ARI +7.5",
+          "confidence": "3/10",
+          "reason": "Washington lost its left tackle and two DTs and travels on a short week. Arizona's last three losses were by 14, 28 and 27, so low trust."
+        },
+        "SEA@SF": {
+          "pick": "SF -3",
+          "confidence": "6/10",
+          "reason": "Largest gap on the board. The 49ers rate 4.7 points better before home field, and Seattle's line is banged up."
+        },
+        "LV@CLE": {
+          "pick": "LV +4.5",
+          "confidence": "3/10",
+          "reason": "Browns' six wins came by a combined 19 points against the 28th-ranked schedule."
+        },
+        "CAR@TB": {
+          "pick": "TB -3",
+          "confidence": "3/10",
+          "reason": "Bucs are 3-7 against the seventh-hardest schedule and won 43-13 in Charlotte in Week 7."
+        }
+      },
+      "best_bets": [
+        {
+          "pick": "SF -3",
+          "game": "SEA@SF"
+        },
+        {
+          "pick": "GB +2.5",
+          "game": "GB@LAR"
+        },
+        {
+          "pick": "MIA +3.5",
+          "game": "NYJ@MIA"
+        }
+      ],
+      "pick5": [
+        "SF -3",
+        "GB +2.5",
+        "MIA +3.5",
+        "BUF -2.5",
+        "DAL -8.5"
+      ],
+      "tiebreaker": 48
+    },
+    {
+      "id": "gemini",
+      "name": "Gemini",
+      "received": "Tue Nov 24, 2026, 9:09 PM PT",
+      "sides": {
+        "GB@LAR": {
+          "pick": "GB +2.5",
+          "confidence": "3/10",
+          "reason": "Coin flip; Rams' two missing interior OL starters wipe out their SRS edge."
+        },
+        "CHI@DET": {
+          "pick": "DET +2.5",
+          "confidence": "8/10",
+          "reason": "Lions are 6-0 at home with higher SRS; getting points at Ford Field is strong value."
+        },
+        "PHI@DAL": {
+          "pick": "DAL -8.5",
+          "confidence": "5/10",
+          "reason": "Slight lean to Dallas against a banged-up Philly defense and Joe Milton III."
+        },
+        "KC@BUF": {
+          "pick": "BUF -2.5",
+          "confidence": "5/10",
+          "reason": "Bills hold a +1.4 SRS edge and home field against KC's league-easiest SoS."
+        },
+        "DEN@PIT": {
+          "pick": "DEN -2.5",
+          "confidence": "6/10",
+          "reason": "Broncos' +5.0 SRS vs. tough schedule and Steelers' OLB cluster injuries favor Denver."
+        },
+        "ATL@MIN": {
+          "pick": "MIN -7",
+          "confidence": "7/10",
+          "reason": "Vikings' +8.6 defensive SRS creates an 8-point baseline gap before home field."
+        },
+        "BAL@HOU": {
+          "pick": "HOU -6.5",
+          "confidence": "8/10",
+          "reason": "Texans' +8.4 SRS advantage over Lamar-less Baltimore makes -6.5 short."
+        },
+        "NO@CIN": {
+          "pick": "CIN -10",
+          "confidence": "6/10",
+          "reason": "Bengals' +11.7 SRS edge and home field clear the double-digit number."
+        },
+        "NYG@IND": {
+          "pick": "IND +7",
+          "confidence": "5/10",
+          "reason": "Giants' 6-3-1 record is inflated by a soft -1.8 SoS; Colts get a full TD at home."
+        },
+        "TEN@JAX": {
+          "pick": "JAX -14.5",
+          "confidence": "9/10",
+          "reason": "Massive 20.3-point SRS gulf; Jags already beat Tennessee by 17 on the road in Week 10."
+        },
+        "NYJ@MIA": {
+          "pick": "MIA +3.5",
+          "confidence": "3/10",
+          "reason": "Coin flip; Miami's brutal +3.1 SoS masks some talent, though Kyle McCord adds risk."
+        },
+        "NE@LAC": {
+          "pick": "NE +1.5",
+          "confidence": "7/10",
+          "reason": "Even with DeVito, Patriots' superior SRS (+8.9 gap) and Herbert's concussion favor NE."
+        },
+        "WAS@ARI": {
+          "pick": "ARI +7.5",
+          "confidence": "6/10",
+          "reason": "Cardinals' -8.3 SRS came against the NFL's #1 toughest SoS (+3.7); line is inflated."
+        },
+        "SEA@SF": {
+          "pick": "SF -3",
+          "confidence": "9/10",
+          "reason": "49ers lead the NFL in SRS (+10.5) and catch Seattle at home at a cheap -3."
+        },
+        "LV@CLE": {
+          "pick": "LV +4.5",
+          "confidence": "7/10",
+          "reason": "Raiders actually hold a better SRS (-3.1 vs. -4.4) against a much tougher schedule."
+        },
+        "CAR@TB": {
+          "pick": "TB -3",
+          "confidence": "7/10",
+          "reason": "Bucs' 3-7 record hides a +2.9 SRS (+4.8 better than Carolina) and tough +1.5 SoS."
+        }
+      },
+      "best_bets": [
+        {
+          "pick": "SF -3",
+          "game": "SEA@SF"
+        },
+        {
+          "pick": "JAX -14.5",
+          "game": "TEN@JAX"
+        },
+        {
+          "pick": "DET +2.5",
+          "game": "CHI@DET"
+        }
+      ],
+      "pick5": [
+        "SF -3",
+        "JAX -14.5",
+        "DET +2.5",
+        "HOU -6.5",
+        "TB -3"
+      ],
+      "tiebreaker": 44
+    },
+    {
+      "id": "grok",
+      "name": "Grok",
+      "received": "Tue Nov 24, 2026, 9:00 PM PT",
+      "sides": {
+        "GB@LAR": {
+          "pick": "GB +2.5",
+          "confidence": "4/10",
+          "reason": "LAR WR/OL losses + GB questions; blended closer."
+        },
+        "CHI@DET": {
+          "pick": "DET +2.5",
+          "confidence": "6/10",
+          "reason": "Lions home, similar ranks; market overrates CHI."
+        },
+        "PHI@DAL": {
+          "pick": "DAL -8.5",
+          "confidence": "7/10",
+          "reason": "Hurts out season; Eagles thin."
+        },
+        "KC@BUF": {
+          "pick": "BUF -2.5",
+          "confidence": "5/10",
+          "reason": "Bills home, slight edge; coin-flip territory."
+        },
+        "DEN@PIT": {
+          "pick": "PIT +2.5",
+          "confidence": "4/10",
+          "reason": "Steelers home underdog; close ranks."
+        },
+        "ATL@MIN": {
+          "pick": "ATL +7",
+          "confidence": "3/10",
+          "reason": "Vikings home but not that much better."
+        },
+        "BAL@HOU": {
+          "pick": "HOU -6.5",
+          "confidence": "6/10",
+          "reason": "Jackson out; Texans home."
+        },
+        "NO@CIN": {
+          "pick": "NO +10",
+          "confidence": "4/10",
+          "reason": "Saints slight value; Burrow elite."
+        },
+        "NYG@IND": {
+          "pick": "IND +7",
+          "confidence": "5/10",
+          "reason": "Giants better but road; Richardson not great."
+        },
+        "TEN@JAX": {
+          "pick": "TEN +14.5",
+          "confidence": "6/10",
+          "reason": "Big number; Titans can cover."
+        },
+        "NYJ@MIA": {
+          "pick": "NYJ -3.5",
+          "confidence": "4/10",
+          "reason": "Jets better; Achane out."
+        },
+        "NE@LAC": {
+          "pick": "LAC -1.5",
+          "confidence": "5/10",
+          "reason": "Maye out; Herbert status key (Q)."
+        },
+        "WAS@ARI": {
+          "pick": "ARI +7.5",
+          "confidence": "5/10",
+          "reason": "Commanders road; Cardinals home underdog."
+        },
+        "SEA@SF": {
+          "pick": "SF -3",
+          "confidence": "6/10",
+          "reason": "49ers clearly better at home."
+        },
+        "LV@CLE": {
+          "pick": "CLE -4.5",
+          "confidence": "4/10",
+          "reason": "Browns home; Raiders road."
+        },
+        "CAR@TB": {
+          "pick": "CAR +3",
+          "confidence": "3/10",
+          "reason": "Close; coin flip."
+        }
+      },
+      "best_bets": [
+        {
+          "pick": "DAL -8.5",
+          "game": "PHI@DAL"
+        },
+        {
+          "pick": "HOU -6.5",
+          "game": "BAL@HOU"
+        },
+        {
+          "pick": "TEN +14.5",
+          "game": "TEN@JAX"
+        }
+      ],
+      "pick5": [
+        "DAL -8.5",
+        "HOU -6.5",
+        "TEN +14.5",
+        "DET +2.5",
+        "SF -3"
+      ],
+      "tiebreaker": 44
+    },
+    {
+      "id": "chatgpt",
+      "name": "ChatGPT",
+      "received": "Tue Nov 24, 2026, 9:07 PM PT",
+      "sides": {
+        "GB@LAR": {
+          "pick": "LAR -2.5",
+          "confidence": "5/10",
+          "reason": "The Rams rate better after schedule adjustment, and the model still makes them more than a field goal favorite after blending."
+        },
+        "CHI@DET": {
+          "pick": "DET +2.5",
+          "confidence": "6/10",
+          "reason": "Detroit's adjusted rating is slightly better; Chicago's raw efficiency is less impressive after accounting for its easier schedule."
+        },
+        "PHI@DAL": {
+          "pick": "PHI +8.5",
+          "confidence": "5/10",
+          "reason": "Dallas is the better-rated team, but the market spread is more than my blended number."
+        },
+        "KC@BUF": {
+          "pick": "KC +2.5",
+          "confidence": "4/10",
+          "reason": "Two highly rated teams; the model sees a close game and only a narrow gap from the line."
+        },
+        "DEN@PIT": {
+          "pick": "DEN -2.5",
+          "confidence": "4/10",
+          "reason": "Denver's schedule-adjusted rating advantage survives the Pittsburgh QB downgrade, but the edge is small."
+        },
+        "ATL@MIN": {
+          "pick": "ATL +7",
+          "confidence": "5/10",
+          "reason": "Minnesota rates better, but the blended projection is short of the touchdown spread."
+        },
+        "BAL@HOU": {
+          "pick": "BAL +6.5",
+          "confidence": "4/10",
+          "reason": "Houston is favored by the model, but the spread is close to the blended number."
+        },
+        "NO@CIN": {
+          "pick": "CIN -10",
+          "confidence": "4/10",
+          "reason": "Cincinnati has a large adjusted-rating advantage; the number is close enough to make this a low-confidence favorite."
+        },
+        "NYG@IND": {
+          "pick": "IND +7",
+          "confidence": "6/10",
+          "reason": "The Giants are better, but not by the full touchdown in my blended projection."
+        },
+        "TEN@JAX": {
+          "pick": "TEN +14.5",
+          "confidence": "4/10",
+          "reason": "Jacksonville is far stronger by the adjusted ratings, but the line has already priced in a very large gap."
+        },
+        "NYJ@MIA": {
+          "pick": "MIA +3.5",
+          "confidence": "6/10",
+          "reason": "The schedule-adjusted ratings make this much closer than the Westgate spread."
+        },
+        "NE@LAC": {
+          "pick": "NE +1.5",
+          "confidence": "6/10",
+          "reason": "New England's adjusted rating is stronger, and the blended line moves the pick to the Patriots. This is sensitive to Herbert's status."
+        },
+        "WAS@ARI": {
+          "pick": "ARI +7.5",
+          "confidence": "7/10",
+          "reason": "Washington has faced a very difficult schedule, but even after that adjustment the blended line is well short of 7.5."
+        },
+        "SEA@SF": {
+          "pick": "SF -3",
+          "confidence": "7/10",
+          "reason": "San Francisco has the strongest adjusted rating; even after its OL deduction and Seattle's uncertainty adjustment, it remains a favorite by more than the market line."
+        },
+        "LV@CLE": {
+          "pick": "LV +4.5",
+          "confidence": "5/10",
+          "reason": "These teams are close in the ratings; Cleveland's home-field advantage does not quite justify the full number."
+        },
+        "CAR@TB": {
+          "pick": "TB -3",
+          "confidence": "4/10",
+          "reason": "Tampa is stronger in the adjusted numbers, but the projected margin is close to the spread."
+        }
+      },
+      "best_bets": [
+        {
+          "pick": "NE +1.5",
+          "game": "NE@LAC"
+        },
+        {
+          "pick": "ARI +7.5",
+          "game": "WAS@ARI"
+        },
+        {
+          "pick": "SF -3",
+          "game": "SEA@SF"
+        }
+      ],
+      "pick5": [
+        "NE +1.5",
+        "ARI +7.5",
+        "SF -3",
+        "MIA +3.5",
+        "DET +2.5"
+      ],
+      "tiebreaker": 48
+    }
+  ],
+  "vector": {
+    "name": "Super Agent Vector",
+    "received": "Wed Nov 25, 2026 refresh (Westgate sheet of Tue 1:31 PM PT)",
+    "sides": {
+      "GB@LAR": "LAR -2.5",
+      "CHI@DET": "CHI -2.5",
+      "PHI@DAL": "PHI +8.5",
+      "KC@BUF": "KC +2.5",
+      "DEN@PIT": "DEN -2.5",
+      "ATL@MIN": "ATL +7",
+      "BAL@HOU": "HOU -6.5",
+      "NO@CIN": "NO +10",
+      "NYG@IND": "IND +7",
+      "TEN@JAX": "TEN +14.5",
+      "NYJ@MIA": "MIA +3.5",
+      "NE@LAC": "NE +1.5",
+      "WAS@ARI": "ARI +7.5",
+      "SEA@SF": "SEA +3",
+      "LV@CLE": "LV +4.5",
+      "CAR@TB": "TB -3"
+    },
+    "best_bets": [],
+    "leans": [
+      {
+        "pick": "LAR -2.5",
+        "game": "GB@LAR"
+      },
+      {
+        "pick": "CHI -2.5",
+        "game": "CHI@DET"
+      },
+      {
+        "pick": "PHI +8.5",
+        "game": "PHI@DAL"
+      },
+      {
+        "pick": "KC +2.5",
+        "game": "KC@BUF"
+      },
+      {
+        "pick": "DEN -2.5",
+        "game": "DEN@PIT"
+      },
+      {
+        "pick": "ATL +7",
+        "game": "ATL@MIN"
+      },
+      {
+        "pick": "HOU -6.5",
+        "game": "BAL@HOU"
+      },
+      {
+        "pick": "NO +10",
+        "game": "NO@CIN"
+      },
+      {
+        "pick": "IND +7",
+        "game": "NYG@IND"
+      },
+      {
+        "pick": "TEN +14.5",
+        "game": "TEN@JAX"
+      },
+      {
+        "pick": "MIA +3.5",
+        "game": "NYJ@MIA"
+      },
+      {
+        "pick": "NE +1.5",
+        "game": "NE@LAC"
+      },
+      {
+        "pick": "ARI +7.5",
+        "game": "WAS@ARI"
+      },
+      {
+        "pick": "SEA +3",
+        "game": "SEA@SF"
+      },
+      {
+        "pick": "LV +4.5",
+        "game": "LV@CLE"
+      },
+      {
+        "pick": "TB -3",
+        "game": "CAR@TB"
+      }
+    ],
+    "lean_label": "Leans (provisional)",
+    "pick5": [
+      "IND +7",
+      "ATL +7",
+      "LAR -2.5",
+      "SEA +3",
+      "NE +1.5"
+    ],
+    "pick5_label": "Provisional top 5 (not Best Bets)"
+  },
+  "consensus": [
+    "GB +2.5: Claude, Gemini, and Grok. ChatGPT took LAR -2.5. Vector leans LAR -2.5.",
+    "DET +2.5: all four AIs. Vector leans CHI -2.5.",
+    "DAL -8.5: Claude, Gemini, and Grok. ChatGPT took PHI +8.5. Vector leans PHI +8.5.",
+    "BUF -2.5: Claude, Gemini, and Grok. ChatGPT took KC +2.5. Vector leans KC +2.5.",
+    "Split: DEN -2.5 (Gemini and ChatGPT) against PIT +2.5 (Claude and Grok). Vector leans DEN -2.5.",
+    "ATL +7: Claude, Grok, and ChatGPT. Gemini took MIN -7. Vector leans ATL +7.",
+    "HOU -6.5: Claude, Gemini, and Grok. ChatGPT took BAL +6.5. Vector leans HOU -6.5.",
+    "CIN -10: Claude, Gemini, and ChatGPT. Grok took NO +10. Vector leans NO +10.",
+    "IND +7: all four AIs. Vector leans IND +7.",
+    "Split: JAX -14.5 (Claude and Gemini) against TEN +14.5 (Grok and ChatGPT). Vector leans TEN +14.5.",
+    "MIA +3.5: Claude, Gemini, and ChatGPT. Grok took NYJ -3.5. Vector leans MIA +3.5.",
+    "NE +1.5: Claude, Gemini, and ChatGPT. Grok took LAC -1.5. Vector leans NE +1.5.",
+    "ARI +7.5: all four AIs. Vector leans ARI +7.5.",
+    "SF -3: all four AIs. Vector leans SEA +3.",
+    "LV +4.5: Claude, Gemini, and ChatGPT. Grok took CLE -4.5. Vector leans LV +4.5.",
+    "TB -3: Claude, Gemini, and ChatGPT. Grok took CAR +3. Vector leans TB -3."
+  ],
+  "results": {},
+  "grades": {
+    "claude": {
+      "sides": [
+        0,
+        0,
+        0
+      ],
+      "sides_pending": 16,
+      "best_bet_units": 0,
+      "best_bets_pending": 3,
+      "pick5": [
+        0,
+        0,
+        0
+      ],
+      "pick5_pending": 5
+    },
+    "gemini": {
+      "sides": [
+        0,
+        0,
+        0
+      ],
+      "sides_pending": 16,
+      "best_bet_units": 0,
+      "best_bets_pending": 3,
+      "pick5": [
+        0,
+        0,
+        0
+      ],
+      "pick5_pending": 5
+    },
+    "grok": {
+      "sides": [
+        0,
+        0,
+        0
+      ],
+      "sides_pending": 16,
+      "best_bet_units": 0,
+      "best_bets_pending": 3,
+      "pick5": [
+        0,
+        0,
+        0
+      ],
+      "pick5_pending": 5
+    },
+    "chatgpt": {
+      "sides": [
+        0,
+        0,
+        0
+      ],
+      "sides_pending": 16,
+      "best_bet_units": 0,
+      "best_bets_pending": 3,
+      "pick5": [
+        0,
+        0,
+        0
+      ],
+      "pick5_pending": 5
+    },
+    "vector": {
+      "sides": [
+        0,
+        0,
+        0
+      ],
+      "sides_pending": 16,
+      "best_bet_units": 0,
+      "best_bets_pending": 0,
+      "pick5": [
+        0,
+        0,
+        0
+      ],
+      "pick5_pending": 5
+    }
+  },
+  "ungraded_games": [
+    "GB@LAR",
+    "CHI@DET",
+    "PHI@DAL",
+    "KC@BUF",
+    "DEN@PIT",
+    "ATL@MIN",
+    "BAL@HOU",
+    "NO@CIN",
+    "NYG@IND",
+    "TEN@JAX",
+    "NYJ@MIA",
+    "NE@LAC",
+    "WAS@ARI",
+    "SEA@SF",
+    "LV@CLE",
+    "CAR@TB"
+  ],
+  "graded": false
+}
