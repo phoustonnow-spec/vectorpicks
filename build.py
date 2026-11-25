@@ -4268,20 +4268,16 @@ def validate_week12():
         "13 pending",
         "16 pending",
         "Tracked weeks",
-        "aXnadwU-Z7U",
-        'data-yt="aXnadwU-Z7U"',
-        "Week 11 Westgate SuperContest Top 5 Leaders",
+        "VMwVPQtbbeo",
+        'data-yt="VMwVPQtbbeo"',
+        "Week 12 NFL AI Picks: LAR -2.5 Tonight (GB @ LAR) | Week 11 Recap",
         "Entertainment only, not betting advice",
-        "Qd7DWqq_jy8",
-        "Week 11 Saturday Update: IND +12.5 Lost TNF, TB +7 Now a Best Bet | Vector Picks",
-        "LqjTjbZOWb4",
-        "Week 11 NFL AI Picks: IND +12.5 TNF, WAS +6.5 Best Bet | Week 10 Recap",
         "Entertainment and opinion only. Not betting advice.",
     ):
         if needle not in home:
             raise SystemExit(f"home is missing {needle}")
-    if 'data-yt="Qd7DWqq_jy8"' in home or 'data-yt="LqjTjbZOWb4"' in home:
-        raise SystemExit("home latest Short is not the Week 11 leaders Short")
+    if 'data-yt="aXnadwU-Z7U"' in home or 'data-yt="Qd7DWqq_jy8"' in home or 'data-yt="LqjTjbZOWb4"' in home:
+        raise SystemExit("home latest Short is not the Week 12 Short")
     if "13 games pending. Not graded." in home or "1 of 13 graded. 12 games pending." in home or "7-7-1" in home or "36-42-1" in home or "10 pending" in home or "12-10-0" in home:
         raise SystemExit("home still shows a pending or pre-grade Week 11 record")
     if '<ul class="picks big">' in home:
@@ -4437,7 +4433,8 @@ def validate_week12():
             raise SystemExit(f"{model_game} is missing the model-side note")
     card = current_card
     for needle in (
-        "Wed 2026-11-25 ~8:30 AM PT",
+        "Wed 2026-11-25 ~7:15 AM PT",
+        "https://www.youtube.com/shorts/VMwVPQtbbeo",
         'id="highlight"',
         "Wednesday night",
         "GB @ LAR",
@@ -4461,8 +4458,8 @@ def validate_week12():
             raise SystemExit(f"weekly card is missing {needle}")
     if "Week 12 card pending" in card or "No Week 12 picks, edges, or line comparisons" in card:
         raise SystemExit("weekly card still says Week 12 is pending")
-    if "youtube.com/shorts" in card.split('id="highlight"', 1)[0]:
-        raise SystemExit("Week 12 card published a video link")
+    if "https://www.youtube.com/shorts/VMwVPQtbbeo" not in card.split('id="highlight"', 1)[0]:
+        raise SystemExit("Week 12 card is missing the Short")
     card_leans = card.split('tier-lean">Lean</span> Leans</h2><ul class="picks">', 1)[1].split("</ul>", 1)[0]
     if card_leans.count("<li>") != 3 or "PHI" in card_leans or "MIA" in card_leans or "LAR" not in card_leans:
         raise SystemExit("card Leans are not LAR, ATL, and IND")
@@ -4716,7 +4713,8 @@ def validate_week12():
     if "Week 11" in w10_ai and "ai-picks-2026-w11.html" not in w10_ai:
         raise SystemExit("Week 10 AI archive picked up the Week 11 board")
     for needle in (
-        "aXnadwU-Z7U", "Qd7DWqq_jy8", "LqjTjbZOWb4", "8cZ7qpdWyvU", "fvn8h67Mze0", "1cY3MSjjkzE", "4-NrBHuRlUE", "q2OazIWZ5vE",
+        "VMwVPQtbbeo", "aXnadwU-Z7U", "Qd7DWqq_jy8", "LqjTjbZOWb4", "8cZ7qpdWyvU", "fvn8h67Mze0", "1cY3MSjjkzE", "4-NrBHuRlUE", "q2OazIWZ5vE",
+        "Week 12 NFL AI Picks: LAR -2.5 Tonight (GB @ LAR) | Week 11 Recap",
         "Week 11 Westgate SuperContest Top 5 Leaders",
         "MATTLEGEND27-1 34-16",
         "RJ551155-3 33-17",
@@ -4733,7 +4731,8 @@ def validate_week12():
         if needle not in shorts:
             raise SystemExit(f"shorts page is missing {needle}")
     if (
-        shorts.find("aXnadwU-Z7U") > shorts.find("Qd7DWqq_jy8")
+        shorts.find("VMwVPQtbbeo") > shorts.find("aXnadwU-Z7U")
+        or shorts.find("aXnadwU-Z7U") > shorts.find("Qd7DWqq_jy8")
         or shorts.find("Qd7DWqq_jy8") > shorts.find("LqjTjbZOWb4")
         or shorts.find("LqjTjbZOWb4") > shorts.find("8cZ7qpdWyvU")
         or shorts.find("8cZ7qpdWyvU") > shorts.find("fvn8h67Mze0")
@@ -4770,22 +4769,27 @@ def validate_week12():
         raise SystemExit("shorts.json Week 11 Thursday Short does not match the card")
     shorts_data = json.load(open(os.path.join(DATA, "shorts.json")))
     latest_short = (shorts_data.get("shorts") or [None])[0] or {}
+    if "VMwVPQtbbeo" not in (latest_short.get("youtube_url") or "") or latest_short.get("date") != "2026-11-25" or int(latest_short.get("week") or 0) != 12:
+        raise SystemExit("shorts.json latest Short is not the Week 12 Short")
+    if latest_short.get("title") != "Week 12 NFL AI Picks: LAR -2.5 Tonight (GB @ LAR) | Week 11 Recap":
+        raise SystemExit("Week 12 Short title does not match")
+    leaders_short = next(s for s in shorts_data["shorts"] if "aXnadwU-Z7U" in (s.get("youtube_url") or ""))
     leaders_title = "Week 11 Westgate SuperContest Top 5 Leaders | Bucs +7 on 4 of 5 #Shorts"
-    if "aXnadwU-Z7U" not in (latest_short.get("youtube_url") or "") or latest_short.get("date") != "2026-11-22" or int(latest_short.get("week") or 0) != 11:
-        raise SystemExit("shorts.json latest Short is not the Week 11 leaders Short")
-    if latest_short.get("title") != leaders_title:
+    if leaders_short.get("date") != "2026-11-22" or int(leaders_short.get("week") or 0) != 11:
+        raise SystemExit("Week 11 leaders Short was moved")
+    if leaders_short.get("title") != leaders_title:
         raise SystemExit("Week 11 leaders Short title does not match")
-    if "MATTLEGEND27-1 34-16" not in (latest_short.get("note") or "") or "RJ551155-3 33-17" not in (latest_short.get("note") or ""):
+    if "MATTLEGEND27-1 34-16" not in (leaders_short.get("note") or "") or "RJ551155-3 33-17" not in (leaders_short.get("note") or ""):
         raise SystemExit("Week 11 leaders Short note is missing the supplied records")
-    if "Contest-leader rows are not Vector picks" not in (latest_short.get("note") or "") or "Entertainment only, not betting advice" not in (latest_short.get("note") or ""):
+    if "Contest-leader rows are not Vector picks" not in (leaders_short.get("note") or "") or "Entertainment only, not betting advice" not in (leaders_short.get("note") or ""):
         raise SystemExit("Week 11 leaders Short note is missing the entertainment line")
     saturday_short = next(s for s in shorts_data["shorts"] if "Qd7DWqq_jy8" in (s.get("youtube_url") or ""))
     if saturday_short.get("title") != "Week 11 Saturday Update: IND +12.5 Lost TNF, TB +7 Now a Best Bet | Vector Picks" or saturday_short.get("date") != "2026-11-21":
         raise SystemExit("Week 11 Saturday Short was changed")
-    if latest_short.get("date") <= saturday_short.get("date"):
+    if leaders_short.get("date") <= saturday_short.get("date"):
         raise SystemExit("Week 11 leaders Short is not dated after the Saturday Short")
     saturday = week11.get("saturday_update") or {}
-    if saturday.get("leaders_video_url") != latest_short.get("youtube_url") or saturday.get("leaders_video_title") != leaders_title:
+    if saturday.get("leaders_video_url") != leaders_short.get("youtube_url") or saturday.get("leaders_video_title") != leaders_title:
         raise SystemExit("Week 11 card is missing the leaders Short link")
     if saturday.get("folded_into_grades") or not saturday.get("latest_on_card"):
         raise SystemExit("Saturday update must stay separate and be the card's latest Short")

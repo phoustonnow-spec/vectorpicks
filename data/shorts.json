@@ -1,5 +1,5 @@
 {
-  "_comment": "Public YouTube Shorts only. never_embed ids are refused by the build even if a URL is added later. Weeks 3, 4, and 8 are archive. Week 9 shorts stay listed. The Week 11 leaders Short is the latest. The Week 11 Saturday Short and the Week 11 Thursday Short stay listed. The Week 10 leaders, Saturday, and Thursday Shorts stay listed. Dates order the home page. 2026-11-22 is the Week 11 leaders Short. 2026-11-21 is the Week 11 Saturday Short. 2026-11-19 is the Week 11 Thursday Short. leader_results is the unofficial Week 9 contest grade shown on the Shorts page. It is not a Vector record.",
+  "_comment": "Public YouTube Shorts only. never_embed ids are refused by the build even if a URL is added later. Weeks 3, 4, and 8 are archive. Week 9 shorts stay listed. The Week 12 Short is the latest. The Week 11 leaders, Saturday, and Thursday Shorts stay listed. The Week 10 leaders, Saturday, and Thursday Shorts stay listed. Dates order the home page. 2026-11-25 is the Week 12 Short. 2026-11-22 is the Week 11 leaders Short. 2026-11-21 is the Week 11 Saturday Short. 2026-11-19 is the Week 11 Thursday Short. leader_results is the unofficial Week 9 contest grade shown on the Shorts page. It is not a Vector record.",
   "never_embed": ["cXnzFQPN7mE"],
   "placeholder_slots": 0,
   "leader_results": {
@@ -151,6 +151,14 @@
     ]
   },
   "shorts": [
+    {
+      "title": "Week 12 NFL AI Picks: LAR -2.5 Tonight (GB @ LAR) | Week 11 Recap",
+      "date": "2026-11-25",
+      "week": 12,
+      "role": "current",
+      "youtube_url": "https://www.youtube.com/shorts/VMwVPQtbbeo",
+      "note": "Posted Wed Nov 25, 2026. Week 12 card. Tonight's Lean is LAR -2.5. No Best Bets. Entertainment only, not betting advice."
+    },
     {
       "title": "Week 11 Westgate SuperContest Top 5 Leaders | Bucs +7 on 4 of 5 #Shorts",
       "date": "2026-11-22",

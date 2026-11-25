@@ -51,7 +51,7 @@ Keep the week's source files in the repo. A copy in Google Drive is a backup, no
 
 ## What failed this week
 
-Report it in the pull request. For Nov 25, 2026 the Wednesday card is 16 games, all pending. No Best Bets. Leans are LAR -2.5, ATL +7, and IND +7. PHI +8.5 and MIA +3.5 stay model side only, not a recommendation. Tonight's highlight is GB @ LAR, LAR -2.5, Lean, kickoff Wednesday Nov 25, 5:00 PM PT. Week 11 stays the Thursday card, final 6-7, Best Bets 1-0, Leans 1-1, Card 4-6, including Monday night CIN 20, WAS 22. Tracked weeks stay Best Bets 13-10-0 (+3u), Leans 17-25-0 (-8u), Card tier 11-13-1 (-2u), full card 42-49-1 (-7u). Week 12 counts only as pending: 0 Best Bets, 3 Leans, 13 Card. The Week 12 AI board is posted with earlier weeks kept. No Week 12 video link was supplied. Open gaps:
+Report it in the pull request. For Nov 25, 2026 the Wednesday card is 16 games, all pending. No Best Bets. Leans are LAR -2.5, ATL +7, and IND +7. PHI +8.5 and MIA +3.5 stay model side only, not a recommendation. Tonight's highlight is GB @ LAR, LAR -2.5, Lean, kickoff Wednesday Nov 25, 5:00 PM PT. Week 11 stays the Thursday card, final 6-7, Best Bets 1-0, Leans 1-1, Card 4-6, including Monday night CIN 20, WAS 22. Tracked weeks stay Best Bets 13-10-0 (+3u), Leans 17-25-0 (-8u), Card tier 11-13-1 (-2u), full card 42-49-1 (-7u). Week 12 counts only as pending: 0 Best Bets, 3 Leans, 13 Card. The Week 12 AI board is posted with earlier weeks kept. The Week 12 Short is https://www.youtube.com/shorts/VMwVPQtbbeo. Open gaps:
 
 - Injury layer is player by player but not a fresh fully reconciled rerun. LAC and SEA quarterback statuses are pending.
 - Tiers are confidence labels, not proven probabilities.

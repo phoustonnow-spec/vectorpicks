@@ -94,16 +94,13 @@ def test_built_pages():
     assert "Vector power rankings entering Week 10" not in home
     assert "Vector power rankings entering Week 11" not in home
     shorts = open(os.path.join(root, "shorts.html"), encoding="utf-8").read()
-    assert "aXnadwU-Z7U" in home and 'data-yt="aXnadwU-Z7U"' in home
-    assert 'data-yt="Qd7DWqq_jy8"' not in home
-    assert "Week 11 Westgate SuperContest Top 5 Leaders" in home
+    assert "VMwVPQtbbeo" in home and 'data-yt="VMwVPQtbbeo"' in home
+    assert 'data-yt="aXnadwU-Z7U"' not in home and 'data-yt="Qd7DWqq_jy8"' not in home
+    assert "Week 12 NFL AI Picks: LAR -2.5 Tonight (GB @ LAR) | Week 11 Recap" in home
     assert "Entertainment only, not betting advice" in home
     assert "MATTLEGEND27-1 34-16" in shorts and "RJ551155-3 33-17" in shorts and "TB +7 (4 of 5)" in shorts
     assert "Contest-leader rows are not Vector picks" in shorts
-    assert "Qd7DWqq_jy8" in home
-    assert "Week 11 Saturday Update: IND +12.5 Lost TNF, TB +7 Now a Best Bet | Vector Picks" in home
-    assert "LqjTjbZOWb4" in home
-    assert "Week 11 NFL AI Picks: IND +12.5 TNF, WAS +6.5 Best Bet | Week 10 Recap" in home
+    assert "VMwVPQtbbeo" in shorts and shorts.find("VMwVPQtbbeo") < shorts.find("aXnadwU-Z7U")
     assert "aXnadwU-Z7U" in shorts and shorts.find("aXnadwU-Z7U") < shorts.find("Qd7DWqq_jy8")
     assert "Qd7DWqq_jy8" in shorts and shorts.find("Qd7DWqq_jy8") < shorts.find("LqjTjbZOWb4")
     assert "LqjTjbZOWb4" in shorts and shorts.find("LqjTjbZOWb4") < shorts.find("8cZ7qpdWyvU")
@@ -169,7 +166,7 @@ def test_built_pages():
     hero = w11_card.split("<h1>", 1)[1].split('id="tnf"', 1)[0]
     assert "Qd7DWqq_jy8" in hero and "aXnadwU-Z7U" not in hero
     assert "Model side only, not a recommendation" in card
-    assert "youtube.com/shorts" not in card.split('id="highlight"', 1)[0]
+    assert "https://www.youtube.com/shorts/VMwVPQtbbeo" in card.split('id="highlight"', 1)[0]
     w11 = open(os.path.join(root, "ai-picks-2026-w11.html"), encoding="utf-8").read()
     assert "cXnzFQPN7mE" not in home + ai + card + shorts + archive + w11
     assert "<title>AI Picks Week 12 2026 |" in ai

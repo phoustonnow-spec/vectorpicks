@@ -1,7 +1,7 @@
 {
   "season": 2026,
   "week": 12,
-  "as_of": "Wed 2026-11-25 ~8:30 AM PT",
+  "as_of": "Wed 2026-11-25 ~7:15 AM PT",
   "pass_policy": "full",
   "flags_confirmed": false,
   "line_column": "Westgate",
@@ -9,6 +9,12 @@
   "market_source": "no separate market table on this Wednesday card (blank, not invented)",
   "hfa_note": "Home field is about 2 points, and 0 at a neutral site. The injury layer is player by player but not a fresh fully reconciled rerun.",
   "update_note": "Wednesday Nov 25, 2026 card. Injury layer is player by player but not a fresh fully reconciled rerun; several quarterback statuses (LAC, SEA) are pending. Pittsburgh benched its starting quarterback for Friday's game and Vector's side flipped from PIT +2.5 to DEN -2.5. Every game has a side; no passes. Tiers are confidence labels, not proven probabilities. Wednesday picks, Saturday update. Entertainment only, not betting advice.",
+  "video_url": "https://www.youtube.com/shorts/VMwVPQtbbeo",
+  "video_url_note": "Verified public YouTube Short on @VectorPicks, published Wed Nov 25, 2026.",
+  "short": {
+    "title": "Week 12 NFL AI Picks: LAR -2.5 Tonight (GB @ LAR) | Week 11 Recap",
+    "youtube_url": "https://www.youtube.com/shorts/VMwVPQtbbeo"
+  },
   "highlight": {
     "game": "GB @ LAR",
     "kickoff_pt": "Wednesday Nov 25, 5:00 PM PT",
@@ -304,7 +310,6 @@
     "Injury layer is player by player but not a fresh fully reconciled rerun; several quarterback statuses (LAC, SEA) are pending.",
     "Pittsburgh benched its starting quarterback for Friday's game and Vector's side flipped from PIT +2.5 to DEN -2.5.",
     "PHI +8.5 and MIA +3.5 are model side only, not a recommendation. They stay on the full card and are not Best Bets or Leans.",
-    "No Week 12 video link is posted.",
     "Tiers are confidence labels, not proven probabilities. Entertainment only, not betting advice.",
     "Wednesday picks, Saturday update."
   ]

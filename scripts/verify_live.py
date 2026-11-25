@@ -75,17 +75,15 @@ HOME_MARKERS = (
     "13 pending",
     "16 pending",
     "Tracked weeks",
-    "aXnadwU-Z7U",
-    'data-yt="aXnadwU-Z7U"',
-    "Week 11 Westgate SuperContest Top 5 Leaders",
+    "VMwVPQtbbeo",
+    'data-yt="VMwVPQtbbeo"',
+    "Week 12 NFL AI Picks: LAR -2.5 Tonight (GB @ LAR) | Week 11 Recap",
     "Entertainment only, not betting advice",
-    "Qd7DWqq_jy8",
-    "Week 11 Saturday Update: IND +12.5 Lost TNF, TB +7 Now a Best Bet | Vector Picks",
-    "LqjTjbZOWb4",
-    "Week 11 NFL AI Picks: IND +12.5 TNF, WAS +6.5 Best Bet | Week 10 Recap",
     "Entertainment and opinion only. Not betting advice.",
 )
 SHORTS_MARKERS = (
+    "VMwVPQtbbeo",
+    "Week 12 NFL AI Picks: LAR -2.5 Tonight (GB @ LAR) | Week 11 Recap",
     "aXnadwU-Z7U",
     "Week 11 Westgate SuperContest Top 5 Leaders",
     "MATTLEGEND27-1 34-16",
@@ -134,7 +132,8 @@ SHORTS_MARKERS = (
     "BUF@MIN (Monday night) is Pending",
 )
 CARD_MARKERS = (
-    "Wed 2026-11-25 ~8:30 AM PT",
+    "Wed 2026-11-25 ~7:15 AM PT",
+    "https://www.youtube.com/shorts/VMwVPQtbbeo",
     'id="highlight"',
     "Wednesday night",
     "GB @ LAR",
@@ -341,8 +340,8 @@ def check(name, status, body, markers):
         or "Model side only, not a recommendation" not in card_table
     ):
         present.append("Week 12 card is not 16 pending rows with the model-only note")
-    if name == "homepage" and ('data-yt="aXnadwU-Z7U"' not in body or 'data-yt="Qd7DWqq_jy8"' in body):
-        present.append("home latest Short is not the Week 11 leaders Short")
+    if name == "homepage" and ('data-yt="VMwVPQtbbeo"' not in body or 'data-yt="aXnadwU-Z7U"' in body or 'data-yt="Qd7DWqq_jy8"' in body):
+        present.append("home latest Short is not the Week 12 Short")
     if name == "live" and ("Week 12 has no card in the repo" in body or "Week 12 card pending" in body or "Our Spread is the Week 11" in body):
         present.append("live board is still the unpublished Week 12 notice")
     if name in ("card", "record"):
@@ -382,7 +381,8 @@ def check(name, status, body, markers):
     if name == "week10-card" and ("Week 11" in body or "IND +12.5" in body or "WAS +6.5" in body or "LqjTjbZOWb4" in body or "aXnadwU-Z7U" in body):
         present.append("week 11 card leaked into the week 10 archive")
     order_bad = name == "shorts" and (
-        body.find("aXnadwU-Z7U") > body.find("Qd7DWqq_jy8")
+        body.find("VMwVPQtbbeo") > body.find("aXnadwU-Z7U")
+        or body.find("aXnadwU-Z7U") > body.find("Qd7DWqq_jy8")
         or body.find("Qd7DWqq_jy8") > body.find("LqjTjbZOWb4")
         or body.find("LqjTjbZOWb4") > body.find("8cZ7qpdWyvU")
         or body.find("8cZ7qpdWyvU") > body.find("fvn8h67Mze0")

@@ -430,21 +430,23 @@
       "season": 2026,
       "published_at_pt": "2026-11-25",
       "dedup_key": "2026-w12-wednesday-card",
-      "source": "Wednesday public card generated 2026-11-25 ~8:30 AM PT. All 16 games are pending. No video link was supplied.",
+      "source": "Wednesday public card generated 2026-11-25 ~7:15 AM PT. All 16 games are pending. Week 12 Short is https://www.youtube.com/shorts/VMwVPQtbbeo.",
       "included": [
         "Week 12 card, a side on every game, all pending",
         "No Best Bets. Leans LAR -2.5, ATL +7, and IND +7",
         "PHI +8.5 and MIA +3.5 stay model side only, not a recommendation",
         "Wednesday night highlight: GB @ LAR, LAR -2.5, Lean",
         "Week 12 AI board, four AIs and Vector, all 16 games pending",
-        "Week 11 stays the graded Thursday card, 6-7, including Monday night CIN 20, WAS 22"
+        "Week 11 stays the graded Thursday card, 6-7, including Monday night CIN 20, WAS 22",
+        "Week 12 Short: https://www.youtube.com/shorts/VMwVPQtbbeo"
       ],
-      "public_video_ids": [],
+      "public_video_ids": [
+        "VMwVPQtbbeo"
+      ],
       "never_embed": [
         "cXnzFQPN7mE"
       ],
       "gaps": [
-        "No Week 12 video link",
         "Injury layer is not a fresh fully reconciled rerun; LAC and SEA quarterback statuses are pending",
         "PHI +8.5 and MIA +3.5 are model side only, not a recommendation",
         "Week 12 rows are pending and do not change the tracked W-L",
