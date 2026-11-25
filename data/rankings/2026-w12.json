@@ -3,7 +3,7 @@
   "week": 12,
   "label": "Vector power rankings entering Week 12 (2026), points vs. an average team; movement vs. Week 11 Tuesday",
   "note": "Injury adjustments are built player by player for all 32 teams but remain provisional until midweek practice reports (some quarterback and role values are assumptions). Home field about 2 points, 0 at a neutral site.",
-  "status": "Week 12 card pending: the Westgate SuperContest Week 12 sheet was not posted as of Tue Nov 24, 2026 8:52 AM PT. The Week 12 card (a side on every game) will be built on that sheet when it posts.",
+  "status": "",
   "rows": [
     {"rank": 1, "team": "BUF", "rating": 5.2, "last_week_rank": 2, "move": 1},
     {"rank": 2, "team": "KC", "rating": 5.0, "last_week_rank": 4, "move": 2},

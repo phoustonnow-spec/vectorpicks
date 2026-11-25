@@ -68,24 +68,23 @@ def test_built_pages():
     assert "Week 12" in home and build.stamp_pt(build.today_pt()) in home
     assert "Week 11 final 6-7 (Best Bets 1-0, Leans 1-1, Card 4-6)." in home
     assert "CIN 20, WAS 22" in home
-    assert "IND +12.5" in home and "WAS +6.5 vs CIN (Mon)" in home
-    assert "NO +11.5 at CHI" in home and "TB +7 at DET (QB status pending)" in home
-    assert "Model side only, not a recommendation: MIA +16.5 at BUF, PHI +4.5 vs PIT." in home
+    assert "IND +12.5" in home and "IND 3, HOU 26" in home
+    assert 'id="highlight"' in home and "GB @ LAR" in home and "LAR \u22122.5" in home
+    assert "No Best Bets" in home and "Leans: LAR \u22122.5, ATL +7, IND +7." in home
+    assert "Model side only, not a recommendation: PHI +8.5 at DAL, MIA +3.5 vs NYJ." in home
+    assert "16 games pending. Not graded." in home
+    assert "TB +7 at DET (QB status pending)" not in home
+    assert "Vector numbers are provisional: injury layer still being reconciled" not in home
     assert "1 of 13 graded. 12 games pending." not in home
-    assert "Week 12 card pending" in home and "Tue Nov 24, 2026 8:52 AM PT" in home
-    assert "No Week 12 picks, edges, or line comparisons" in home
-    assert "GB @ LAR" not in home and "KC @ BUF" not in home
-    assert "Week 11 Saturday update (Nov 21, 2026)" in home
-    assert "HOU 26, IND 3" in home and "IND 3, HOU 26" in home
-    assert "BAL +2.5" in home and "TB +7 at DET" in home
+    assert "Week 12 card pending" not in home and "No Week 12 picks, edges, or line comparisons" not in home
+    assert "Wednesday picks, Saturday update." in home
     assert "Week 11 card pending" not in home and "No Week 11 picks, edges, or line comparisons" not in home
-    assert "Week 10 final 7-7 (Best Bets 1-1, Leans 3-4, Card 3-2)." in home
     assert "13-10-0" in home and "17-25-0" in home and "11-13-1" in home and "42-49-1" in home
     assert "+3u" in home and "-2u" in home and "-8u" in home and "-7u" in home
     assert "7-7-1" not in home and "36-42-1" not in home and "12-10-0" not in home
-    assert "0 pending" in home and "12 pending" not in home and "10 pending" not in home
+    assert "0 pending" in home and "3 pending" in home and "13 pending" in home and "16 pending" in home
+    assert "12 pending" not in home and "10 pending" not in home
     assert "Official Westgate Week 10 standings" in home and "LAMBDA LAMBDA LAMBDA-1 36-13-1" in home
-    assert "DAL +4.5 vs SF" in home and "LAC +4.5" in home and "SF 46, DAL 40" in home and "LAC 23, BAL 20" in home
     assert 'id="rankings"' in home and "<b>BUF</b>" in home and "5.2" in home
     assert "Injury adjustments are built player by player" in home
     assert "Injury adjustments are provisional this week" not in home
@@ -98,8 +97,9 @@ def test_built_pages():
     assert "aXnadwU-Z7U" in home and 'data-yt="aXnadwU-Z7U"' in home
     assert 'data-yt="Qd7DWqq_jy8"' not in home
     assert "Week 11 Westgate SuperContest Top 5 Leaders" in home
-    assert "MATTLEGEND27-1 34-16" in home and "RJ551155-3 33-17" in home and "TB +7 (4 of 5)" in home
-    assert "Contest-leader rows are not Vector picks" in home and "Entertainment only, not betting advice" in home
+    assert "Entertainment only, not betting advice" in home
+    assert "MATTLEGEND27-1 34-16" in shorts and "RJ551155-3 33-17" in shorts and "TB +7 (4 of 5)" in shorts
+    assert "Contest-leader rows are not Vector picks" in shorts
     assert "Qd7DWqq_jy8" in home
     assert "Week 11 Saturday Update: IND +12.5 Lost TNF, TB +7 Now a Best Bet | Vector Picks" in home
     assert "LqjTjbZOWb4" in home
@@ -147,29 +147,37 @@ def test_built_pages():
     assert "Week 10 Saturday update (Nov 14, 2026)" in w10_card
     assert "WAS 24, NYG 21" in w10_card and "WAS +0.3" in w10_card
     assert "Week 11" not in w10_card and "IND +12.5" not in w10_card and "WAS +6.5" not in w10_card and "LqjTjbZOWb4" not in w10_card and "aXnadwU-Z7U" not in w10_card
-    assert "IND +12.5" in card and "WAS +6.5" in card and "HOU \u221212.5" in card
+    assert "GB @ LAR" in card and "No Best Bets" in card and "LAR \u22122.5" in card
     assert "Week 11 final 6-7" in card and "CIN 20, WAS 22" in card
-    assert "Week 12 card pending" in card and "No Week 12 picks, edges, or line comparisons" in card
+    assert "Week 12 card pending" not in card and "No Week 12 picks, edges, or line comparisons" not in card
     card_table = card.split("Full card: Market vs Our Spread", 1)[-1]
-    assert card_table.count("PENDING") == 0
-    assert card_table.count('res-win">WIN') == 6 and card_table.count('res-loss">LOSS') == 7
-    assert "IND 3, HOU 26" in card and "Week 11 Saturday update (Nov 21, 2026)" in card
+    assert card_table.count("PENDING") == 16
+    assert "Model side only, not a recommendation" in card_table.split("PHI @ DAL", 1)[-1].split("</tr>", 1)[0]
+    assert "Model side only, not a recommendation" in card_table.split("NYJ @ MIA", 1)[-1].split("</tr>", 1)[0]
+    w11_card = open(os.path.join(root, "card-2026-w11.html"), encoding="utf-8").read()
+    assert "IND +12.5" in w11_card and "WAS +6.5" in w11_card and "HOU \u221212.5" in w11_card
+    w11_table = w11_card.split("Full card: Market vs Our Spread", 1)[-1]
+    assert w11_table.count("PENDING") == 0
+    assert w11_table.count('res-win">WIN') == 6 and w11_table.count('res-loss">LOSS') == 7
+    assert "IND 3, HOU 26" in w11_card and "Week 11 Saturday update (Nov 21, 2026)" in w11_card
+    assert "CIN 20, WAS 22" in w11_card
     assert "Week 10 early look" not in card and "Thu card line" not in card
-    assert "https://www.youtube.com/shorts/Qd7DWqq_jy8" in card
-    assert "https://www.youtube.com/shorts/LqjTjbZOWb4" in card
-    assert "https://www.youtube.com/shorts/aXnadwU-Z7U" in card
-    assert "MATTLEGEND27-1 34-16" in card and "Contest-leader rows are not Vector picks" in card
-    hero = card.split("<h1>", 1)[1].split('id="tnf"', 1)[0]
+    assert "https://www.youtube.com/shorts/Qd7DWqq_jy8" in w11_card
+    assert "https://www.youtube.com/shorts/LqjTjbZOWb4" in w11_card
+    assert "https://www.youtube.com/shorts/aXnadwU-Z7U" in w11_card
+    assert "MATTLEGEND27-1 34-16" in w11_card and "Contest-leader rows are not Vector picks" in w11_card
+    hero = w11_card.split("<h1>", 1)[1].split('id="tnf"', 1)[0]
     assert "Qd7DWqq_jy8" in hero and "aXnadwU-Z7U" not in hero
     assert "Model side only, not a recommendation" in card
+    assert "youtube.com/shorts" not in card.split('id="highlight"', 1)[0]
     w11 = open(os.path.join(root, "ai-picks-2026-w11.html"), encoding="utf-8").read()
     assert "cXnzFQPN7mE" not in home + ai + card + shorts + archive + w11
-    assert "Week 12 AI picks pending" in ai and "No sides were invented" in ai
-    assert "AI picks are not published yet" in ai
-    assert "<title>AI Picks Week 12 pending |" in ai
-    assert "Week 12 card pending" in ai and "No Week 12 picks, edges, or line comparisons" in ai
+    assert "<title>AI Picks Week 12 2026 |" in ai
+    assert "All 16 games are pending." in ai and "Westgate line" in ai and "No Best Bets" in ai
+    assert "Week 12 AI picks pending" not in ai and "No sides were invented" not in ai
+    assert "Week 12 card pending" not in ai
     assert "1:16 PM PT" not in ai and "All 13 games are pending." not in ai and "DraftKings line" not in ai
-    assert "GB @ LAR" not in ai and "KC @ BUF" not in ai
+    assert "GB @ LAR" in ai and "KC @ BUF" in ai
     assert "PROVISIONAL" in w11 and "DraftKings line" in w11 and "Not a Westgate card." in w11
     assert "IND +12.5" in w11 and "Final:" not in w11
     assert "PROVISIONAL" in w10 and "DraftKings line" in w10 and "Not a Westgate card." in w10
