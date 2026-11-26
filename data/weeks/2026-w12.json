@@ -16,34 +16,30 @@
     "youtube_url": "https://www.youtube.com/shorts/VMwVPQtbbeo"
   },
   "highlight": {
-    "game": "GB @ LAR",
-    "kickoff_pt": "Wednesday Nov 25, 5:00 PM PT",
-    "pick": "LAR -2.5",
-    "tier": "Lean",
-    "westgate": "LAR -2.5",
-    "our_spread": "LAR -5.6",
-    "gap": 3.1,
-    "kicker": "Wednesday night",
-    "note": "Tonight's game. Lean, not a Best Bet."
+    "game": "KC @ BUF",
+    "kickoff_pt": "Thursday Nov 26, 5:20 PM PT",
+    "pick": "KC +2.5",
+    "tier": "Card",
+    "westgate": "KC +2.5 (BUF -2.5)",
+    "our_spread": "BUF -2.2",
+    "gap": 0.3,
+    "kicker": "Thanksgiving night",
+    "note": "Tonight's game. Card, near coin flip."
   },
   "prior_recap": {
     "week": 11,
     "text": "Week 11 final 6-7 (Best Bets 1-0, Leans 1-1, Card 4-6). Monday night is CIN 20, WAS 22 (WAS +6.5 won). TNF IND +12.5 lost, IND 3, HOU 26. Thursday Nov 19 card of record, 13 of 13 graded. Graded rows stay the Thursday card. Saturday notes stay separate and are not folded into the graded rows."
   },
   "westgate_leaders": {
-    "status": "official Westgate Week 10 standings",
+    "status": "official Westgate standings thru Week 11",
     "supercontest": [
       [
         "LAMBDA LAMBDA LAMBDA-1",
-        "36-13-1",
-        "Wk10 4-1"
-      ],
-      [
-        "AMICI2-1",
-        "33-16-1",
-        "Wk10 5-0"
+        "39-15-1",
+        "Wk11 3-2"
       ]
     ],
+    "gold_status": "official Westgate Week 10 standings",
     "gold": [
       [
         "THREAD CLOD FOOL-1",
@@ -70,7 +66,7 @@
       "IND +7"
     ],
     "card": [
-      "CHI -2.5 at DET",
+      "CHI -2.5 at DET (10:00 AM PT, Card, coin flip)",
       "KC +2.5 at BUF",
       "DEN -2.5 at PIT",
       "HOU -6.5 vs BAL",

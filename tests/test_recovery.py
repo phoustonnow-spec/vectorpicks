@@ -69,22 +69,30 @@ def test_built_pages():
     assert "Week 11 final 6-7 (Best Bets 1-0, Leans 1-1, Card 4-6)." in home
     assert "CIN 20, WAS 22" in home
     assert "IND +12.5" in home and "IND 3, HOU 26" in home
-    assert 'id="highlight"' in home and "GB @ LAR" in home and "LAR \u22122.5" in home
+    assert 'id="highlight"' in home and "KC @ BUF" in home and "KC +2.5" in home
+    assert "Thanksgiving night" in home and "Thursday Nov 26, 5:20 PM PT" in home
+    assert "GB @ LAR: LAR \u22122.5 WIN" in home and "GB 13, LAR 26" in home
+    assert "CHI \u22122.5 at DET (10:00 AM PT, Card, coin flip)" in home
     assert "No Best Bets" in home and "Leans: LAR \u22122.5, ATL +7, IND +7." in home
     assert "Model side only, not a recommendation: PHI +8.5 at DAL, MIA +3.5 vs NYJ." in home
-    assert "16 games pending. Not graded." in home
+    assert "1 of 16 graded. 15 games pending." in home
+    assert "Week 12 so far 1-0 (Leans 1-0; Best Bets 0-0; Card 0-0)." in home
+    assert "16 games pending. Not graded." not in home
     assert "TB +7 at DET (QB status pending)" not in home
     assert "Vector numbers are provisional: injury layer still being reconciled" not in home
     assert "1 of 13 graded. 12 games pending." not in home
     assert "Week 12 card pending" not in home and "No Week 12 picks, edges, or line comparisons" not in home
     assert "Wednesday picks, Saturday update." in home
     assert "Week 11 card pending" not in home and "No Week 11 picks, edges, or line comparisons" not in home
-    assert "13-10-0" in home and "17-25-0" in home and "11-13-1" in home and "42-49-1" in home
-    assert "+3u" in home and "-2u" in home and "-8u" in home and "-7u" in home
+    assert "13-10-0" in home and "18-25-0" in home and "11-13-1" in home and "43-49-1" in home
+    assert "17-25-0" not in home and "42-49-1" not in home
+    assert "+3u" in home and "-2u" in home and "-7u" in home and "-6u" in home
+    assert "-8u" not in home
     assert "7-7-1" not in home and "36-42-1" not in home and "12-10-0" not in home
-    assert "0 pending" in home and "3 pending" in home and "13 pending" in home and "16 pending" in home
-    assert "12 pending" not in home and "10 pending" not in home
-    assert "Official Westgate Week 10 standings" in home and "LAMBDA LAMBDA LAMBDA-1 36-13-1" in home
+    assert "0 pending" in home and "2 pending" in home and "13 pending" in home and "15 pending" in home
+    assert "12 pending" not in home and "10 pending" not in home and "16 pending" not in home
+    assert "Official Westgate standings thru Week 11" in home and "LAMBDA LAMBDA LAMBDA-1 39-15-1" in home
+    assert "Official Westgate Week 10 standings" in home and "THREAD CLOD FOOL-1 33-17-0" in home
     assert 'id="rankings"' in home and "<b>BUF</b>" in home and "5.2" in home
     assert "Injury adjustments are built player by player" in home
     assert "Injury adjustments are provisional this week" not in home
@@ -124,6 +132,7 @@ def test_built_pages():
     assert shorts.count('res-win">WIN') == 20
     assert shorts.count('res-loss">LOSS') == 27
     assert shorts.count('res-pend">Pending') == 8
+    assert "Official Westgate standings thru Week 11" in shorts and "LAMBDA LAMBDA LAMBDA-1 39-15-1" in shorts
     assert "Official Westgate Week 10 standings" in shorts and "LAMBDA LAMBDA LAMBDA-1 36-13-1" in shorts
     assert "Sunday Nov 8, 2026 unofficial snapshot" in shorts
     lowered = shorts.lower()
@@ -148,7 +157,10 @@ def test_built_pages():
     assert "Week 11 final 6-7" in card and "CIN 20, WAS 22" in card
     assert "Week 12 card pending" not in card and "No Week 12 picks, edges, or line comparisons" not in card
     card_table = card.split("Full card: Market vs Our Spread", 1)[-1]
-    assert card_table.count("PENDING") == 16
+    assert card_table.count("PENDING") == 15
+    assert card_table.count('res-win">WIN') == 1
+    gb_row = card_table.split("GB @ LAR", 1)[-1].split("</tr>", 1)[0]
+    assert "WIN" in gb_row and "GB 13, LAR 26" in gb_row and "PENDING" not in gb_row
     assert "Model side only, not a recommendation" in card_table.split("PHI @ DAL", 1)[-1].split("</tr>", 1)[0]
     assert "Model side only, not a recommendation" in card_table.split("NYJ @ MIA", 1)[-1].split("</tr>", 1)[0]
     w11_card = open(os.path.join(root, "card-2026-w11.html"), encoding="utf-8").read()

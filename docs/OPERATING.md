@@ -51,7 +51,21 @@ Keep the week's source files in the repo. A copy in Google Drive is a backup, no
 
 ## What failed this week
 
-Report it in the pull request. For Nov 25, 2026 the Wednesday card is 16 games, all pending. No Best Bets. Leans are LAR -2.5, ATL +7, and IND +7. PHI +8.5 and MIA +3.5 stay model side only, not a recommendation. Tonight's highlight is GB @ LAR, LAR -2.5, Lean, kickoff Wednesday Nov 25, 5:00 PM PT. Week 11 stays the Thursday card, final 6-7, Best Bets 1-0, Leans 1-1, Card 4-6, including Monday night CIN 20, WAS 22. Tracked weeks stay Best Bets 13-10-0 (+3u), Leans 17-25-0 (-8u), Card tier 11-13-1 (-2u), full card 42-49-1 (-7u). Week 12 counts only as pending: 0 Best Bets, 3 Leans, 13 Card. The Week 12 AI board is posted with earlier weeks kept. The Week 12 Short is https://www.youtube.com/shorts/VMwVPQtbbeo. Open gaps:
+Report it in the pull request. For Nov 26, 2026 the Thursday grade is GB @ LAR only. ESPN final is GB 13, LAR 26. Vector's Wednesday side LAR -2.5, Lean, is an ATS win, +1 unit. The line, pick, Our Spread LAR -5.6, gap 3.1, tier, and date are unchanged. Week 12 so far is 1-0 (Leans 1-0, Best Bets 0-0, Card 0-0) with 15 games pending. Tracked weeks are Best Bets 13-10-0 (+3u), Leans 18-25-0 (-7u), Card tier 11-13-1 (-2u), full card 43-49-1 (-6u). The homepage highlight is KC +2.5 at BUF, Thursday Nov 26, 5:20 PM PT, Westgate KC +2.5 (BUF -2.5), Our Spread BUF -2.2, gap 0.3, Card, near coin flip. CHI -2.5 at DET (10:00 AM PT, Card, coin flip) stays on the card. PHI +8.5 stays model side only, not a recommendation, and is not the highlight. Week 11 stays 6-7, Best Bets 1-0, Leans 1-1, Card 4-6, including Monday night CIN 20, WAS 22. The official Westgate standings thru Week 11 list LAMBDA LAMBDA LAMBDA-1 at 39-15-1 (Wk11 3-2). The Gold line stays the Week 10 line. The Week 12 Short stays https://www.youtube.com/shorts/VMwVPQtbbeo. The Wednesday AI board stays ungraded. Open gaps:
+
+- 15 Week 12 games are still pending. CHI @ DET had not kicked off at publish time.
+- Injury layer is player by player but not a fresh fully reconciled rerun. LAC and SEA quarterback statuses are pending.
+- Tiers are confidence labels, not proven probabilities.
+- PHI +8.5 and MIA +3.5 are model side only, not a recommendation.
+- Wednesday picks, Saturday update.
+- Week 11 Saturday notes stay off the graded rows.
+- Week 4's 13 unpublished model sides stay off the record.
+- The Wednesday AI board stays its own board and is not graded from this update.
+- Gold standings stay the official Week 10 line. No Week 11 Gold numbers were added.
+- The Shorts contest-leader block is still the Sunday Nov 8 snapshot. Those rows are not Vector picks.
+- Entertainment only, not betting advice.
+
+For Nov 25, 2026 the Wednesday card is 16 games, all pending. No Best Bets. Leans are LAR -2.5, ATL +7, and IND +7. PHI +8.5 and MIA +3.5 stay model side only, not a recommendation. Tonight's highlight is GB @ LAR, LAR -2.5, Lean, kickoff Wednesday Nov 25, 5:00 PM PT. Week 11 stays the Thursday card, final 6-7, Best Bets 1-0, Leans 1-1, Card 4-6, including Monday night CIN 20, WAS 22. Tracked weeks stay Best Bets 13-10-0 (+3u), Leans 17-25-0 (-8u), Card tier 11-13-1 (-2u), full card 42-49-1 (-7u). Week 12 counts only as pending: 0 Best Bets, 3 Leans, 13 Card. The Week 12 AI board is posted with earlier weeks kept. The Week 12 Short is https://www.youtube.com/shorts/VMwVPQtbbeo. Open gaps:
 
 - Injury layer is player by player but not a fresh fully reconciled rerun. LAC and SEA quarterback statuses are pending.
 - Tiers are confidence labels, not proven probabilities.

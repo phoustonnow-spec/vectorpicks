@@ -453,6 +453,33 @@
         "Week 11 Saturday notes stay off the graded rows",
         "Entertainment only, not betting advice"
       ]
+    },
+    {
+      "week": 12,
+      "season": 2026,
+      "published_at_pt": "2026-11-26",
+      "dedup_key": "2026-w12-thursday-gb-lar",
+      "source": "Thursday Nov 26, 2026 grade. ESPN scoreboard fetched that morning: GB @ LAR final, GB 13, LAR 26. The other Week 12 games were still pregame. Official Westgate SuperContest standings through Week 11 list LAMBDA LAMBDA LAMBDA-1 at 39-15-1 (Wk11 3-2). No new video.",
+      "included": [
+        "GB @ LAR graded WIN at LAR -2.5, Lean, final GB 13, LAR 26, +1u",
+        "Week 12 so far 1-0, Leans 1-0, Best Bets 0-0, Card 0-0, 15 games pending",
+        "Tracked weeks: Best Bets 13-10-0 (+3u), Leans 18-25-0 (-7u), Card tier 11-13-1 (-2u), full card 43-49-1 (-6u)",
+        "Homepage highlight is KC +2.5 at BUF, Thursday Nov 26, 5:20 PM PT, Card",
+        "Official Westgate standings thru Week 11 leader line; the Week 10 Gold line stays as published"
+      ],
+      "public_video_ids": [],
+      "never_embed": [
+        "cXnzFQPN7mE"
+      ],
+      "gaps": [
+        "15 Week 12 games are still pending",
+        "Injury layer is not a fresh fully reconciled rerun; LAC and SEA quarterback statuses are pending",
+        "PHI +8.5 and MIA +3.5 are model side only, not a recommendation",
+        "The Wednesday AI board stays ungraded; the Westgate card is the graded record",
+        "Week 11 Saturday notes stay off the graded rows",
+        "Gold standings stay the official Week 10 line; no Week 11 Gold numbers were added",
+        "Entertainment only, not betting advice"
+      ]
     }
   ]
 }
