@@ -2,9 +2,9 @@
 """Check the live site after a merge. A local build is not a publish.
 
 Exit 0 only when https://www.vectorpicks.com serves the Week 12 card
-(16 pending games, GB @ LAR highlighted, no Best Bets), the Week 12 AI board,
+(GB @ LAR graded WIN, 15 pending, KC +2.5 highlighted, no Best Bets), the Week 12 AI board,
 the graded Week 11 Thursday card (6-7, including Monday night), and the
-tracked-weeks record with Week 12 counted only as pending.
+tracked-weeks record with that one Lean win counted.
 Exit 1 when production is still the rankings-only page or is missing a marker.
 
   python3 scripts/verify_live.py
@@ -29,20 +29,25 @@ LIVE_MARKERS = (
 )
 HOME_MARKERS = (
     "Week 12",
-    "Wednesday, Nov 25, 2026 PT",
+    "Thursday, Nov 26, 2026 PT",
     'id="highlight"',
-    "Wednesday night",
-    "GB @ LAR",
-    "LAR \u22122.5",
-    "Wednesday Nov 25, 5:00 PM PT",
-    "Our Spread LAR \u22125.6",
-    "Gap 3.1",
-    "Lean, not a Best Bet.",
+    "Thanksgiving night",
+    "KC @ BUF",
+    "KC +2.5",
+    "Thursday Nov 26, 5:20 PM PT",
+    "Westgate KC +2.5 (BUF \u22122.5)",
+    "Our Spread BUF \u22122.2",
+    "Gap 0.3",
+    "Card, near coin flip.",
+    "GB @ LAR: LAR \u22122.5 WIN",
+    "GB 13, LAR 26",
+    "CHI \u22122.5 at DET (10:00 AM PT, Card, coin flip)",
     "No Best Bets",
     "No Best Bets this week so far. Updates Saturday.",
     "Leans: LAR \u22122.5, ATL +7, IND +7.",
     "Model side only, not a recommendation: PHI +8.5 at DAL, MIA +3.5 vs NYJ.",
-    "16 games pending. Not graded.",
+    "1 of 16 graded. 15 games pending.",
+    "Week 12 so far 1-0 (Leans 1-0; Best Bets 0-0; Card 0-0).",
     "not a fresh fully reconciled rerun",
     "Tiers are confidence labels, not proven probabilities.",
     "Wednesday picks, Saturday update.",
@@ -51,9 +56,10 @@ HOME_MARKERS = (
     "IND 3, HOU 26",
     "Graded rows stay the Thursday card.",
     'id="week-11-recap"',
+    "Official Westgate standings thru Week 11",
+    "LAMBDA LAMBDA LAMBDA-1 39-15-1",
+    "Wk11 3-2",
     "Official Westgate Week 10 standings",
-    "LAMBDA LAMBDA LAMBDA-1 36-13-1",
-    "AMICI2-1 33-16-1",
     "THREAD CLOD FOOL-1 33-17-0",
     "BIG LIB-1 32-17-1",
     "The crowd top 5 went 3-2 in the SuperContest and 2-3 in Gold.",
@@ -63,17 +69,17 @@ HOME_MARKERS = (
     "<b>BUF</b></td><td>5.2</td>",
     "<b>ARI</b></td><td>\u22129.8</td>",
     "13-10-0",
-    "17-25-0",
+    "18-25-0",
     "11-13-1",
-    "42-49-1",
+    "43-49-1",
     "+3u",
-    "-8u",
-    "-2u",
     "-7u",
+    "-2u",
+    "-6u",
     "0 pending",
-    "3 pending",
+    "2 pending",
     "13 pending",
-    "16 pending",
+    "15 pending",
     "Tracked weeks",
     "VMwVPQtbbeo",
     'data-yt="VMwVPQtbbeo"',
@@ -111,6 +117,8 @@ SHORTS_MARKERS = (
     "Week 4 Westgate SuperContest Top 5 Leaders",
     "LAMBDA LAMBDA LAMBDA-1 29-10-1",
     "LAMBDA LAMBDA LAMBDA-1 32-12-1",
+    "Official Westgate standings thru Week 11",
+    "LAMBDA LAMBDA LAMBDA-1 39-15-1",
     "Official Westgate Week 10 standings",
     "LAMBDA LAMBDA LAMBDA-1 36-13-1",
     "Sunday Nov 8, 2026 unofficial snapshot",
@@ -135,10 +143,12 @@ CARD_MARKERS = (
     "Wed 2026-11-25 ~7:15 AM PT",
     "https://www.youtube.com/shorts/VMwVPQtbbeo",
     'id="highlight"',
-    "Wednesday night",
+    "Thanksgiving night",
+    "Thursday Nov 26, 5:20 PM PT",
+    "KC +2.5",
     "GB @ LAR",
     "LAR \u22122.5",
-    "Wednesday Nov 25, 5:00 PM PT",
+    "GB 13, LAR 26",
     "Our Spread LAR \u22125.6",
     "No Best Bets",
     "ATL +7",
@@ -198,17 +208,21 @@ RECORD_MARKERS = (
     "Week 11 final 6-7 (Best Bets 1-0, Leans 1-1, Card 4-6).",
     "13-10-0",
     "17-25-0",
+    "18-25-0",
     "11-13-1",
     "42-49-1",
+    "43-49-1",
     "+3u",
     "-2u",
+    "-6u",
     "The other 12 Week 11 rows stay pending",
-    "Official Westgate Week 10 standings",
-    "LAMBDA LAMBDA LAMBDA-1 36-13-1",
+    "Official Westgate standings thru Week 11",
+    "LAMBDA LAMBDA LAMBDA-1 39-15-1",
     "Gaps, not a complete season",
     "Saturday tier changes are not folded in.",
     "GB@LAR",
-    "16 pending",
+    "GB 13, LAR 26",
+    "15 pending",
 )
 W11_URL = "https://www.vectorpicks.com/ai-picks-2026-w11.html"
 W11_MARKERS = (
@@ -298,7 +312,7 @@ STALE = (
 
 
 def fetch(url):
-    bust = url + ("&" if "?" in url else "?") + "cb=20261125w12"
+    bust = url + ("&" if "?" in url else "?") + "cb=20261126w12thu"
     request = urllib.request.Request(bust, headers={
         "Cache-Control": "no-cache",
         "Pragma": "no-cache",
@@ -328,18 +342,27 @@ def check(name, status, body, markers):
             present.append("home Leans are not LAR, ATL, and IND")
         if "13 games pending. Not graded." in body or "1 of 13 graded. 12 games pending." in body or "7-7-1" in body or "36-42-1" in body or "12-10-0" in body:
             present.append("home still shows a pending or pre-grade Week 11 record")
+        if "16 games pending. Not graded." in body or "17-25-0" in body or "42-49-1" in body or "Lean, not a Best Bet." in body or "Wednesday Nov 25, 5:00 PM PT" in body:
+            present.append("home still shows Wednesday night GB @ LAR as the live pick")
+        highlight = body.split('id="highlight"', 1)[-1].split("</div>", 1)[0]
+        if "KC @ BUF" not in highlight or "GB @ LAR" in highlight or "PHI" in highlight:
+            present.append("home highlight is not KC +2.5 at BUF")
         if "TB +7 at DET (QB status pending)" in body or "Vector numbers are provisional: injury layer still being reconciled" in body:
             present.append("home Week 11 block still reads as pending or provisional")
         if "Week 12 card pending" in body or "No Week 12 picks, edges, or line comparisons" in body:
             present.append("home still says the Week 12 card is unpublished")
     card_table = body.split("Full card: Market vs Our Spread", 1)[-1] if name == "card" else ""
+    gb_row = card_table.split("GB @ LAR", 1)[-1].split("</tr>", 1)[0] if name == "card" else ""
     if name == "card" and (
-        card_table.count("PENDING") != 16
-        or 'res-win">WIN' in card_table
+        card_table.count("PENDING") != 15
+        or card_table.count('res-win">WIN') != 1
         or 'res-loss">LOSS' in card_table
         or "Model side only, not a recommendation" not in card_table
+        or "WIN" not in gb_row
+        or "GB 13, LAR 26" not in gb_row
+        or "PENDING" in gb_row
     ):
-        present.append("Week 12 card is not 16 pending rows with the model-only note")
+        present.append("Week 12 card is not GB @ LAR win plus 15 pending rows")
     if name == "homepage" and ('data-yt="VMwVPQtbbeo"' not in body or 'data-yt="aXnadwU-Z7U"' in body or 'data-yt="Qd7DWqq_jy8"' in body):
         present.append("home latest Short is not the Week 12 Short")
     if name == "live" and ("Week 12 has no card in the repo" in body or "Week 12 card pending" in body or "Our Spread is the Week 11" in body):

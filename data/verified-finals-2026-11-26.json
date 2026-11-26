@@ -1,0 +1,20 @@
+{
+  "captured": "2026-11-26",
+  "timezone": "source times are ESPN competition timestamps; card dates stay the US game date",
+  "source": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?week=12&seasontype=2&dates=2026",
+  "note": "Fetched Thu Nov 26, 2026. GB @ LAR is final, GB 13, LAR 26. The other Week 12 games were still pregame and are not given scores here.",
+  "weeks": {
+    "12": [
+      {
+        "game": "GB@LAR",
+        "away_abbr": "GB",
+        "home_abbr": "LAR",
+        "away_score": 13,
+        "home_score": 26,
+        "state": "post",
+        "detail": "Final",
+        "final": "GB 13, LAR 26"
+      }
+    ]
+  }
+}
